@@ -10,7 +10,7 @@ export const stage5Practice: Question[] = [
     options: ['because', 'therefore', 'although', 'despite'],
     answer: 'because',
     explanation:
-      'অর্থ এতটুকু না হারিয়েই পাঁচটি শব্দ কমে একটিতে নেমে আসে।',
+      'অর্থ একটুও না হারিয়ে পাঁচটা শব্দ কমে একটা শব্দ হয়ে যায়।',
   },
   {
     id: 'm23-p2', moduleId: 23, type: 'choose-correct-sentence',
@@ -23,7 +23,7 @@ export const stage5Practice: Question[] = [
     ],
     answer: 'He drove his children to school almost every day.',
     explanation:
-      'সীমা বোঝানো Adverb সেই অংশটির পাশে বসতে হবে, যাকে এটি সীমিত করছে।',
+      'সীমা বোঝানো Adverb বসবে ঠিক সেই অংশের পাশে, যেটাকে এটা সীমিত করছে।',
   },
   {
     id: 'm23-p3', moduleId: 23, type: 'rewrite',
@@ -31,7 +31,7 @@ export const stage5Practice: Question[] = [
     answer: 'The committee decided to investigate the matter.',
     acceptable: ['the committee decided to investigate the matter'],
     explanation:
-      'লুকিয়ে থাকা Verb গুলো ফিরিয়ে আনলে ছয়টি শব্দ কমে যায়।',
+      'Noun-এর আড়ালে লুকিয়ে থাকা Verb-গুলো ফিরিয়ে আনলে ছয়টা শব্দ কমে যায়।',
   },
   {
     id: 'm23-p4', moduleId: 23, type: 'error-correction',
@@ -40,7 +40,7 @@ export const stage5Practice: Question[] = [
     options: ['Walking through the park,', 'the statues', 'were impressive', 'that afternoon'],
     answer: 'the statues',
     explanation:
-      'মূর্তি তো হাঁটতে পারে না, তাই মূল Clause-এ এমন একটি Subject দরকার যে হাঁটতে পারে।',
+      'মূর্তি তো হাঁটতে পারে না, তাই মূল Clause-এ এমন একটা Subject দরকার, যে হাঁটতে পারে।',
   },
 
   /* ---- Module 24 ---- */
@@ -63,7 +63,7 @@ export const stage5Practice: Question[] = [
     ],
     answer: 'Three factors matter: cost, time and access.',
     explanation:
-      'Colon বসে একটি পূর্ণ Clause-এর পরে এবং তালিকাটি সরাসরি তার পরেই আসে।',
+      'Colon বসে একটা পূর্ণ Clause-এর পরে, আর তালিকাটা আসে ঠিক তার পরেই।',
   },
   {
     id: 'm24-p3', moduleId: 24, type: 'fill-blank',
@@ -71,7 +71,7 @@ export const stage5Practice: Question[] = [
     answer: ';',
     acceptable: [';', 'semicolon'],
     explanation:
-      'Semicolon দুটি পূর্ণ ও ঘনিষ্ঠভাবে সম্পর্কিত বাক্য জোড়া দেয়।',
+      'Semicolon কাছাকাছি অর্থের দুটো পূর্ণ বাক্য জোড়া দেয়।',
   },
   {
     id: 'm24-p4', moduleId: 24, type: 'rewrite',
@@ -79,7 +79,7 @@ export const stage5Practice: Question[] = [
     answer: 'As the graph shows, sales increased.',
     acceptable: ['as the graph shows, sales increased', 'the graph shows that sales increased'],
     explanation:
-      'পাঠককে সরাসরি সম্বোধন এড়ান, আর phrasal verb-এর বদলে একক Verb বসান।',
+      'পাঠককে সরাসরি সম্বোধন এড়ান, আর phrasal verb-এর বদলে এক শব্দের Verb বসান।',
   },
 ]
 
@@ -91,7 +91,7 @@ export const stage5Test: Question[] = [
     options: ['because of', 'it is important to note that', 'in order to', 'as a result'],
     answer: 'it is important to note that',
     explanation:
-      'এটি কোনো তথ্য না দিয়ে শুধু ভূমিকা তৈরি করে; এটি বাদ দিলেও বাক্যটি ঠিক থাকে।',
+      'এটা কোনো তথ্য দেয় না, শুধু ভূমিকা করে; বাদ দিলেও বাক্যটা ঠিকই থাকে।',
   },
   {
     id: 'm23-t2', moduleId: 23, type: 'choose-correct-sentence',
@@ -104,14 +104,14 @@ export const stage5Test: Question[] = [
     ],
     answer: 'Many students are struggling with the course.',
     explanation:
-      'Existential গঠন আর Relative Clause দুটোই কোনো অর্থ যোগ করছিল না।',
+      'There is... গঠন আর Relative Clause, দুটোই কোনো অর্থ যোগ করছিল না।',
   },
   {
     id: 'm23-t3', moduleId: 23, type: 'fill-blank',
     question: 'Replace "has the ability to" with one word.',
     answer: 'can',
     explanation:
-      'একটি Modal পুরো phrase-টির জায়গা নিয়ে নেয়।',
+      'একটা Modal-ই পুরো phrase-টার জায়গা নিয়ে নেয়।',
   },
   {
     id: 'm23-t4', moduleId: 23, type: 'error-correction',
@@ -120,7 +120,7 @@ export const stage5Test: Question[] = [
     options: ['The minister', 'announced a plan', 'to reduce emissions', 'on Tuesday'],
     answer: 'on Tuesday',
     explanation:
-      'বাক্যের শেষে বসায় সময়বাচক phrase-টি যেন emissions-কে বিশেষিত করছে; এটি সামনে সরিয়ে দিন।',
+      'বাক্যের শেষে বসায় সময় বোঝানো phrase-টা মনে হচ্ছে emissions-কে বর্ণনা করছে; এটাকে সামনে নিয়ে আসুন।',
   },
   {
     id: 'm23-t5', moduleId: 23, type: 'multiple-choice',
@@ -133,7 +133,7 @@ export const stage5Test: Question[] = [
     ],
     answer: 'It reduces memory load and prevents agreement errors',
     explanation:
-      'লম্বা ফাঁক পাঠককে Subject মনে রাখতে বাধ্য করে এবং agreement-এর ভুল ডেকে আনে।',
+      'Subject আর Verb-এর মাঝে অনেক শব্দ থাকলে পাঠককে Subject মনে ধরে রাখতে হয়, আর agreement-এর ভুলও হয় সহজে।',
   },
   {
     id: 'm23-t6', moduleId: 23, type: 'multiple-choice',
@@ -146,7 +146,7 @@ export const stage5Test: Question[] = [
     ],
     answer: 'The committee approved only the plan.',
     explanation:
-      'Only ঠিক সেই অংশটির আগে বসে, যাকে এটি সীমিত করছে।',
+      'Only বসে ঠিক সেই অংশের আগে, যেটাকে এটা সীমিত করছে।',
   },
   {
     id: 'm23-t7', moduleId: 23, type: 'choose-correct-sentence',
@@ -159,14 +159,14 @@ export const stage5Test: Question[] = [
     ],
     answer: 'Renewable resources must be used more widely.',
     explanation:
-      'একের পর এক nominalization খুলে ফেললে সহজ একটি Verb ফিরে আসে।',
+      'একের পর এক nominalization ভেঙে ফেললে সহজ একটা Verb ফিরে আসে।',
   },
   {
     id: 'm23-t8', moduleId: 23, type: 'fill-blank',
     question: 'Replace "in spite of the fact that" with one word.',
     answer: 'although',
     explanation:
-      'Although তার পরের Clause-টি নিয়ে নেয়।',
+      'Although-এর পরে সরাসরি Clause বসে।',
   },
   {
     id: 'm23-t9', moduleId: 23, type: 'error-correction',
@@ -175,7 +175,7 @@ export const stage5Test: Question[] = [
     options: ['In todays modern world of today,', 'technology', 'is important', 'to everyone'],
     answer: 'In todays modern world of today,',
     explanation:
-      'Phrase-টি একই কথা দুইবার বলছে; শুধু Today লিখলেই যথেষ্ট হতো।',
+      'Phrase-টা একই কথা দুবার বলছে; শুধু Today লিখলেই যথেষ্ট হতো।',
   },
   {
     id: 'm23-t10', moduleId: 23, type: 'multiple-choice',
@@ -188,7 +188,7 @@ export const stage5Test: Question[] = [
     ],
     answer: 'Split it into two sentences',
     explanation:
-      'ভুলসহ একটি লম্বা বাক্যের চেয়ে দুটি নির্ভুল বাক্য বেশি নম্বর পায়।',
+      'ভুলওয়ালা একটা লম্বা বাক্যের চেয়ে দুটো নির্ভুল বাক্য বেশি নম্বর পায়।',
   },
 
   /* ========================== Module 24 test ========================== */
@@ -203,7 +203,7 @@ export const stage5Test: Question[] = [
     ],
     answer: 'Children today spend an increasing amount of time on their phones.',
     explanation:
-      'আনুষ্ঠানিক Noun, নির্দিষ্ট Verb এবং কোনো slang নেই।',
+      'Formal Noun, নির্দিষ্ট Verb, আর কোনো slang নেই।',
   },
   {
     id: 'm24-t2', moduleId: 24, type: 'multiple-choice',
@@ -211,7 +211,7 @@ export const stage5Test: Question[] = [
     options: ['semicolon', 'colon', 'comma', 'dash'],
     answer: 'colon',
     explanation:
-      'পূর্ণ একটি Clause-এর পরে colon বসে কিছু উপস্থাপন করে।',
+      'একটা পূর্ণ Clause-এর পরে colon বসিয়ে পরের কথাটা সামনে আনা হয়।',
   },
   {
     id: 'm24-t3', moduleId: 24, type: 'fill-blank',
@@ -219,7 +219,7 @@ export const stage5Test: Question[] = [
     answer: 'discover',
     acceptable: ['discover', 'determine', 'establish', 'ascertain'],
     explanation:
-      'Academic লেখায় কথ্য phrasal verb-এর জায়গায় সাধারণত একটি একক Verb বসে।',
+      'Academic লেখায় কথ্য phrasal verb-এর জায়গায় সাধারণত এক শব্দের Verb বসে।',
   },
   {
     id: 'm24-t4', moduleId: 24, type: 'error-correction',
@@ -228,7 +228,7 @@ export const stage5Test: Question[] = [
     options: ['The main issues', 'are:', 'cost, time', 'and access'],
     answer: 'are:',
     explanation:
-      'Verb আর তার পরিপূরকের মাঝখানে colon বসানো যায় না।',
+      'Verb আর তার Object-এর মাঝখানে colon বসানো যায় না।',
   },
   {
     id: 'm24-t5', moduleId: 24, type: 'multiple-choice',
@@ -249,7 +249,7 @@ export const stage5Test: Question[] = [
     ],
     answer: 'Costs rose; demand fell.',
     explanation:
-      'দুই পাশেই একটি করে পূর্ণ ও ঘনিষ্ঠভাবে সম্পর্কিত বাক্য আছে।',
+      'দুই পাশেই একটা করে পূর্ণ বাক্য আছে, আর দুটোর অর্থ কাছাকাছি।',
   },
   {
     id: 'm24-t7', moduleId: 24, type: 'multiple-choice',
@@ -262,14 +262,14 @@ export const stage5Test: Question[] = [
     ],
     answer: 'Choosing sentence length for effect',
     explanation:
-      'দুটি লম্বা বাক্যের পরে একটি ছোট বাক্য জোরালোভাবে আঘাত করে, আর সেটিই এর উদ্দেশ্য।',
+      'দুটো লম্বা বাক্যের পরে একটা ছোট বাক্য পাঠকের মনে জোরে দাগ কাটে, আর এটাই উদ্দেশ্য।',
   },
   {
     id: 'm24-t8', moduleId: 24, type: 'fill-blank',
     question: 'Costs rose; ___, demand fell. (however with correct punctuation after it)',
     answer: 'however',
     explanation:
-      'However দ্বিতীয় Clause-টি শুরু করলে এর পরে একটি কমা বসে।',
+      'However দিয়ে দ্বিতীয় Clause শুরু হলে এর পরে একটা কমা বসে।',
   },
   {
     id: 'm24-t9', moduleId: 24, type: 'error-correction',
@@ -278,7 +278,7 @@ export const stage5Test: Question[] = [
     options: ['Although many argue', 'that the policy is effective,', 'however', 'it remains controversial'],
     answer: 'however',
     explanation:
-      'Although আগেই বৈপরীত্য বুঝিয়ে দিয়েছে, তাই দ্বিতীয় connector একটি ভুল।',
+      'Although আগেই বৈপরীত্যটা বুঝিয়ে দিয়েছে, তাই আরেকটা connector বসানো ভুল।',
   },
   {
     id: 'm24-t10', moduleId: 24, type: 'multiple-choice',
@@ -291,6 +291,6 @@ export const stage5Test: Question[] = [
     ],
     answer: 'You can choose the right structure, including a simple one',
     explanation:
-      'পরিসর মানে সাবলীলতা ও নির্ভুলতা, ক্রমাগত জটিল করা নয়।',
+      'Range মানে সাবলীলতা আর নির্ভুলতা, সবকিছু জটিল করে ফেলা নয়।',
   },
 ]

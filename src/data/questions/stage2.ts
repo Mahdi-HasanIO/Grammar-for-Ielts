@@ -17,7 +17,7 @@ export const stage2Practice: Question[] = [
     question: 'Since 2010, the city ___ invested heavily in cycling. (has / had)',
     answer: 'has',
     explanation:
-      'Since বোঝাচ্ছে সময়কালটি এখনো চলছে, আর সেখানে Present perfect বসে।',
+      'Since বলছে সময়টা এখনো চলছে, আর তখন Present perfect বসে।',
   },
   {
     id: 'm6-p3', moduleId: 6, type: 'choose-correct-sentence',
@@ -30,7 +30,7 @@ export const stage2Practice: Question[] = [
     ],
     answer: 'Firstly, the beans are harvested. They are then dried.',
     explanation:
-      'Process বর্ণনায় শুরু থেকে শেষ পর্যন্ত একই Tense ও একই Voice ধরে রাখতে হয়।',
+      'Process বর্ণনা করার সময় শুরু থেকে শেষ পর্যন্ত একই Tense আর একই Voice রাখতে হয়।',
   },
   {
     id: 'm6-p4', moduleId: 6, type: 'error-correction',
@@ -77,7 +77,7 @@ export const stage2Practice: Question[] = [
     question: 'Employees ___ have to work overtime if they do not want to. (must not / do not)',
     answer: 'do not',
     explanation:
-      'Do not have to বাধ্যবাধকতা তুলে নেয়, আর must not কাজটি নিষিদ্ধ করে।',
+      'Do not have to মানে করার দরকার নেই, আর must not মানে করা নিষেধ।',
   },
 
   /* ---- Module 8 ---- */
@@ -96,7 +96,7 @@ export const stage2Practice: Question[] = [
     options: ['Many changes', 'have been occurred', 'in the city', 'since 2010'],
     answer: 'have been occurred',
     explanation:
-      'Occur-এর কোনো Object নেই, তাই এটি passive হতে পারে না: have occurred হবে।',
+      'Occur-এর কোনো Object হয় না, তাই এটা passive হতে পারে না: have occurred হবে।',
   },
   {
     id: 'm8-p3', moduleId: 8, type: 'choose-correct-sentence',
@@ -109,7 +109,7 @@ export const stage2Practice: Question[] = [
     ],
     answer: 'The policy is said to be effective.',
     explanation:
-      'Subject + passive reporting verb + to-infinitive একটি সম্পূর্ণ গঠন।',
+      'Subject + passive reporting verb + to-infinitive একটা সম্পূর্ণ গঠন।',
   },
   {
     id: 'm8-p4', moduleId: 8, type: 'rewrite',
@@ -117,7 +117,7 @@ export const stage2Practice: Question[] = [
     answer: 'The committee cancelled the project.',
     acceptable: ['the committee cancelled the project', 'the committee decided to cancel the project'],
     explanation:
-      'Active রূপটি কর্তার নাম বলে দেয় এবং ছয়টি বাড়তি শব্দ কমিয়ে দেয়।',
+      'Active রূপে কে কাজটা করছে সেটা সরাসরি বলা যায়, আর ছয়টা বাড়তি শব্দও কমে।',
   },
 
   /* ---- Module 9 ---- */
@@ -147,7 +147,7 @@ export const stage2Practice: Question[] = [
     ],
     answer: 'This policy allows cities to reduce traffic.',
     explanation:
-      'Allow-এর ক্ষেত্রে to-infinitive-এর আগে একটি Object বসাতেই হবে।',
+      'Allow-এর পরে to-infinitive-এর আগে একটা Object বসাতেই হবে।',
   },
   {
     id: 'm9-p4', moduleId: 9, type: 'error-correction',
@@ -166,14 +166,14 @@ export const stage2Practice: Question[] = [
     options: ['of', 'in', 'on', 'to'],
     answer: 'in',
     explanation:
-      'increase, rise, fall ও decline - সবগুলোর পরেই in বসে, যা বোঝায় কী বদলেছে।',
+      'Noun হিসেবে increase, rise, fall আর decline-এর পরে in বসে, যা বোঝায় কী বদলেছে।',
   },
   {
     id: 'm10-p2', moduleId: 10, type: 'fill-blank',
     question: 'Social media has a huge impact ___ young people.',
     answer: 'on',
     explanation:
-      'impact, effect ও influence - তিনটিরই সঙ্গে on বসে।',
+      'impact, effect আর influence - তিনটার সঙ্গেই on বসে।',
   },
   {
     id: 'm10-p3', moduleId: 10, type: 'multiple-choice',
@@ -181,7 +181,7 @@ export const stage2Practice: Question[] = [
     options: ['by', 'to', 'at', 'from'],
     answer: 'to',
     explanation:
-      'To দিয়ে শেষ মান বোঝায়; by দিয়ে বোঝাত পরিবর্তনের পরিমাণ।',
+      'To দিয়ে বোঝায় শেষে কত হয়েছে; by দিয়ে বোঝাত কতটা বদলেছে।',
   },
   {
     id: 'm10-p4', moduleId: 10, type: 'error-correction',
@@ -200,7 +200,7 @@ export const stage2Practice: Question[] = [
     options: ['more bigger', 'much bigger', 'most big', 'more big'],
     answer: 'much bigger',
     explanation:
-      'একটি comparative চিহ্নই যথেষ্ট, আর much দিয়ে পার্থক্যের মাত্রা বোঝানো হয়।',
+      'একটা comparative চিহ্নই যথেষ্ট, আর much দিয়ে বোঝানো হয় পার্থক্যটা কত বড়।',
   },
   {
     id: 'm11-p2', moduleId: 11, type: 'choose-correct-sentence',
@@ -213,14 +213,14 @@ export const stage2Practice: Question[] = [
     ],
     answer: 'There were twice as many visitors in July as in January.',
     explanation:
-      'গুণিতক বোঝাতে as...as কাঠামো লাগে, আর visitors countable বলে many বসে।',
+      'কয় গুণ, তা বোঝাতে as...as গঠন লাগে, আর visitors countable বলে many বসে।',
   },
   {
     id: 'm11-p3', moduleId: 11, type: 'fill-blank',
     question: 'Sales increased ___ between 2010 and 2015. (sharp / sharply)',
     answer: 'sharply',
     explanation:
-      'Verb-কে বিশেষিত করে Adverb; Noun হলে Adjective sharp বসত।',
+      'Verb-কে বর্ণনা করে Adverb; Noun হলে Adjective sharp বসত।',
   },
   {
     id: 'm11-p4', moduleId: 11, type: 'rewrite',
@@ -260,7 +260,7 @@ export const stage2Test: Question[] = [
     question: 'When the researchers arrived, the experiment ___ already finished. (has / had)',
     answer: 'had',
     explanation:
-      'দুটি অতীত ঘটনার মধ্যে আগেরটি বোঝাতে Past perfect বসে।',
+      'অতীতের দুটো ঘটনার মধ্যে যেটা আগে ঘটেছে, সেটা বোঝাতে Past perfect বসে।',
   },
   {
     id: 'm6-t4', moduleId: 6, type: 'error-correction',
@@ -269,7 +269,7 @@ export const stage2Test: Question[] = [
     options: ['The graph', 'showed that', 'sales will rise', 'until 2030'],
     answer: 'showed that',
     explanation:
-      'চার্টটি এখন আপনার সামনেই আছে, তাই এটি কী দেখাচ্ছে তা Present simple-এ লিখুন।',
+      'চার্টটা এখন আপনার সামনেই আছে, তাই এটা কী দেখাচ্ছে তা Present simple-এ লিখুন।',
   },
   {
     id: 'm6-t5', moduleId: 6, type: 'multiple-choice',
@@ -285,7 +285,7 @@ export const stage2Test: Question[] = [
     options: ['fell', 'have fallen', 'had fallen', 'fall'],
     answer: 'have fallen',
     explanation:
-      'Since বোঝাচ্ছে সময়কালটি এখনো শেষ হয়নি এবং বর্তমান পর্যন্ত চলছে।',
+      'Since বলছে সময়টা এখনো শেষ হয়নি, এখন পর্যন্ত চলছে।',
   },
   {
     id: 'm6-t7', moduleId: 6, type: 'choose-correct-sentence',
@@ -298,14 +298,14 @@ export const stage2Test: Question[] = [
     ],
     answer: 'The government introduced the scheme and spent millions on it.',
     explanation:
-      'দুটি Verb-ই একই শেষ হওয়া অতীত সময়ের কথা বলছে।',
+      'দুটো Verb-ই অতীতের একই শেষ হওয়া সময়ের কথা বলছে।',
   },
   {
     id: 'm6-t8', moduleId: 6, type: 'fill-blank',
     question: 'Demand ___ expected to reach 40 million by 2035. (is / was)',
     answer: 'is',
     explanation:
-      'বর্তমান থেকে করা পূর্বাভাসে is expected to বসে, কোনো অতীত রূপ নয়।',
+      'এখন থেকে ভবিষ্যতের অনুমান করলে is expected to বসে, কোনো অতীত রূপ নয়।',
   },
   {
     id: 'm6-t9', moduleId: 6, type: 'error-correction',
@@ -314,7 +314,7 @@ export const stage2Test: Question[] = [
     options: ['Since the last decade,', 'air quality', 'improved', 'considerably'],
     answer: 'Since the last decade,',
     explanation:
-      'Since-এর পরে নির্দিষ্ট সময়বিন্দু বসে; সময়কাল বোঝাতে over the last decade লাগবে।',
+      'Since-এর পরে নির্দিষ্ট একটা সময় বসে; সময়ের দৈর্ঘ্য বোঝাতে over the last decade লাগবে।',
   },
   {
     id: 'm6-t10', moduleId: 6, type: 'multiple-choice',
@@ -322,7 +322,7 @@ export const stage2Test: Question[] = [
     options: ['Past simple active', 'Present simple passive', 'Present perfect', 'Future passive'],
     answer: 'Present simple passive',
     explanation:
-      'Process-কে সাধারণ ধারাবাহিকতা হিসেবে বর্ণনা করা হয়: the glass is crushed and then melted।',
+      'Process সবসময় যেভাবে ঘটে সেভাবে Present-এ লেখা হয়: the glass is crushed and then melted।',
   },
 
   /* =========================== Module 7 test ========================== */
@@ -341,7 +341,7 @@ export const stage2Test: Question[] = [
     options: ['will can', 'will be able to', 'can will', 'will could'],
     answer: 'will be able to',
     explanation:
-      'দুটি Modal পাশাপাশি বসে না; দ্বিতীয়টির জায়গায় be able to বসে।',
+      'দুটো Modal পাশাপাশি বসে না; দ্বিতীয়টার জায়গায় be able to বসে।',
   },
   {
     id: 'm7-t3', moduleId: 7, type: 'multiple-choice',
@@ -354,7 +354,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'Governments must act now.',
     explanation:
-      'এখানে must দিয়ে প্রয়োজনীয়তা বোঝানো হচ্ছে, আর বাকিগুলোতে প্রমাণ থেকে সিদ্ধান্ত।',
+      'এখানে must দিয়ে বোঝানো হচ্ছে কাজটা করা জরুরি; বাকিগুলোতে must মানে প্রমাণ দেখে টানা সিদ্ধান্ত।',
   },
   {
     id: 'm7-t4', moduleId: 7, type: 'fill-blank',
@@ -374,7 +374,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'Technology must improve education.',
     explanation:
-      'Modal-এর পরের Verb-এ কখনো -s বসে না এবং to-ও বসে না।',
+      'Modal-এর পরের Verb-এ কখনো -s বসে না, to-ও বসে না।',
   },
   {
     id: 'm7-t6', moduleId: 7, type: 'multiple-choice',
@@ -382,7 +382,7 @@ export const stage2Test: Question[] = [
     options: ['must', 'should', 'will', 'can'],
     answer: 'should',
     explanation:
-      'Should পরামর্শ দেয় কিন্তু আইনের মতো শোনায় না, যা essay-র register-এর সঙ্গে মানানসই।',
+      'Should পরামর্শ দেয়, কিন্তু আইনের মতো শোনায় না, তাই essay-র সঙ্গে মানায়।',
   },
   {
     id: 'm7-t7', moduleId: 7, type: 'multiple-choice',
@@ -395,7 +395,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'Automation may displace workers.',
     explanation:
-      'May দিয়ে আত্মবিশ্বাস বা প্রত্যাশা নয়, বরং সত্যিকারের সম্ভাবনা বোঝানো হয়।',
+      'May দিয়ে নিশ্চয়তা বা প্রত্যাশা নয়, শুধু সম্ভাবনা বোঝানো হয়।',
   },
   {
     id: 'm7-t8', moduleId: 7, type: 'choose-correct-sentence',
@@ -408,7 +408,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'Employees do not have to work overtime if they prefer not to.',
     explanation:
-      'Must not নিষেধ করে, আর do not have to কাজটিকে ঐচ্ছিক করে দেয়।',
+      'Must not মানে নিষেধ, আর do not have to মানে কাজটা করা ঐচ্ছিক।',
   },
   {
     id: 'm7-t9', moduleId: 7, type: 'fill-blank',
@@ -424,7 +424,7 @@ export const stage2Test: Question[] = [
     options: ['Children', 'may to watch', 'television', 'after finishing homework'],
     answer: 'may to watch',
     explanation:
-      'অনুমতি বোঝানোর ক্ষেত্রেও bare infinitive-এর নিয়ম একই: may watch।',
+      'অনুমতি বোঝানোর সময়ও bare infinitive-এর নিয়ম একই: may watch।',
   },
 
   /* =========================== Module 8 test ========================== */
@@ -447,7 +447,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'The problem happened last year.',
     explanation:
-      'Happen একটি Intransitive Verb, তাই এর কোনো passive রূপ নেই।',
+      'Happen একটা Intransitive Verb (Object হয় না), তাই এর কোনো passive রূপ নেই।',
   },
   {
     id: 'm8-t3', moduleId: 8, type: 'fill-blank',
@@ -476,7 +476,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'When the agent is unknown or obvious',
     explanation:
-      'Academic লেখায় বেশিরভাগ passive-এ by-phrase থাকে না, কারণ কর্তা নতুন কিছু জানায় না।',
+      'Academic লেখায় বেশিরভাগ passive-এ by-phrase থাকে না, কারণ কর্তার নাম বললে নতুন কিছু জানা যায় না।',
   },
   {
     id: 'm8-t6', moduleId: 8, type: 'choose-correct-sentence',
@@ -489,7 +489,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'The committee cancelled the project.',
     explanation:
-      'কর্তা জানা থাকলে ও গুরুত্বপূর্ণ হলে Active voice ছোট ও স্পষ্ট হয়।',
+      'কে কাজটা করছে তা জানা আর গুরুত্বপূর্ণ হলে Active voice ছোট আর পরিষ্কার হয়।',
   },
   {
     id: 'm8-t7', moduleId: 8, type: 'multiple-choice',
@@ -502,14 +502,14 @@ export const stage2Test: Question[] = [
     ],
     answer: 'The policy must be reviewed.',
     explanation:
-      'গঠনটি হলো modal + be + past participle।',
+      'গঠনটা হলো modal + be + past participle।',
   },
   {
     id: 'm8-t8', moduleId: 8, type: 'fill-blank',
     question: 'It is ___ that automation will reduce employment. (argued / arguing)',
     answer: 'argued',
     explanation:
-      'নৈর্ব্যক্তিক গঠনটি হলো it + passive + that-clause।',
+      'নাম না বলে মত জানানোর গঠনটা হলো it + passive + that-clause।',
   },
   {
     id: 'm8-t9', moduleId: 8, type: 'error-correction',
@@ -531,7 +531,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'The glass is crushed.',
     explanation:
-      'Process-এ Present simple passive বসে, কারণ কর্তা এখানে অপ্রাসঙ্গিক।',
+      'Process-এ Present simple passive বসে, কারণ এখানে কে কাজটা করছে তা জরুরি নয়।',
   },
 
   /* =========================== Module 9 test ========================== */
@@ -554,14 +554,14 @@ export const stage2Test: Question[] = [
     ],
     answer: 'Technology enables people to communicate instantly.',
     explanation:
-      'Enable-এর ক্ষেত্রে to-infinitive-এর আগে একটি Object লাগে।',
+      'Enable-এর পরে to-infinitive-এর আগে একটা Object লাগে।',
   },
   {
     id: 'm9-t3', moduleId: 9, type: 'fill-blank',
     question: 'She is looking forward to ___ from you. (hear / hearing)',
     answer: 'hearing',
     explanation:
-      'look forward to-এর to একটি Preposition, তাই এর পরে -ing বসে।',
+      'look forward to-এর to একটা Preposition, তাই এর পরে -ing বসে।',
   },
   {
     id: 'm9-t4', moduleId: 9, type: 'error-correction',
@@ -578,7 +578,7 @@ export const stage2Test: Question[] = [
     options: ['avoid', 'tend', 'involve', 'risk'],
     answer: 'tend',
     explanation:
-      'Tend to do হয়; বাকি তিনটি Verb-এর পরে -ing রূপ বসে।',
+      'Tend-এর পরে to do বসে; বাকি তিনটা Verb-এর পরে -ing রূপ বসে।',
   },
   {
     id: 'm9-t6', moduleId: 9, type: 'multiple-choice',
@@ -599,7 +599,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'It is difficult to measure happiness objectively.',
     explanation:
-      'It is-এর পরে মূল্যায়নমূলক Adjective থাকলে to-infinitive বসে।',
+      'It is-এর পরে মতামত বোঝানো Adjective থাকলে to-infinitive বসে।',
   },
   {
     id: 'm9-t8', moduleId: 9, type: 'fill-blank',
@@ -615,7 +615,7 @@ export const stage2Test: Question[] = [
     options: ['The law', 'requires companies', 'publish', 'their emissions'],
     answer: 'publish',
     explanation:
-      'Require একটি Object ও তারপর to-infinitive নেয়: to publish।',
+      'Require-এর পরে একটা Object, তারপর to-infinitive বসে: to publish।',
   },
   {
     id: 'm9-t10', moduleId: 9, type: 'multiple-choice',
@@ -628,7 +628,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'He is used to working late.',
     explanation:
-      'Be used to মানে অভ্যস্ত হওয়া, আর এখানকার to একটি Preposition, তাই -ing বসে।',
+      'Be used to মানে কোনো কিছুতে অভ্যস্ত হওয়া; এখানকার to একটা Preposition, তাই -ing বসে।',
   },
 
   /* ========================== Module 10 test ========================== */
@@ -646,7 +646,7 @@ export const stage2Test: Question[] = [
     options: ['to', 'by', 'at', 'in'],
     answer: 'at',
     explanation:
-      'peak, stand ও remain - তিনটিরই পরে নির্দিষ্ট মানের আগে at বসে।',
+      'peak, stand আর remain - তিনটার পরেই নির্দিষ্ট মানের আগে at বসে।',
   },
   {
     id: 'm10-t3', moduleId: 10, type: 'fill-blank',
@@ -662,7 +662,7 @@ export const stage2Test: Question[] = [
     options: ['This leads to', 'people become', 'unemployed', 'in large numbers'],
     answer: 'people become',
     explanation:
-      'lead to-এর to একটি Preposition, তাই এর পরের Verb হবে becoming।',
+      'lead to-এর to একটা Preposition, তাই এর পরের Verb হবে becoming।',
   },
   {
     id: 'm10-t5', moduleId: 10, type: 'multiple-choice',
@@ -670,7 +670,7 @@ export const stage2Test: Question[] = [
     options: ['to', 'by', 'at', 'on'],
     answer: 'by',
     explanation:
-      'By দিয়ে পরিবর্তনের পরিমাণ বোঝায়; to দিয়ে বোঝাত শেষ মান।',
+      'By দিয়ে বোঝায় কতটা বদলেছে; to দিয়ে বোঝাত শেষে কত হয়েছে।',
   },
   {
     id: 'm10-t6', moduleId: 10, type: 'choose-correct-sentence',
@@ -683,7 +683,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'The results are different from the 2019 figures.',
     explanation:
-      'Academic English-এ different from স্বাভাবিক ও প্রচলিত।',
+      'Academic English-এ different from-ই স্বাভাবিক আর প্রচলিত।',
   },
   {
     id: 'm10-t7', moduleId: 10, type: 'multiple-choice',
@@ -696,14 +696,14 @@ export const stage2Test: Question[] = [
     ],
     answer: 'Congestion results in pollution.',
     explanation:
-      'Result in দিয়ে ফলাফল বোঝায়, আর result from দিয়ে কারণ।',
+      'Result in-এর পরে আসে ফলাফল, আর result from-এর পরে আসে কারণ।',
   },
   {
     id: 'm10-t8', moduleId: 10, type: 'fill-blank',
     question: 'Students should concentrate ___ their studies.',
     answer: 'on',
     explanation:
-      'concentrate, focus, depend ও rely - সবগুলোর সঙ্গেই on বসে।',
+      'concentrate, focus, depend আর rely - সবগুলোর সঙ্গেই on বসে।',
   },
   {
     id: 'm10-t9', moduleId: 10, type: 'error-correction',
@@ -743,7 +743,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'Car ownership is higher than it was in 1990.',
     explanation:
-      'একটি মাত্রার সঙ্গে আরেকটি মাত্রার তুলনা করুন, কোনো সালের সঙ্গে নয়।',
+      'একটা সংখ্যার সঙ্গে আরেকটা সংখ্যার তুলনা করুন, কোনো সালের সঙ্গে নয়।',
   },
   {
     id: 'm11-t3', moduleId: 11, type: 'fill-blank',
@@ -759,7 +759,7 @@ export const stage2Test: Question[] = [
     options: ['The figure', 'for Spain', 'was the most highest', 'of all countries'],
     answer: 'was the most highest',
     explanation:
-      'একটি superlative চিহ্নই যথেষ্ট: the highest।',
+      'একটা superlative চিহ্নই যথেষ্ট: the highest।',
   },
   {
     id: 'm11-t5', moduleId: 11, type: 'multiple-choice',
@@ -772,7 +772,7 @@ export const stage2Test: Question[] = [
     ],
     answer: 'three times as much as Italy',
     explanation:
-      'Three times more দিয়ে তিন গুণ না চার গুণ বোঝাচ্ছে তা অস্পষ্ট থেকে যায়।',
+      'Three times more দিয়ে তিন গুণ নাকি চার গুণ বোঝাচ্ছে, তা পরিষ্কার নয়।',
   },
   {
     id: 'm11-t6', moduleId: 11, type: 'multiple-choice',
@@ -780,7 +780,7 @@ export const stage2Test: Question[] = [
     options: ['are', 'is', 'were', 'have been'],
     answer: 'is',
     explanation:
-      'Verb মেলে energy-র সঙ্গে, যা uncountable এবং একবচন।',
+      'Verb মেলে energy-র সঙ্গে, যেটা uncountable আর একবচন।',
   },
   {
     id: 'm11-t7', moduleId: 11, type: 'choose-correct-sentence',
@@ -793,14 +793,14 @@ export const stage2Test: Question[] = [
     ],
     answer: 'The number of users was higher in urban areas.',
     explanation:
-      'High একটি ছোট Adjective, তাই এর comparative হলো higher।',
+      'High একটা ছোট Adjective, তাই এর comparative হলো higher।',
   },
   {
     id: 'm11-t8', moduleId: 11, type: 'fill-blank',
     question: 'The figure rose ___ between 2000 and 2010. (steady / steadily)',
     answer: 'steadily',
     explanation:
-      'Adverb দিয়ে Verb rose-কে বিশেষিত করা হচ্ছে।',
+      'এখানে Adverb দিয়ে Verb rose-কে বর্ণনা করা হচ্ছে।',
   },
   {
     id: 'm11-t9', moduleId: 11, type: 'error-correction',
@@ -817,6 +817,6 @@ export const stage2Test: Question[] = [
     options: ['slightly', 'marginally', 'considerably', 'somewhat'],
     answer: 'considerably',
     explanation:
-      'considerably, significantly ও substantially দিয়ে তুলনার মাত্রা বাড়ানো হয়।',
+      'considerably, significantly আর substantially দিয়ে বোঝানো হয় পার্থক্যটা বেশ বড়।',
   },
 ]

@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { Reveal } from '@/components/ui/Reveal'
 
 export function Review() {
   const { state } = useProgress()
@@ -27,8 +28,8 @@ export function Review() {
 
       {/* Weak areas */}
       <section>
-        <h2 className="mb-3 flex items-center gap-2 text-[17px] font-semibold tracking-tight">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400">
+        <h2 className="mb-4 flex items-center gap-2.5 text-[19px] font-extrabold tracking-tight">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-600 ring-1 ring-inset ring-amber-200/70 dark:bg-amber-950/60 dark:text-amber-400 dark:ring-amber-800/50">
             <AlertTriangle size={15} />
           </span>
           Needs review
@@ -42,8 +43,13 @@ export function Review() {
           />
         ) : (
           <div className="grid gap-3">
-            {weak.map((area) => (
-              <Card key={area.moduleId}>
+            {weak.map((area, i) => (
+              <Card
+                key={area.moduleId}
+                interactive
+                className="animate-fade-up stagger"
+                style={{ '--i': i } as React.CSSProperties}
+              >
                 <CardBody className="flex flex-wrap items-center gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
@@ -79,9 +85,9 @@ export function Review() {
       </section>
 
       {/* Completed modules */}
-      <section>
-        <h2 className="mb-3 flex items-center gap-2 text-[17px] font-semibold tracking-tight">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">
+      <Reveal as="section">
+        <h2 className="mb-4 flex items-center gap-2.5 text-[19px] font-extrabold tracking-tight">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 ring-1 ring-inset ring-emerald-200/70 dark:bg-emerald-950/60 dark:text-emerald-400 dark:ring-emerald-800/50">
             <BookMarked size={15} />
           </span>
           Completed modules
@@ -101,18 +107,23 @@ export function Review() {
           />
         ) : (
           <div className="grid gap-3 sm:grid-cols-2">
-            {completed.map((module) => {
+            {completed.map((module, i) => {
               const progress = getModuleProgress(state, module.id)
               const stage = stageById(module.stage)
               return (
-                <Card key={module.id}>
+                <Card
+                  key={module.id}
+                  interactive
+                  className="animate-fade-up stagger"
+                  style={{ '--i': i } as React.CSSProperties}
+                >
                   <CardHeader
                     title={`${module.id}. ${module.title}`}
                     subtitle={`Stage ${stage.id} - ${stage.name}`}
                     action={<Badge tone="success">{progress.bestScore}%</Badge>}
                   />
                   <CardBody className="pt-3">
-                    <p className="text-[13px] leading-5 text-ink-600 dark:text-ink-400">
+                    <p className="bn-text text-[13.5px] text-ink-600 dark:text-ink-400">
                       {module.summary}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
@@ -133,7 +144,7 @@ export function Review() {
             })}
           </div>
         )}
-      </section>
+      </Reveal>
     </div>
   )
 }

@@ -10,7 +10,7 @@ export const stage4Practice: Question[] = [
     answer: 'The rapid rise in prices reduced demand.',
     acceptable: ['the rapid rise in prices reduced demand', 'the rapid rise in prices caused demand to fall'],
     explanation:
-      'Adverb-টি Adjective-এ বদলে যায় আর Verb-টি নিজের Preposition সহ Noun-এ রূপ নেয়।',
+      'Adverb-টা Adjective হয়ে যায়, আর Verb-টা নিজের Preposition সহ Noun হয়ে যায়।',
   },
   {
     id: 'm18-p2', moduleId: 18, type: 'multiple-choice',
@@ -18,7 +18,7 @@ export const stage4Practice: Question[] = [
     options: ['a five-years plan', 'a five-year plan', 'a five years plan', 'a five year plans'],
     answer: 'a five-year plan',
     explanation:
-      'Modifier হিসেবে ব্যবহৃত Noun একবচনে থাকে এবং সংখ্যার সঙ্গে hyphen দিয়ে যুক্ত হয়।',
+      'Modifier হিসেবে বসা Noun একবচনে থাকে, আর সংখ্যার সঙ্গে hyphen দিয়ে জোড়া লাগে।',
   },
   {
     id: 'm18-p3', moduleId: 18, type: 'fill-blank',
@@ -49,7 +49,7 @@ export const stage4Practice: Question[] = [
     ],
     answer: 'This study indicates that exercise may help prevent depression.',
     explanation:
-      'Indicates ও may দাবির জোরকে প্রমাণের সঙ্গে মানানসই করে তোলে।',
+      'Indicates আর may দাবির জোরকে প্রমাণের সঙ্গে মিলিয়ে দেয়।',
   },
   {
     id: 'm19-p2', moduleId: 19, type: 'multiple-choice',
@@ -62,14 +62,14 @@ export const stage4Practice: Question[] = [
     ],
     answer: 'Technology can improve educational outcomes when it is implemented effectively.',
     explanation:
-      'একটি শর্ত যোগ করায় দাবিটি কেবল নরম নয়, বরং নির্ভুল হয়ে ওঠে।',
+      'একটা শর্ত যোগ করায় দাবিটা শুধু নরম নয়, নির্ভুলও হয়েছে।',
   },
   {
     id: 'm19-p3', moduleId: 19, type: 'fill-blank',
     question: 'Young people ___ to spend more time online than older groups. (tend / tends)',
     answer: 'tend',
     explanation:
-      'Tend to একটি hedge, যা ব্যতিক্রমসহ সাধারণ প্রবণতা বোঝায়।',
+      'Tend to একটা hedge; এটা বোঝায় সাধারণত এমন হয়, তবে ব্যতিক্রমও আছে।',
   },
   {
     id: 'm19-p4', moduleId: 19, type: 'rewrite',
@@ -77,7 +77,7 @@ export const stage4Practice: Question[] = [
     answer: 'Costs are likely to rise.',
     acceptable: ['costs are likely to rise', 'costs may rise'],
     explanation:
-      'প্রতি দাবিতে একটি hedge-ই যথেষ্ট; একের পর এক বসালে বাক্য অর্থশূন্য হয়ে যায়।',
+      'প্রতিটি দাবিতে একটা hedge-ই যথেষ্ট; একের পর এক বসালে বাক্যটা শেষে কিছুই বলে না।',
   },
 
   /* ---- Module 20 ---- */
@@ -92,7 +92,7 @@ export const stage4Practice: Question[] = [
     ],
     answer: 'It is difficult to find a solution that satisfies all stakeholders.',
     explanation:
-      'লম্বা infinitive clause-টি বাক্যের শেষে বসাই উচিত।',
+      'লম্বা infinitive clause-টা বাক্যের শেষে বসাই উচিত।',
   },
   {
     id: 'm20-p2', moduleId: 20, type: 'multiple-choice',
@@ -100,14 +100,14 @@ export const stage4Practice: Question[] = [
     options: ['This.', 'This thing.', 'This expansion', 'That one'],
     answer: 'This expansion',
     explanation:
-      'This + summary noun নির্দিষ্টভাবে আগের বাক্যকে নির্দেশ করে এবং জানা তথ্য দিয়ে শুরু করে।',
+      'This + summary noun পরিষ্কারভাবে আগের বাক্যটাকে বোঝায়, আর বাক্যটা জানা তথ্য দিয়ে শুরু হয়।',
   },
   {
     id: 'm20-p3', moduleId: 20, type: 'fill-blank',
     question: '___ was a sharp fall in rainfall, which affected three regions. (There / It)',
     answer: 'There',
     explanation:
-      'Existential there নতুন তথ্য আনে এবং ভারী Clause-টিকে শেষে রাখে।',
+      'Existential there নতুন তথ্য আনে, আর ভারী Clause-টাকে শেষে রাখে।',
   },
   {
     id: 'm20-p4', moduleId: 20, type: 'error-correction',
@@ -116,7 +116,7 @@ export const stage4Practice: Question[] = [
     options: ['Moreover,', 'in addition,', 'furthermore,', 'the cost should also be considered'],
     answer: 'in addition,',
     explanation:
-      'তিনটি যোগবাচক connector একই কাজ করছে; একটি রেখে বাকিগুলো বাদ দিতে হবে।',
+      'তিনটা connector একই কাজ করছে (আরও কিছু যোগ করা); একটা রেখে বাকিগুলো বাদ দিন।',
   },
 
   /* ---- Module 21 ---- */
@@ -126,14 +126,14 @@ export const stage4Practice: Question[] = [
     options: ['do it', 'do so', 'make so', 'does so'],
     answer: 'do so',
     explanation:
-      'Do so হলো পুনরাবৃত্ত Verb phrase-এর আনুষ্ঠানিক বিকল্প।',
+      'একই Verb phrase আবার না লিখে formal লেখায় do so বসানো হয়।',
   },
   {
     id: 'm21-p2', moduleId: 21, type: 'fill-blank',
     question: 'The old system was slow; the new ___ is faster. (one / ones)',
     answer: 'one',
     explanation:
-      'One আগে উল্লেখ করা একবচন countable Noun-এর জায়গা নেয়।',
+      'One আগে বলা একবচন countable Noun-এর জায়গা নেয়।',
   },
   {
     id: 'm21-p3', moduleId: 21, type: 'choose-correct-sentence',
@@ -154,7 +154,7 @@ export const stage4Practice: Question[] = [
     answer: 'Some countries invest in rail; others, in roads.',
     acceptable: ['some countries invest in rail; others, in roads', 'some countries invest in rail, others in roads'],
     explanation:
-      'পুনরাবৃত্ত Verb-টি পাঠক নিজেই বুঝে নিতে পারেন, তাই সেটি বাদ দেওয়া যায়।',
+      'দ্বিতীয়বারের Verb-টা পাঠক নিজেই বুঝে নিতে পারেন, তাই সেটা বাদ দেওয়া যায়।',
   },
 
   /* ---- Module 22 ---- */
@@ -177,7 +177,7 @@ export const stage4Practice: Question[] = [
     ],
     answer: 'Not only does the scheme reduce costs, but it also improves safety.',
     explanation:
-      'সামনে বসা নেতিবাচক শব্দ do-support দাবি করে, আর দ্বিতীয় Clause-এ নিজস্ব Subject থাকে।',
+      'না-বোধক শব্দ সামনে বসলে do-support লাগে, আর দ্বিতীয় Clause-এ নিজস্ব Subject থাকে।',
   },
   {
     id: 'm22-p3', moduleId: 22, type: 'fill-blank',
@@ -197,7 +197,7 @@ export const stage4Practice: Question[] = [
     ],
     answer: 'Not required at any band',
     explanation:
-      'IELTS নম্বর দেয় নির্ভুলতা ও সাবলীলতায়, কোনো নির্দিষ্ট দেখানো-গঠনে নয়।',
+      'IELTS নম্বর দেয় নির্ভুলতা আর সাবলীলতার জন্য, কোনো নির্দিষ্ট \'দেখানোর মতো\' গঠনের জন্য নয়।',
   },
 ]
 
@@ -209,7 +209,7 @@ export const stage4Test: Question[] = [
     options: ['the increasing of prices', 'the increase in prices', 'the increase of price', 'the increased prices in'],
     answer: 'the increase in prices',
     explanation:
-      'প্রতিষ্ঠিত Noun রূপটি ব্যবহার করুন, আর increase-এর সঙ্গে in বসে।',
+      'প্রচলিত Noun রূপটা ব্যবহার করুন, আর increase-এর সঙ্গে in বসে।',
   },
   {
     id: 'm18-t2', moduleId: 18, type: 'choose-correct-sentence',
@@ -229,7 +229,7 @@ export const stage4Test: Question[] = [
     question: 'There is a possibility ___ the scheme will fail. (that / of that)',
     answer: 'that',
     explanation:
-      'Noun complement clause সরাসরি জুড়ে বসে; that-এর আগে কোনো Preposition বসে না।',
+      'Noun complement clause সরাসরি Noun-এর পরে বসে; that-এর আগে কোনো Preposition বসে না।',
   },
   {
     id: 'm18-t4', moduleId: 18, type: 'error-correction',
@@ -238,7 +238,7 @@ export const stage4Test: Question[] = [
     options: ['The fact', 'which the policy failed', 'is undeniable', 'to most analysts'],
     answer: 'which the policy failed',
     explanation:
-      'The fact তার বিষয়বস্তু জানাতে that-clause নেয়, কোনো Relative Clause নয়।',
+      'The fact-এর পরে that-clause বসে জানায় fact-টা কী; এটা Relative Clause নয়।',
   },
   {
     id: 'm18-t5', moduleId: 18, type: 'multiple-choice',
@@ -251,7 +251,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Reducing plastic use',
     explanation:
-      'একের পর এক ভাববাচক Noun সহজ একটি কাজকে ঢেকে রাখে; সেগুলো খুলে Verb-এ ফিরে যান।',
+      'একের পর এক abstract Noun একটা সহজ কাজকে ঢেকে রাখে; সেগুলো ভেঙে আবার Verb দিয়ে লিখুন।',
   },
   {
     id: 'm18-t6', moduleId: 18, type: 'multiple-choice',
@@ -264,7 +264,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Jakarta, the capital of Indonesia, is sinking.',
     explanation:
-      'দুটি Noun phrase পাশাপাশি বসেছে, আর দ্বিতীয়টি প্রথমটিকেই অন্যভাবে বোঝাচ্ছে।',
+      'দুটো Noun phrase পাশাপাশি বসেছে, আর দ্বিতীয়টা প্রথমটাকেই অন্যভাবে ব্যাখ্যা করছে।',
   },
   {
     id: 'm18-t7', moduleId: 18, type: 'choose-correct-sentence',
@@ -277,14 +277,14 @@ export const stage4Test: Question[] = [
     ],
     answer: 'The sharp increase in temperatures was recorded in July.',
     explanation:
-      'Noun phrase-এর ভেতরে Adverb বদলে গিয়ে Adjective হয়ে যায়।',
+      'Noun phrase-এর ভেতরে Adverb বদলে Adjective হয়ে যায়।',
   },
   {
     id: 'm18-t8', moduleId: 18, type: 'fill-blank',
     question: 'Rewrite the head noun: "Cities are expanding" becomes "the ___ of cities".',
     answer: 'expansion',
     explanation:
-      'Expand-এর Noun রূপ expansion, যা এরপর Subject হিসেবে কাজ করতে পারে।',
+      'Expand-এর Noun রূপ expansion, যেটা এরপর Subject হিসেবে বসতে পারে।',
   },
   {
     id: 'm18-t9', moduleId: 18, type: 'error-correction',
@@ -293,7 +293,7 @@ export const stage4Test: Question[] = [
     options: ['A three-years', 'programme', 'was introduced', 'last year'],
     answer: 'A three-years',
     explanation:
-      'যৌগিক modifier একবচনে থাকে: a three-year programme।',
+      'Compound modifier একবচনে থাকে: a three-year programme।',
   },
   {
     id: 'm18-t10', moduleId: 18, type: 'multiple-choice',
@@ -306,7 +306,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'A chain of of-phrases',
     explanation:
-      'পরপর অনেকগুলো of-phrase থাকলে পাঠককে বাক্যটি দুইবার খুলে বুঝতে হয়।',
+      'পরপর অনেকগুলো of-phrase থাকলে পাঠককে বাক্যটা দুবার পড়ে বুঝতে হয়।',
   },
 
   /* ========================== Module 19 test ========================== */
@@ -321,7 +321,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Pollution contributes to a range of respiratory conditions.',
     explanation:
-      'Contributes to একটি বাস্তব সম্পর্ক বোঝায়, অতিরঞ্জন ছাড়াই।',
+      'Contributes to একটা বাস্তবসম্মত সম্পর্ক বোঝায়, বাড়িয়ে না বলে।',
   },
   {
     id: 'm19-t2', moduleId: 19, type: 'multiple-choice',
@@ -329,14 +329,14 @@ export const stage4Test: Question[] = [
     options: ['proves', 'suggests', 'guarantees', 'confirms absolutely'],
     answer: 'suggests',
     explanation:
-      'চার্ট একটি প্রবণতা দেখায়, কোনো কারণ প্রমাণ করতে পারে না।',
+      'চার্ট একটা প্রবণতা দেখায়, কোনো কারণ প্রমাণ করতে পারে না।',
   },
   {
     id: 'm19-t3', moduleId: 19, type: 'fill-blank',
     question: 'It is ___ that costs will rise next year. (likely / certainly)',
     answer: 'likely',
     explanation:
-      'It is likely that সম্ভাব্য ফলাফল বোঝানোর একটি প্রচলিত hedging গঠন।',
+      'It is likely that সম্ভাব্য ফলাফল বোঝানোর খুব প্রচলিত একটা hedging গঠন।',
   },
   {
     id: 'm19-t4', moduleId: 19, type: 'error-correction',
@@ -345,7 +345,7 @@ export const stage4Test: Question[] = [
     options: ['It tends to be', 'that students', 'may possibly', 'perform better'],
     answer: 'may possibly',
     explanation:
-      'Tend to নিজেই একটি hedge, আর may possibly এর উপরে আরও দুটি hedge চাপিয়ে দিচ্ছে।',
+      'Tend to নিজেই একটা hedge, আর may possibly তার উপর আরও দুটো hedge চাপিয়ে দিচ্ছে।',
   },
   {
     id: 'm19-t5', moduleId: 19, type: 'multiple-choice',
@@ -353,7 +353,7 @@ export const stage4Test: Question[] = [
     options: ['demonstrates', 'claims', 'establishes', 'confirms'],
     answer: 'claims',
     explanation:
-      'Claims দিয়ে বোঝায় যে আপনি বক্তব্যটি মেনে নিচ্ছেন না।',
+      'Claims লিখলে বোঝায় যে আপনি বক্তব্যটা পুরোপুরি মেনে নিচ্ছেন না।',
   },
   {
     id: 'm19-t6', moduleId: 19, type: 'choose-correct-sentence',
@@ -366,7 +366,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'The government should act, since the evidence suggests that delay is costly.',
     explanation:
-      'অবস্থান এখানে দৃঢ়, আর hedge বসেছে প্রমাণের উপর, যেখানে এটির থাকা উচিত।',
+      'এখানে মতটা দৃঢ়, আর hedge বসেছে প্রমাণ নিয়ে করা দাবিতে, যেখানে এটা থাকার কথা।',
   },
   {
     id: 'm19-t7', moduleId: 19, type: 'multiple-choice',
@@ -374,14 +374,14 @@ export const stage4Test: Question[] = [
     options: ['all', 'every single', 'many', 'without exception'],
     answer: 'many',
     explanation:
-      'Many ব্যতিক্রমের জায়গা রাখে, কিন্তু চূড়ান্ত quantifier তা রাখে না।',
+      'Many ব্যতিক্রমের জায়গা রাখে, কিন্তু all-এর মতো চরম quantifier তা রাখে না।',
   },
   {
     id: 'm19-t8', moduleId: 19, type: 'fill-blank',
     question: 'The findings ___ that a link exists, though more research is needed. (prove / indicate)',
     answer: 'indicate',
     explanation:
-      'Indicate একটি প্রাথমিক ফলাফলের জোরের সঙ্গে মানানসই।',
+      'প্রাথমিক একটা ফলাফলের জন্য indicate-এর জোরটাই মানানসই।',
   },
   {
     id: 'm19-t9', moduleId: 19, type: 'error-correction',
@@ -390,7 +390,7 @@ export const stage4Test: Question[] = [
     options: ['Research is proving', 'that this approach', 'is the only', 'solution available'],
     answer: 'is the only',
     explanation:
-      'The only solution এমন একটি চূড়ান্ত দাবি, যা কোনো গবেষণাই সমর্থন করতে পারে না।',
+      'The only solution এমন একটা চরম দাবি, যেটা কোনো গবেষণাই সমর্থন করতে পারে না।',
   },
   {
     id: 'm19-t10', moduleId: 19, type: 'multiple-choice',
@@ -403,7 +403,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Your own position on the question',
     explanation:
-      'Hedging দাবিকে সংযত করে, কিন্তু প্রশ্নের উত্তর দেওয়ার বিকল্প হয় না।',
+      'Hedging দাবিকে মেপে বলে, কিন্তু প্রশ্নের উত্তর না দেওয়ার অজুহাত হতে পারে না।',
   },
 
   /* ========================== Module 20 test ========================== */
@@ -413,7 +413,7 @@ export const stage4Test: Question[] = [
     options: ['At the start', 'At the end', 'In the middle', 'In a separate clause'],
     answer: 'At the end',
     explanation:
-      'জানা তথ্য আগে আসে, আর বাক্যের শেষ অংশটিই মূল কথা বহন করে।',
+      'জানা তথ্য আগে আসে, আর বাক্যের শেষ অংশেই থাকে মূল কথা।',
   },
   {
     id: 'm20-t2', moduleId: 20, type: 'choose-correct-sentence',
@@ -426,7 +426,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'This measure cut congestion by 20 per cent.',
     explanation:
-      'এটি জানা তথ্য দিয়ে শুরু হয়ে নতুন সংখ্যাটি দিয়ে শেষ হচ্ছে।',
+      'বাক্যটা জানা তথ্য দিয়ে শুরু হয়ে নতুন সংখ্যাটা দিয়ে শেষ হচ্ছে।',
   },
   {
     id: 'm20-t3', moduleId: 20, type: 'fill-blank',
@@ -434,7 +434,7 @@ export const stage4Test: Question[] = [
     answer: 'It',
     acceptable: ['it'],
     explanation:
-      'Extraposition Clause-কে শেষে সরিয়ে Subject-এর জায়গা it দিয়ে পূরণ করে।',
+      'Extraposition-এ Clause শেষে চলে যায়, আর Subject-এর জায়গা পূরণ করে it।',
   },
   {
     id: 'm20-t4', moduleId: 20, type: 'error-correction',
@@ -443,7 +443,7 @@ export const stage4Test: Question[] = [
     options: ['There is', 'the government', 'which should act', 'on this issue'],
     answer: 'There is',
     explanation:
-      'Existential there নতুন ও অনির্দিষ্ট তথ্য আনে, আগে থেকে জানা Subject নয়।',
+      'Existential there দিয়ে নতুন আর অনির্দিষ্ট তথ্য আনা হয়, আগে থেকে জানা Subject নয়।',
   },
   {
     id: 'm20-t5', moduleId: 20, type: 'multiple-choice',
@@ -451,7 +451,7 @@ export const stage4Test: Question[] = [
     options: ['Passive voice', 'Extraposition', 'Coordination', 'Ellipsis'],
     answer: 'Extraposition',
     explanation:
-      'It is clear that... গঠনটি Clause-কে মূল Verb-এর পরে নিয়ে যায়।',
+      'It is clear that... গঠনে Clause-টা মূল Verb-এর পরে চলে যায়।',
   },
   {
     id: 'm20-t6', moduleId: 20, type: 'choose-correct-sentence',
@@ -464,7 +464,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Cities grew rapidly. This growth pushed up housing costs and lengthened commutes.',
     explanation:
-      'তথ্যের ক্রম বদলানোয় তিনটি linking adverbial-এর আর দরকার থাকে না।',
+      'তথ্যের ক্রম বদলানোয় তিনটা linking adverbial-এর আর দরকারই থাকে না।',
   },
   {
     id: 'm20-t7', moduleId: 20, type: 'multiple-choice',
@@ -484,7 +484,7 @@ export const stage4Test: Question[] = [
     question: 'Many firms now allow remote work. This ___ has reduced office demand. (shift / thing)',
     answer: 'shift',
     explanation:
-      'Summary noun আগের বাক্যে বর্ণিত বিষয়টিকে এক শব্দে নাম দেয়।',
+      'Summary noun আগের বাক্যে যা বলা হয়েছে, সেটাকে এক শব্দে প্রকাশ করে।',
   },
   {
     id: 'm20-t9', moduleId: 20, type: 'error-correction',
@@ -493,7 +493,7 @@ export const stage4Test: Question[] = [
     options: ['That the climate is changing rapidly', 'and that action is needed', 'urgently', 'is accepted'],
     answer: 'That the climate is changing rapidly',
     explanation:
-      'দুটি ভারী Subject Clause extraposition করা উচিত: It is accepted that...',
+      'দুটো ভারী Subject Clause শেষে পাঠানো (extraposition) উচিত: It is accepted that...',
   },
   {
     id: 'm20-t10', moduleId: 20, type: 'multiple-choice',
@@ -506,7 +506,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'There was a sharp fall in rainfall, which affected three regions and lasted two years.',
     explanation:
-      'ভারী বিশেষণ অংশটি এখন বাক্যের শেষে বসেছে।',
+      'ভারী বর্ণনার অংশটা এখন বাক্যের শেষে বসেছে।',
   },
 
   /* ========================== Module 21 test ========================== */
@@ -521,7 +521,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'The new policy replaced the old one, which had proved ineffective.',
     explanation:
-      'One দিয়ে substitution আর একটি Relative Clause মিলে দুটি পুনরাবৃত্তি সরিয়ে দিয়েছে।',
+      'One দিয়ে substitution আর একটা Relative Clause মিলে দুটো পুনরাবৃত্তি সরিয়ে দিয়েছে।',
   },
   {
     id: 'm21-t2', moduleId: 21, type: 'multiple-choice',
@@ -529,7 +529,7 @@ export const stage4Test: Question[] = [
     options: ['do it', 'do so', 'make it', 'does that'],
     answer: 'do so',
     explanation:
-      'Academic লেখায় do so-ই প্রচলিত ও মানানসই রূপ।',
+      'Academic লেখায় do so-ই প্রচলিত আর মানানসই রূপ।',
   },
   {
     id: 'm21-t3', moduleId: 21, type: 'fill-blank',
@@ -545,7 +545,7 @@ export const stage4Test: Question[] = [
     options: ['The report', 'was long.', 'This made', 'difficult to read'],
     answer: 'difficult to read',
     explanation:
-      'Make-এর একটি Object লাগে: which made it difficult to read।',
+      'Make-এর একটা Object লাগে: which made it difficult to read।',
   },
   {
     id: 'm21-t5', moduleId: 21, type: 'multiple-choice',
@@ -566,7 +566,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'I prefer the first option to the second.',
     explanation:
-      'Prefer-এর সঙ্গে to বসে, আর ellipsis পুনরাবৃত্ত Noun-টি সরিয়ে দেয়।',
+      'Prefer-এর সঙ্গে to বসে, আর ellipsis করে দ্বিতীয়বারের Noun-টা বাদ দেওয়া হয়।',
   },
   {
     id: 'm21-t7', moduleId: 21, type: 'multiple-choice',
@@ -579,7 +579,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Mechanical overuse of cohesive devices',
     explanation:
-      'প্রতিটি বাক্যে connector থাকলে সেটি যান্ত্রিক শোনায় এবং এতে নম্বর কমে।',
+      'প্রতিটি বাক্যে connector থাকলে লেখা যান্ত্রিক শোনায়, আর এতে নম্বর কাটে।',
   },
   {
     id: 'm21-t8', moduleId: 21, type: 'fill-blank',
@@ -608,7 +608,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'A result participle clause at the end of the previous sentence',
     explanation:
-      '..., reducing costs. লিখলে আরেকটি connector ছাড়াই ফলাফল বোঝানো যায়।',
+      '..., reducing costs. লিখলে আরেকটা connector ছাড়াই ফলাফল বোঝানো যায়।',
   },
 
   /* ========================== Module 22 test ========================== */
@@ -623,7 +623,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Never before have people had access to so much information.',
     explanation:
-      'সামনে বসা নেতিবাচক শব্দের কারণে Auxiliary Subject-এর আগে চলে আসে।',
+      'না-বোধক শব্দ সামনে বসায় Auxiliary Subject-এর আগে চলে এসেছে।',
   },
   {
     id: 'm22-t2', moduleId: 22, type: 'multiple-choice',
@@ -647,7 +647,7 @@ export const stage4Test: Question[] = [
     options: ['Under no circumstances', 'we should', 'ignore', 'this evidence'],
     answer: 'we should',
     explanation:
-      'শুরুতে বসা সীমাবদ্ধতাসূচক phrase inversion দাবি করে: should we ignore।',
+      'শুরুতে সীমা বোঝানো phrase বসলে inversion লাগে: should we ignore।',
   },
   {
     id: 'm22-t5', moduleId: 22, type: 'multiple-choice',
@@ -655,7 +655,7 @@ export const stage4Test: Question[] = [
     options: ['did', 'was', 'had', 'has'],
     answer: 'did',
     explanation:
-      'Only + adverbial-এর ক্ষেত্রে do-support লাগে, আর মূল Verb base রূপে ফিরে যায়।',
+      'Only + adverbial-এর পরে do-support লাগে, আর মূল Verb base রূপে ফিরে যায়।',
   },
   {
     id: 'm22-t6', moduleId: 22, type: 'choose-correct-sentence',
@@ -668,7 +668,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'It is not only expensive but also ineffective.',
     explanation:
-      'সামনে না আনলে inversion-ও লাগে না, আর সাধারণ রূপটিই সঠিক।',
+      'শব্দটা সামনে না আনলে inversion-ও লাগে না; সাধারণ রূপটাই সঠিক।',
   },
   {
     id: 'm22-t7', moduleId: 22, type: 'multiple-choice',
@@ -676,7 +676,7 @@ export const stage4Test: Question[] = [
     options: ['Passive voice', 'What-cleft', 'Relative clause', 'Ellipsis'],
     answer: 'What-cleft',
     explanation:
-      'What matters most is the cost গঠনে জোরটি বাক্যের দ্বিতীয়ার্ধে চলে যায়।',
+      'What matters most is the cost গঠনে জোরটা পড়ে বাক্যের দ্বিতীয় অর্ধে।',
   },
   {
     id: 'm22-t8', moduleId: 22, type: 'fill-blank',
@@ -696,7 +696,7 @@ export const stage4Test: Question[] = [
     ],
     answer: 'When you cannot produce the form automatically',
     explanation:
-      'ভুলসহ একটি inverted বাক্যের ক্ষতি নির্ভুল সাধারণ বাক্যের চেয়ে অনেক বেশি।',
+      'ভুলে ভরা একটা inverted বাক্য, নির্ভুল একটা সাধারণ বাক্যের চেয়ে অনেক বেশি ক্ষতি করে।',
   },
   {
     id: 'm22-t10', moduleId: 22, type: 'multiple-choice',
@@ -709,6 +709,6 @@ export const stage4Test: Question[] = [
     ],
     answer: 'Noun phrases, hedging, information packaging and cohesion',
     explanation:
-      'উন্নত পর্যায়ের দক্ষতা আসে Module 18 থেকে 21 থেকে; Module 22 কেবল বাড়তি সমৃদ্ধি।',
+      'Advanced লেভেলের নম্বর আসে Module 18 থেকে 21-এর দক্ষতা থেকে; Module 22 শুধু বাড়তি জ্ঞান।',
   },
 ]

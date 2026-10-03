@@ -4,6 +4,7 @@ import { ProgressProvider } from '@/hooks/useProgress'
 import { useTheme } from '@/hooks/useTheme'
 import { Layout } from '@/components/Layout'
 import { Dashboard } from '@/pages/Dashboard'
+import { Skeleton } from '@/components/ui/Skeleton'
 
 /* The lesson and question banks are large, so the content-heavy routes load on demand. */
 const Course = lazy(() => import('@/pages/Course').then((m) => ({ default: m.Course })))
@@ -17,10 +18,15 @@ const Settings = lazy(() => import('@/pages/Settings').then((m) => ({ default: m
 
 function RouteFallback() {
   return (
-    <div className="space-y-4" aria-busy="true" aria-label="Loading">
-      <div className="h-8 w-56 animate-pulse rounded-lg bg-ink-200 dark:bg-ink-800" />
-      <div className="h-32 animate-pulse rounded-2xl bg-ink-200 dark:bg-ink-800" />
-      <div className="h-32 animate-pulse rounded-2xl bg-ink-200 dark:bg-ink-800" />
+    <div className="animate-fade-in space-y-5" aria-busy="true" aria-label="Loading">
+      <Skeleton className="h-3 w-24 rounded-full" />
+      <Skeleton className="h-9 w-72 max-w-full rounded-xl" />
+      <Skeleton className="h-4 w-full max-w-lg" />
+      <Skeleton className="h-40 rounded-3xl" />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Skeleton className="h-32 rounded-2xl" />
+        <Skeleton className="h-32 rounded-2xl" />
+      </div>
     </div>
   )
 }

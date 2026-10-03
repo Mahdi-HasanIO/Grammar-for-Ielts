@@ -5,17 +5,17 @@ export const stage2Lessons: Lesson[] = [
   {
     moduleId: 6,
     intro:
-      'আপনার সব Tense মুখস্থ করার দরকার নেই। দরকার অল্প কয়েকটি Tense, যেগুলো আপনি ধারাবাহিকভাবে ঠিকভাবে ব্যবহার করতে পারবেন, আর সেই সঙ্গে বোঝার ক্ষমতা যে কোন প্রশ্নে কোন সময়কাল লাগবে। পরীক্ষার লেখায় Tense-এর বেশিরভাগ ভুল কঠিন কিছু নয়; বরং একই অনুচ্ছেদের ভেতরে কারণ ছাড়াই Tense বদলে ফেলা।',
+      'সব Tense মুখস্থ করার দরকার নেই। দরকার অল্প কয়েকটা Tense, যেগুলো আপনি সবসময় নির্ভুলভাবে ব্যবহার করতে পারবেন, আর প্রশ্ন দেখে বোঝার ক্ষমতা যে কোন সময়ের কথা লিখতে হবে। পরীক্ষায় Tense-এর বেশিরভাগ ভুল আসলে কঠিন কিছু নয়; বরং একই paragraph-এ কারণ ছাড়াই Tense বদলে ফেলা।',
     rules: [
       {
         id: 'm6-r1',
         heading: 'যে কয়টি Tense আসলেই লাগবে',
-        rule: 'Academic writing-এর প্রায় পুরোটাই চলে পাঁচটি রূপে: Present simple, Past simple, Present perfect, Past perfect এবং একটি Future রূপ।',
-        whenToUse: 'প্রতি অনুচ্ছেদে একবার সময়কাল ঠিক করুন, তারপর সেটি ধরে রাখুন।',
+        rule: 'Academic writing-এর প্রায় পুরোটাই চলে পাঁচটা রূপ দিয়ে: Present simple, Past simple, Present perfect, Past perfect, আর একটা Future রূপ।',
+        whenToUse: 'প্রতিটি paragraph-এর শুরুতে ঠিক করে নিন কোন সময়ের কথা বলছেন, তারপর সেটাতেই থাকুন।',
         structure: [
           'Present simple - সাধারণ সত্য, বর্তমান অবস্থা, আপনার যুক্তি।',
           'Past simple - নির্দিষ্ট অতীত সময়ে শেষ হওয়া ঘটনা।',
-          'Present perfect - অতীতের ঘটনা যার প্রভাব এখনো আছে, বা এখনো শেষ না হওয়া সময়কাল।',
+          'Present perfect - অতীতের ঘটনা যার প্রভাব এখনো আছে, বা যে সময়টা এখনো শেষ হয়নি।',
           'Past perfect - অতীতের আরেকটি ঘটনার আগে ঘটে যাওয়া ঘটনা।',
           'will / be going to - ভবিষ্যদ্বাণী ও পরিকল্পনা।',
         ],
@@ -35,7 +35,7 @@ export const stage2Lessons: Lesson[] = [
       {
         id: 'm6-r2',
         heading: 'Past simple না Present perfect',
-        rule: 'নির্দিষ্ট ও শেষ হয়ে যাওয়া সময় উল্লেখ থাকলে Past simple ব্যবহার করুন। সময় উল্লেখ না থাকলে বা সময়কাল এখনো চললে Present perfect ব্যবহার করুন।',
+        rule: 'নির্দিষ্ট আর শেষ হয়ে যাওয়া সময়ের কথা থাকলে Past simple ব্যবহার করুন। সময় বলা না থাকলে, বা সময়টা এখনো চলতে থাকলে Present perfect ব্যবহার করুন।',
         whenToUse: 'যখনই সময়ের সঙ্গে পরিবর্তন বর্ণনা করবেন।',
         structure: [
           'Past simple: Emissions fell sharply in 2019.',
@@ -44,14 +44,14 @@ export const stage2Lessons: Lesson[] = [
         ],
         notes: [
           'since ও so far থাকলে Present perfect; আর in 2019, last year, ago থাকলে Past simple।',
-          'দুটি কখনো একসঙ্গে মেশাবেন না: has fallen in 2019 ভুল।',
+          'দুটোকে কখনো মেশাবেন না: has fallen in 2019 ভুল।',
         ],
       },
       {
         id: 'm6-r3',
         heading: 'IELTS-এর প্রশ্নে Tense',
-        rule: 'Task 1-এ Tense ঠিক হয় চার্টে দেওয়া সাল দেখে। Task 2 মূলত Present simple-এ লেখা হয়।',
-        whenToUse: 'একটি শব্দ লেখার আগেই চার্টের শিরোনাম ভালো করে পড়ুন।',
+        rule: 'Task 1-এ Tense ঠিক হয় চার্টের সাল দেখে। Task 2 মূলত Present simple-এ লেখা হয়।',
+        whenToUse: 'একটা শব্দ লেখার আগেই চার্টের title ভালো করে পড়ুন।',
         structure: [
           'অতীতের সাল দেওয়া চার্ট: The number of visitors rose between 2001 and 2010.',
           'সাল না থাকা চার্ট: The chart shows how waste is processed.',
@@ -61,21 +61,21 @@ export const stage2Lessons: Lesson[] = [
         ],
         notes: [
           'Process diagram-এ সাধারণত Present simple passive ব্যবহৃত হয়।',
-          'অনুমিত ভবিষ্যৎ সংখ্যার জন্য will, is expected to বা is projected to বসে, Past simple নয়।',
+          'ভবিষ্যতের অনুমান করা সংখ্যার জন্য will, is expected to বা is projected to বসে, Past simple নয়।',
         ],
       },
       {
         id: 'm6-r4',
-        heading: 'ধারাবাহিকতা ও যুক্তিসঙ্গত পরিবর্তন',
-        rule: 'অর্থের প্রয়োজন না হলে একই সময়কালে থাকুন। আর যখন সত্যিই Tense বদলাবেন, তখন কারণটি পাঠকের কাছে স্পষ্ট রাখুন।',
-        whenToUse: 'লেখা শেষে যখন নিজের কাজ যাচাই করবেন।',
+        heading: 'এক Tense-এ থাকা, আর কারণ থাকলে তবেই বদলানো',
+        rule: 'অর্থের দরকার না হলে একই সময়ে থাকুন। আর সত্যিই Tense বদলালে কারণটা যেন পাঠক বুঝতে পারেন।',
+        whenToUse: 'লেখা শেষে নিজের লেখা চেক করার সময়।',
         structure: [
           'Unjustified: The government introduced the scheme and spends millions on it.',
           'Fixed: The government introduced the scheme and spent millions on it.',
           'Justified: The government introduced the scheme in 2015, and it still operates today.',
         ],
         notes: [
-          'today বা since then-এর মতো সময়সূচক শব্দ থাকলে Tense বদলানো যুক্তিসঙ্গত হয়।',
+          'today বা since then-এর মতো সময় বোঝানো শব্দ থাকলে Tense বদলানোর কারণটা পাঠক সহজেই বোঝেন।',
         ],
       },
     ],
@@ -88,22 +88,22 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'Since 2010, the city invested heavily in cycling.',
         right: 'Since 2010, the city has invested heavily in cycling.',
-        note: 'Since বোঝাচ্ছে সময়কালটি এখনো চলছে।',
+        note: 'Since বলছে, সময়টা এখনো চলছে।',
       },
       {
         wrong: 'The graph showed that sales will rise until 2030.',
         right: 'The graph shows that sales will rise until 2030.',
-        note: 'চার্টটি এখন আপনার সামনেই আছে, তাই বর্তমানে বর্ণনা করুন।',
+        note: 'চার্টটা এখন আপনার সামনেই আছে, তাই এটা কী দেখাচ্ছে তা Present-এ লিখুন।',
       },
       {
         wrong: 'When the researchers arrived, the experiment already finished.',
         right: 'When the researchers arrived, the experiment had already finished.',
-        note: 'দুটি অতীত ঘটনার মধ্যে আগেরটি Past perfect-এ বসে।',
+        note: 'অতীতের দুটো ঘটনার মধ্যে যেটা আগে ঘটেছে, সেটা Past perfect-এ বসে।',
       },
       {
         wrong: 'Firstly, the beans are harvested. Then workers dried them.',
         right: 'Firstly, the beans are harvested. They are then dried.',
-        note: 'Process বর্ণনায় একই Tense ও একই Voice ধরে রাখুন।',
+        note: 'Process বর্ণনা করার সময় পুরোটা একই Tense আর একই Voice-এ লিখুন।',
       },
     ],
     mistakes: [
@@ -127,20 +127,20 @@ export const stage2Lessons: Lesson[] = [
         wrong: 'The report was published last year and describes three solutions.',
         right: 'The report, which was published last year, describes three solutions.',
         explanation:
-          'সরলভাবে পাশাপাশি বসালে Tense-এর বদল বিভ্রান্তিকর লাগে; Relative Clause ব্যবহার করলে দুটি সময়কাল ইচ্ছাকৃত বলে বোঝা যায়।',
+          'শুধু পাশাপাশি বসালে Tense-এর বদলটা গোলমেলে লাগে; Relative Clause ব্যবহার করলে বোঝা যায় যে দুটো আলাদা সময়ের কথা ইচ্ছা করেই বলা হচ্ছে।',
       },
       {
         wrong: 'Since the last decade, air quality improved considerably.',
         right: 'Over the last decade, air quality has improved considerably.',
         explanation:
-          'Since-এর পরে নির্দিষ্ট সময়বিন্দু বসে, আর সময়কাল বোঝাতে over বসে। দুই ক্ষেত্রেই অসমাপ্ত সময়ের জন্য Present perfect মানানসই।',
+          'Since-এর পরে নির্দিষ্ট একটা সময় (যেমন 2010) বসে, আর সময়ের দৈর্ঘ্য বোঝাতে over বসে। দুই ক্ষেত্রেই সময়টা এখনো চলছে, তাই Present perfect মানায়।',
       },
     ],
     keyTakeaways: [
-      'প্রশ্ন দেখে সময়কাল ঠিক করুন, তারপর সেটি ধরে রাখুন।',
+      'প্রশ্ন দেখে সময়টা ঠিক করুন, তারপর সেটাতেই থাকুন।',
       'নির্দিষ্ট অতীত সময় মানে Past simple; since থাকলে বা সময় উল্লেখ না থাকলে Present perfect।',
-      'চার্ট ও process বর্তমানে বর্ণনা করুন, আর তথ্যগুলো চার্টের সময়কাল অনুযায়ী।',
-      'প্রতিটি Tense পরিবর্তনের পেছনে একটি দৃশ্যমান কারণ থাকা চাই।',
+      'চার্ট বা process কী দেখাচ্ছে তা Present-এ লিখুন, আর ডেটাগুলো চার্টের সময় অনুযায়ী।',
+      'প্রতিবার Tense বদলানোর পেছনে একটা স্পষ্ট কারণ থাকতে হবে।',
     ],
   },
 
@@ -148,13 +148,13 @@ export const stage2Lessons: Lesson[] = [
   {
     moduleId: 7,
     intro:
-      'Modal দিয়ে আপনি বোঝান কোনো কিছু নিয়ে আপনি কতটা নিশ্চিত এবং কোনো পরামর্শ কতটা জোরালো। পুরো ব্যবস্থাটিতে দুটি অর্থ কাজ করে: কোনো কিছু কতটা সম্ভব, আর কারও কী করা উচিত। এই দুটি আলাদা রাখতে পারলে আপনার যুক্তি একতরফা না শুনিয়ে বরং ভারসাম্যপূর্ণ শোনাবে।',
+      'Modal দিয়ে আপনি বোঝান কোনো বিষয়ে আপনি কতটা নিশ্চিত, আর আপনার পরামর্শ কতটা জোরালো। Modal মূলত দুটো কাজ করে: কোনো কিছু কতটা সম্ভব তা বোঝায়, আর কারও কী করা উচিত তা বোঝায়। এই দুটো আলাদা রাখতে পারলে আপনার যুক্তি একপেশে না শুনিয়ে ভারসাম্যপূর্ণ শোনাবে।',
     rules: [
       {
         id: 'm7-r1',
-        heading: 'দুটি কাজ: সম্ভাবনা ও বাধ্যবাধকতা',
-        rule: 'একই Modal দিয়ে কোনো কিছুর সম্ভাবনা (epistemic) বোঝানো যায়, আবার কী করা আবশ্যক (deontic) সেটিও বোঝানো যায়। কোন অর্থটি প্রযোজ্য, তা ঠিক করে দেয় প্রসঙ্গ।',
-        whenToUse: 'যখনই আপনি ভবিষ্যদ্বাণী করছেন, পরামর্শ দিচ্ছেন বা মূল্যায়ন করছেন।',
+        heading: 'দুটো কাজ: সম্ভাবনা আর বাধ্যবাধকতা',
+        rule: 'একই Modal দিয়ে কোনো কিছুর সম্ভাবনা (epistemic) বোঝানো যায়, আবার কী করা জরুরি (deontic) সেটাও বোঝানো যায়। কোন অর্থটা বোঝানো হচ্ছে, সেটা বোঝা যায় context দেখে।',
+        whenToUse: 'যখনই আপনি ভবিষ্যতের কথা বলছেন, পরামর্শ দিচ্ছেন বা মতামত দিচ্ছেন।',
         structure: [
           'সম্ভাবনা: This policy may reduce congestion. (এটি সম্ভব)',
           'অনুমতি: Drivers may park here. (এটি অনুমোদিত)',
@@ -162,14 +162,14 @@ export const stage2Lessons: Lesson[] = [
           'বাধ্যবাধকতা: Governments must act. (এটি করা জরুরি)',
         ],
         notes: [
-          'পরিভাষা মুখস্থ করার দরকার নেই, শুধু অভ্যাস করুন এই প্রশ্নটি করার: আমি কি সম্ভাবনার কথা বলছি, নাকি কর্তব্যের কথা?',
+          'এই পরিভাষাগুলো মুখস্থ করার দরকার নেই; শুধু নিজেকে জিজ্ঞেস করার অভ্যাস করুন: আমি কি সম্ভাবনার কথা বলছি, নাকি কী করা উচিত তার কথা?',
         ],
       },
       {
         id: 'm7-r2',
         heading: 'নিশ্চয়তার মাত্রা',
-        rule: 'Modal-গুলো প্রায়-নিশ্চিত থেকে শুরু করে ক্ষীণ সম্ভাবনা পর্যন্ত সাজানো থাকে। সঠিক ধাপটি বেছে নেওয়াই আপনার দাবিকে যুক্তিসঙ্গত রাখে।',
-        whenToUse: 'যখন এমন কোনো ফলাফলের কথা বলছেন যা আপনি প্রমাণ করতে পারবেন না।',
+        rule: 'Modal-গুলোকে প্রায় নিশ্চিত থেকে সামান্য সম্ভাবনা পর্যন্ত একটা সিঁড়ির মতো সাজানো যায়। ঠিক ধাপটা বেছে নিলেই আপনার দাবি যুক্তিসঙ্গত থাকে।',
+        whenToUse: 'যখন এমন কোনো ফলাফলের কথা বলছেন, যেটা আপনি প্রমাণ করতে পারবেন না।',
         structure: [
           'will - আত্মবিশ্বাসী ভবিষ্যদ্বাণী: Demand will rise.',
           'must - প্রমাণভিত্তিক দৃঢ় সিদ্ধান্ত: The cause must be economic.',
@@ -192,8 +192,8 @@ export const stage2Lessons: Lesson[] = [
       {
         id: 'm7-r3',
         heading: 'বাধ্যবাধকতা ও পরামর্শ',
-        rule: 'Must খুব কড়া এবং অনেক সময় আদেশের মতো শোনায়; essay-তে পরামর্শ দেওয়ার স্বাভাবিক শব্দ হলো should।',
-        whenToUse: 'সমাধান বিষয়ক অনুচ্ছেদে।',
+        rule: 'Must খুব কড়া, অনেক সময় হুকুমের মতো শোনায়; essay-তে পরামর্শ দেওয়ার স্বাভাবিক শব্দ হলো should।',
+        whenToUse: 'সমাধান নিয়ে লেখা paragraph-এ।',
         structure: [
           'Governments should invest in renewable energy.',
           'Schools ought to teach financial literacy.',
@@ -202,14 +202,14 @@ export const stage2Lessons: Lesson[] = [
           'Students do not have to attend. (বাধ্যবাধকতা নেই)',
         ],
         notes: [
-          'Must not মানে নিষিদ্ধ; do not have to মানে ইচ্ছা করলে করতে পারেন। এ দুটি কখনো এক নয়।',
-          'যুক্তি উপস্থাপনে should সাধারণত ভালো পছন্দ, কারণ এটি পরামর্শ দেয় কিন্তু আইনের মতো শোনায় না।',
+          'Must not মানে করা নিষেধ; do not have to মানে করার দরকার নেই, তবে চাইলে করতে পারেন। দুটো কখনো এক নয়।',
+          'যুক্তি দেওয়ার সময় should সাধারণত ভালো পছন্দ, কারণ এটা পরামর্শ দেয়, কিন্তু আইনের মতো শোনায় না।',
         ],
       },
       {
         id: 'm7-r4',
-        heading: 'যে গঠনগত নিয়ম কখনো বদলায় না',
-        rule: 'Modal-এর পরে সবসময় bare infinitive বসে। Modal-এ -s যোগ হয় না, to বসে না এবং দুটি Modal পাশাপাশি বসতে পারে না।',
+        heading: 'Modal-এর যে নিয়ম কখনো বদলায় না',
+        rule: 'Modal-এর পরে সবসময় bare infinitive বসে। Modal-এ -s যোগ হয় না, পরে to বসে না, আর দুটো Modal পাশাপাশি বসতে পারে না।',
         whenToUse: 'সবসময়।',
         structure: [
           'modal + base verb: should invest',
@@ -232,7 +232,7 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'This policy will definitely solve all social problems.',
         right: 'This policy could address several of these problems.',
-        note: 'চূড়ান্ত দাবির চেয়ে পরিমিত দাবি রক্ষা করা অনেক সহজ।',
+        note: 'চরম দাবির চেয়ে মেপে করা দাবির পক্ষে যুক্তি দেওয়া অনেক সহজ।',
       },
       {
         wrong: 'Students should to be encouraged to read widely.',
@@ -247,7 +247,7 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'Employees must not work overtime if they do not want to.',
         right: 'Employees do not have to work overtime if they do not want to.',
-        note: 'Must not নিষেধ করে; do not have to বাধ্যবাধকতা তুলে নেয়।',
+        note: 'Must not মানে নিষেধ; do not have to মানে বাধ্যবাধকতা নেই।',
       },
     ],
     mistakes: [
@@ -259,7 +259,7 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'It will can solve the problem.',
         right: 'It will be able to solve the problem.',
-        explanation: 'দুটি Modal পাশাপাশি বসে না; দ্বিতীয়টির জায়গায় be able to ব্যবহার করুন।',
+        explanation: 'দুটো Modal পাশাপাশি বসে না; দ্বিতীয়টার জায়গায় be able to ব্যবহার করুন।',
       },
       {
         wrong: 'Technology must improves education.',
@@ -269,20 +269,20 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'Children may to watch television after finishing homework.',
         right: 'Children may watch television after finishing homework.',
-        explanation: 'অনুমতি বোঝানোর ক্ষেত্রেও একই bare infinitive নিয়ম প্রযোজ্য।',
+        explanation: 'অনুমতি বোঝানোর সময়ও একই bare infinitive নিয়ম খাটে।',
       },
       {
         wrong: 'This evidence must proves that the theory is correct.',
         right: 'This evidence suggests that the theory is correct.',
         explanation:
-          'গঠনগত ভুল ছাড়াও এখানে must দিয়ে এমন দাবি করা হয়েছে যা একটিমাত্র প্রমাণ দিয়ে করা যায় না।',
+          'গঠনের ভুল তো আছেই, তার উপর must দিয়ে এমন জোরালো দাবি করা হয়েছে, যেটা মাত্র একটা প্রমাণ দিয়ে করা যায় না।',
       },
     ],
     keyTakeaways: [
-      'Modal বাছার আগে ভাবুন আপনি সম্ভাবনা বোঝাচ্ছেন নাকি বাধ্যবাধকতা।',
-      'Essay-র পরামর্শে should স্বাভাবিক, আর must রাখুন নিয়মকানুনের জন্য।',
-      'Modal + bare infinitive; কোনো to নয়, -s নয়, দুটি Modal একসঙ্গে নয়।',
-      'may, might ও could ব্যবহার করে এমন দাবি করুন যা আপনি সত্যিই রক্ষা করতে পারবেন।',
+      'Modal বাছার আগে ভাবুন: আপনি সম্ভাবনা বোঝাচ্ছেন, নাকি বাধ্যবাধকতা?',
+      'Essay-তে পরামর্শ দিতে should স্বাভাবিক; must রাখুন নিয়মকানুনের জন্য।',
+      'Modal + bare infinitive; কোনো to নয়, -s নয়, দুটো Modal একসঙ্গে নয়।',
+      'may, might আর could ব্যবহার করে এমন দাবি করুন, যার পক্ষে আপনি সত্যিই যুক্তি দিতে পারবেন।',
     ],
   },
 
@@ -290,13 +290,13 @@ export const stage2Lessons: Lesson[] = [
   {
     moduleId: 8,
     intro:
-      'Passive একটি ফোকাস বদলানোর কৌশল। এটি যার উপর কাজটি ঘটেছে তাকে Subject-এর জায়গায় নিয়ে আসে, যা তখনই দরকার যখন কে কাজটি করল তা অজানা, স্বাভাবিক বা অপ্রাসঙ্গিক। তবে এটি কখনোই লেখাকে পাণ্ডিত্যপূর্ণ দেখানোর উপায় নয়; পুরো অনুচ্ছেদ passive-এ লিখলে পড়া কঠিন হয়, চমৎকার হয় না।',
+      'Passive হলো ফোকাস বদলানোর একটা কৌশল। কাজটা যার উপর হয়েছে, Passive তাকে Subject-এর জায়গায় নিয়ে আসে। এটা দরকার তখনই, যখন কে কাজটা করেছে তা অজানা, স্পষ্ট বা অদরকারি। তবে লেখাকে ভারী বা পণ্ডিতি দেখানোর জন্য Passive নয়; পুরো paragraph passive-এ লিখলে পড়া কঠিন হয়, সুন্দর হয় না।',
     rules: [
       {
         id: 'm8-r1',
         heading: 'Passive কীভাবে গঠিত হয়',
-        rule: 'Passive-এর গঠন হলো be + past participle। Tense-এর ভার বহন করে be, তাই participle কখনো বদলায় না।',
-        whenToUse: 'যখন কাজটি যার উপর পড়েছে সে কর্তার চেয়ে বেশি গুরুত্বপূর্ণ।',
+        rule: 'Passive-এর গঠন: be + past participle। Tense বোঝানোর কাজটা করে be, তাই participle কখনো বদলায় না।',
+        whenToUse: 'যখন কে কাজটা করেছে তার চেয়ে কার উপর কাজটা হয়েছে, সেটা বেশি গুরুত্বপূর্ণ।',
         structure: [
           'Present simple: The data are collected annually.',
           'Past simple: The scheme was introduced in 2015.',
@@ -319,22 +319,22 @@ export const stage2Lessons: Lesson[] = [
       {
         id: 'm8-r2',
         heading: 'Agent বাদ দেওয়া',
-        rule: 'by + agent তখনই যোগ করুন যখন কর্তার নাম জানা পাঠকের জন্য দরকারি। Academic বাক্যে বেশিরভাগ সময় এটি বাদ দিতে হয়।',
-        whenToUse: 'প্রক্রিয়া, পদ্ধতি ও সাধারণ বক্তব্যে।',
+        rule: 'by + agent তখনই দিন, যখন কে কাজটা করেছে তা জানা পাঠকের জন্য দরকারি। Academic লেখায় বেশিরভাগ সময় এটা বাদ যায়।',
+        whenToUse: 'Process, গবেষণার পদ্ধতি আর সাধারণ বক্তব্যে।',
         structure: [
           'কর্তা অজানা: The documents were destroyed.',
           'কর্তা স্পষ্ট: The suspect was arrested. (by the police)',
           'কর্তা অপ্রাসঙ্গিক: The samples were stored at 4 degrees.',
-          'কর্তা তথ্যবহুল: The theory was first proposed by Chomsky.',
+          'কর্তার নামটাই গুরুত্বপূর্ণ তথ্য: The theory was first proposed by Chomsky.',
         ],
         notes: [
-          'Academic writing-এর প্রায় পাঁচটির মধ্যে চারটি passive-এ কোনো by-phrase থাকে না।',
+          'Academic writing-এ প্রতি পাঁচটা passive-এর মধ্যে প্রায় চারটাতেই কোনো by-phrase থাকে না।',
         ],
       },
       {
         id: 'm8-r3',
-        heading: 'নৈর্ব্যক্তিক Reporting গঠন',
-        rule: 'দুটি গঠন ব্যবহার করে আপনি কারও নাম উল্লেখ না করেই প্রচলিত মত জানাতে পারেন।',
+        heading: 'নাম না বলে মত জানানো (Impersonal reporting)',
+        rule: 'এই দুটো গঠন দিয়ে কারও নাম না বলেই প্রচলিত মত জানাতে পারেন।',
         whenToUse: 'Essay-তে সাধারণ মত বা প্রতিষ্ঠিত গবেষণার ফল সংক্ষেপে বলার সময়।',
         structure: [
           'It + passive + that-clause: It is argued that automation will reduce employment.',
@@ -342,14 +342,14 @@ export const stage2Lessons: Lesson[] = [
           'যেসব Verb বেশি ব্যবহৃত হয়: argue, believe, claim, think, say, expect, consider, report, know.',
         ],
         notes: [
-          'এগুলো কাজের, তবে খুব চোখে পড়ে। একটি essay-তে এক-দুইবারই যথেষ্ট।',
+          'এগুলো কাজের, তবে খুব চোখে পড়ে। একটা essay-তে এক-দুইবারই যথেষ্ট।',
           'দ্বিতীয় গঠনে to-infinitive লাগবে: X is believed to be..., কখনো X is believed that... নয়।',
         ],
       },
       {
         id: 'm8-r4',
         heading: 'কখন Active ভালো',
-        rule: 'যখন কর্তাই মূল কথা, এবং যখন passive দায়িত্ব আড়াল করে বা শব্দ বাড়ায়, তখন Active ব্যবহার করুন।',
+        rule: 'যখন কে কাজটা করছে সেটাই মূল কথা, অথবা passive দিলে দায়িত্বটা কার তা লুকিয়ে যায় বা অকারণে শব্দ বাড়ে, তখন Active ব্যবহার করুন।',
         whenToUse: 'বেশিরভাগ সময়েই।',
         structure: [
           'Weak: It was decided by the committee that the project would be cancelled.',
@@ -358,7 +358,7 @@ export const stage2Lessons: Lesson[] = [
           'Better: The department made several mistakes.',
         ],
         notes: [
-          'Task 2-তে আপনার যুক্তির কর্তা সাধারণত স্পষ্ট থাকে: governments, schools, employers। তাদের নাম লিখে দিন।',
+          'Task 2-তে কারা কাজটা করবে তা সাধারণত স্পষ্ট: governments, schools, employers। তাদের নামটাই সরাসরি লিখুন।',
         ],
       },
     ],
@@ -371,12 +371,12 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'The new policy will be introduce next year.',
         right: 'The new policy will be introduced next year.',
-        note: 'Modal-এর পরেও গঠনটি be + past participle।',
+        note: 'Modal-এর পরেও গঠনটা be + past participle।',
       },
       {
         wrong: 'It is believed that technology to improve productivity.',
         right: 'It is believed that technology improves productivity.',
-        note: 'It is believed that-এর পরে একটি পূর্ণ Clause বসে।',
+        note: 'It is believed that-এর পরে একটা পূর্ণ Clause বসে।',
       },
       {
         wrong: 'The glass is crushing and then melted.',
@@ -386,7 +386,7 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'The problem was happened last year.',
         right: 'The problem occurred last year.',
-        note: 'happen-এর মতো Intransitive Verb-এর কোনো passive রূপ নেই।',
+        note: 'happen-এর মতো Intransitive Verb (যার Object হয় না)-এর কোনো passive রূপ নেই।',
       },
     ],
     mistakes: [
@@ -405,25 +405,25 @@ export const stage2Lessons: Lesson[] = [
         wrong: 'It is said that the policy to be effective.',
         right: 'The policy is said to be effective.',
         explanation:
-          'যে কোনো একটি গঠন বেছে নিন: It is said that the policy is effective, অথবা The policy is said to be effective.',
+          'যেকোনো একটা গঠন বেছে নিন: It is said that the policy is effective, অথবা The policy is said to be effective.',
       },
       {
         wrong: 'The decision was made by the government to increase the tax by them.',
         right: 'The government decided to increase the tax.',
         explanation:
-          'Passive-টি চারটি বাড়তি শব্দ আর একটি পুনরাবৃত্ত কর্তা যোগ করেছে। Active রূপটিই স্পষ্ট।',
+          'Passive করায় চারটা বাড়তি শব্দ এসেছে, আর কর্তাকেও আবার বলতে হয়েছে। Active রূপটাই বেশি পরিষ্কার।',
       },
       {
         wrong: 'Air pollution is effected by traffic volume.',
         right: 'Air pollution is affected by traffic volume.',
         explanation:
-          'Affect হলো Verb আর effect হলো Noun। Passive গঠনটি নিজে ঠিকই ছিল।',
+          'Affect হলো Verb আর effect হলো Noun। Passive গঠনটা নিজে ঠিকই ছিল।',
       },
     ],
     keyTakeaways: [
-      'be + past participle, আর Tense-এর ভার বহন করে be।',
+      'be + past participle; Tense বোঝায় be।',
       'কর্তার নাম পাঠককে নতুন কিছু না জানালে by-phrase বাদ দিন।',
-      'It is argued that... কাজের গঠন, তবে খুব কম ব্যবহার করুন।',
+      'It is argued that... কাজের গঠন, তবে অল্প ব্যবহার করুন।',
       'কর্তা গুরুত্বপূর্ণ হলে Active voice-এ লিখুন।',
     ],
   },
@@ -432,13 +432,13 @@ export const stage2Lessons: Lesson[] = [
   {
     moduleId: 9,
     intro:
-      'প্রতিটি Verb তার পরে একটি নির্দিষ্ট গঠন দাবি করে: কখনো gerund, কখনো infinitive, কখনো Object সহ infinitive, আবার কখনো that-clause। অর্থ দেখে এগুলো আন্দাজ করা যায় না, তাই Verb ও তার গঠন একসঙ্গে শিখতে হয়। ভালো খবর হলো, essay-তে আপনার যা লাগবে তার প্রায় পুরোটাই অল্প কয়েক ডজন Verb দিয়ে হয়ে যায়।',
+      'প্রতিটি Verb-এর পরে একটা নির্দিষ্ট গঠন বসে: কখনো gerund, কখনো infinitive, কখনো Object + infinitive, আবার কখনো that-clause। অর্থ দেখে এগুলো আন্দাজ করা যায় না, তাই Verb আর তার গঠন একসঙ্গে শিখতে হয়। ভালো খবর হলো, essay-তে যা লাগে তার প্রায় পুরোটাই কয়েক ডজন Verb দিয়েই হয়ে যায়।',
     rules: [
       {
         id: 'm9-r1',
         heading: 'Verb + gerund (-ing রূপ)',
-        rule: 'কিছু প্রচলিত Verb-এর পরে সবসময় -ing রূপ বসে, কখনো to বসে না।',
-        whenToUse: 'এড়ানো, চালিয়ে যাওয়া, প্রস্তাব দেওয়া ও বিবেচনা করা অর্থের Verb-এর সঙ্গে।',
+        rule: 'কিছু পরিচিত Verb-এর পরে সবসময় -ing রূপ বসে, কখনো to বসে না।',
+        whenToUse: 'এড়ানো, চালিয়ে যাওয়া, প্রস্তাব দেওয়া আর বিবেচনা করা বোঝায় এমন Verb-এর সঙ্গে।',
         structure: [
           'avoid, consider, suggest, involve, risk, delay, deny, mind, practise, enjoy, keep, finish',
           'Governments should avoid raising taxes too quickly.',
@@ -452,8 +452,8 @@ export const stage2Lessons: Lesson[] = [
       {
         id: 'm9-r2',
         heading: 'Verb + to-infinitive (to সহ ক্রিয়া)',
-        rule: 'আরেক দল Verb-এর পরে to + base form বসে।',
-        whenToUse: 'ইচ্ছা, প্রবণতা ও চেষ্টা বোঝানো Verb-এর সঙ্গে।',
+        rule: 'আরেক দল Verb-এর পরে বসে to + base form।',
+        whenToUse: 'ইচ্ছা, প্রবণতা আর চেষ্টা বোঝায় এমন Verb-এর সঙ্গে।',
         structure: [
           'tend, aim, fail, hope, plan, decide, attempt, refuse, manage, afford, offer, seek, choose',
           'Young people tend to spend more time online.',
@@ -463,9 +463,9 @@ export const stage2Lessons: Lesson[] = [
       },
       {
         id: 'm9-r3',
-        heading: 'Verb + object + to-infinitive (কর্ম সহ গঠন)',
-        rule: 'কিছু Verb-এর ক্ষেত্রে infinitive-এর আগে একটি ব্যক্তি বা বস্তু বসাতেই হয়; এই Object বাদ দেওয়া যায় না।',
-        whenToUse: 'যখন এক পক্ষ অন্য পক্ষকে কিছু করায় বা করার সুযোগ দেয়।',
+        heading: 'Verb + object + to-infinitive (মাঝে Object বসে)',
+        rule: 'কিছু Verb-এর পরে infinitive-এর আগে একজন ব্যক্তি বা কোনো কিছু বসাতেই হয়; এই Object বাদ দেওয়া যায় না।',
+        whenToUse: 'যখন কেউ অন্য কাউকে দিয়ে কিছু করায়, বা করার সুযোগ দেয়।',
         structure: [
           'allow, enable, encourage, force, require, persuade, advise, expect, cause, lead',
           'Technology enables students to learn remotely.',
@@ -492,8 +492,8 @@ export const stage2Lessons: Lesson[] = [
       {
         id: 'm9-r4',
         heading: 'Preposition + gerund এবং Adjective + infinitive',
-        rule: 'Preposition-এর ঠিক পরে কোনো Verb বসলে সেটি সবসময় -ing রূপ নেয়। আর মূল্যায়নমূলক Adjective-এর পরে to-infinitive বসে।',
-        whenToUse: 'প্রায় প্রতিটি জটিল বাক্যেই।',
+        rule: 'Preposition-এর ঠিক পরে কোনো Verb বসলে সেটা সবসময় -ing রূপ নেয়। আর মতামত বোঝানো Adjective (important, difficult)-এর পরে to-infinitive বসে।',
+        whenToUse: 'প্রায় প্রতিটি complex বাক্যেই।',
         structure: [
           'preposition + -ing: interested in learning, capable of solving, responsible for managing',
           'prevent / stop / discourage sb from doing',
@@ -502,7 +502,7 @@ export const stage2Lessons: Lesson[] = [
         ],
         notes: [
           'look forward to ও be used to-এর to আসলে Preposition, তাই এর পরে -ing বসে: used to working late.',
-          'পার্থক্যটি খেয়াল করুন: used to work মানে অতীতের অভ্যাস, আর be used to working মানে অভ্যস্ত হয়ে যাওয়া।',
+          'পার্থক্যটা খেয়াল করুন: used to work মানে আগে করতাম (অতীতের অভ্যাস), আর be used to working মানে কোনো কিছুতে অভ্যস্ত।',
         ],
       },
     ],
@@ -515,7 +515,7 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'This policy allows to reduce traffic.',
         right: 'This policy allows cities to reduce traffic.',
-        note: 'Allow-এর ক্ষেত্রে infinitive-এর আগে একটি Object লাগে।',
+        note: 'Allow-এর পরে infinitive-এর আগে একটা Object লাগে।',
       },
       {
         wrong: 'They avoided to answer the question.',
@@ -547,25 +547,25 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'Technology enables to communicate instantly.',
         right: 'Technology enables people to communicate instantly.',
-        explanation: 'allow ও require-এর মতো enable-এরও একটি Object লাগে।',
+        explanation: 'allow আর require-এর মতো enable-এরও একটা Object লাগে।',
       },
       {
         wrong: 'She is looking forward to hear from you.',
         right: 'She is looking forward to hearing from you.',
         explanation:
-          'এখানকার to কোনো infinitive-এর অংশ নয়, বরং একটি Preposition, তাই পরে -ing বসে।',
+          'এখানকার to কোনো infinitive-এর অংশ নয়, এটা একটা Preposition, তাই পরে -ing বসে।',
       },
       {
         wrong: 'It is difficult measuring happiness objectively.',
         right: 'It is difficult to measure happiness objectively.',
-        explanation: 'It is-এর পরে মূল্যায়নমূলক Adjective থাকলে to-infinitive বসে।',
+        explanation: 'It is-এর পরে মতামত বোঝানো Adjective থাকলে to-infinitive বসে।',
       },
     ],
     keyTakeaways: [
-      'Verb আর তার গঠনটি একসঙ্গে, একটি একক হিসেবে শিখুন।',
+      'Verb আর তার পরের গঠনটা একসঙ্গে, এক প্যাকেজ হিসেবে শিখুন।',
       'avoid, suggest, consider, involve ও risk-এর পরে -ing বসে।',
-      'allow, enable, encourage ও require-এর ক্ষেত্রে to-এর আগে একটি Object লাগে।',
-      'Preposition-এর পরে যে কোনো Verb -ing রূপ নেয়, এমনকি look forward to-এর পরেও।',
+      'allow, enable, encourage আর require-এর পরে to-এর আগে একটা Object লাগে।',
+      'Preposition-এর পরে যেকোনো Verb -ing রূপ নেয়, এমনকি look forward to-এর পরেও।',
     ],
   },
 
@@ -573,13 +573,13 @@ export const stage2Lessons: Lesson[] = [
   {
     moduleId: 10,
     intro:
-      'Preposition ঠিক হয় তার আগের শব্দটি দিয়ে, যুক্তি দিয়ে নয়। কেন an increase in হয় অথচ an impact on হয়, তার কোনো ব্যাখ্যা নেই; জোড়াগুলো কেবল মনে রাখতে হয়। Task 1-এ এগুলো সত্যিকারের কাজ করে: rose by আর rose to দুটি সম্পূর্ণ আলাদা সংখ্যা বোঝায়।',
+      'কোন Preposition বসবে, তা ঠিক হয় আগের শব্দটা দেখে, যুক্তি দিয়ে নয়। কেন an increase in হয় অথচ an impact on, তার কোনো ব্যাখ্যা নেই; জোড়াগুলো শুধু মনে রাখতে হয়। Task 1-এ এগুলোর গুরুত্ব অনেক: rose by আর rose to একেবারে আলাদা দুটো সংখ্যা বোঝায়।',
     rules: [
       {
         id: 'm10-r1',
-        heading: 'Noun + preposition (বিশেষ্যের সঙ্গে অব্যয়)',
-        rule: 'Academic Noun-গুলো নির্দিষ্ট Preposition দাবি করে। Noun একা নয়, জোড়াটি শিখুন।',
-        whenToUse: 'যে বাক্যেই দুটি জিনিসের সম্পর্ক বোঝাবেন, সেখানেই।',
+        heading: 'Noun + preposition',
+        rule: 'Academic Noun-গুলোর সঙ্গে নির্দিষ্ট Preposition বসে। শুধু Noun নয়, পুরো জোড়াটা শিখুন।',
+        whenToUse: 'যে বাক্যেই দুটো জিনিসের সম্পর্ক বোঝাবেন, সেখানেই।',
         structure: [
           'an increase / rise / fall / decline / reduction IN something',
           'an impact / effect / influence ON something',
@@ -603,9 +603,9 @@ export const stage2Lessons: Lesson[] = [
       },
       {
         id: 'm10-r2',
-        heading: 'Verb + preposition (ক্রিয়ার সঙ্গে অব্যয়)',
-        rule: 'অনেক Academic Verb-এর পরে নির্দিষ্ট একটি Preposition বসাতে হয়।',
-        whenToUse: 'কারণ, নির্ভরতা ও দায়িত্ব বোঝানোর সময়।',
+        heading: 'Verb + preposition',
+        rule: 'অনেক Academic Verb-এর পরে নির্দিষ্ট একটা Preposition বসাতে হয়।',
+        whenToUse: 'কারণ, নির্ভরতা আর দায়িত্ব বোঝানোর সময়।',
         structure: [
           'result in / result from',
           'depend on, rely on, focus on, concentrate on',
@@ -620,9 +620,9 @@ export const stage2Lessons: Lesson[] = [
       },
       {
         id: 'm10-r3',
-        heading: 'Adjective + preposition (বিশেষণের সঙ্গে অব্যয়)',
+        heading: 'Adjective + preposition',
         rule: 'Adjective-গুলোরও নিজস্ব Preposition আছে।',
-        whenToUse: 'মূল্যায়নমূলক বাক্যে।',
+        whenToUse: 'মতামত দেওয়ার বাক্যে।',
         structure: [
           'responsible for, suitable for, essential for',
           'aware of, capable of, typical of, characteristic of',
@@ -633,14 +633,14 @@ export const stage2Lessons: Lesson[] = [
       },
       {
         id: 'm10-r4',
-        heading: 'Task 1-এর পরিবর্তন বোঝানোর গঠন',
-        rule: 'চারটি গঠন চার রকম তথ্য দেয়। এগুলো গুলিয়ে ফেললে আপনি ভুল সংখ্যাই রিপোর্ট করবেন।',
+        heading: 'Task 1-এ পরিবর্তন বোঝানোর গঠন',
+        rule: 'চারটা গঠন চার রকম তথ্য দেয়। এগুলো গুলিয়ে ফেললে আপনি ভুল সংখ্যাই লিখে ফেলবেন।',
         whenToUse: 'যতবার কোনো সংখ্যার পরিবর্তন বর্ণনা করবেন।',
         structure: [
           'rise / fall BY - পরিবর্তনের পরিমাণ: Sales rose by 20 per cent.',
           'rise / fall TO - শেষ মান: Sales rose to 80 million.',
           'rise / fall FROM X TO Y: Sales rose from 60 to 80 million.',
-          'peak / stand / remain AT - একটি নির্দিষ্ট বিন্দু: Sales peaked at 90 million.',
+          'peak / stand / remain AT - নির্দিষ্ট একটা মান: Sales peaked at 90 million.',
         ],
         table: {
           caption: 'পরিবর্তন কীভাবে লিখবেন',
@@ -649,13 +649,13 @@ export const stage2Lessons: Lesson[] = [
             ['by', 'পরিবর্তনের পরিমাণ', 'fell by 15 per cent'],
             ['to', 'শেষ মান', 'fell to 15 per cent'],
             ['from... to...', 'শুরু ও শেষ', 'fell from 30 to 15 per cent'],
-            ['at', 'একটি নির্দিষ্ট বিন্দু', 'peaked at 30 per cent'],
-            ['between... and...', 'সময়ের ব্যাপ্তি', 'between 2000 and 2010'],
-            ['in / over', 'একটি সাল / একটি সময়কাল', 'in 2005; over the decade'],
+            ['at', 'নির্দিষ্ট একটা মান', 'peaked at 30 per cent'],
+            ['between... and...', 'কতটা সময় জুড়ে', 'between 2000 and 2010'],
+            ['in / over', 'একটা সাল / একটা সময়কাল', 'in 2005; over the decade'],
           ],
         },
         notes: [
-          'An increase of 20 per cent মানে পরিবর্তনের পরিমাণ; an increase to 20 per cent মানে পৌঁছানো মাত্রা।',
+          'An increase of 20 per cent মানে কতটা বেড়েছে; an increase to 20 per cent মানে বেড়ে কোথায় পৌঁছেছে।',
         ],
       },
     ],
@@ -691,7 +691,7 @@ export const stage2Lessons: Lesson[] = [
         wrong: 'This leads to people become unemployed.',
         right: 'This leads to people becoming unemployed.',
         explanation:
-          'lead to-এর to একটি Preposition, তাই এর পরের Verb -ing রূপ নেয়।',
+          'lead to-এর to একটা Preposition, তাই এর পরের Verb -ing রূপ নেয়।',
       },
       {
         wrong: 'Unemployment is one of the main reasons of crime.',
@@ -702,12 +702,12 @@ export const stage2Lessons: Lesson[] = [
         wrong: 'The results are different than the ones reported in 2019.',
         right: 'The results are different from the ones reported in 2019.',
         explanation:
-          'Academic English-এ different from স্বাভাবিক; different than আমেরিকান কথ্য রূপ।',
+          'Academic English-এ different from স্বাভাবিক; different than মূলত আমেরিকান কথ্য রূপ।',
       },
       {
         wrong: 'Consumption peaked to 90 million units.',
         right: 'Consumption peaked at 90 million units.',
-        explanation: 'peak, stand ও remain - তিনটিরই সঙ্গে at বসে।',
+        explanation: 'peak, stand আর remain - তিনটার সঙ্গেই at বসে।',
       },
       {
         wrong: 'Students should concentrate in their studies.',
@@ -717,9 +717,9 @@ export const stage2Lessons: Lesson[] = [
     ],
     keyTakeaways: [
       'Noun ও তার Preposition একসঙ্গে মুখস্থ করুন: increase in, impact on, access to।',
-      'Result in দিয়ে ফলাফলের দিকে যায়, আর result from দিয়ে কারণের দিকে ফেরে।',
+      'Result in-এর পরে আসে ফলাফল, আর result from-এর পরে আসে কারণ।',
       'discuss, affect, mention ও consider-এর পরে কোনো Preposition বসে না।',
-      'By = পরিবর্তনের পরিমাণ; to = শেষ মান; at = একটি নির্দিষ্ট বিন্দু।',
+      'By = কতটা বদলেছে; to = শেষে কত হয়েছে; at = নির্দিষ্ট একটা মান।',
     ],
   },
 
@@ -727,16 +727,16 @@ export const stage2Lessons: Lesson[] = [
   {
     moduleId: 11,
     intro:
-      'Academic Task 1 শুরু থেকে শেষ পর্যন্তই তুলনা, আর Task 2-তে প্রতিনিয়ত এক বিকল্পের সঙ্গে আরেকটির তুলনা করতে হয়। তুলনার ভুল দ্বিগুণ ক্ষতিকর, কারণ ভুল গুণিতক লিখলে শুধু ভাষাই খারাপ হয় না, আপনি ভুল তথ্যও রিপোর্ট করে ফেলেন।',
+      'Academic Task 1 শুরু থেকে শেষ পর্যন্ত তুলনাই, আর Task 2-তেও বারবার এক বিকল্পের সঙ্গে আরেকটার তুলনা করতে হয়। তুলনার ভুলে ক্ষতি দ্বিগুণ: ভুল গুণ (যেমন twice, three times) লিখলে শুধু ভাষা খারাপ হয় না, আপনি ভুল তথ্যও লিখে ফেলেন।',
     rules: [
       {
         id: 'm11-r1',
         heading: 'Comparative ও Superlative গঠন',
-        rule: 'এক সিলেবলের Adjective-এ -er ও -est বসে। লম্বা Adjective-এ more ও most বসে। দুটি একসঙ্গে কখনো নয়।',
-        whenToUse: 'যখনই দুই বা ততোধিক জিনিসের মধ্যে ক্রম বোঝাবেন।',
+        rule: 'এক syllable-এর Adjective-এ -er আর -est বসে। লম্বা Adjective-এ more আর most বসে। দুটো একসঙ্গে কখনো নয়।',
+        whenToUse: 'যখনই দুই বা তার বেশি জিনিসের মধ্যে কোনটা বেশি বা কম তা বোঝাবেন।',
         structure: [
-          'এক সিলেবল: high - higher - the highest',
-          'দুই সিলেবল, শেষে -y: easy - easier - the easiest',
+          'এক syllable: high - higher - the highest',
+          'দুই syllable, শেষে -y: easy - easier - the easiest',
           'লম্বা শব্দ: expensive - more expensive - the most expensive',
           'অনিয়মিত: good - better - best; bad - worse - worst; far - further - furthest',
         ],
@@ -747,9 +747,9 @@ export const stage2Lessons: Lesson[] = [
       },
       {
         id: 'm11-r2',
-        heading: 'সমতা ও গুণিতক',
-        rule: 'সমান বোঝাতে as + adjective + as ব্যবহার করুন, আর গুণিতক সংখ্যাটি প্রথম as-এর আগে বসান।',
-        whenToUse: 'যখন একটি সংখ্যা অন্যটির গুণিতক।',
+        heading: 'সমান আর কয়েক গুণ বোঝানো',
+        rule: 'সমান বোঝাতে as + adjective + as ব্যবহার করুন, আর কয় গুণ (twice, three times) তা প্রথম as-এর আগে বসান।',
+        whenToUse: 'যখন একটা সংখ্যা আরেকটার কয়েক গুণ।',
         structure: [
           'as high as, not as high as',
           'twice as many cars as',
@@ -758,7 +758,7 @@ export const stage2Lessons: Lesson[] = [
           'half as many visitors as',
         ],
         table: {
-          caption: 'গুণিতক লেখার দুটি উপায়',
+          caption: 'কয় গুণ, তা লেখার দুটো উপায়',
           headers: ['as...as দিয়ে', 'the + noun দিয়ে'],
           rows: [
             ['twice as many students as', 'twice the number of students'],
@@ -768,14 +768,14 @@ export const stage2Lessons: Lesson[] = [
         },
         notes: [
           'Countable Noun-এর সঙ্গে many আর Uncountable Noun-এর সঙ্গে much বসে।',
-          'three times as many as বোঝাতে three times more than লিখবেন না; প্রথমটি অস্পষ্ট।',
+          'three times as many as বোঝাতে three times more than লিখবেন না; three times more than-এর অর্থ অস্পষ্ট।',
         ],
       },
       {
         id: 'm11-r3',
-        heading: 'তুলনার মাত্রা বোঝানো',
-        rule: 'Comparative-এর আগে বসা Adverb বলে দেয় পার্থক্যটি কত বড়।',
-        whenToUse: 'একই ধরনের সাদামাটা তুলনা বারবার না লেখার জন্য।',
+        heading: 'পার্থক্য কতটা, তা বোঝানো',
+        rule: 'Comparative-এর আগে বসা Adverb বলে দেয় পার্থক্যটা কত বড়।',
+        whenToUse: 'একই রকম সাদামাটা তুলনা বারবার না লিখে বৈচিত্র্য আনতে।',
         structure: [
           'বড় পার্থক্য: significantly, considerably, substantially, far, much',
           'ছোট পার্থক্য: slightly, marginally, somewhat, a little',
@@ -788,7 +788,7 @@ export const stage2Lessons: Lesson[] = [
       {
         id: 'm11-r4',
         heading: 'পরিমাণ, শতকরা ও পরিবর্তন',
-        rule: 'সংখ্যাকে অনুপাত, ভগ্নাংশ বা পরিবর্তন হিসেবে প্রকাশ করা যায়। প্রতিটির নিজস্ব নির্দিষ্ট গঠন আছে।',
+        rule: 'একটা সংখ্যাকে অনুপাত, ভগ্নাংশ বা পরিবর্তন হিসেবে লেখা যায়। প্রতিটার নিজস্ব গঠন আছে।',
         whenToUse: 'পুরো Task 1 জুড়েই।',
         structure: [
           'অনুপাত: 40 per cent of respondents; the proportion of women rose.',
@@ -807,7 +807,7 @@ export const stage2Lessons: Lesson[] = [
           ],
         },
         notes: [
-          'Noun-এর আগে Adjective, আর Verb-এর পরে Adverb। rose sharp বা a sharply rise লেখা স্পষ্ট ভুল।',
+          'Noun-এর আগে Adjective, আর Verb-এর পরে Adverb। rose sharp বা a sharply rise লেখা পরিষ্কার ভুল।',
           'Uncountable Noun-এর সঙ্গে শতকরা একবচন Verb নেয়, আর বহুবচন Noun-এর সঙ্গে বহুবচন Verb: 40 per cent of the water is..., 40 per cent of students are...',
         ],
       },
@@ -821,17 +821,17 @@ export const stage2Lessons: Lesson[] = [
       {
         wrong: 'There were twice more visitors in July than in January.',
         right: 'There were twice as many visitors in July as in January.',
-        note: 'গুণিতক বোঝাতে as...as কাঠামো ব্যবহার করুন।',
+        note: 'কয় গুণ, তা বোঝাতে as...as গঠন ব্যবহার করুন।',
       },
       {
         wrong: 'Sales increased sharp between 2010 and 2015.',
         right: 'Sales increased sharply between 2010 and 2015.',
-        note: 'Verb-কে বিশেষিত করে Adverb।',
+        note: 'Verb-কে বর্ণনা করে Adverb।',
       },
       {
         wrong: 'The figure for Spain was the most highest of all.',
         right: 'The figure for Spain was the highest of all.',
-        note: 'একটি superlative চিহ্নই যথেষ্ট।',
+        note: 'একটা superlative চিহ্নই যথেষ্ট।',
       },
       {
         wrong: 'Three quarters of the energy are produced by coal.',
@@ -850,7 +850,7 @@ export const stage2Lessons: Lesson[] = [
         wrong: 'Car ownership is higher than 1990.',
         right: 'Car ownership is higher than it was in 1990.',
         explanation:
-          'সমানে সমানে তুলনা করুন: একটি মাত্রার সঙ্গে আরেকটি মাত্রা, কোনো সালের সঙ্গে নয়।',
+          'একই ধরনের জিনিসের মধ্যে তুলনা করুন: একটা সংখ্যার সঙ্গে আরেকটা সংখ্যা, কোনো সালের সঙ্গে নয়।',
       },
       {
         wrong: 'There was a slightly increase in unemployment.',
@@ -866,14 +866,14 @@ export const stage2Lessons: Lesson[] = [
         wrong: 'Japan spent three times more money than Italy did on research.',
         right: 'Japan spent three times as much money on research as Italy did.',
         explanation:
-          'Three times more দিয়ে তিন গুণ না চার গুণ বোঝাচ্ছে তা অস্পষ্ট থাকে; as...as কাঠামোটি নির্ভুল।',
+          'Three times more দিয়ে তিন গুণ নাকি চার গুণ বোঝাচ্ছে, তা পরিষ্কার নয়; as...as গঠনটাই নির্ভুল।',
       },
     ],
     keyTakeaways: [
-      'প্রতিটি Adjective-এ একটিমাত্র comparative চিহ্ন: হয় -er, নয়তো more।',
-      'গুণিতকে twice / three times + as...as, অথবা + the number of ব্যবহার করুন।',
+      'প্রতিটি Adjective-এ comparative চিহ্ন একটাই: হয় -er, নয়তো more।',
+      'কয় গুণ বোঝাতে twice / three times + as...as, অথবা + the number of ব্যবহার করুন।',
       'Noun-এর আগে Adjective, Verb-এর পরে Adverb: a sharp rise, rose sharply।',
-      'সমানে সমানে তুলনা করুন এবং দ্বিতীয় পক্ষটি আসলে কী, তা স্পষ্ট করে লিখুন।',
+      'একই ধরনের জিনিসের মধ্যে তুলনা করুন, আর কীসের সঙ্গে তুলনা করছেন তা স্পষ্ট করে লিখুন।',
     ],
   },
 ]

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { CheckCircle2, Clock, Lock, PlayCircle, RotateCcw } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Clock, Lock, RotateCcw } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import type { ModuleMeta } from '@/types'
 import { cn } from '@/utils/cn'
 import { Badge } from '@/components/ui/Badge'
@@ -9,40 +10,49 @@ export function ModuleCard({
   module,
   status,
   bestScore,
+  style,
 }: {
   module: ModuleMeta
   status: ModuleStatus
   bestScore?: number
+  style?: CSSProperties
 }) {
   const locked = status === 'locked'
   const completed = status === 'completed'
+  const current = status === 'unlocked'
 
   const content = (
     <div
       className={cn(
-        'group flex items-start gap-4 rounded-2xl border p-4 transition-all sm:p-5',
+        'group relative flex items-start gap-4 overflow-hidden rounded-2xl border p-4 transition-all duration-300 ease-spring sm:p-5',
         locked
-          ? 'border-ink-200 bg-ink-50 opacity-70 dark:border-ink-800 dark:bg-ink-900/40'
-          : 'border-ink-200 bg-white shadow-card hover:-translate-y-0.5 hover:border-ink-300 hover:shadow-lift dark:border-ink-800 dark:bg-ink-900 dark:hover:border-ink-700',
+          ? 'border-ink-200/70 bg-ink-100/40 dark:border-ink-800/70 dark:bg-ink-900/40'
+          : 'border-ink-200/80 bg-white shadow-card hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-lift dark:border-ink-800 dark:bg-ink-900 dark:hover:border-brand-800/70',
+        current && 'border-brand-200 ring-1 ring-brand-100 dark:border-brand-800/70 dark:ring-brand-900/50',
       )}
     >
+      {current ? (
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-brand-500 via-accent-500 to-brand-500" />
+      ) : null}
+
       <span
         className={cn(
-          'mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-[13px] font-semibold',
+          'mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-display text-[14px] font-bold transition-transform duration-300 ease-bounce',
+          !locked && 'group-hover:scale-110',
           completed && 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
-          status === 'unlocked' && 'bg-brand-600 text-white',
-          locked && 'bg-ink-200 text-ink-500 dark:bg-ink-800 dark:text-ink-500',
+          current && 'bg-gradient-to-br from-brand-500 to-accent-600 text-white shadow-glow',
+          locked && 'bg-ink-200/70 text-ink-400 dark:bg-ink-800 dark:text-ink-500',
         )}
       >
-        {completed ? <CheckCircle2 size={18} /> : locked ? <Lock size={15} /> : module.id}
+        {completed ? <CheckCircle2 size={19} /> : locked ? <Lock size={15} /> : module.id}
       </span>
 
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <h3
             className={cn(
-              'text-[15px] font-semibold tracking-tight',
-              locked ? 'text-ink-500 dark:text-ink-400' : 'text-ink-900 dark:text-ink-50',
+              'text-[15px] font-bold tracking-tight',
+              locked ? 'text-ink-500 dark:text-ink-500' : 'text-ink-900 dark:text-ink-50',
             )}
           >
             <span className="text-ink-400 dark:text-ink-500">{module.id}.</span> {module.title}
@@ -50,9 +60,17 @@ export function ModuleCard({
           {completed && bestScore !== undefined ? (
             <Badge tone="success">Best {bestScore}%</Badge>
           ) : null}
+          {current ? <Badge tone="brand">Up next</Badge> : null}
         </div>
 
-        <p className="mt-1 text-[13px] leading-5 text-ink-600 dark:text-ink-400">{module.summary}</p>
+        <p
+          className={cn(
+            'bn-text mt-1 text-[13.5px]',
+            locked ? 'text-ink-400 dark:text-ink-500' : 'text-ink-600 dark:text-ink-400',
+          )}
+        >
+          {module.summary}
+        </p>
 
         <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[11px] text-ink-500 dark:text-ink-400">
           <Badge tone="muted">{module.difficulty}</Badge>
@@ -70,14 +88,22 @@ export function ModuleCard({
       </div>
 
       {!locked ? (
-        <span className="mt-0.5 hidden shrink-0 items-center gap-1 text-[12px] font-medium text-brand-600 group-hover:underline sm:flex dark:text-brand-400">
+        <span
+          className={cn(
+            'mt-1 hidden shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-semibold transition-all duration-300 ease-spring sm:inline-flex',
+            completed
+              ? 'text-ink-600 group-hover:bg-ink-100 dark:text-ink-300 dark:group-hover:bg-ink-800'
+              : 'bg-brand-50 text-brand-700 group-hover:bg-brand-600 group-hover:text-white dark:bg-brand-950 dark:text-brand-200',
+          )}
+        >
           {completed ? (
             <>
               <RotateCcw size={13} /> Review
             </>
           ) : (
             <>
-              <PlayCircle size={13} /> Start
+              Start
+              <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-0.5" />
             </>
           )}
         </span>
@@ -87,14 +113,18 @@ export function ModuleCard({
 
   if (locked) {
     return (
-      <div aria-disabled className="cursor-not-allowed">
+      <div aria-disabled className="animate-fade-up stagger cursor-not-allowed" style={style}>
         {content}
       </div>
     )
   }
 
   return (
-    <Link to={`/module/${module.id}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 rounded-2xl dark:focus-visible:ring-offset-ink-950">
+    <Link
+      to={`/module/${module.id}`}
+      style={style}
+      className="block animate-fade-up stagger rounded-2xl focus-ring"
+    >
       {content}
     </Link>
   )

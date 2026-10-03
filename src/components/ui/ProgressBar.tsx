@@ -1,4 +1,11 @@
+import { useEffect, useState } from 'react'
 import { cn } from '@/utils/cn'
+
+const tones = {
+  brand: 'bg-gradient-to-r from-brand-500 to-accent-500',
+  success: 'bg-gradient-to-r from-emerald-400 to-emerald-500',
+  amber: 'bg-gradient-to-r from-amber-400 to-orange-400',
+}
 
 export function ProgressBar({
   value,
@@ -12,16 +19,18 @@ export function ProgressBar({
   size?: 'sm' | 'md'
 }) {
   const pct = Math.max(0, Math.min(100, value))
-  const tones = {
-    brand: 'bg-brand-600',
-    success: 'bg-emerald-500',
-    amber: 'bg-amber-500',
-  }
+  // Start at 0 and grow on mount so the bar animates in rather than appearing full.
+  const [shown, setShown] = useState(0)
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setShown(pct))
+    return () => cancelAnimationFrame(frame)
+  }, [pct])
+
   return (
     <div
       className={cn(
-        'w-full overflow-hidden rounded-full bg-ink-200 dark:bg-ink-800',
-        size === 'sm' ? 'h-1.5' : 'h-2',
+        'w-full overflow-hidden rounded-full bg-ink-200/70 dark:bg-ink-800',
+        size === 'sm' ? 'h-1.5' : 'h-2.5',
         className,
       )}
       role="progressbar"
@@ -30,9 +39,16 @@ export function ProgressBar({
       aria-valuemax={100}
     >
       <div
-        className={cn('h-full rounded-full transition-[width] duration-500 ease-out', tones[tone])}
-        style={{ width: `${pct}%` }}
-      />
+        className={cn(
+          'relative h-full overflow-hidden rounded-full transition-[width] duration-1000 ease-spring',
+          tones[tone],
+        )}
+        style={{ width: `${shown}%` }}
+      >
+        {shown > 0 && shown < 100 ? (
+          <span className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/35 to-transparent" />
+        ) : null}
+      </div>
     </div>
   )
 }

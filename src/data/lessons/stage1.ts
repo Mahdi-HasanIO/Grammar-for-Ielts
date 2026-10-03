@@ -5,14 +5,14 @@ export const stage1Lessons: Lesson[] = [
   {
     moduleId: 1,
     intro:
-      'ইংরেজি প্রতিটি বাক্য তৈরি হয় Clause (উপবাক্য) দিয়ে, আর প্রতিটি Clause-এ একটি Subject (কর্তা) ও একটি Verb (ক্রিয়া) থাকতেই হবে। Band 8-এ পৌঁছাতে না পারার পেছনে বড় কারণগুলো কিন্তু কঠিন কোনো grammar নয়; বরং Subject বাদ পড়া, দুইবার Subject বসানো বা শব্দের ভুল ক্রম। এই জায়গাটা পাকা হলে পরের মডিউলগুলো অনেক সহজ লাগবে।',
+      'ইংরেজির প্রতিটি বাক্য তৈরি হয় Clause (উপবাক্য) দিয়ে, আর প্রতিটি Clause-এ একটা Subject (কর্তা) আর একটা Verb (ক্রিয়া) থাকতেই হবে। অনেকে Band 8-এ পৌঁছাতে পারেন না কঠিন grammar-এর জন্য নয়; বরং Subject বাদ পড়া, Subject দুইবার বসানো বা ভুল word order-এর জন্য। এই জায়গাটা পাকা হলে পরের module-গুলো অনেক সহজ লাগবে।',
     rules: [
       {
         id: 'm1-r1',
         heading: 'Clause-এর পাঁচটি উপাদান',
         rule: 'একটি Clause সর্বোচ্চ পাঁচটি উপাদান দিয়ে গঠিত হয়: Subject (কর্তা), Verb (ক্রিয়া), Object (কর্ম), Complement (পূরক) এবং Adverbial (ক্রিয়া-বিশেষণ অংশ)। Verb থাকা বাধ্যতামূলক, আর লিখিত ইংরেজিতে Subject-ও বাধ্যতামূলক।',
         whenToUse:
-          'এটিকে ভুল ধরার একটি পরীক্ষা হিসেবে ব্যবহার করুন। কোনো বাক্য অস্বস্তিকর লাগলে উপাদানগুলো চিহ্নিত করুন এবং দেখুন কোনটি বাদ পড়েছে বা কোনটি দুইবার এসেছে।',
+          'ভুল ধরার টুল হিসেবে এটা ব্যবহার করুন। কোনো বাক্য পড়ে খটকা লাগলে উপাদানগুলো আলাদা করে দেখুন: কোনটা বাদ পড়েছে, বা কোনটা দুইবার এসেছে।',
         structure: [
           'Subject + Verb: Prices rose.',
           'Subject + Verb + Object: The government introduced a tax.',
@@ -40,7 +40,7 @@ export const stage1Lessons: Lesson[] = [
         id: 'm1-r2',
         heading: 'মূল শব্দক্রম: Subject - Verb - Object',
         rule: 'ইংরেজিতে অর্থ ঠিক হয় শব্দের ক্রম দিয়ে। Subject আর Object-এর জায়গা বদলে গেলে কে কাজটি করল সেটাই বদলে যায়, তাই এই ক্রম ইচ্ছেমতো পাল্টানো যায় না।',
-        whenToUse: 'আপনি যত বর্ণনামূলক বাক্য লিখবেন, সবগুলোতেই এই নিয়ম প্রযোজ্য।',
+        whenToUse: 'সাধারণ statement বা বিবৃতিমূলক প্রতিটি বাক্যেই এই নিয়ম খাটে।',
         structure: [
           'Statement: Subject + Verb + Object + (Adverbial)',
           'Adverbial বাক্যের শুরুতেও বসতে পারে: In 2020, the government introduced a tax.',
@@ -77,9 +77,9 @@ export const stage1Lessons: Lesson[] = [
       {
         id: 'm1-r4',
         heading: 'Dummy it এবং Existential there',
-        rule: 'ইংরেজিতে Subject ছাড়া Clause চলে না। যখন অর্থপূর্ণ কোনো Subject থাকে না, তখন it বা there সেই জায়গাটা পূরণ করে।',
+        rule: 'ইংরেজিতে Subject ছাড়া Clause চলে না। বসানোর মতো অর্থপূর্ণ কোনো Subject না থাকলে it বা there সেই খালি জায়গাটা পূরণ করে।',
         whenToUse:
-          'মূল্যায়নমূলক বাক্যে (It is important to...), আবহাওয়া ও সময় বোঝাতে, এবং কোনো কিছুর অস্তিত্ব জানাতে (There are three reasons...)।',
+          'মতামত দেওয়ার বাক্যে (It is important to...), আবহাওয়া বা সময় বোঝাতে, আর কোনো কিছু আছে সেটা জানাতে (There are three reasons...)।',
         structure: [
           'It + be + adjective + to-infinitive: It is important to consider the cost.',
           'It + be + adjective + that-clause: It is clear that demand has risen.',
@@ -115,7 +115,7 @@ export const stage1Lessons: Lesson[] = [
       {
         wrong: 'Have many reasons for this problem.',
         right: 'There are many reasons for this problem.',
-        note: 'কোনো কিছুর অস্তিত্ব বোঝাতে existential there ব্যবহার করুন।',
+        note: 'কোনো কিছু আছে বোঝাতে existential there ব্যবহার করুন।',
       },
     ],
     mistakes: [
@@ -128,7 +128,7 @@ export const stage1Lessons: Lesson[] = [
       {
         wrong: 'Is necessary to reduce carbon emissions.',
         right: 'It is necessary to reduce carbon emissions.',
-        explanation: 'প্রতিটি লিখিত Clause-এ Subject লাগে, এমনকি অর্থহীন dummy subject হলেও।',
+        explanation: 'লেখায় প্রতিটি Clause-এ Subject লাগে; অর্থ না থাকলেও অন্তত একটা dummy subject বসাতেই হয়।',
       },
       {
         wrong: 'My country it has a growing economy.',
@@ -140,7 +140,7 @@ export const stage1Lessons: Lesson[] = [
         wrong: 'Nowadays, more and more people living in cities.',
         right: 'Nowadays, more and more people live in cities.',
         explanation:
-          'শুধু -ing রূপ কখনো finite verb হতে পারে না, তাই Clause-টিতে মূল Verb অনুপস্থিত ছিল।',
+          'শুধু -ing রূপ কখনো finite verb হতে পারে না, তাই Clause-টাতে আসল Verb-টাই ছিল না।',
       },
       {
         wrong: 'Explains the author that technology has changed society.',
@@ -152,7 +152,7 @@ export const stage1Lessons: Lesson[] = [
     keyTakeaways: [
       'প্রতিটি বাক্যে Subject আর finite Verb খুঁজে বের করার অভ্যাস করুন।',
       'in, on বা according to দিয়ে শুরু হওয়া অংশ কখনো Subject নয়।',
-      'সত্যিকারের Subject না থাকলে it বা there বসান; জায়গাটা কখনো ফাঁকা রাখবেন না।',
+      'আসল Subject না থাকলে it বা there বসান; Subject-এর জায়গা কখনো খালি রাখবেন না।',
       'Subject-কে Pronoun দিয়ে দুইবার বসাবেন না, আর Verb ও Object-এর মাঝখানে Adverb রাখবেন না।',
     ],
   },
@@ -161,21 +161,21 @@ export const stage1Lessons: Lesson[] = [
   {
     moduleId: 2,
     intro:
-      'Subject ছোট থাকলে Agreement সহজ মনে হয়, কিন্তু Subject লম্বা হলেই গড়বড় শুরু হয়। লেখক তখন আসল Subject ভুলে গিয়ে Verb-টিকে সবচেয়ে কাছের Noun-এর সঙ্গে মিলিয়ে ফেলেন। এই ভুল পুরো লেখাজুড়ে বারবার ঘটে বলে আপনার accuracy-র উপর এর প্রভাব অনেক বেশি।',
+      'Subject ছোট হলে Agreement সহজই মনে হয়, কিন্তু Subject লম্বা হলেই গোলমাল শুরু হয়। তখন আমরা আসল Subject-এর কথা ভুলে গিয়ে Verb-কে সবচেয়ে কাছের Noun-এর সঙ্গে মিলিয়ে ফেলি। এই ভুল পুরো লেখায় বারবার হয় বলে আপনার accuracy-তে এর প্রভাব অনেক বেশি।',
     rules: [
       {
         id: 'm2-r1',
         heading: 'আসল Head Noun খুঁজে তারপর Verb মেলান',
         rule: 'Verb মিলবে Subject noun phrase-এর head noun-এর সঙ্গে, Verb-এর ঠিক আগে বসা Noun-এর সঙ্গে নয়।',
         whenToUse:
-          'যখনই Subject-এর ভেতরে of, with, along with, as well as বা কোনো Relative Clause (সম্পর্কবাচক উপবাক্য) থাকে।',
+          'যখনই Subject-এর ভেতরে of, with, along with, as well as বা কোনো Relative Clause থাকে।',
         structure: [
           'The number of students is rising. (head = number)',
           'The effects of the policy are visible. (head = effects)',
           'The quality of the roads has improved. (head = quality)',
         ],
         notes: [
-          'মনে মনে head noun আর Verb-এর মাঝের অংশটুকু মুছে ফেলুন, তারপর মিল যাচাই করুন।',
+          'মনে মনে head noun আর Verb-এর মাঝের অংশটুকু বাদ দিয়ে পড়ুন, তারপর মিলিয়ে দেখুন।',
           'along with, together with বা as well as বসলে একবচন Subject বহুবচন হয়ে যায় না।',
         ],
       },
@@ -183,7 +183,7 @@ export const stage1Lessons: Lesson[] = [
         id: 'm2-r2',
         heading: 'There is এবং There are',
         rule: 'Existential বাক্যে Verb মেলে পরে বসা Noun-এর সঙ্গে, there-এর সঙ্গে নয়।',
-        whenToUse: 'নতুন কোনো কিছুর অস্তিত্ব জানাতে।',
+        whenToUse: 'নতুন কোনো কিছু আছে, সেটা জানাতে।',
         structure: [
           'There is a clear difference between the two groups.',
           'There are several reasons for this change.',
@@ -197,15 +197,15 @@ export const stage1Lessons: Lesson[] = [
       {
         id: 'm2-r3',
         heading: 'Uncountable Noun সবসময় একবচন',
-        rule: 'অনেক ভাববাচক ও বস্তুবাচক Noun ইংরেজিতে বহুবচন হয় না এবং সবসময় একবচন Verb নেয়।',
-        whenToUse: 'Academic writing-এ প্রতিনিয়ত, কারণ সেখানে ভাববাচক Noun-এর ব্যবহার সবচেয়ে বেশি।',
+        rule: 'ইংরেজিতে অনেক abstract Noun (যেমন advice, progress) আর বস্তুবাচক Noun (যেমন equipment) বহুবচন হয় না, আর সবসময় একবচন Verb নেয়।',
+        whenToUse: 'Academic writing-এ প্রায় সবসময়, কারণ সেখানে abstract Noun অনেক বেশি ব্যবহার হয়।',
         structure: [
           'Information is widely available.',
           'This research supports the hypothesis.',
           'The equipment was installed last year.',
         ],
         table: {
-          caption: 'যে Noun গুলোতে শিক্ষার্থীরা সবচেয়ে বেশি ভুল করে',
+          caption: 'যে Noun-গুলোতে শিক্ষার্থীরা সবচেয়ে বেশি ভুল করে',
           headers: ['Uncountable (-s হয় না)', 'গুনতে চাইলে যা ব্যবহার করবেন'],
           rows: [
             ['information', 'pieces of information / facts'],
@@ -283,7 +283,7 @@ export const stage1Lessons: Lesson[] = [
       {
         wrong: 'Modern technology have changed the way we work.',
         right: 'Modern technology has changed the way we work.',
-        explanation: 'এখানে technology uncountable, তাই এটি একবচন Noun-এর মতো আচরণ করে।',
+        explanation: 'এখানে technology uncountable, তাই এটা একবচন Noun-এর মতোই Verb নেয়।',
       },
       {
         wrong: 'A number of solutions has been proposed.',
@@ -309,13 +309,13 @@ export const stage1Lessons: Lesson[] = [
   {
     moduleId: 3,
     intro:
-      'Article-এর নিজস্ব অর্থ কম, তাই এগুলো বাদ পড়ে যায় সহজে আর চোখেও পড়ে না। সমস্যা হলো সংখ্যায়: একটি essay-তে প্রায় একশোবার article বসানোর সুযোগ আসে, ফলে অল্প হারে ভুল হলেও পুরো লেখাটি ভুলে ভরা দেখায়। তাই ধাপে ধাপে ভাবুন: Countable না Uncountable, তারপর নির্দিষ্ট না সাধারণ, তারপর প্রথমবার না দ্বিতীয়বার উল্লেখ।',
+      'Article-এর নিজের তেমন অর্থ নেই, তাই এগুলো সহজেই বাদ পড়ে যায় আর চোখেও পড়ে না। সমস্যাটা সংখ্যায়: একটা essay-তে প্রায় একশোবার article বসানোর জায়গা আসে, তাই অল্প কিছু ভুলেও পুরো লেখাটা ভুলে ভরা মনে হয়। তাই ধাপে ধাপে ভাবুন: Countable না Uncountable, তারপর নির্দিষ্ট না সাধারণ, তারপর প্রথমবার বলছেন নাকি আগে বলা জিনিস।',
     rules: [
       {
         id: 'm3-r1',
         heading: 'Article বাছাইয়ের ধাপ',
         rule: 'তিনটি প্রশ্ন করুন: Noun-টি কি Countable? এটি কি একবচন? পাঠক কি বুঝতে পারবে ঠিক কোনটির কথা বলছেন?',
-        whenToUse: 'যে কোনো common noun লেখার ঠিক আগে।',
+        whenToUse: 'যেকোনো common noun লেখার ঠিক আগে।',
         structure: [
           'Countable + singular + নির্দিষ্ট: the solution',
           'Countable + singular + অনির্দিষ্ট: a solution',
@@ -336,8 +336,8 @@ export const stage1Lessons: Lesson[] = [
       {
         id: 'm3-r2',
         heading: 'প্রথম উল্লেখ ও দ্বিতীয় উল্লেখ',
-        rule: 'নতুন কিছু প্রথমবার আনার সময় a বসে বা কোনো article বসে না; পরে একই জিনিস বোঝাতে the বসে।',
-        whenToUse: 'যে অনুচ্ছেদে একটি উদাহরণ ধরে আলোচনা এগিয়ে নিচ্ছেন, সেখানে।',
+        rule: 'নতুন কিছু প্রথমবার বলার সময় a বসে, অথবা কোনো article বসে না; পরে সেই একই জিনিসের কথা বললে the বসে।',
+        whenToUse: 'যে paragraph-এ একটা উদাহরণ ধরে আলোচনা এগোচ্ছেন, সেখানে।',
         structure: [
           'The city built a new railway. The railway has reduced congestion.',
           'Governments could introduce taxes. The taxes would fund public transport.',
@@ -352,7 +352,7 @@ export const stage1Lessons: Lesson[] = [
         heading: 'সাধারণভাবে কোনো কিছু বোঝানো',
         rule: 'সাধারণ অর্থ বোঝাতে Countable Noun-এর বহুবচন রূপ article ছাড়া ব্যবহার করুন, আর Uncountable Noun-ও article ছাড়া ব্যবহার করুন।',
         whenToUse:
-          'Task 2-এর ভূমিকা ও topic sentence-এ, যেখানে আপনি নির্দিষ্ট উদাহরণ নয়, বরং পুরো শ্রেণি নিয়ে কথা বলছেন।',
+          'Task 2-এর introduction আর topic sentence-এ, যেখানে নির্দিষ্ট কোনো উদাহরণ নয়, পুরো একটা শ্রেণি নিয়ে কথা বলছেন।',
         structure: [
           'Cars pollute the air. (The cars pollute... নয়)',
           'Education reduces inequality.',
@@ -361,14 +361,14 @@ export const stage1Lessons: Lesson[] = [
         ],
         notes: [
           'The + বহুবচন Noun মানে একটি নির্দিষ্ট দল: The children in the study learned quickly.',
-          'সাধারণ মন্তব্যে ভাববাচক Noun-এর আগে the বসে না: the technology has changed society ভুল।',
+          'সাধারণ অর্থে abstract Noun-এর আগে the বসে না: the technology has changed society ভুল।',
         ],
       },
       {
         id: 'm3-r4',
         heading: 'Determiner ও Quantifier',
         rule: 'Demonstrative ও Quantifier নিজেই Article-এর জায়গা নেয়; এদের সঙ্গে a বা the একসঙ্গে বসে না।',
-        whenToUse: 'আগের কোনো ধারণা নির্দেশ করতে বা আনুমানিক পরিমাণ বোঝাতে।',
+        whenToUse: 'আগে বলা কোনো আইডিয়া বোঝাতে, বা মোটামুটি পরিমাণ বোঝাতে।',
         structure: [
           'this / that + একবচন; these / those + বহুবচন',
           'much + uncountable; many + countable plural',
@@ -441,7 +441,7 @@ export const stage1Lessons: Lesson[] = [
         wrong: 'The children in general need more outdoor activity.',
         right: 'Children in general need more outdoor activity.',
         explanation:
-          'পুরো শ্রেণি বোঝাতে article ছাড়া বহুবচন বসে; the বসালে নির্দিষ্ট একটি দল বোঝাত।',
+          'পুরো শ্রেণি বোঝাতে article ছাড়া বহুবচন বসে; the বসালে নির্দিষ্ট একটা দলকে বোঝাত।',
       },
       {
         wrong: 'This problems affect every city.',
@@ -467,28 +467,28 @@ export const stage1Lessons: Lesson[] = [
   {
     moduleId: 4,
     intro:
-      'Pronoun ব্যবহার করা মানে পাঠককে এই নিশ্চয়তা দেওয়া যে তিনি আগেই বুঝে ফেলেছেন আপনি কার কথা বলছেন। সেই নিশ্চয়তা ভেঙে গেলে বাক্যের গঠন ঠিক থাকলেও যুক্তি আটকে যায়। এই ভুলে Grammar ও Coherence দুই জায়গাতেই নম্বর কমে, তাই এটি ভালোভাবে ঠিক করা দরকার।',
+      'Pronoun ব্যবহার করে আপনি আসলে ধরে নিচ্ছেন যে পাঠক ইতিমধ্যে বুঝে গেছেন কার কথা হচ্ছে। পাঠক যদি তা না বোঝেন, তাহলে বাক্যের গঠন ঠিক থাকলেও যুক্তিটা আটকে যায়। এই ভুলে Grammar আর Coherence দুই জায়গাতেই নম্বর কাটে, তাই এটা ভালোভাবে ঠিক করে নেওয়া দরকার।',
     rules: [
       {
         id: 'm4-r1',
-        heading: 'বচন ও পুরুষে মিল',
-        rule: 'Pronoun তার Antecedent (যে Noun-কে নির্দেশ করছে) এর বচনের সঙ্গে মিলবে। একবচন Noun নেয় it, he, she বা singular they; বহুবচন Noun নেয় they।',
-        whenToUse: 'যতবার আপনি আগের কোনো Noun-কে আবার নির্দেশ করবেন।',
+        heading: 'Pronoun আর Noun-এর বচনে মিল',
+        rule: 'Pronoun যে Noun-কে বোঝাচ্ছে (তার Antecedent), বচনে তার সঙ্গে মিলতে হবে। একবচন Noun-এর জন্য it, he, she বা singular they; বহুবচন Noun-এর জন্য they।',
+        whenToUse: 'যতবার আগে বলা কোনো Noun-কে আবার বোঝাতে চাইবেন।',
         structure: [
           'The company increased its budget.',
           'Companies increased their budgets.',
           'A student should submit their work on time. (singular they, এখন গ্রহণযোগ্য)',
         ],
         notes: [
-          'একবচন ধরা Collective Noun নেয় it: The government published its report.',
-          'অনির্দিষ্ট কোনো ব্যক্তির ক্ষেত্রে academic writing-এ singular they গ্রহণযোগ্য এবং এতে he or she-এর মতো আড়ষ্ট গঠন এড়ানো যায়।',
+          'Collective Noun-কে একবচন ধরলে it বসবে: The government published its report.',
+          'নির্দিষ্ট নয় এমন কোনো ব্যক্তির কথা বলতে academic writing-এ singular they চলে, আর এতে he or she-এর মতো ভারী গঠন এড়ানো যায়।',
         ],
       },
       {
         id: 'm4-r2',
         heading: 'Antecedent যেন একটাই হয়',
-        rule: 'একটি Pronoun ঠিক একটি Noun-কেই নির্দেশ করবে। দুটি Noun মানানসই হলে Pronoun না বসিয়ে Noun-টি আবার লিখুন।',
-        whenToUse: 'যখন এক বাক্যে দুটি সম্ভাব্য Noun থাকে।',
+        rule: 'একটা Pronoun ঠিক একটা Noun-কেই বোঝাবে। দুটো Noun-ই খাপ খেলে Pronoun না বসিয়ে Noun-টাই আবার লিখুন।',
+        whenToUse: 'যখন এক বাক্যে Pronoun-টা বোঝাতে পারে এমন দুটো Noun থাকে।',
         structure: [
           'Ambiguous: Governments give money to charities, but they waste it.',
           'Clear: Governments give money to charities, but the charities waste it.',
@@ -502,9 +502,9 @@ export const stage1Lessons: Lesson[] = [
       {
         id: 'm4-r3',
         heading: 'This, that এবং Summary Noun',
-        rule: 'This ও that গোটা একটি ধারণাকে নির্দেশ করতে পারে, কিন্তু একা this প্রায়ই অস্পষ্ট থেকে যায়। সঙ্গে একটি Noun বসালে নির্দেশটি স্পষ্ট হয়।',
+        rule: 'This আর that পুরো একটা আইডিয়াকে বোঝাতে পারে, কিন্তু শুধু this লিখলে প্রায়ই বোঝা যায় না কীসের কথা হচ্ছে। সঙ্গে একটা Noun বসালেই পরিষ্কার হয়ে যায়।',
         whenToUse:
-          'যে বাক্যটি আগের বাক্য নিয়ে মন্তব্য করছে, তার শুরুতে। Academic writing-এ এটি সবচেয়ে কাজের অভ্যাসগুলোর একটি।',
+          'যে বাক্য আগের বাক্য নিয়ে মন্তব্য করছে, তার শুরুতে। Academic writing-এ এটা সবচেয়ে কাজের অভ্যাসগুলোর একটা।',
         structure: [
           'Weak: Cities are expanding rapidly. This causes problems.',
           'Strong: Cities are expanding rapidly. This expansion places pressure on housing.',
@@ -515,8 +515,8 @@ export const stage1Lessons: Lesson[] = [
       {
         id: 'm4-r4',
         heading: 'Dummy it বনাম Existential there',
-        rule: 'মূল্যায়ন ও সরিয়ে দেওয়া Clause-এর জন্য it, আর অস্তিত্ব জানাতে there ব্যবহার করুন। এ দুটি একে অন্যের বদলে বসে না।',
-        whenToUse: 'ভূমিকামূলক বাক্যে এবং নতুন তথ্য উপস্থাপনের সময়।',
+        rule: 'মতামত দিতে বা লম্বা Clause-কে বাক্যের শেষে পাঠাতে it, আর কোনো কিছু আছে বোঝাতে there। একটার জায়গায় আরেকটা বসে না।',
+        whenToUse: 'Introduction-এর বাক্যে, আর নতুন তথ্য আনার সময়।',
         structure: [
           'It is clear that demand has risen.',
           'It is difficult to measure happiness.',
@@ -553,25 +553,25 @@ export const stage1Lessons: Lesson[] = [
       {
         wrong: 'Pollution increased, and this is a problem that must be solved.',
         right: 'Pollution increased, and this deterioration must be addressed.',
-        note: 'Summary noun বসানোয় নির্দেশটি নির্দিষ্ট হয়ে গেছে।',
+        note: 'Summary noun বসানোয় this কীসের কথা বলছে, তা এখন পরিষ্কার।',
       },
     ],
     mistakes: [
       {
         wrong: 'Students should bring his or her own laptop.',
         right: 'Students should bring their own laptops.',
-        explanation: 'Antecedent-টি বহুবচন রাখলে Pronoun আপনাআপনিই সহজ ও স্বাভাবিক হয়।',
+        explanation: 'Antecedent বহুবচন রাখলে Pronoun-ও আপনাআপনি সহজ আর স্বাভাবিক হয়ে যায়।',
       },
       {
         wrong: 'It has many museums in the city.',
         right: 'There are many museums in the city.',
-        explanation: 'অস্তিত্ব বোঝাতে there বসে, it নয়।',
+        explanation: 'কোনো কিছু আছে বোঝাতে there বসে, it নয়।',
       },
       {
         wrong: 'The committee announced their decision, and it was criticised by them.',
         right: 'The committee announced its decision, which was widely criticised.',
         explanation:
-          'Collective Noun-টি একবচন রাখুন এবং Relative Clause ব্যবহার করে Pronoun-এর লম্বা শিকল ভেঙে দিন।',
+          'Collective Noun-টাকে একবচন রাখুন, আর Relative Clause দিয়ে পরপর অনেকগুলো Pronoun-এর জট ছাড়িয়ে নিন।',
       },
       {
         wrong: 'Technology is advancing quickly, which they make old skills obsolete.',
@@ -587,7 +587,7 @@ export const stage1Lessons: Lesson[] = [
       },
     ],
     keyTakeaways: [
-      'প্রতিটি Pronoun-এর জন্য একটিমাত্র স্পষ্ট Antecedent আছে কি না এবং বচনে মিলছে কি না দেখুন।',
+      'প্রতিটি Pronoun-এর জন্য একটাই স্পষ্ট Antecedent আছে কি না, আর বচনে মিলছে কি না, দেখে নিন।',
       'অস্পষ্ট this-এর বদলে this + summary noun লিখুন।',
       'It দিয়ে মূল্যায়ন শুরু হয়, there দিয়ে অস্তিত্ব।',
       'অস্পষ্ট Pronoun-এর চেয়ে Noun আবার লিখে দেওয়া সবসময় ভালো।',
@@ -598,12 +598,12 @@ export const stage1Lessons: Lesson[] = [
   {
     moduleId: 5,
     intro:
-      'এই মডিউলের মূল প্রশ্ন একটাই: একটি বাক্য কোথায় শুরু হয় আর কোথায় শেষ হয়? Fragment, run-on আর comma splice সবই এই প্রশ্নের ভুল উত্তর থেকে আসে। ভালো খবর হলো, এর পরীক্ষাটা একদম যান্ত্রিক, তাই পরীক্ষার চাপের মধ্যেও অর্থ নিয়ে না ভেবে এটি যাচাই করা যায়।',
+      'এই module-এর মূল প্রশ্ন একটাই: একটা বাক্য কোথায় শুরু হয় আর কোথায় শেষ হয়? Fragment, run-on আর comma splice সবগুলোই এই প্রশ্নের ভুল উত্তর থেকে আসে। ভালো খবর হলো, চেক করার নিয়মটা একদম mechanical, তাই পরীক্ষার চাপেও অর্থ নিয়ে মাথা না ঘামিয়ে সহজে চেক করা যায়।',
     rules: [
       {
         id: 'm5-r1',
         heading: 'Independent ও Dependent Clause',
-        rule: 'Independent Clause একাই একটি পূর্ণ বাক্য হতে পারে। Dependent Clause শুরু হয় একটি Subordinator দিয়ে এবং একা দাঁড়াতে পারে না।',
+        rule: 'Independent Clause একাই একটা পূর্ণ বাক্য হতে পারে। Dependent Clause শুরু হয় একটা Subordinator (যেমন because, although) দিয়ে, আর একা দাঁড়াতে পারে না।',
         whenToUse: 'দাঁড়ি বা full stop বসানোর ঠিক আগে।',
         structure: [
           'Independent: Air quality has improved.',
@@ -628,7 +628,7 @@ export const stage1Lessons: Lesson[] = [
       {
         id: 'm5-r2',
         heading: 'Fragment (অসম্পূর্ণ বাক্য)',
-        rule: 'Fragment হলো বাক্যের একটি টুকরো, যাকে পূর্ণ বাক্যের মতো করে দাঁড়ি দিয়ে লেখা হয়েছে। সাধারণত এতে finite verb থাকে না, অথবা এটি একা পড়ে থাকা Dependent Clause।',
+        rule: 'Fragment হলো বাক্যের একটা টুকরো, যেটাকে পূর্ণ বাক্যের মতো full stop দিয়ে লেখা হয়েছে। সাধারণত এতে finite verb থাকে না, অথবা এটা একা পড়ে থাকা একটা Dependent Clause।',
         whenToUse: 'because, although, which বা কোনো -ing রূপ দিয়ে শুরু হওয়া প্রতিটি বাক্য যাচাই করুন।',
         structure: [
           'Fragment: Because the cost of housing has risen sharply.',
@@ -645,7 +645,7 @@ export const stage1Lessons: Lesson[] = [
         heading: 'Run-on ও Comma Splice',
         rule: 'দুটি Independent Clause-কে কিছু না বসিয়ে (run-on) বা শুধু একটি কমা দিয়ে (comma splice) জোড়া লাগানো যায় না।',
         whenToUse:
-          'যখনই দুটি পূর্ণ ধারণা জোড়া দিচ্ছেন, বিশেষ করে however ও therefore-এর আশেপাশে।',
+          'যখনই দুটো পূর্ণ আইডিয়া জোড়া দিচ্ছেন, বিশেষ করে however আর therefore-এর আশেপাশে।',
         structure: [
           'Splice: The policy was expensive, it reduced emissions.',
           'Fix 1 - full stop: The policy was expensive. It reduced emissions.',
@@ -654,7 +654,7 @@ export const stage1Lessons: Lesson[] = [
           'Fix 4 - subordinator: Although the policy was expensive, it reduced emissions.',
         ],
         notes: [
-          'চারটি সমাধানের অর্থ কিন্তু এক নয়। যে সম্পর্কটি আপনি বোঝাতে চান, সেটিই বেছে নিন।',
+          'চারটা সমাধানের অর্থ কিন্তু এক নয়। আপনি যে সম্পর্কটা বোঝাতে চান, সেটাই বেছে নিন।',
         ],
       },
       {
@@ -679,7 +679,7 @@ export const stage1Lessons: Lesson[] = [
         },
         notes: [
           'Linking adverbial-এর আগে full stop-এর জায়গায় semicolon বসতে পারে, কিন্তু কমা কখনোই নয়।',
-          'Semicolon দুটি পূর্ণ ও ঘনিষ্ঠভাবে সম্পর্কিত বাক্য জোড়া দেয়। কোনো একপাশ পূর্ণ বাক্য না হলে কমা ব্যবহার করুন।',
+          'Semicolon দুটো পূর্ণ আর কাছাকাছি অর্থের বাক্য জোড়া দেয়। কোনো এক পাশ পূর্ণ বাক্য না হলে কমা ব্যবহার করুন।',
         ],
       },
     ],
@@ -692,12 +692,12 @@ export const stage1Lessons: Lesson[] = [
       {
         wrong: 'Although the scheme was popular, but it was cancelled.',
         right: 'Although the scheme was popular, it was cancelled.',
-        note: 'একটি connector-ই যথেষ্ট; although আগেই বৈপরীত্য বুঝিয়ে দিয়েছে।',
+        note: 'একটা connector-ই যথেষ্ট; although আগেই বৈপরীত্যটা বুঝিয়ে দিয়েছে।',
       },
       {
         wrong: 'Because the system is efficient. It saves money.',
         right: 'Because the system is efficient, it saves money.',
-        note: 'প্রথম অংশটি Dependent Clause, অথচ তাকে পূর্ণ বাক্যের মতো লেখা হয়েছিল।',
+        note: 'প্রথম অংশটা Dependent Clause, অথচ সেটাকে পূর্ণ বাক্যের মতো লেখা হয়েছিল।',
       },
       {
         wrong: 'Online learning is convenient it is also cheaper.',
@@ -726,7 +726,7 @@ export const stage1Lessons: Lesson[] = [
         wrong: 'More people are cycling, this reduces air pollution.',
         right: 'More people are cycling, which reduces air pollution.',
         explanation:
-          'This দিয়ে নতুন একটি Independent Clause শুরু হচ্ছে, তাই কমাটি splice তৈরি করেছে। Relative Clause দিয়ে ধারণা দুটি সুন্দরভাবে জোড়া লাগে।',
+          'This দিয়ে নতুন একটা Independent Clause শুরু হচ্ছে, তাই শুধু কমা দেওয়ায় comma splice হয়েছে। Relative Clause দিয়ে আইডিয়া দুটো সুন্দরভাবে জোড়া লাগে।',
       },
       {
         wrong: 'Despite the government invested heavily, the problem remained.',

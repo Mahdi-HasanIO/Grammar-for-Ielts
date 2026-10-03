@@ -6,6 +6,10 @@ export const STORAGE_KEYS = {
   progress: `${PREFIX}progress`,
   preferences: `${PREFIX}preferences`,
   geminiApiKey: `${PREFIX}geminiApiKey`,
+  /** Per-module suffix: the AI practice set currently shown (sessionStorage). */
+  aiSetPrefix: `${PREFIX}ai-set:`,
+  /** Per-module suffix: stems of AI questions already seen, to avoid repeats. */
+  aiHistoryPrefix: `${PREFIX}ai-seen:`,
 } as const
 
 export function readStorage<T>(key: string, fallback: T): T {

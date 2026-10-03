@@ -22,7 +22,7 @@ export const stage3Practice: Question[] = [
     question: '___ the high cost, the scheme was approved. (Despite / Although)',
     answer: 'Despite',
     explanation:
-      'The high cost একটি Noun phrase, তাই Preposition despite এখানে সঠিক।',
+      'The high cost একটা Noun phrase, তাই Preposition despite এখানে ঠিক।',
   },
   {
     id: 'm12-p3', moduleId: 12, type: 'multiple-choice',
@@ -30,7 +30,7 @@ export const stage3Practice: Question[] = [
     options: ['although', 'whereas', 'because', 'so that'],
     answer: 'whereas',
     explanation:
-      'Whereas দুটি তথ্যের সরাসরি পার্থক্য বোঝায়, আর although বোঝায় ফলটি অপ্রত্যাশিত।',
+      'Whereas দুটো তথ্যের সরাসরি পার্থক্য বোঝায়, আর although বোঝায় ফলটা প্রত্যাশার উল্টো।',
   },
   {
     id: 'm12-p4', moduleId: 12, type: 'error-correction',
@@ -39,7 +39,7 @@ export const stage3Practice: Question[] = [
     options: ['Because the roads', 'are congested,', 'therefore commuting', 'takes longer'],
     answer: 'therefore commuting',
     explanation:
-      'Because আর therefore দুটোই কারণ বোঝায়, তাই একসঙ্গে ব্যবহার করলে connector দ্বিগুণ হয়ে যায়।',
+      'Because আর therefore দুটোই কারণ-ফলাফল বোঝায়, তাই একসঙ্গে বসালে একই কাজে দুটো connector হয়ে যায়।',
   },
 
   /* ---- Module 13 ---- */
@@ -50,7 +50,7 @@ export const stage3Practice: Question[] = [
     options: ['The policy', 'which it was', 'introduced in 2015', 'reduced pollution'],
     answer: 'which it was',
     explanation:
-      'Which নিজেই Relative Clause-টির Subject, তাই it দ্বিতীয় একটি Subject হয়ে যাচ্ছে।',
+      'Which নিজেই Relative Clause-টার Subject, তাই it বসালে দুটো Subject হয়ে যায়।',
   },
   {
     id: 'm13-p2', moduleId: 13, type: 'multiple-choice',
@@ -58,7 +58,7 @@ export const stage3Practice: Question[] = [
     options: ['who', 'which', 'whose', 'whom'],
     answer: 'whose',
     explanation:
-      'Whose দিয়ে অধিকার বোঝায়: study-টি researcher-এর।',
+      'Whose দিয়ে কার জিনিস তা বোঝায়: study-টা researcher-এর।',
   },
   {
     id: 'm13-p3', moduleId: 13, type: 'choose-correct-sentence',
@@ -71,7 +71,7 @@ export const stage3Practice: Question[] = [
     ],
     answer: 'My hometown, which is in the north, has grown rapidly.',
     explanation:
-      'অনন্য একটি Noun সম্পর্কে বাড়তি তথ্য দিলে দুই পাশে কমা বসে এবং which ব্যবহার হয়।',
+      'একটাই আছে এমন Noun সম্পর্কে বাড়তি তথ্য দিলে দুই পাশে কমা বসে, আর which ব্যবহার হয়।',
   },
   {
     id: 'm13-p4', moduleId: 13, type: 'rewrite',
@@ -79,7 +79,7 @@ export const stage3Practice: Question[] = [
     answer: 'The report published in 2020 criticises the plan.',
     acceptable: ['the report published in 2020 criticises the plan'],
     explanation:
-      'which was বাদ দিলে একটি past participle থেকে যায়, যা Noun-টিকে বিশেষিত করে।',
+      'which was বাদ দিলে শুধু past participle থাকে, যেটা Noun-টাকে বর্ণনা করে।',
   },
 
   /* ---- Module 14 ---- */
@@ -94,14 +94,14 @@ export const stage3Practice: Question[] = [
     ],
     answer: 'I wonder why people move to cities.',
     explanation:
-      'Embedded question-এ statement-এর শব্দক্রম থাকে এবং সহায়ক do বাদ পড়ে।',
+      'Embedded question-এ statement-এর word order থাকে, আর auxiliary do বাদ যায়।',
   },
   {
     id: 'm14-p2', moduleId: 14, type: 'fill-blank',
     question: 'It is unclear ___ the scheme will succeed. (if / whether)',
     answer: 'whether',
     explanation:
-      'আনুষ্ঠানিক লেখায় হ্যাঁ-না বিকল্প বোঝাতে whether বেশি উপযুক্ত।',
+      'Formal লেখায় হ্যাঁ-না বিকল্প বোঝাতে whether বেশি মানানসই।',
   },
   {
     id: 'm14-p3', moduleId: 14, type: 'rewrite',
@@ -109,7 +109,7 @@ export const stage3Practice: Question[] = [
     answer: 'It is now undisputed that the climate is changing.',
     acceptable: ['it is now undisputed that the climate is changing'],
     explanation:
-      'ভারী Clause-টিকে শেষে সরিয়ে দিলে end-weight নীতি রক্ষা হয়।',
+      'ভারী Clause-টাকে শেষে পাঠালে end-weight নিয়ম (ভারী অংশ শেষে) মানা হয়।',
   },
   {
     id: 'm14-p4', moduleId: 14, type: 'error-correction',
@@ -118,7 +118,7 @@ export const stage3Practice: Question[] = [
     options: ['The study', 'examines how', 'does air pollution', 'affect health'],
     answer: 'does air pollution',
     explanation:
-      'does বাদ দিয়ে statement-এর শব্দক্রমে ফিরে যান: how air pollution affects health।',
+      'does বাদ দিয়ে statement-এর word order-এ লিখুন: how air pollution affects health।',
   },
 
   /* ---- Module 15 ---- */
@@ -150,14 +150,14 @@ export const stage3Practice: Question[] = [
     options: ['Unless', 'we do not act now,', 'the situation', 'will worsen'],
     answer: 'we do not act now,',
     explanation:
-      'Unless-এর অর্থই if not, তাই বাড়তি নেতিবাচক শব্দ অর্থ উল্টে দেয়।',
+      'Unless-এর অর্থই if not, তাই আরেকটা not বসালে অর্থ উল্টে যায়।',
   },
   {
     id: 'm15-p4', moduleId: 15, type: 'fill-blank',
     question: 'If I ___ the minister, I would increase funding. (was / were)',
     answer: 'were',
     explanation:
-      'আনুষ্ঠানিক লেখায় কাল্পনিক অর্থে were ব্যবহার করা হয়।',
+      'Formal লেখায় কাল্পনিক অর্থে were ব্যবহার হয়।',
   },
 
   /* ---- Module 16 ---- */
@@ -172,7 +172,7 @@ export const stage3Practice: Question[] = [
     ],
     answer: 'The policy reduces pollution, saves money and improves health.',
     explanation:
-      'তিনটি আইটেমই এখন একই Subject-এর অধীনে finite verb।',
+      'তিনটা আইটেমই এখন একই Subject-এর finite verb।',
   },
   {
     id: 'm16-p2', moduleId: 16, type: 'multiple-choice',
@@ -180,14 +180,14 @@ export const stage3Practice: Question[] = [
     options: ['it is expensive', 'expensive', 'expensively', 'has expense'],
     answer: 'expensive',
     explanation:
-      'not only-এর পরে যা বসে, but also-এর পরেও তাই বসতে হবে: Adjective-এর সঙ্গে Adjective।',
+      'not only-এর পরে যা বসে, but also-এর পরেও তাই বসবে: Adjective-এর সঙ্গে Adjective।',
   },
   {
     id: 'm16-p3', moduleId: 16, type: 'fill-blank',
     question: 'The climate of Spain is warmer than ___ of Norway. (that / those)',
     answer: 'that',
     explanation:
-      'That of দিয়ে একবচন Noun climate বোঝানো হচ্ছে, যা তুলনাটিকে ভারসাম্যপূর্ণ রাখে।',
+      'That of দিয়ে একবচন Noun climate বোঝানো হচ্ছে, তাই তুলনার দুই পাশে একই জিনিস থাকে।',
   },
   {
     id: 'm16-p4', moduleId: 16, type: 'error-correction',
@@ -211,14 +211,14 @@ export const stage3Practice: Question[] = [
     ],
     answer: 'Walking to school, I was caught in the rain.',
     explanation:
-      'মূল Clause-এর Subject-কেই হাঁটার কাজটি করতে হবে।',
+      'হাঁটার কাজটা মূল Clause-এর Subject-কেই করতে হবে।',
   },
   {
     id: 'm17-p2', moduleId: 17, type: 'fill-blank',
     question: 'The report ___ in 2020 criticises the plan. (publishing / published)',
     answer: 'published',
     explanation:
-      'Report-টি প্রকাশ করা হয়েছিল, তাই সংক্ষিপ্ত রূপে past participle বসে।',
+      'Report-টা প্রকাশ করা হয়েছিল, তাই ছোট রূপে past participle বসে।',
   },
   {
     id: 'm17-p3', moduleId: 17, type: 'multiple-choice',
@@ -226,7 +226,7 @@ export const stage3Practice: Question[] = [
     options: ['reached', 'reaching', 'to reaching', 'reaches'],
     answer: 'reaching',
     explanation:
-      'বাক্যের শেষে বসা ফলাফলবাচক Clause -ing রূপ নেয়।',
+      'বাক্যের শেষে ফলাফল বোঝানো Clause -ing রূপ নেয়।',
   },
   {
     id: 'm17-p4', moduleId: 17, type: 'rewrite',
@@ -234,7 +234,7 @@ export const stage3Practice: Question[] = [
     answer: 'Having finished the report, the team met the deadline.',
     acceptable: ['having finished the report, the team met the deadline', 'having finished the report, we met the deadline'],
     explanation:
-      'মূল Clause-এ এমন একটি Subject থাকতে হবে, যে আসলে report-টি শেষ করেছে।',
+      'মূল Clause-এ এমন একটা Subject থাকতে হবে, যে আসলে report-টা শেষ করেছে।',
   },
 ]
 
@@ -247,7 +247,7 @@ export const stage3Test: Question[] = [
     options: ['Even though', 'renewable energy is clean,', 'but it remains', 'expensive'],
     answer: 'but it remains',
     explanation:
-      'Even though একটি Subordinator, তাই এর সঙ্গে but বসতে পারে না।',
+      'Even though একটা Subordinator, তাই এর সঙ্গে but বসতে পারে না।',
   },
   {
     id: 'm12-t2', moduleId: 12, type: 'multiple-choice',
@@ -255,7 +255,7 @@ export const stage3Test: Question[] = [
     options: ['Despite', 'In spite of', 'Although', 'Despite of'],
     answer: 'Although',
     explanation:
-      'পূর্ণ Clause বসাতে হলে although লাগে; despite ও in spite of-এর পরে Noun phrase বসে।',
+      'পূর্ণ Clause বসাতে হলে although লাগে; despite আর in spite of-এর পরে Noun phrase বসে।',
   },
   {
     id: 'm12-t3', moduleId: 12, type: 'choose-correct-sentence',
@@ -268,14 +268,14 @@ export const stage3Test: Question[] = [
     ],
     answer: 'Despite the cost, the project continued.',
     explanation:
-      'Despite-এর সঙ্গে কখনো of বসে না এবং এর পরে Clause-ও বসে না।',
+      'Despite-এর সঙ্গে কখনো of বসে না, আর এর পরে Clause-ও বসে না।',
   },
   {
     id: 'm12-t4', moduleId: 12, type: 'fill-blank',
     question: 'Taxes were cut ___ that firms could invest. (so / such)',
     answer: 'so',
     explanation:
-      'So that দিয়ে উদ্দেশ্যবাচক Clause শুরু হয়।',
+      'So that দিয়ে উদ্দেশ্য বোঝানো Clause শুরু হয়।',
   },
   {
     id: 'm12-t5', moduleId: 12, type: 'multiple-choice',
@@ -283,7 +283,7 @@ export const stage3Test: Question[] = [
     options: ['because', 'although', 'so that', 'when'],
     answer: 'although',
     explanation:
-      'Although বোঝায় যে প্রথম Clause অনুযায়ী ফলটি অপ্রত্যাশিত।',
+      'Although বোঝায়, প্রথম Clause দেখে যা আশা করা যেত, ফলটা তার উল্টো।',
   },
   {
     id: 'm12-t6', moduleId: 12, type: 'choose-correct-sentence',
@@ -296,7 +296,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'Whereas some people prefer cities, others prefer the countryside.',
     explanation:
-      'Whereas দিয়ে শুরু হওয়া Clause নির্ভরশীল, তাই এর সঙ্গে একটি main clause লাগে।',
+      'Whereas দিয়ে শুরু হওয়া Clause নির্ভরশীল, তাই এর সঙ্গে একটা main clause লাগে।',
   },
   {
     id: 'm12-t7', moduleId: 12, type: 'multiple-choice',
@@ -313,14 +313,14 @@ export const stage3Test: Question[] = [
     options: ['The policy failed,', 'because of poor planning', 'and it was', 'underfunded'],
     answer: 'because of poor planning',
     explanation:
-      'দ্বিতীয় অংশটি একটি Clause, তাই connector হবে because, because of নয়।',
+      'দ্বিতীয় অংশটা একটা Clause, তাই connector হবে because, because of নয়।',
   },
   {
     id: 'm12-t9', moduleId: 12, type: 'fill-blank',
     question: 'Urban areas are growing, ___ rural areas are shrinking. (whereas / although)',
     answer: 'whereas',
     explanation:
-      'দুটি তথ্য শুধু আলাদা, অর্থাৎ এটি বৈপরীত্য, কোনো অপ্রত্যাশিত ফল নয়।',
+      'দুটো তথ্য শুধু আলাদা, অর্থাৎ এটা সাধারণ বৈপরীত্য, প্রত্যাশার উল্টো কোনো ফল নয়।',
   },
   {
     id: 'm12-t10', moduleId: 12, type: 'multiple-choice',
@@ -363,7 +363,7 @@ export const stage3Test: Question[] = [
     question: 'The company, ___ employs 2,000 people, is expanding. (who / which)',
     answer: 'which',
     explanation:
-      'প্রতিষ্ঠান একটি বস্তু, তাই এর সঙ্গে which বসে।',
+      'প্রতিষ্ঠান কোনো মানুষ নয়, তাই এর সঙ্গে which বসে।',
   },
   {
     id: 'm13-t4', moduleId: 13, type: 'error-correction',
@@ -372,7 +372,7 @@ export const stage3Test: Question[] = [
     options: ['This is', 'the village', 'where I grew up in', 'last year'],
     answer: 'where I grew up in',
     explanation:
-      'Where-এর ভেতরেই Preposition-টি আছে, তাই আলাদা করে in বসানো বাড়তি।',
+      'Where-এর ভেতরেই Preposition-টা আছে, তাই আলাদা করে in বসানো বাড়তি।',
   },
   {
     id: 'm13-t5', moduleId: 13, type: 'multiple-choice',
@@ -385,7 +385,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'All the workers were unskilled and lost their jobs.',
     explanation:
-      'কমা বসালে Clause-টি non-defining হয়ে যায়, অর্থাৎ এটি সবার সম্পর্কেই বলছে।',
+      'কমা বসালে Clause-টা non-defining হয়ে যায়, অর্থাৎ তখন এটা সবার সম্পর্কেই বলছে।',
   },
   {
     id: 'm13-t6', moduleId: 13, type: 'multiple-choice',
@@ -393,7 +393,7 @@ export const stage3Test: Question[] = [
     options: ['which', 'in which', 'that', 'what'],
     answer: 'in which',
     explanation:
-      'Clause-টিতে একটি Preposition দরকার, তাই in which বা সহজভাবে when বসবে।',
+      'Clause-টাতে একটা Preposition দরকার, তাই in which বা সহজভাবে when বসবে।',
   },
   {
     id: 'm13-t7', moduleId: 13, type: 'choose-correct-sentence',
@@ -406,14 +406,14 @@ export const stage3Test: Question[] = [
     ],
     answer: 'People living in rural areas often lack healthcare.',
     explanation:
-      'Active অর্থের সংক্ষিপ্ত Relative Clause -ing রূপ নেয়।',
+      'Active অর্থের Relative Clause ছোট করলে -ing রূপ নেয়।',
   },
   {
     id: 'm13-t8', moduleId: 13, type: 'fill-blank',
     question: 'The rate ___ which temperatures are rising is alarming.',
     answer: 'at',
     explanation:
-      'নির্দিষ্ট গঠনটি হলো the rate at which।',
+      'নির্দিষ্ট গঠনটা হলো the rate at which।',
   },
   {
     id: 'm13-t9', moduleId: 13, type: 'error-correction',
@@ -422,7 +422,7 @@ export const stage3Test: Question[] = [
     options: ['The book', 'that I read it', 'last week', 'was useful'],
     answer: 'that I read it',
     explanation:
-      'That আগে থেকেই read-এর Object, তাই it দ্বিতীয় একটি Object হয়ে যাচ্ছে।',
+      'That আগে থেকেই read-এর Object, তাই it বসালে দুটো Object হয়ে যায়।',
   },
   {
     id: 'm13-t10', moduleId: 13, type: 'multiple-choice',
@@ -435,7 +435,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'Students who study abroad often become more independent.',
     explanation:
-      'এটি বুঝিয়ে দিচ্ছে কোন শিক্ষার্থীদের কথা বলা হচ্ছে এবং এতে কোনো কমা বসে না।',
+      'এটা বুঝিয়ে দিচ্ছে কোন শিক্ষার্থীদের কথা হচ্ছে, তাই এতে কোনো কমা বসে না।',
   },
 
   /* ========================== Module 14 test ========================== */
@@ -450,7 +450,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'Nobody knows what the outcome will be.',
     explanation:
-      'Embedded clause-এ Subject আগে ও Verb পরে থাকে।',
+      'Embedded clause-এ Subject আগে আর Verb পরে থাকে।',
   },
   {
     id: 'm14-t2', moduleId: 14, type: 'multiple-choice',
@@ -458,14 +458,14 @@ export const stage3Test: Question[] = [
     options: ['if', 'whether', 'that', 'what'],
     answer: 'whether',
     explanation:
-      'Preposition-এর পরে কেবল whether বসতে পারে।',
+      'Preposition-এর পরে শুধু whether বসতে পারে।',
   },
   {
     id: 'm14-t3', moduleId: 14, type: 'fill-blank',
     question: 'It is argued ___ technology has reduced employment. (that / which)',
     answer: 'that',
     explanation:
-      'Reporting গঠনটি একটি that-clause নেয়।',
+      'Reporting verb-এর পরে একটা that-clause বসে।',
   },
   {
     id: 'm14-t4', moduleId: 14, type: 'error-correction',
@@ -474,7 +474,7 @@ export const stage3Test: Question[] = [
     options: ['Researchers', 'want to know', 'that why', 'the figure fell'],
     answer: 'that why',
     explanation:
-      'wh-শব্দের সঙ্গে that বসে না; একটি connector-ই যথেষ্ট।',
+      'wh-শব্দের সঙ্গে that বসে না; একটা connector-ই যথেষ্ট।',
   },
   {
     id: 'm14-t5', moduleId: 14, type: 'multiple-choice',
@@ -487,7 +487,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'It is undeniable that the policy failed.',
     explanation:
-      'Clause-টি শেষে সরে গেছে এবং Subject-এর জায়গা পূরণ করছে it।',
+      'Clause-টা শেষে চলে গেছে, আর Subject-এর জায়গা পূরণ করছে it।',
   },
   {
     id: 'm14-t6', moduleId: 14, type: 'choose-correct-sentence',
@@ -508,14 +508,14 @@ export const stage3Test: Question[] = [
     options: ['suggests', 'indicates', 'demonstrates', 'implies'],
     answer: 'demonstrates',
     explanation:
-      'Demonstrates ও shows লেখককে ফলাফলের সঙ্গে যুক্ত করে; suggests ও indicates করে না।',
+      'Demonstrates বা shows লিখলে লেখক নিজেও ফলাফলটা মেনে নেন; suggests বা indicates-এ তা হয় না।',
   },
   {
     id: 'm14-t8', moduleId: 14, type: 'fill-blank',
     question: 'They must decide ___ to expand or consolidate. (if / whether)',
     answer: 'whether',
     explanation:
-      'to-infinitive-এর আগে কেবল whether বসতে পারে।',
+      'to-infinitive-এর আগে শুধু whether বসতে পারে।',
   },
   {
     id: 'm14-t9', moduleId: 14, type: 'error-correction',
@@ -524,7 +524,7 @@ export const stage3Test: Question[] = [
     options: ['It is depends', 'on whether', 'funding', 'is available'],
     answer: 'It is depends',
     explanation:
-      'Extraposed it is বসে Adjective-এর আগে, কোনো পূর্ণ Verb-এর আগে নয়: It depends।',
+      'এই it is-এর পরে Adjective বসে, কোনো পূর্ণ Verb নয়; তাই লিখুন It depends।',
   },
   {
     id: 'm14-t10', moduleId: 14, type: 'multiple-choice',
@@ -532,7 +532,7 @@ export const stage3Test: Question[] = [
     options: ['what does it cost', 'how much it costs', 'what costs it', 'how much does it cost'],
     answer: 'how much it costs',
     explanation:
-      'সহায়ক Verb বাদ দিন এবং মূল Verb-কে তার স্বাভাবিক রূপে ফিরিয়ে আনুন।',
+      'Auxiliary বাদ দিন, আর মূল Verb-কে তার স্বাভাবিক রূপে ফিরিয়ে আনুন।',
   },
 
   /* ========================== Module 15 test ========================== */
@@ -562,7 +562,7 @@ export const stage3Test: Question[] = [
     question: 'The plan will work provided that it ___ support. (receives / will receive)',
     answer: 'receives',
     explanation:
-      'Provided that if-এর মতোই আচরণ করে এবং Present tense নেয়।',
+      'Provided that-এর নিয়ম if-এর মতোই, তাই এর পরে Present tense বসে।',
   },
   {
     id: 'm15-t4', moduleId: 15, type: 'error-correction',
@@ -571,7 +571,7 @@ export const stage3Test: Question[] = [
     options: ['Unless if', 'the policy changes,', 'the issue', 'will remain'],
     answer: 'Unless if',
     explanation:
-      'Unless ও if একসঙ্গে বসে না; unless-এর অর্থই except if।',
+      'Unless আর if একসঙ্গে বসে না; unless-এর অর্থই except if।',
   },
   {
     id: 'm15-t5', moduleId: 15, type: 'multiple-choice',
@@ -605,14 +605,14 @@ export const stage3Test: Question[] = [
     ],
     answer: 'Unless action is taken, emissions will rise.',
     explanation:
-      'Unless নিজেই নেতিবাচক অর্থ বহন করে এবং Present tense নেয়।',
+      'Unless-এর ভেতরেই না-বোধক অর্থ আছে, আর এর পরে Present tense বসে।',
   },
   {
     id: 'm15-t8', moduleId: 15, type: 'fill-blank',
     question: 'Remote work is effective as long as teams ___ regularly. (communicate / will communicate)',
     answer: 'communicate',
     explanation:
-      'As long as একটি শর্ত বোঝায় এবং Present simple নেয়।',
+      'As long as একটা শর্ত বোঝায়, আর এর পরে Present simple বসে।',
   },
   {
     id: 'm15-t9', moduleId: 15, type: 'error-correction',
@@ -634,7 +634,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'If schools introduced financial education, students would manage money better.',
     explanation:
-      'Second conditional বোঝায় যে আপনি ভবিষ্যদ্বাণী নয়, বরং একটি কল্পনা তুলে ধরছেন।',
+      'Second conditional বোঝায় যে আপনি ভবিষ্যদ্বাণী করছেন না, একটা কাল্পনিক অবস্থার কথা বলছেন।',
   },
 
   /* ========================== Module 16 test ========================== */
@@ -649,7 +649,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'The course teaches students how to write reports, give presentations and conduct research.',
     explanation:
-      'তিনটি আইটেমই এখন how to-এর পরে bare infinitive হিসেবে বসেছে।',
+      'তিনটা আইটেমই এখন how to-এর পরে bare infinitive হিসেবে বসেছে।',
   },
   {
     id: 'm16-t2', moduleId: 16, type: 'multiple-choice',
@@ -657,7 +657,7 @@ export const stage3Test: Question[] = [
     options: ['to organise', 'organise', 'organising', 'organisation'],
     answer: 'organising',
     explanation:
-      'Preposition for-এর পরে প্রতিটি আইটেম -ing রূপে হতে হবে।',
+      'Preposition for-এর পরে প্রতিটি আইটেম -ing রূপে হবে।',
   },
   {
     id: 'm16-t3', moduleId: 16, type: 'fill-blank',
@@ -673,7 +673,7 @@ export const stage3Test: Question[] = [
     options: ['The report', 'is both detailed', 'and it is', 'well researched'],
     answer: 'and it is',
     explanation:
-      'Both...and দুটি Adjective জোড়া দেয়, তাই Clause বসালে parallel ভেঙে যায়।',
+      'Both...and এখানে দুটো Adjective জোড়া দেয়, তাই একপাশে Clause বসালে parallelism ভেঙে যায়।',
   },
   {
     id: 'm16-t5', moduleId: 16, type: 'multiple-choice',
@@ -702,7 +702,7 @@ export const stage3Test: Question[] = [
     options: ['both', 'either', 'neither', 'not only'],
     answer: 'both',
     explanation:
-      'Both...and একই ধরনের দুটি ইতিবাচক আইটেম জোড়া দেয়।',
+      'Both...and একই ধরনের দুটো হ্যাঁ-বোধক আইটেম জোড়া দেয়।',
   },
   {
     id: 'm16-t8', moduleId: 16, type: 'multiple-choice',
@@ -710,7 +710,7 @@ export const stage3Test: Question[] = [
     options: ['raising awareness', 'raise awareness', 'to raising awareness', 'awareness is raised'],
     answer: 'raise awareness',
     explanation:
-      'তালিকার শুরুতে to থাকায় প্রতিটি আইটেমই bare infinitive: reduce, cut, raise।',
+      'তালিকার শুরুতে to থাকায় বাকি প্রতিটি আইটেম bare infinitive: reduce, cut, raise।',
   },
   {
     id: 'm16-t9', moduleId: 16, type: 'error-correction',
@@ -719,7 +719,7 @@ export const stage3Test: Question[] = [
     options: ['Governments should', 'invest in education,', 'improving healthcare', 'and build housing'],
     answer: 'improving healthcare',
     explanation:
-      'Should-এর পরে প্রতিটি আইটেম bare infinitive হতে হবে: improve healthcare।',
+      'Should-এর পরে প্রতিটি আইটেম bare infinitive হবে: improve healthcare।',
   },
   {
     id: 'm16-t10', moduleId: 16, type: 'multiple-choice',
@@ -747,7 +747,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'After reviewing the evidence, the committee changed the policy.',
     explanation:
-      'মূল Clause-এর Subject-কেই প্রমাণ পর্যালোচনার কাজটি করতে হবে।',
+      'প্রমাণ পর্যালোচনার কাজটা মূল Clause-এর Subject-কেই করতে হবে।',
   },
   {
     id: 'm17-t2', moduleId: 17, type: 'multiple-choice',
@@ -755,14 +755,14 @@ export const stage3Test: Question[] = [
     options: ['Introducing', 'Introduced', 'To introduce', 'Introduce'],
     answer: 'Introduced',
     explanation:
-      'Scheme-টি কাজটির শিকার, তাই passive participle বসবে।',
+      'কাজটা Scheme-এর উপর হচ্ছে, তাই passive participle বসবে।',
   },
   {
     id: 'm17-t3', moduleId: 17, type: 'fill-blank',
     question: '___ completed the survey, the researchers analysed the data. (Having / Have)',
     answer: 'Having',
     explanation:
-      'Having + past participle বোঝায় কাজটি মূল Verb-এর আগেই শেষ হয়েছে।',
+      'Having + past participle বোঝায়, কাজটা মূল Verb-এর আগেই শেষ হয়ে গেছে।',
   },
   {
     id: 'm17-t4', moduleId: 17, type: 'error-correction',
@@ -771,7 +771,7 @@ export const stage3Test: Question[] = [
     options: ['The report', 'writing by the committee', 'was published', 'yesterday'],
     answer: 'writing by the committee',
     explanation:
-      'Report-টি লেখা হয়েছিল, তাই সংক্ষিপ্ত রূপে past participle written বসবে।',
+      'Report-টা লেখা হয়েছিল, তাই ছোট রূপে past participle written বসবে।',
   },
   {
     id: 'm17-t5', moduleId: 17, type: 'multiple-choice',
@@ -784,7 +784,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'Factors affecting performance',
     explanation:
-      'Active অর্থের Relative Clause সংক্ষিপ্ত হয়ে -ing রূপ নেয়।',
+      'Active অর্থের Relative Clause ছোট করলে -ing রূপ নেয়।',
   },
   {
     id: 'm17-t6', moduleId: 17, type: 'choose-correct-sentence',
@@ -797,7 +797,7 @@ export const stage3Test: Question[] = [
     ],
     answer: 'For those living in a big city, the cost of housing is very high.',
     explanation:
-      'এখন participle-টি এমন একটি Noun-কে বিশেষিত করছে, যে সত্যিই বাস করতে পারে।',
+      'এখন participle-টা এমন একটা Noun-কে বর্ণনা করছে, যে সত্যিই কোথাও বাস করতে পারে।',
   },
   {
     id: 'm17-t7', moduleId: 17, type: 'multiple-choice',
@@ -805,14 +805,14 @@ export const stage3Test: Question[] = [
     options: ['reached', 'reaching', 'reach', 'to reach'],
     answer: 'reaching',
     explanation:
-      'ফলাফলবাচক participle clause -ing রূপ নেয় এবং মূল Subject-এর সঙ্গে জুড়ে বসে।',
+      'ফলাফল বোঝানো participle clause -ing রূপ নেয়, আর মূল Subject-এর সঙ্গেই জুড়ে থাকে।',
   },
   {
     id: 'm17-t8', moduleId: 17, type: 'fill-blank',
     question: 'The issues ___ be addressed are listed below. (to / for)',
     answer: 'to',
     explanation:
-      'Infinitive post-modifier-এ to বসে, এখানে passive রূপে: to be addressed।',
+      'Noun-এর পরে বসা infinitive-এ to থাকে; এখানে passive রূপে: to be addressed।',
   },
   {
     id: 'm17-t9', moduleId: 17, type: 'error-correction',

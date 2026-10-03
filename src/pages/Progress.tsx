@@ -15,6 +15,7 @@ import { ActivityCalendar } from '@/components/dashboard/ActivityCalendar'
 import { StageTrack } from '@/components/dashboard/StageTrack'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { cn } from '@/utils/cn'
+import { Reveal } from '@/components/ui/Reveal'
 
 function WeeklyBars() {
   const { state } = useProgress()
@@ -28,13 +29,21 @@ function WeeklyBars() {
           const minutes = state.activity[key]?.minutes ?? 0
           const height = Math.max(3, (minutes / max) * 100)
           return (
-            <div key={key} className="group relative flex-1" title={`${dayLabel(key)}: ${minutes} min`}>
+            <div
+              key={key}
+              className="group relative flex-1"
+              title={`${dayLabel(key)}: ${minutes} min`}
+            >
               <div
                 className={cn(
-                  'w-full rounded-t-md transition-all',
-                  minutes >= 10 ? 'bg-brand-500' : minutes > 0 ? 'bg-brand-300' : 'bg-ink-200 dark:bg-ink-800',
+                  'w-full origin-bottom animate-[grow-bar_0.8s_cubic-bezier(0.16,1,0.3,1)_both] rounded-t-md transition-[filter] duration-200 group-hover:brightness-110',
+                  minutes >= 10
+                    ? 'bg-gradient-to-t from-brand-600 to-accent-500'
+                    : minutes > 0
+                      ? 'bg-brand-300 dark:bg-brand-800'
+                      : 'bg-ink-200 dark:bg-ink-800',
                 )}
-                style={{ height: `${height}%` }}
+                style={{ height: `${height}%`, animationDelay: `${days.indexOf(key) * 35}ms` }}
               />
             </div>
           )
@@ -59,33 +68,61 @@ export function ProgressPage() {
         description="Everything is stored locally in your browser, so your history stays on this device."
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 0 } as React.CSSProperties}
           label="Modules completed"
           value={`${stats.modulesCompleted}/${MODULES.length}`}
           icon={<Trophy size={15} />}
         />
-        <StatTile label="Tests completed" value={stats.testsTaken} icon={<BarChart3 size={15} />} />
         <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 1 } as React.CSSProperties}
+          label="Tests completed"
+          value={stats.testsTaken}
+          icon={<BarChart3 size={15} />}
+        />
+        <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 2 } as React.CSSProperties}
           label="Average test score"
           value={`${stats.averageScore}%`}
           hint={`Pass rate ${stats.passRate}%`}
           icon={<TrendingUp size={15} />}
         />
-        <StatTile label="Best test score" value={`${stats.bestScore}%`} icon={<Award size={15} />} />
         <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 3 } as React.CSSProperties}
+          label="Best test score"
+          value={`${stats.bestScore}%`}
+          icon={<Award size={15} />}
+        />
+        <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 4 } as React.CSSProperties}
           label="Study time"
           value={formatMinutes(stats.studyMinutes)}
           icon={<Clock size={15} />}
         />
         <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 5 } as React.CSSProperties}
           label="Current streak"
           value={`${streak.current}d`}
           hint={`${streak.activeDays} active days`}
           icon={<Flame size={15} />}
         />
-        <StatTile label="Longest streak" value={`${streak.longest}d`} icon={<Flame size={15} />} />
         <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 6 } as React.CSSProperties}
+          label="Longest streak"
+          value={`${streak.longest}d`}
+          icon={<Flame size={15} />}
+        />
+        <StatTile
+          className="animate-fade-up stagger"
+          style={{ '--i': 7 } as React.CSSProperties}
           label="Question accuracy"
           value={`${stats.questionAccuracy}%`}
           hint={`${stats.questionsAnswered} answered`}
@@ -93,10 +130,10 @@ export function ProgressPage() {
         />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <Reveal className="grid gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader title="Daily activity" subtitle="Intensity by minutes studied" />
-          <CardBody className="pt-1">
+          <CardBody className="pt-4">
             <ActivityCalendar />
           </CardBody>
         </Card>
@@ -104,100 +141,112 @@ export function ProgressPage() {
         <div className="space-y-4">
           <Card>
             <CardHeader title="Recent study time" />
-            <CardBody className="pt-1">
+            <CardBody className="pt-4">
               <WeeklyBars />
             </CardBody>
           </Card>
           <Card>
             <CardHeader title="Stage progress" />
-            <CardBody className="pt-1">
+            <CardBody className="pt-4">
               <StageTrack />
             </CardBody>
           </Card>
         </div>
-      </div>
+      </Reveal>
 
-      <Card>
-        <CardHeader title="Test history" subtitle={`${state.attempts.length} attempts recorded`} />
-        <CardBody className="pt-1">
-          {recentAttempts.length === 0 ? (
-            <EmptyState
-              icon={<BarChart3 size={22} />}
-              title="No tests yet"
-              description="Your test attempts, scores and pass results will be listed here."
-            />
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-left text-[13px]">
-                <thead>
-                  <tr className="text-ink-500 dark:text-ink-400">
-                    <th className="pb-2 font-medium">Module</th>
-                    <th className="pb-2 font-medium">Score</th>
-                    <th className="pb-2 font-medium">Result</th>
-                    <th className="pb-2 text-right font-medium">When</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {recentAttempts.map((a, i) => (
-                    <tr key={`${a.at}-${i}`} className="border-t border-ink-200 dark:border-ink-800">
-                      <td className="py-2.5 pr-3 text-ink-800 dark:text-ink-200">
-                        {a.moduleId}. {moduleById(a.moduleId)?.title}
-                      </td>
-                      <td className="py-2.5 pr-3 tabular-nums text-ink-700 dark:text-ink-300">
-                        {a.score}/{a.total} ({a.percentage}%)
-                      </td>
-                      <td className="py-2.5 pr-3">
-                        <Badge tone={a.passed ? 'success' : 'warning'}>
-                          {a.passed ? 'Passed' : 'Below 80%'}
-                        </Badge>
-                      </td>
-                      <td className="py-2.5 text-right text-ink-500 dark:text-ink-400">
-                        {formatRelative(a.at)}
-                      </td>
+      <Reveal>
+        <Card>
+          <CardHeader
+            title="Test history"
+            subtitle={`${state.attempts.length} attempts recorded`}
+          />
+          <CardBody className="pt-1">
+            {recentAttempts.length === 0 ? (
+              <EmptyState
+                icon={<BarChart3 size={22} />}
+                title="No tests yet"
+                description="Your test attempts, scores and pass results will be listed here."
+              />
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse text-left text-[13px]">
+                  <thead>
+                    <tr className="text-ink-500 dark:text-ink-400">
+                      <th className="pb-2 font-medium">Module</th>
+                      <th className="pb-2 font-medium">Score</th>
+                      <th className="pb-2 font-medium">Result</th>
+                      <th className="pb-2 text-right font-medium">When</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </CardBody>
-      </Card>
-
-      <Card>
-        <CardHeader
-          title="Badges"
-          subtitle={`${state.badges.length} of ${BADGES.length} earned`}
-          icon={<Award size={16} />}
-        />
-        <CardBody className="grid gap-2 pt-1 sm:grid-cols-2">
-          {BADGES.map((badge) => {
-            const earned = state.badges.includes(badge.id)
-            const meta = badgeById(badge.id)
-            return (
-              <div
-                key={badge.id}
-                className={cn(
-                  'flex items-start gap-3 rounded-xl border p-3',
-                  earned
-                    ? 'border-amber-200 bg-amber-50/60 dark:border-amber-900 dark:bg-amber-950/30'
-                    : 'border-ink-200 bg-ink-50 opacity-60 dark:border-ink-800 dark:bg-ink-900/40',
-                )}
-              >
-                <Award
-                  size={16}
-                  className={cn('mt-0.5 shrink-0', earned ? 'text-amber-500' : 'text-ink-400')}
-                />
-                <div>
-                  <p className="text-[13px] font-medium text-ink-900 dark:text-ink-100">
-                    {meta?.name}
-                  </p>
-                  <p className="text-[12px] text-ink-500 dark:text-ink-400">{meta?.description}</p>
-                </div>
+                  </thead>
+                  <tbody>
+                    {recentAttempts.map((a, i) => (
+                      <tr
+                        key={`${a.at}-${i}`}
+                        className="border-t border-ink-200 transition-colors hover:bg-ink-50 dark:border-ink-800 dark:hover:bg-ink-800/40"
+                      >
+                        <td className="py-2.5 pr-3 text-ink-800 dark:text-ink-200">
+                          {a.moduleId}. {moduleById(a.moduleId)?.title}
+                        </td>
+                        <td className="py-2.5 pr-3 tabular-nums text-ink-700 dark:text-ink-300">
+                          {a.score}/{a.total} ({a.percentage}%)
+                        </td>
+                        <td className="py-2.5 pr-3">
+                          <Badge tone={a.passed ? 'success' : 'warning'}>
+                            {a.passed ? 'Passed' : 'Below 80%'}
+                          </Badge>
+                        </td>
+                        <td className="py-2.5 text-right text-ink-500 dark:text-ink-400">
+                          {formatRelative(a.at)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            )
-          })}
-        </CardBody>
-      </Card>
+            )}
+          </CardBody>
+        </Card>
+      </Reveal>
+
+      <Reveal>
+        <Card>
+          <CardHeader
+            title="Badges"
+            subtitle={`${state.badges.length} of ${BADGES.length} earned`}
+            icon={<Award size={16} />}
+          />
+          <CardBody className="grid gap-2 pt-1 sm:grid-cols-2">
+            {BADGES.map((badge) => {
+              const earned = state.badges.includes(badge.id)
+              const meta = badgeById(badge.id)
+              return (
+                <div
+                  key={badge.id}
+                  className={cn(
+                    'flex items-start gap-3 rounded-2xl border p-3.5 transition-all duration-300 ease-spring',
+                    earned
+                      ? 'border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50/40 hover:-translate-y-0.5 hover:shadow-lift dark:border-amber-900 dark:from-amber-950/40 dark:to-ink-900'
+                      : 'border-ink-200 bg-ink-50 opacity-60 grayscale dark:border-ink-800 dark:bg-ink-900/40',
+                  )}
+                >
+                  <Award
+                    size={16}
+                    className={cn('mt-0.5 shrink-0', earned ? 'text-amber-500' : 'text-ink-400')}
+                  />
+                  <div>
+                    <p className="text-[13px] font-medium text-ink-900 dark:text-ink-100">
+                      {meta?.name}
+                    </p>
+                    <p className="text-[12px] text-ink-500 dark:text-ink-400">
+                      {meta?.description}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
+          </CardBody>
+        </Card>
+      </Reveal>
     </div>
   )
 }

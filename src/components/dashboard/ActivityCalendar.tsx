@@ -31,7 +31,10 @@ export function ActivityCalendar() {
   return (
     <div>
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-[13px] font-medium text-ink-800 dark:text-ink-100">
+        <p
+          key={`${view.year}-${view.month}`}
+          className="animate-fade-in text-[13.5px] font-semibold text-ink-800 dark:text-ink-100"
+        >
           {MONTH_NAMES[view.month]} {view.year}
         </p>
         <div className="flex items-center gap-1">
@@ -39,7 +42,7 @@ export function ActivityCalendar() {
             type="button"
             aria-label="Previous month"
             onClick={() => setOffset((o) => o - 1)}
-            className="rounded-md p-1 text-ink-500 hover:bg-ink-100 hover:text-ink-800 dark:hover:bg-ink-800 dark:hover:text-ink-100"
+            className="rounded-lg p-1.5 text-ink-500 transition-colors hover:bg-ink-100 hover:text-ink-800 focus-ring dark:hover:bg-ink-800 dark:hover:text-ink-100"
           >
             <ChevronLeft size={15} />
           </button>
@@ -48,14 +51,14 @@ export function ActivityCalendar() {
             aria-label="Next month"
             disabled={offset >= 0}
             onClick={() => setOffset((o) => Math.min(0, o + 1))}
-            className="rounded-md p-1 text-ink-500 hover:bg-ink-100 hover:text-ink-800 disabled:opacity-30 disabled:hover:bg-transparent dark:hover:bg-ink-800 dark:hover:text-ink-100"
+            className="rounded-lg p-1.5 text-ink-500 transition-colors hover:bg-ink-100 hover:text-ink-800 focus-ring disabled:opacity-30 disabled:hover:bg-transparent dark:hover:bg-ink-800 dark:hover:text-ink-100"
           >
             <ChevronRight size={15} />
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-7 gap-1.5">
+      <div key={`${view.year}-${view.month}`} className="grid animate-fade-in grid-cols-7 gap-1.5">
         {WEEKDAY_LABELS.map((d) => (
           <div
             key={d}
@@ -73,7 +76,7 @@ export function ActivityCalendar() {
               key={key}
               title={`${key}: ${minutes} min studied`}
               className={cn(
-                'aspect-square rounded-md transition-colors',
+                'aspect-square rounded-md transition-[transform,background-color] duration-200 hover:scale-110',
                 intensityClass(minutes),
                 key === todayKey && 'ring-2 ring-brand-500 ring-offset-1 dark:ring-offset-ink-900',
               )}

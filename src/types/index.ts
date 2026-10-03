@@ -114,6 +114,12 @@ export interface Question {
   /** Additional accepted answers for typed responses. */
   acceptable?: string[]
   explanation: string
+  /** Set on AI-generated questions so the UI can label them. */
+  source?: 'ai' | 'static'
+  /** Relative difficulty inside the module (AI-generated questions only). */
+  level?: 'easy' | 'medium' | 'hard'
+  /** Short context label such as "IELTS Task 2" (AI-generated questions only). */
+  context?: string
 }
 
 /* ---------------------------- Progress ---------------------------- */

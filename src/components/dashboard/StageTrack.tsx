@@ -9,14 +9,18 @@ export function StageTrack() {
   const { state } = useProgress()
 
   return (
-    <ol className="space-y-3">
-      {STAGES.map((stage) => {
+    <ol className="space-y-4">
+      {STAGES.map((stage, i) => {
         const { done, total, percentage, status } = stageProgress(state, stage.id)
         return (
-          <li key={stage.id} className="flex items-center gap-3">
+          <li
+            key={stage.id}
+            className="flex animate-slide-in stagger items-center gap-3"
+            style={{ '--i': i } as React.CSSProperties}
+          >
             <span
               className={cn(
-                'flex h-7 w-7 shrink-0 items-center justify-center rounded-lg',
+                'flex h-9 w-9 shrink-0 items-center justify-center rounded-xl',
                 status === 'completed' && 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
                 status === 'in-progress' && 'bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300',
                 status === 'locked' && 'bg-ink-100 text-ink-400 dark:bg-ink-800 dark:text-ink-500',
@@ -25,7 +29,7 @@ export function StageTrack() {
               {status === 'completed' ? (
                 <CheckCircle2 size={15} />
               ) : status === 'in-progress' ? (
-                <Loader size={15} />
+                <Loader size={15} className="animate-spin-slow" />
               ) : (
                 <Lock size={13} />
               )}
@@ -34,7 +38,7 @@ export function StageTrack() {
               <div className="flex items-baseline justify-between gap-2">
                 <p
                   className={cn(
-                    'truncate text-[13px] font-medium',
+                    'truncate text-[13.5px] font-semibold',
                     status === 'locked'
                       ? 'text-ink-500 dark:text-ink-400'
                       : 'text-ink-900 dark:text-ink-100',

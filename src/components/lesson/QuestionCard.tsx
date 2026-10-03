@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Check, X } from 'lucide-react'
+import { useEffect, useState, type CSSProperties } from 'react'
+import { Check, Lightbulb, Sparkles, X } from 'lucide-react'
 import type { Question } from '@/types'
 import { cn } from '@/utils/cn'
 import { isCorrect, QUESTION_TYPE_LABEL } from '@/utils/answers'
@@ -17,6 +17,32 @@ interface Props {
   mode: 'practice' | 'test'
   /** In test mode, set once the test is submitted. */
   revealed?: boolean
+  /** Practice mode: called once when the learner checks this answer. */
+  onChecked?: (correct: boolean) => void
+  className?: string
+  style?: CSSProperties
+}
+
+const LETTERS = ['A', 'B', 'C', 'D', 'E']
+
+const LEVEL_TONE = { easy: 'success', medium: 'warning', hard: 'danger' } as const
+
+/** Renders " ___ " gaps as a visible blank so the carrier sentence reads naturally. */
+function WithBlanks({ text }: { text: string }) {
+  const parts = text.split(/_{3,}/)
+  if (parts.length === 1) return <>{text}</>
+  return (
+    <>
+      {parts.map((part, i) => (
+        <span key={i}>
+          {part}
+          {i < parts.length - 1 ? (
+            <span className="mx-0.5 inline-block w-14 translate-y-[-3px] border-b-2 border-dashed border-brand-400 align-baseline dark:border-brand-500" />
+          ) : null}
+        </span>
+      ))}
+    </>
+  )
 }
 
 function OptionList({
@@ -33,8 +59,8 @@ function OptionList({
   showResult: boolean
 }) {
   return (
-    <div className="mt-4 grid gap-2">
-      {(question.options ?? []).map((option) => {
+    <div className="mt-5 grid gap-2.5" role="radiogroup">
+      {(question.options ?? []).map((option, i) => {
         const selected = value === option
         const correct = option === question.answer
         const state = showResult
@@ -42,7 +68,7 @@ function OptionList({
             ? 'correct'
             : selected
               ? 'wrong'
-              : 'idle'
+              : 'dimmed'
           : selected
             ? 'selected'
             : 'idle'
@@ -51,34 +77,46 @@ function OptionList({
           <button
             key={option}
             type="button"
+            role="radio"
+            aria-checked={selected}
             disabled={disabled}
             onClick={() => onChange(option)}
+            style={{ '--i': i } as CSSProperties}
             className={cn(
-              'flex w-full items-start gap-3 rounded-xl border px-4 py-3 text-left text-[14px] transition-colors',
+              'group flex w-full animate-fade-up stagger items-start gap-3 rounded-xl border px-3.5 py-3 text-left text-[14.5px] leading-6',
+              'transition-[transform,background-color,border-color,box-shadow,opacity] duration-200 ease-spring focus-ring',
               state === 'idle' &&
-                'border-ink-200 bg-white hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:bg-ink-900 dark:hover:border-ink-700 dark:hover:bg-ink-800',
+                'border-ink-200 bg-white hover:-translate-y-px hover:border-brand-300 hover:bg-brand-50/40 hover:shadow-card active:scale-[0.99] dark:border-ink-700/80 dark:bg-ink-900 dark:hover:border-brand-700 dark:hover:bg-brand-950/30',
               state === 'selected' &&
-                'border-brand-500 bg-brand-50 text-brand-900 dark:border-brand-600 dark:bg-brand-950 dark:text-brand-100',
+                'border-brand-500 bg-brand-50 text-brand-950 shadow-[0_0_0_3px_rgba(99,102,241,0.15)] dark:border-brand-500 dark:bg-brand-950/60 dark:text-brand-50',
               state === 'correct' &&
-                'border-emerald-500 bg-emerald-50 text-emerald-900 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-100',
+                'animate-celebrate border-emerald-500 bg-emerald-50 text-emerald-950 shadow-[0_0_0_3px_rgba(16,185,129,0.15)] dark:border-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-50',
               state === 'wrong' &&
-                'border-rose-500 bg-rose-50 text-rose-900 dark:border-rose-700 dark:bg-rose-950 dark:text-rose-100',
-              disabled && 'cursor-default',
+                'animate-shake border-rose-500 bg-rose-50 text-rose-950 dark:border-rose-600 dark:bg-rose-950/60 dark:text-rose-50',
+              state === 'dimmed' && 'border-ink-200 bg-white opacity-55 dark:border-ink-800 dark:bg-ink-900',
+              disabled && 'cursor-default hover:translate-y-0',
             )}
           >
             <span
               className={cn(
-                'mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border',
-                state === 'selected' && 'border-brand-600 bg-brand-600 text-white',
-                state === 'correct' && 'border-emerald-600 bg-emerald-600 text-white',
-                state === 'wrong' && 'border-rose-600 bg-rose-600 text-white',
-                state === 'idle' && 'border-ink-300 dark:border-ink-600',
+                'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-[11.5px] font-bold transition-all duration-200',
+                state === 'idle' &&
+                  'bg-ink-100 text-ink-500 group-hover:bg-brand-100 group-hover:text-brand-700 dark:bg-ink-800 dark:text-ink-400 dark:group-hover:bg-brand-900 dark:group-hover:text-brand-200',
+                state === 'selected' && 'bg-brand-600 text-white',
+                state === 'correct' && 'bg-emerald-600 text-white',
+                state === 'wrong' && 'bg-rose-600 text-white',
+                state === 'dimmed' && 'bg-ink-100 text-ink-400 dark:bg-ink-800',
               )}
             >
-              {state === 'correct' ? <Check size={11} strokeWidth={3} /> : null}
-              {state === 'wrong' ? <X size={11} strokeWidth={3} /> : null}
+              {state === 'correct' ? (
+                <Check size={13} strokeWidth={3} className="animate-pop-in" />
+              ) : state === 'wrong' ? (
+                <X size={13} strokeWidth={3} className="animate-pop-in" />
+              ) : (
+                LETTERS[i]
+              )}
             </span>
-            <span>{option}</span>
+            <span className="pt-px">{option}</span>
           </button>
         )
       })}
@@ -94,6 +132,9 @@ export function QuestionCard({
   onChange,
   mode,
   revealed = false,
+  onChecked,
+  className,
+  style,
 }: Props) {
   const [checked, setChecked] = useState(false)
   const typed = question.type === 'fill-blank' || question.type === 'rewrite'
@@ -104,23 +145,41 @@ export function QuestionCard({
 
   const showResult = mode === 'test' ? revealed : checked
   const correct = isCorrect(question, value)
-  const locked = mode === 'practice' && checked
+  const locked = (mode === 'practice' && checked) || (mode === 'test' && revealed)
+
+  function check() {
+    if (!value || checked) return
+    setChecked(true)
+    onChecked?.(correct)
+  }
 
   return (
-    <div className="card card-pad animate-fade-up">
-      <div className="flex flex-wrap items-center gap-2">
-        <Badge tone="muted">
-          Question {index + 1} of {total}
-        </Badge>
+    <div className={cn('card card-pad', className)} style={style}>
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="mr-1 font-display text-[13px] font-bold tabular-nums text-ink-400 dark:text-ink-500">
+          {String(index + 1).padStart(2, '0')}
+          <span className="font-medium">/{String(total).padStart(2, '0')}</span>
+        </span>
         <Badge tone="neutral">{QUESTION_TYPE_LABEL[question.type]}</Badge>
+        {question.source === 'ai' ? (
+          <Badge tone="ai">
+            <Sparkles size={11} /> AI
+          </Badge>
+        ) : null}
+        {question.level ? (
+          <Badge tone={LEVEL_TONE[question.level]} className="capitalize">
+            {question.level}
+          </Badge>
+        ) : null}
+        {question.context ? <Badge tone="muted">{question.context}</Badge> : null}
       </div>
 
-      <p className="mt-3 text-[15px] font-medium leading-6 text-ink-900 dark:text-ink-50">
-        {question.question}
+      <p className="mt-3.5 text-[15.5px] font-semibold leading-7 text-ink-900 dark:text-ink-50">
+        <WithBlanks text={question.question} />
       </p>
 
       {question.prompt ? (
-        <p className="mt-3 rounded-lg bg-ink-100 px-3 py-2 font-serif text-[15px] leading-6 text-ink-800 dark:bg-ink-800/70 dark:text-ink-100">
+        <p className="mt-3 rounded-xl border-l-4 border-brand-400 bg-ink-50 px-4 py-3 font-serif text-[15.5px] leading-7 text-ink-800 dark:border-brand-600 dark:bg-ink-800/50 dark:text-ink-100">
           {question.prompt}
         </p>
       ) : null}
@@ -129,16 +188,21 @@ export function QuestionCard({
         <input
           type="text"
           value={value}
-          disabled={locked || (mode === 'test' && revealed)}
+          disabled={locked}
           onChange={(e) => onChange(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && mode === 'practice') check()
+          }}
           placeholder="Type your answer"
           autoComplete="off"
+          autoCapitalize="off"
+          spellCheck={false}
           className={cn(
-            'mt-4 w-full rounded-xl border px-4 py-2.5 text-[14px] outline-none transition-colors',
-            'border-ink-200 bg-white placeholder:text-ink-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100',
-            'dark:border-ink-700 dark:bg-ink-900 dark:placeholder:text-ink-500 dark:focus:ring-brand-950',
-            showResult && correct && 'border-emerald-500 dark:border-emerald-600',
-            showResult && !correct && 'border-rose-500 dark:border-rose-600',
+            'mt-5 w-full rounded-xl border px-4 py-3 text-[15px] outline-none transition-[border-color,box-shadow] duration-200',
+            'border-ink-200 bg-white placeholder:text-ink-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(99,102,241,0.15)]',
+            'dark:border-ink-700 dark:bg-ink-900 dark:placeholder:text-ink-500',
+            showResult && correct && 'border-emerald-500 bg-emerald-50/50 dark:border-emerald-600 dark:bg-emerald-950/30',
+            showResult && !correct && 'animate-shake border-rose-500 bg-rose-50/50 dark:border-rose-600 dark:bg-rose-950/30',
           )}
         />
       ) : (
@@ -146,47 +210,67 @@ export function QuestionCard({
           question={question}
           value={value}
           onChange={(v) => {
-            if (locked || (mode === 'test' && revealed)) return
-            onChange(v)
+            if (!locked) onChange(v)
           }}
-          disabled={locked || (mode === 'test' && revealed)}
+          disabled={locked}
           showResult={showResult}
         />
       )}
 
       {mode === 'practice' && !checked ? (
-        <Button
-          size="sm"
-          variant="secondary"
-          className="mt-4"
-          disabled={!value}
-          onClick={() => setChecked(true)}
-        >
-          Check answer
-        </Button>
-      ) : null}
-
-      {showResult ? (
-        <div
-          className={cn(
-            'mt-4 rounded-xl border px-4 py-3 text-[13px] leading-6 animate-fade-up',
-            correct
-              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-100'
-              : 'border-rose-200 bg-rose-50 text-rose-900 dark:border-rose-900 dark:bg-rose-950/60 dark:text-rose-100',
-          )}
-        >
-          <p className="flex items-center gap-1.5 font-semibold">
-            {correct ? <Check size={14} strokeWidth={3} /> : <X size={14} strokeWidth={3} />}
-            {correct ? 'Correct' : 'Not quite'}
-          </p>
-          {!correct ? (
-            <p className="mt-1">
-              Answer: <span className="font-medium">{question.answer}</span>
-            </p>
+        <div className="mt-4 flex items-center gap-3">
+          <Button size="sm" variant={value ? 'primary' : 'secondary'} disabled={!value} onClick={check}>
+            Check answer
+          </Button>
+          {!value ? (
+            <span className="text-[12px] text-ink-400 dark:text-ink-500">
+              {typed ? 'Type an answer first' : 'Pick an option first'}
+            </span>
           ) : null}
-          <p className="mt-1 opacity-90">{question.explanation}</p>
         </div>
       ) : null}
+
+      {/* Grid-rows trick animates the panel's height open without measuring it. */}
+      <div
+        className={cn(
+          'grid transition-[grid-template-rows,opacity] duration-500 ease-spring',
+          showResult ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
+        )}
+      >
+        <div className="overflow-hidden">
+          {showResult ? (
+            <div
+              className={cn(
+                'mt-4 rounded-xl border px-4 py-3.5 text-[13.5px]',
+                correct
+                  ? 'border-emerald-200 bg-gradient-to-br from-emerald-50 to-white text-emerald-950 dark:border-emerald-900 dark:from-emerald-950/60 dark:to-ink-900 dark:text-emerald-50'
+                  : 'border-rose-200 bg-gradient-to-br from-rose-50 to-white text-rose-950 dark:border-rose-900 dark:from-rose-950/60 dark:to-ink-900 dark:text-rose-50',
+              )}
+            >
+              <p className="flex items-center gap-2 font-bold">
+                <span
+                  className={cn(
+                    'flex h-5 w-5 animate-pop-in items-center justify-center rounded-full text-white',
+                    correct ? 'bg-emerald-500' : 'bg-rose-500',
+                  )}
+                >
+                  {correct ? <Check size={12} strokeWidth={3} /> : <X size={12} strokeWidth={3} />}
+                </span>
+                {correct ? 'Correct, well done!' : 'Not quite'}
+              </p>
+              {!correct ? (
+                <p className="mt-2 leading-6">
+                  Correct answer: <span className="font-semibold">{question.answer}</span>
+                </p>
+              ) : null}
+              <p className="bn-text mt-2 flex gap-2 opacity-90">
+                <Lightbulb size={14} className="mt-1 shrink-0 opacity-70" />
+                <span>{question.explanation}</span>
+              </p>
+            </div>
+          ) : null}
+        </div>
+      </div>
     </div>
   )
 }

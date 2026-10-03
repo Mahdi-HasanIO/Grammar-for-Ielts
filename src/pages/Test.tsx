@@ -34,14 +34,21 @@ export function TestPage() {
 
   const questions = useMemo(() => getTestQuestions(moduleId), [moduleId])
   const [answers, setAnswers] = useState<Record<string, string>>({})
-  const [index, setIndex] = useState(0)
+  const [index, setIndexRaw] = useState(0)
+  /** Which way the last navigation went, so the next card slides in from that side. */
+  const [direction, setDirection] = useState<'forward' | 'back'>('forward')
   const [result, setResult] = useState<TestResultSummary | null>(null)
 
   useEffect(() => {
     setAnswers({})
-    setIndex(0)
+    setIndexRaw(0)
     setResult(null)
   }, [moduleId])
+
+  function goTo(target: number) {
+    setDirection(target >= index ? 'forward' : 'back')
+    setIndexRaw(target)
+  }
 
   if (!module) return <Navigate to="/course" replace />
   if (getModuleStatus(state, moduleId) === 'locked') {
@@ -61,7 +68,8 @@ export function TestPage() {
 
   function retake() {
     setAnswers({})
-    setIndex(0)
+    setDirection('forward')
+    setIndexRaw(0)
     setResult(null)
     window.scrollTo({ top: 0 })
   }
@@ -73,22 +81,29 @@ export function TestPage() {
 
     return (
       <div className="space-y-6">
-        <Card className="overflow-hidden">
+        <Card className="animate-scale-in overflow-hidden">
           <div
             className={cn(
-              'px-5 py-6 sm:px-6',
+              'relative overflow-hidden px-5 py-7 sm:px-7',
               result.passed
-                ? 'bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-950/60 dark:to-ink-900'
-                : 'bg-gradient-to-br from-amber-50 to-white dark:from-amber-950/60 dark:to-ink-900',
+                ? 'bg-gradient-to-br from-emerald-50 via-white to-brand-50/50 dark:from-emerald-950/60 dark:via-ink-900 dark:to-brand-950/30'
+                : 'bg-gradient-to-br from-amber-50 via-white to-orange-50/40 dark:from-amber-950/50 dark:via-ink-900 dark:to-ink-900',
             )}
           >
-            <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+            <div
+              className={cn(
+                'pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full blur-3xl',
+                result.passed ? 'bg-emerald-400/20' : 'bg-amber-400/20',
+              )}
+            />
+            <div className="relative flex flex-col items-start gap-5 sm:flex-row sm:items-center">
               <div className="animate-pop-in">
                 <ProgressRing
                   value={result.percentage}
                   label={`${result.score}/${result.total}`}
                   sublabel={`${result.percentage}%`}
-                  size={104}
+                  size={116}
+                  stroke={9}
                 />
               </div>
               <div className="min-w-0">
@@ -103,7 +118,7 @@ export function TestPage() {
                     </>
                   )}
                 </Badge>
-                <h1 className="text-xl font-semibold tracking-tight text-ink-900 dark:text-ink-50">
+                <h1 className="text-[24px] font-extrabold tracking-tight text-ink-900 dark:text-ink-50">
                   {result.passed
                     ? `Module ${module.id} completed`
                     : `${result.percentage}% - the pass mark is ${PASS_THRESHOLD}%`}
@@ -117,7 +132,7 @@ export function TestPage() {
                 </p>
 
                 {result.passed && result.unlockedModuleId && nextModule ? (
-                  <p className="mt-3 inline-flex animate-fade-up items-center gap-1.5 rounded-lg bg-white px-3 py-2 text-[13px] font-medium text-emerald-700 shadow-card dark:bg-ink-900 dark:text-emerald-300">
+                  <p className="mt-4 inline-flex animate-pop-in items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-[13px] font-semibold text-emerald-700 shadow-lift ring-1 ring-emerald-200 [animation-delay:400ms] dark:bg-ink-900 dark:text-emerald-300 dark:ring-emerald-900">
                     <Unlock size={14} /> Module {nextModule.id} unlocked
                   </p>
                 ) : null}
@@ -139,16 +154,16 @@ export function TestPage() {
                 </Button>
               </Link>
             ) : null}
-            <span className="ml-auto text-[12px] text-ink-500 dark:text-ink-400">
+            <span className="ml-auto animate-pop-in rounded-full bg-gradient-to-r from-brand-500 to-accent-500 px-3 py-1 text-[12px] font-bold text-white shadow-glow [animation-delay:600ms]">
               +{result.xpEarned} XP
             </span>
           </CardBody>
         </Card>
 
         {result.newBadges.length ? (
-          <Card>
+          <Card className="animate-fade-up [animation-delay:200ms]">
             <CardBody className="flex flex-wrap items-center gap-3">
-              <PartyPopper size={18} className="text-amber-500" />
+              <PartyPopper size={20} className="animate-float text-amber-500" />
               <p className="text-[14px] font-medium">New badge unlocked</p>
               <div className="flex flex-wrap gap-2">
                 {result.newBadges.map((b) => {
@@ -166,7 +181,7 @@ export function TestPage() {
         ) : null}
 
         <section>
-          <h2 className="mb-3 text-[17px] font-semibold tracking-tight">
+          <h2 className="mb-4 text-[19px] font-extrabold tracking-tight">
             {wrong.length === 0
               ? 'Every answer was correct'
               : `Review ${wrong.length} incorrect answer${wrong.length === 1 ? '' : 's'}`}
@@ -177,9 +192,11 @@ export function TestPage() {
             </p>
           ) : (
             <div className="space-y-3">
-              {wrong.map((q) => (
+              {wrong.map((q, i) => (
                 <QuestionCard
                   key={q.id}
+                  className="animate-fade-up stagger"
+                  style={{ '--i': i } as React.CSSProperties}
                   question={q}
                   index={questions.indexOf(q)}
                   total={questions.length}
@@ -201,19 +218,27 @@ export function TestPage() {
     <div className="mx-auto max-w-2xl">
       <Link
         to={`/module/${module.id}`}
-        className="mb-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-ink-500 hover:text-ink-800 dark:text-ink-400 dark:hover:text-ink-100"
+        className="group mb-5 inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink-500 transition-colors hover:text-brand-700 dark:text-ink-400 dark:hover:text-brand-300"
       >
-        <ArrowLeft size={14} /> Back to lesson
+        <ArrowLeft size={14} className="transition-transform duration-200 group-hover:-translate-x-0.5" />
+        Back to lesson
       </Link>
 
-      <div className="mb-5">
-        <p className="label-xs">Module {module.id} test</p>
-        <h1 className="mt-1 text-xl font-semibold tracking-tight text-ink-900 dark:text-ink-50">
-          {module.title}
-        </h1>
-        <div className="mt-3 flex items-center gap-3">
+      <div className="mb-6 rounded-3xl border border-ink-200/80 bg-white p-5 shadow-card dark:border-ink-800 dark:bg-ink-900">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="label-xs">Module {module.id} test</p>
+            <h1 className="mt-1 text-[22px] font-extrabold tracking-tight text-ink-900 dark:text-ink-50">
+              {module.title}
+            </h1>
+          </div>
+          <span className="shrink-0 rounded-full bg-brand-50 px-3 py-1 text-[12px] font-bold tabular-nums text-brand-700 dark:bg-brand-950 dark:text-brand-200">
+            Pass {PASS_THRESHOLD}%
+          </span>
+        </div>
+        <div className="mt-4 flex items-center gap-3">
           <ProgressBar value={(answeredCount / questions.length) * 100} className="flex-1" />
-          <span className="shrink-0 text-[12px] tabular-nums text-ink-500 dark:text-ink-400">
+          <span className="shrink-0 text-[12px] font-semibold tabular-nums text-ink-500 dark:text-ink-400">
             {answeredCount}/{questions.length} answered
           </span>
         </div>
@@ -221,6 +246,7 @@ export function TestPage() {
 
       <QuestionCard
         key={current.id}
+        className={direction === 'forward' ? 'animate-slide-in-right' : 'animate-slide-in-left'}
         question={current}
         index={index}
         total={questions.length}
@@ -233,7 +259,7 @@ export function TestPage() {
         <Button
           variant="secondary"
           disabled={index === 0}
-          onClick={() => setIndex((i) => Math.max(0, i - 1))}
+          onClick={() => goTo(Math.max(0, index - 1))}
         >
           <ArrowLeft size={15} /> Previous
         </Button>
@@ -243,7 +269,7 @@ export function TestPage() {
             Submit test
           </Button>
         ) : (
-          <Button onClick={() => setIndex((i) => Math.min(questions.length - 1, i + 1))}>
+          <Button onClick={() => goTo(Math.min(questions.length - 1, index + 1))}>
             Next <ArrowRight size={15} />
           </Button>
         )}
@@ -256,20 +282,20 @@ export function TestPage() {
       ) : null}
 
       {/* Question jump strip */}
-      <div className="mt-6 flex flex-wrap gap-1.5">
+      <div className="mt-7 flex flex-wrap justify-center gap-2">
         {questions.map((q, i) => (
           <button
             key={q.id}
             type="button"
-            onClick={() => setIndex(i)}
+            onClick={() => goTo(i)}
             aria-label={`Go to question ${i + 1}`}
             className={cn(
-              'h-8 w-8 rounded-lg text-[12px] font-medium tabular-nums transition-colors',
+              'h-9 w-9 rounded-xl text-[12.5px] font-bold tabular-nums transition-all duration-200 ease-spring focus-ring',
               i === index
-                ? 'bg-brand-600 text-white'
+                ? 'scale-110 bg-gradient-to-br from-brand-500 to-accent-600 text-white shadow-glow'
                 : answers[q.id]
-                  ? 'bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300'
-                  : 'bg-ink-100 text-ink-500 hover:bg-ink-200 dark:bg-ink-800 dark:text-ink-400 dark:hover:bg-ink-700',
+                  ? 'bg-brand-100 text-brand-700 hover:scale-105 dark:bg-brand-950 dark:text-brand-300'
+                  : 'bg-white text-ink-500 ring-1 ring-inset ring-ink-200 hover:scale-105 hover:bg-ink-50 dark:bg-ink-900 dark:text-ink-400 dark:ring-ink-700 dark:hover:bg-ink-800',
             )}
           >
             {i + 1}

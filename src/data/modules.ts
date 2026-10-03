@@ -6,35 +6,35 @@ export const STAGES: Stage[] = [
     name: 'Foundation',
     tagline: 'ভুলমুক্ত বাক্য গড়ে তুলুন',
     description:
-      'মূল বাক্যের উপর নিয়ন্ত্রণ। Band কমিয়ে দেওয়া বেশিরভাগ ভুল এখানেই থাকে, উন্নত ব্যাকরণে নয়।',
+      'সাধারণ বাক্য নির্ভুলভাবে লেখার দক্ষতা। Band কমে যাওয়ার বেশিরভাগ ভুল আসলে এখানেই হয়, কঠিন grammar-এ নয়।',
   },
   {
     id: 2,
     name: 'Core Grammar',
-    tagline: 'Verb, Voice ও গঠন',
+    tagline: 'Verb, Voice আর বাক্যের গঠন',
     description:
-      'যে ব্যাকরণ প্রায় প্রতিটি অনুচ্ছেদেই লাগে: Tense, Modality, Voice এবং Verb ও Preposition যে গঠন দাবি করে।',
+      'যে grammar প্রায় প্রতিটি paragraph-এ লাগে: Tense, Modal, Voice, আর কোন Verb বা Preposition-এর পরে কোন গঠন বসে।',
   },
   {
     id: 3,
     name: 'Complex Sentence Control',
-    tagline: 'ধারণাগুলো নির্ভুলভাবে জোড়া দিন',
+    tagline: 'আইডিয়াগুলো নির্ভুলভাবে জুড়ুন',
     description:
-      'নিয়ন্ত্রণ না হারিয়ে Clause জোড়া দেওয়া। এখানেই বৈচিত্র্য আর নির্ভুলতাকে একসঙ্গে কাজ করতে হয়।',
+      'ভুল না করে একাধিক Clause জোড়া লাগানো। এখানে বাক্যে বৈচিত্র্যও আনতে হবে, আবার নির্ভুলও থাকতে হবে।',
   },
   {
     id: 4,
     name: 'Advanced Grammar',
-    tagline: 'Academic ভঙ্গিতে লিখুন',
+    tagline: 'Academic স্টাইলে লিখুন',
     description:
-      'সংকোচন, অবস্থান ও প্রবাহ। এই গঠনগুলোই একটি মোটামুটি ভালো লেখাকে সত্যিকারের জোরালো লেখায় বদলে দেয়।',
+      'কম শব্দে বেশি কথা বলা, দাবি মেপে করা আর লেখার স্বাভাবিক flow। এই গঠনগুলোই মোটামুটি ভালো একটা লেখাকে সত্যিকারের শক্তিশালী লেখায় পরিণত করে।',
   },
   {
     id: 5,
     name: 'Professional Writing',
-    tagline: 'স্পষ্টতা ও tone-এর জন্য সম্পাদনা',
+    tagline: 'স্পষ্টতা আর tone ঠিক করতে editing',
     description:
-      'নির্ভুল ব্যাকরণকে পরীক্ষার ও পেশাগত কাজের উপযোগী স্পষ্ট, পরিমিত লেখায় রূপ দেওয়া।',
+      'নির্ভুল grammar-কে এমন পরিষ্কার, গোছানো লেখায় রূপ দেওয়া, যা পরীক্ষায় আর কাজের জায়গায় দুই জায়গাতেই চলে।',
   },
 ]
 
@@ -46,14 +46,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Clause Anatomy & Word Order',
     stage: 1,
     difficulty: 'Elementary',
-    summary: 'প্রতিটি Clause-এ Subject ও Verb থাকতে হবে, আর সঠিক ক্রমে।',
+    summary: 'প্রতিটি Clause-এ Subject আর Verb থাকতেই হবে, তাও সঠিক ক্রমে।',
     estimatedMinutes: 12,
     topics: ['Subject', 'Verb', 'Object', 'Complement', 'Adverbial', 'SVO order', 'Dummy it'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'Subject বাদ পড়া বা দুইবার বসানো Clause পরীক্ষকের চোখে একদম প্রাথমিক ভুল হিসেবে ধরা পড়ে। Band 8-এর জন্য বেশিরভাগ বাক্য ভুলমুক্ত থাকতে হয়, তাই সবার আগে এই জায়গাটি পাকা করুন।',
+        'Subject বাদ পড়লে বা দুইবার বসলে examiner সেটাকে একেবারে basic ভুল হিসেবে ধরেন। Band 8 পেতে হলে বেশিরভাগ বাক্য ভুলমুক্ত হতে হয়, তাই সবার আগে এই জায়গাটা পাকা করে নিন।',
     },
   },
   {
@@ -62,14 +62,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Subject-Verb Agreement & Noun Number',
     stage: 1,
     difficulty: 'Elementary',
-    summary: 'Subject যত লম্বাই হোক, Verb মেলাতে হবে আসল Subject-এর সঙ্গে।',
+    summary: 'Subject যত লম্বাই হোক, Verb মিলবে আসল Subject-এর সঙ্গেই।',
     estimatedMinutes: 14,
     topics: ['Singular/plural', 'Long subjects', 'There is/are', 'Uncountable nouns', 'Collective nouns', 'A number of'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'Task 2 essay-তে Agreement-এর ভুলই সবচেয়ে বেশিবার ঘটে। পুরো লেখাজুড়ে বারবার ঘটে বলে পরীক্ষক একে মাঝেমধ্যের ভুল নয়, বরং ধারাবাহিক দুর্বলতা হিসেবে দেখেন।',
+        'Task 2 essay-তে সবচেয়ে বেশি যে ভুলটা হয়, সেটা Agreement-এর ভুল। পুরো লেখায় বারবার হয় বলে examiner এটাকে হঠাৎ হয়ে যাওয়া ভুল না ভেবে একটা স্থায়ী দুর্বলতা হিসেবেই দেখেন।',
     },
   },
   {
@@ -78,14 +78,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Articles & Determiners',
     stage: 1,
     difficulty: 'Intermediate',
-    summary: 'কখন a বসবে, কখন the, আর কখন কিছুই বসবে না।',
+    summary: 'কখন a বসবে, কখন the, আর কখন কোনোটাই বসবে না।',
     estimatedMinutes: 18,
     topics: ['a / an', 'the', 'Zero article', 'Countable vs uncountable', 'Generic reference', 'Quantifiers'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'Article-এর ভুল একা খুব বড় ক্ষতি করে না, কিন্তু এটি বারবার ঘটে। এক লেখায় ডজনখানেক এমন ভুল থাকলে সেটিকে আর বেশিরভাগ বাক্য ভুলমুক্ত বলা যায় না, অথচ Band 8-এ সেটিই দরকার।',
+        'একটা Article-এর ভুলে খুব বেশি ক্ষতি হয় না, কিন্তু এই ভুল বারবার হয়। এক লেখায় ডজনখানেক এমন ভুল থাকলে আর বলা যায় না যে বেশিরভাগ বাক্য ভুলমুক্ত, অথচ Band 8-এর জন্য ঠিক সেটাই দরকার।',
     },
   },
   {
@@ -94,14 +94,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Pronoun Reference',
     stage: 1,
     difficulty: 'Intermediate',
-    summary: 'প্রতিটি Pronoun কাকে বোঝাচ্ছে তা স্পষ্ট রাখুন।',
+    summary: 'প্রতিটি Pronoun কাকে বোঝাচ্ছে, সেটা যেন পরিষ্কার থাকে।',
     estimatedMinutes: 12,
     topics: ['Agreement', 'Antecedents', 'it / they / this', 'Dummy it', 'Existential there', 'Ambiguity'],
     ielts: {
       importance: 'High',
       priority: 'Essential for Band 8',
       note:
-        'অস্পষ্ট Pronoun-এ দুইভাবে নম্বর কমে: একবার Grammar-এ, আরেকবার Coherence-এ, কারণ পাঠককে থেমে ভাবতে হয় they আসলে কাদের বোঝাচ্ছে।',
+        'অস্পষ্ট Pronoun-এর কারণে দুই জায়গায় নম্বর কাটা যায়: Grammar-এ আর Coherence-এ। কারণ পাঠককে থেমে ভাবতে হয়, they আসলে কাদের কথা বলছে।',
     },
   },
   {
@@ -110,14 +110,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Sentence Boundaries & Punctuation',
     stage: 1,
     difficulty: 'Intermediate',
-    summary: 'একটি বাক্য ঠিক কোথায় শুরু আর কোথায় শেষ, তা বুঝে নিন।',
+    summary: 'একটা বাক্য ঠিক কোথায় শুরু আর কোথায় শেষ, সেটা বুঝে নিন।',
     estimatedMinutes: 16,
     topics: ['Independent clauses', 'Fragments', 'Run-ons', 'Comma splices', 'Semicolons', 'however / therefore'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'however ও therefore-এর আগে comma splice খুব সাধারণ একটি ভুল এবং এটি ঠিক করা সহজ। বাক্যের সীমানা পরিষ্কার থাকলে আপনার বাকি লেখাটুকুও অনেক বেশি নিয়ন্ত্রিত দেখায়।',
+        'however বা therefore-এর আগে শুধু কমা দিয়ে দুটো বাক্য জোড়া (comma splice) খুব কমন ভুল, আর ঠিক করাও সহজ। বাক্য কোথায় শেষ হচ্ছে সেটা পরিষ্কার থাকলে পুরো লেখাটাই অনেক গোছানো লাগে।',
     },
   },
 
@@ -128,14 +128,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Tense & Aspect',
     stage: 2,
     difficulty: 'Intermediate',
-    summary: 'একটি Tense বেছে নিন, তারপর সেটি ধরে রাখুন।',
+    summary: 'একটা Tense বেছে নিন, তারপর সেটাতেই থাকুন।',
     estimatedMinutes: 18,
     topics: ['Present simple', 'Past simple', 'Present perfect', 'Past perfect', 'Future forms', 'Consistency'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'Task 1-এ চার্টের শিরোনাম দেখে সময়কাল বুঝে নেওয়াই আসল কাজ। Task 2 মূলত Present simple-এ লেখা হয়। এক অনুচ্ছেদের ভেতরে ব্যাখ্যাহীন Tense বদল স্পষ্টভাবে চোখে পড়ে।',
+        'Task 1-এ চার্টের title দেখে সময়টা কখনকার, সেটা বোঝাই আসল কাজ। Task 2 মূলত Present simple-এ লেখা হয়। একই paragraph-এ কারণ ছাড়া Tense বদলালে সেটা সহজেই চোখে পড়ে।',
     },
   },
   {
@@ -144,14 +144,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Modal Verbs',
     stage: 2,
     difficulty: 'Intermediate',
-    summary: 'নিশ্চয়তা, সম্ভাবনা ও বাধ্যবাধকতা সঠিকভাবে প্রকাশ করুন।',
+    summary: 'কতটা নিশ্চিত, কতটা সম্ভব আর কতটা জরুরি, সেটা ঠিকঠাক বোঝান।',
     estimatedMinutes: 14,
     topics: ['can / could', 'may / might', 'should', 'must', 'would', 'Epistemic vs deontic'],
     ielts: {
       importance: 'High',
       priority: 'Essential for Band 8',
       note:
-        'Task 2-তে সুপারিশ ও ভবিষ্যদ্বাণী পুরোটাই Modal-এর উপর নির্ভরশীল। এগুলো আপনাকে অতিরঞ্জন ছাড়াই যুক্তি দিতে সাহায্য করে, যা Module 19-এর hedging-এর ভিত্তি।',
+        'Task 2-তে পরামর্শ দেওয়া বা ভবিষ্যতের কথা বলা পুরোটাই Modal দিয়ে হয়। Modal থাকলে বাড়িয়ে না বলেও জোরালো যুক্তি দেওয়া যায়, আর এটাই Module 19-এর hedging-এর ভিত্তি।',
     },
   },
   {
@@ -160,14 +160,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Passive Voice',
     stage: 2,
     difficulty: 'Intermediate',
-    summary: 'কর্তা অজানা বা অপ্রয়োজনীয় হলে ফোকাস বদলে দিন।',
+    summary: 'কে কাজটা করেছে তা অজানা বা অদরকারি হলে ফোকাস বদলে দিন।',
     estimatedMinutes: 16,
     topics: ['Basic passive', 'Passive across tenses', 'Modal + passive', 'Agent omission', 'It is argued that'],
     ielts: {
       importance: 'High',
       priority: 'High-value enhancement',
       note:
-        'Task 1-এর process এবং Task 2-এর নৈর্ব্যক্তিক দাবিতে এটি কাজে লাগে। এটি ফোকাস বদলানোর কৌশল, পাণ্ডিত্য দেখানোর উপায় নয়; অতিরিক্ত passive স্পষ্টতা কমিয়ে দেয়।',
+        'Task 1-এর process diagram আর Task 2-এর নৈর্ব্যক্তিক (impersonal) বক্তব্যে এটা খুব কাজে লাগে। Passive হলো ফোকাস বদলানোর একটা কৌশল, ভারী শোনানোর উপায় নয়; বেশি passive দিলে লেখা উল্টো অস্পষ্ট হয়ে যায়।',
     },
   },
   {
@@ -176,14 +176,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Verb Complementation',
     stage: 2,
     difficulty: 'Upper-Intermediate',
-    summary: 'কোন Verb-এর পরে কোন গঠন বসে তা শিখে নিন।',
+    summary: 'কোন Verb-এর পরে কোন গঠন বসে, সেটা শিখে নিন।',
     estimatedMinutes: 18,
     topics: ['verb + gerund', 'verb + infinitive', 'verb + object + infinitive', 'that-clauses', 'preposition + gerund'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'suggest to do বা allow to access-এর মতো ভুলকে শব্দভাণ্ডারের নয়, ব্যাকরণের ভুল হিসেবে গণনা করা হয়, আর essay-র সবচেয়ে প্রচলিত Verb-গুলোতেই এগুলো বারবার ঘটে।',
+        'suggest to do বা allow to access-এর মতো ভুল vocabulary-র নয়, grammar-এর ভুল হিসেবেই ধরা হয়। আর essay-তে সবচেয়ে বেশি ব্যবহৃত Verb-গুলোতেই এই ভুল বারবার হয়।',
     },
   },
   {
@@ -192,14 +192,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Prepositional Patterns',
     stage: 2,
     difficulty: 'Upper-Intermediate',
-    summary: 'Academic Noun ও Verb-এর সঙ্গে কোন Preposition বসে তা ঠিক করুন।',
+    summary: 'Academic Noun আর Verb-এর সঙ্গে কোন Preposition বসে, সেটা ঠিক করে নিন।',
     estimatedMinutes: 15,
     topics: ['increase in', 'impact on', 'access to', 'result in', 'rise by / to', 'peak at'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'Task 1-এর পুরো বর্ণনাই এই গঠনগুলোর উপর দাঁড়ানো। rose by আর rose to উল্টে গেলে আপনি আসলে ভুল সংখ্যাই রিপোর্ট করে ফেলেন।',
+        'Task 1-এর পুরো বর্ণনাটাই এই গঠনগুলোর উপর নির্ভর করে। rose by আর rose to গুলিয়ে ফেললে আপনি আসলে ভুল সংখ্যাই লিখে ফেলবেন।',
     },
   },
   {
@@ -208,14 +208,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Comparison & Quantity',
     stage: 2,
     difficulty: 'Upper-Intermediate',
-    summary: 'সংখ্যা নির্ভুলভাবে তুলনা করুন এবং প্রকাশে বৈচিত্র্য আনুন।',
+    summary: 'সংখ্যা নির্ভুলভাবে তুলনা করুন, আর একই কথা নানাভাবে বলুন।',
     estimatedMinutes: 18,
     topics: ['Comparatives', 'Superlatives', 'as...as', 'twice as many', 'Percentages', 'Fractions', 'sharp / slight'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'Academic Task 1 প্রায় পুরোটাই তুলনা। গুণিতক ও ভগ্নাংশ নির্ভুল হলে শুধু ব্যাকরণ নয়, Task Achievement-ও সুরক্ষিত থাকে।',
+        'Academic Task 1 প্রায় পুরোটাই তুলনা। twice, three times বা half-এর মতো গুণ আর ভগ্নাংশ ঠিকঠাক লিখলে শুধু grammar নয়, Task Achievement-এর নম্বরও বাঁচে।',
     },
   },
 
@@ -226,14 +226,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Coordination & Subordination',
     stage: 3,
     difficulty: 'Upper-Intermediate',
-    summary: 'অর্থ অনুযায়ী Clause জোড়া দিন, আর কখনো দুটি connector নয়।',
+    summary: 'অর্থ বুঝে Clause জোড়া দিন, আর একসঙ্গে কখনো দুটো connector নয়।',
     estimatedMinutes: 18,
     topics: ['and / but / so', 'because', 'although', 'whereas', 'despite', 'therefore', 'however'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'Band 7 ও তার উপরে complex sentence লাগে, তবে কেবল নিয়ন্ত্রিত হলেই। Although... but... সেই চিরচেনা ভুল, যা একটি ভালো বাক্যকেও নষ্ট করে দেয়।',
+        'Band 7 বা তার বেশি পেতে complex sentence লাগে, তবে সেগুলো নির্ভুল হতে হবে। Although... but... হলো সেই পরিচিত ভুল, যেটা ভালো একটা বাক্যকেও নষ্ট করে দেয়।',
     },
   },
   {
@@ -242,14 +242,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Relative Clauses',
     stage: 3,
     difficulty: 'Upper-Intermediate',
-    summary: 'নতুন বাক্য শুরু না করেই Noun-এর সঙ্গে তথ্য যোগ করুন।',
+    summary: 'নতুন বাক্য না লিখেই Noun সম্পর্কে বাড়তি তথ্য যোগ করুন।',
     estimatedMinutes: 18,
     topics: ['who / which / that', 'whose', 'where / when', 'Defining vs non-defining', 'preposition + which', 'Reduction'],
     ielts: {
       importance: 'Very High',
       priority: 'Essential for Band 8',
       note:
-        'জটিল গঠন দেখানোর সবচেয়ে নির্ভরযোগ্য উপায় এটিই। Non-defining clause-এ কমা আর বাড়তি Pronoun-এর ভুল, এই দুটি ঠিক রাখাই মূল কাজ।',
+        'Complex গঠন দেখানোর সবচেয়ে নিরাপদ উপায় এটাই। মূল কাজ দুটো: Non-defining clause-এ কমা ঠিক রাখা, আর বাড়তি Pronoun না বসানো।',
     },
   },
   {
@@ -258,14 +258,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Noun Clauses & Extraposition',
     stage: 3,
     difficulty: 'Upper-Intermediate',
-    summary: 'পুরো একটি Clause-কে Subject বা Object হিসেবে ব্যবহার করুন।',
+    summary: 'পুরো একটা Clause-কে Subject বা Object হিসেবে ব্যবহার করুন।',
     estimatedMinutes: 16,
     topics: ['that-clauses', 'whether', 'wh-clauses', 'Embedded questions', 'It is clear that'],
     ielts: {
       importance: 'High',
       priority: 'Essential for Band 8',
       note:
-        'যুক্তি উপস্থাপন ও মূল্যায়ন পুরোপুরি এগুলোর উপর নির্ভর করে। Embedded question-এর শব্দক্রমে ভালো শিক্ষার্থীরাও প্রায়ই ভুল করেন।',
+        'যুক্তি দেওয়া আর মতামত জানানো, দুটোই এগুলোর উপর নির্ভর করে। Embedded question-এর word order-এ ভালো শিক্ষার্থীরাও প্রায়ই ভুল করেন।',
     },
   },
   {
@@ -274,14 +274,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Conditionals',
     stage: 3,
     difficulty: 'Upper-Intermediate',
-    summary: 'বাস্তব ও কাল্পনিক, দুই ধরনের ফলাফল নিয়েই যুক্তি দিন।',
+    summary: 'বাস্তব আর কাল্পনিক, দুই ধরনের ফলাফল নিয়েই যুক্তি দিন।',
     estimatedMinutes: 16,
     topics: ['Zero conditional', 'First conditional', 'Second conditional', 'unless', 'provided that', 'as long as'],
     ielts: {
       importance: 'High',
       priority: 'High-value enhancement',
       note:
-        'সমাধান বিষয়ক অনুচ্ছেদ Conditional-এর উপরেই দাঁড়ায়: If governments invested in..., congestion would fall. Mixed ও third conditional বাড়তি সুবিধা, বাধ্যতামূলক নয়।',
+        'সমাধান নিয়ে লেখা paragraph মূলত Conditional দিয়েই চলে: If governments invested in..., congestion would fall. Mixed আর third conditional থাকলে ভালো, কিন্তু বাধ্যতামূলক নয়।',
     },
   },
   {
@@ -290,14 +290,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Parallelism',
     stage: 3,
     difficulty: 'Upper-Intermediate',
-    summary: 'তালিকার প্রতিটি অংশের ব্যাকরণগত গঠন এক রাখুন।',
+    summary: 'তালিকার প্রতিটি অংশ একই grammatical গঠনে লিখুন।',
     estimatedMinutes: 12,
     topics: ['Lists', 'not only...but also', 'Parallel comparisons', 'Matching forms'],
     ielts: {
       importance: 'High',
       priority: 'Essential for Band 8',
       note:
-        'Task 2-তে কারণ বা সুবিধার তালিকাসহ লম্বা বাক্য খুব সাধারণ, আর তালিকা ভেঙে গেলে সেটি একটি উচ্চাকাঙ্ক্ষী বাক্যের স্পষ্ট ব্যাকরণগত ভুল হয়ে দাঁড়ায়।',
+        'Task 2-তে কারণ বা সুবিধার তালিকা দিয়ে লম্বা বাক্য লেখা খুব সাধারণ। কিন্তু তালিকার গঠন মিল না থাকলে, ভালো করে লিখতে চাওয়া বাক্যটাই একটা স্পষ্ট grammar ভুলে পরিণত হয়।',
     },
   },
   {
@@ -306,14 +306,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Reduced & Participle Clauses',
     stage: 3,
     difficulty: 'Advanced',
-    summary: 'Clause সংক্ষিপ্ত করুন, তবে modifier যেন ঝুলে না থাকে।',
+    summary: 'Clause ছোট করুন, তবে modifier যেন ঝুলে না থাকে।',
     estimatedMinutes: 18,
     topics: ['-ing clauses', '-ed clauses', 'Reduced relatives', 'having + participle', 'Dangling modifiers'],
     ielts: {
       importance: 'High',
       priority: 'High-value enhancement',
       note:
-        'নিয়ন্ত্রণে রাখতে পারলে এটি সত্যিকারের ভাষাদক্ষতার প্রমাণ। ঝুঁকি হলো dangling modifier, যা এমন একটি বাক্য তৈরি করে যা আপনি বোঝাতেই চাননি।',
+        'ঠিকভাবে ব্যবহার করতে পারলে এটা ভাষার উপর সত্যিকারের দখলের প্রমাণ। ঝুঁকি হলো dangling modifier, যার ফলে বাক্যটা এমন অর্থ দেয় যা আপনি বলতেই চাননি।',
     },
   },
 
@@ -324,14 +324,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Complex Noun Phrases & Nominalization',
     stage: 4,
     difficulty: 'Advanced',
-    summary: 'তথ্যকে Noun phrase-এ ঠেসে দিন, তবে পরিমিতভাবে।',
+    summary: 'অনেক তথ্য একটা Noun phrase-এ গুছিয়ে আনুন, তবে মাত্রা রেখে।',
     estimatedMinutes: 20,
     topics: ['noun + noun', 'noun + of', 'Prepositional modifiers', 'Noun complement clauses', 'Apposition', 'Nominalization'],
     ielts: {
       importance: 'High',
       priority: 'High-value enhancement',
       note:
-        'লেখাকে সত্যিকার অর্থে academic করে তোলে এটিই, inversion নয়। Academic ভাষাশৈলীর গবেষণাও জটিল Clause-এর সারির চেয়ে ঘন Noun phrase-এর দিকেই ইঙ্গিত করে।',
+        'লেখাকে সত্যিকারের academic করে তোলে এটাই, inversion নয়। Academic writing নিয়ে গবেষণাও বলে, এ ধরনের লেখায় একের পর এক Clause-এর চেয়ে তথ্যবহুল Noun phrase-ই বেশি দেখা যায়।',
     },
   },
   {
@@ -340,14 +340,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Hedging & Academic Stance',
     stage: 4,
     difficulty: 'Advanced',
-    summary: 'এমন দাবি করুন যা আপনি রক্ষা করতে পারবেন।',
+    summary: 'এমন দাবি করুন, যেটার পক্ষে আপনি দাঁড়াতে পারবেন।',
     estimatedMinutes: 16,
     topics: ['may / might / could', 'tend to', 'appear to', 'suggest / indicate', 'arguably', 'It is likely that'],
     ielts: {
       importance: 'Very High',
       priority: 'High-value enhancement',
       note:
-        'অতিরঞ্জিত দাবি আপনার যুক্তি দুর্বল করে এবং অপেশাদার শোনায়। Hedging আপনাকে অবস্থান নিতে দেয়, অথচ নির্ভুলও রাখে, যা ব্যাকরণের পাশাপাশি উত্তরের মানও বাড়ায়।',
+        'বাড়িয়ে বলা দাবি যুক্তিকে দুর্বল করে আর লেখাকে অপেশাদার শোনায়। Hedging দিয়ে আপনি নিজের মত দিতে পারেন, আবার বাড়াবাড়িও এড়াতে পারেন। এতে grammar-এর পাশাপাশি উত্তরের মানও বাড়ে।',
     },
   },
   {
@@ -356,14 +356,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Information Packaging',
     stage: 4,
     difficulty: 'Advanced',
-    summary: 'জানা তথ্য আগে, নতুন তথ্য পরে রাখুন।',
+    summary: 'পাঠক যা জানে তা আগে, নতুন তথ্য পরে।',
     estimatedMinutes: 18,
     topics: ['Given to new', 'End-weight', 'Heavy subjects', 'Passive for focus', 'Existential there', 'This + summary noun'],
     ielts: {
       importance: 'High',
       priority: 'High-value enhancement',
       note:
-        'Cohesion-এর নম্বর সেই লেখাকে পুরস্কৃত করে, যা প্রতিটি বাক্যে linker ছাড়াই সাবলীলভাবে এগোয়। এই কাজের বেশিরভাগটাই করে বাক্যের ভেতরে তথ্যের ক্রম।',
+        'Cohesion-এ বেশি নম্বর পায় সেই লেখা, যেটা প্রতিটি বাক্যে linker না বসিয়েও সাবলীলভাবে এগোয়। আর এর বেশিরভাগ কাজটাই করে বাক্যের ভেতরে তথ্য সাজানোর ক্রম।',
     },
   },
   {
@@ -372,14 +372,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Grammatical Cohesion',
     stage: 4,
     difficulty: 'Advanced',
-    summary: 'শুধু connector নয়, reference দিয়েও বাক্য জোড়া দিন।',
+    summary: 'শুধু connector দিয়ে নয়, reference দিয়েও বাক্য জুড়ুন।',
     estimatedMinutes: 16,
     topics: ['Reference', 'Substitution', 'Ellipsis', 'this / such + noun', 'one / ones', 'do so'],
     ielts: {
       importance: 'High',
       priority: 'High-value enhancement',
       note:
-        'Band descriptor-এ cohesive device-এর যান্ত্রিক অতিরিক্ত ব্যবহারের বিষয়ে সরাসরি সতর্ক করা আছে। Reference ও substitution সেই বিকল্প, যা স্বাভাবিক শোনায়।',
+        'Band descriptor-এ সরাসরি বলা আছে, cohesive device যান্ত্রিকভাবে বেশি বেশি ব্যবহার করা যাবে না। Reference আর substitution হলো সেই বিকল্প, যেটা শুনতে স্বাভাবিক লাগে।',
     },
   },
   {
@@ -388,14 +388,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Clefts & Limited Inversion',
     stage: 4,
     difficulty: 'Proficient',
-    summary: 'জোর দেওয়ার ঐচ্ছিক গঠন, খুব পরিমিতভাবে ব্যবহার্য।',
+    summary: 'জোর দেওয়ার ঐচ্ছিক গঠন, খুব হিসেব করে ব্যবহার করুন।',
     estimatedMinutes: 14,
     topics: ['What matters is...', 'It was X that...', 'Not only does X...', 'Emphasis'],
     ielts: {
       importance: 'Situational',
       priority: 'Optional',
       note:
-        'কোনো band-এই এটি আবশ্যক নয়। IELTS নম্বর দেয় নির্ভুলতা ও সাবলীলতায়, কোনো নির্দিষ্ট দেখানো-গঠনে নয়। জোর করে inversion লিখতে গিয়ে সাধারণত সেখানেই ভুল হয়, যেখানে সাধারণ বাক্য নির্ভুল হতো।',
+        'কোনো band-এর জন্যই এটা বাধ্যতামূলক নয়। IELTS নম্বর দেয় নির্ভুলতা আর সাবলীলতার জন্য, কোনো নির্দিষ্ট \'দেখানোর মতো\' গঠনের জন্য নয়। জোর করে inversion লিখতে গেলে সাধারণত ঠিক সেখানেই ভুল হয়, যেখানে সাধারণ বাক্যটা নির্ভুল হতো।',
     },
   },
 
@@ -406,14 +406,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Concision & Ambiguity Control',
     stage: 5,
     difficulty: 'Advanced',
-    summary: 'বাড়তি শব্দ কাটুন, modifier বসান, Subject ও Verb কাছাকাছি রাখুন।',
+    summary: 'বাড়তি শব্দ কাটুন, modifier ঠিক জায়গায় বসান, Subject আর Verb কাছাকাছি রাখুন।',
     estimatedMinutes: 18,
     topics: ['Cutting deadwood', 'Sentence length', 'Misplaced modifiers', 'Weak nominalizations', 'Subject-verb distance'],
     ielts: {
       importance: 'High',
       priority: 'High-value enhancement',
       note:
-        'সময়ের চাপে লম্বা বাক্যের চেয়ে ছোট ও নিয়ন্ত্রিত বাক্যে ভুল কম হয়। এই মডিউলটি একই সঙ্গে আপনার সম্পাদনার তালিকা হিসেবেও কাজ করে।',
+        'সময়ের চাপে লম্বা বাক্যের চেয়ে ছোট, গোছানো বাক্যে ভুল কম হয়। এই module-টা আপনার নিজের লেখা edit করার checklist হিসেবেও কাজ করবে।',
     },
   },
   {
@@ -422,14 +422,14 @@ export const MODULES: ModuleMeta[] = [
     title: 'Register, Punctuation & Sentence Variety',
     stage: 5,
     difficulty: 'Proficient',
-    summary: 'কাজের ধরন অনুযায়ী tone বাছুন, আর বাক্যের দৈর্ঘ্যে ইচ্ছাকৃত বৈচিত্র্য আনুন।',
+    summary: 'লেখার ধরন বুঝে tone বাছুন, আর ভেবেচিন্তে বাক্যের দৈর্ঘ্যে বৈচিত্র্য আনুন।',
     estimatedMinutes: 18,
     topics: ['Formal vs informal', 'Academic register', 'Contractions', 'Semicolons', 'Colons', 'Dashes', 'Sentence variety'],
     ielts: {
       importance: 'High',
       priority: 'Essential for Band 8',
       note:
-        'Band 8 চায় নানা ধরনের গঠন সাবলীলভাবে ব্যবহার করা। সাবলীলতা মানে কার্যকারিতার জন্য বাক্যের দৈর্ঘ্য বেছে নেওয়া, প্রতিটি বাক্য লম্বা করা নয়।',
+        'Band 8-এর জন্য নানা ধরনের গঠন সাবলীলভাবে ব্যবহার করতে হয়। সাবলীলতা মানে প্রতিটি বাক্য লম্বা করা নয়, বরং যেখানে যেমন দরকার সেভাবে বাক্যের দৈর্ঘ্য বেছে নেওয়া।',
     },
   },
 ]

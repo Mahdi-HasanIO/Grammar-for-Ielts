@@ -1,8 +1,12 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 
-export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('card', className)} {...props} />
+export function Card({
+  className,
+  interactive = false,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & { interactive?: boolean }) {
+  return <div className={cn('card', interactive && 'card-interactive', className)} {...props} />
 }
 
 export function CardHeader({
@@ -20,14 +24,10 @@ export function CardHeader({
 }) {
   return (
     <div className={cn('flex items-start justify-between gap-4 px-5 pt-5 sm:px-6 sm:pt-6', className)}>
-      <div className="flex items-start gap-3">
-        {icon ? (
-          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300">
-            {icon}
-          </span>
-        ) : null}
-        <div>
-          <h2 className="text-[15px] font-semibold tracking-tight text-ink-900 dark:text-ink-50">
+      <div className="flex min-w-0 items-start gap-3">
+        {icon ? <span className="icon-chip mt-0.5 h-9 w-9">{icon}</span> : null}
+        <div className="min-w-0">
+          <h2 className="text-[15px] font-bold tracking-tight text-ink-900 dark:text-ink-50">
             {title}
           </h2>
           {subtitle ? (
@@ -35,7 +35,7 @@ export function CardHeader({
           ) : null}
         </div>
       </div>
-      {action}
+      {action ? <div className="shrink-0">{action}</div> : null}
     </div>
   )
 }

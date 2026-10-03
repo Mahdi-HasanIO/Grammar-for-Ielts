@@ -23,7 +23,7 @@ export const stage1Practice: Question[] = [
     answer: 'It',
     acceptable: ['it'],
     explanation:
-      'be + adjective + to-infinitive গঠনের আগে খালি Subject-এর জায়গাটি পূরণ করে dummy subject it।',
+      'be + adjective + to-infinitive গঠনের আগে Subject-এর খালি জায়গাটা পূরণ করে dummy subject it।',
   },
   {
     id: 'm1-p3', moduleId: 1, type: 'error-correction',
@@ -32,7 +32,7 @@ export const stage1Practice: Question[] = [
     options: ['The students', 'they often', 'struggle', 'with grammar'],
     answer: 'they often',
     explanation:
-      'The students আগে থেকেই Subject, তাই they বসালে একই Clause-এ দ্বিতীয় একটি Subject হয়ে যায়।',
+      'The students আগে থেকেই Subject, তাই they বসালে একই Clause-এ দুটো Subject হয়ে যায়।',
   },
   {
     id: 'm1-p4', moduleId: 1, type: 'rewrite',
@@ -40,7 +40,7 @@ export const stage1Practice: Question[] = [
     answer: 'It is important to invest in education.',
     acceptable: ['it is important to invest in education'],
     explanation:
-      'লিখিত ইংরেজিতে প্রতিটি Clause-এ একটি Subject লাগে, আর এখানে সেটি হলো dummy it।',
+      'লিখিত ইংরেজিতে প্রতিটি Clause-এ একটা Subject লাগে, আর এখানে সেটা হলো dummy it।',
   },
 
   /* ---- Module 2 ---- */
@@ -50,7 +50,7 @@ export const stage1Practice: Question[] = [
     options: ['are', 'is', 'were', 'have been'],
     answer: 'is',
     explanation:
-      'Head noun হলো impact, যা একবচন; মাঝখানের বহুবচন Noun গুলো শুধু বিশেষণ অংশ।',
+      'Head noun হলো impact, যেটা একবচন; মাঝখানের বহুবচন Noun-গুলো শুধু বাড়তি বর্ণনা।',
   },
   {
     id: 'm2-p2', moduleId: 2, type: 'fill-blank',
@@ -70,7 +70,7 @@ export const stage1Practice: Question[] = [
     ],
     answer: 'Research shows that exercise improves memory.',
     explanation:
-      'Research uncountable: এতে বহুবচনের -s বসে না, a বসে না, আর Verb একবচন হয়।',
+      'Research uncountable: এতে -s বসে না, a বসে না, আর Verb একবচন হয়।',
   },
   {
     id: 'm2-p4', moduleId: 2, type: 'multiple-choice',
@@ -78,7 +78,7 @@ export const stage1Practice: Question[] = [
     options: ['has', 'have', 'is', 'was'],
     answer: 'have',
     explanation:
-      'A number of মানে কয়েকটি, তাই Verb বহুবচন। The number of হলে Verb একবচন হতো।',
+      'A number of মানে কয়েকটা, তাই Verb বহুবচন। The number of হলে Verb একবচন হতো।',
   },
 
   /* ---- Module 3 ---- */
@@ -88,7 +88,7 @@ export const stage1Practice: Question[] = [
     options: ['A', 'The', 'An', 'No article'],
     answer: 'The',
     explanation:
-      'of-phrase টি বুঝিয়ে দিচ্ছে ঠিক কোন growth-এর কথা বলা হচ্ছে, তাই নির্দেশটি নির্দিষ্ট।',
+      'of-phrase-টা বুঝিয়ে দিচ্ছে ঠিক কোন growth-এর কথা হচ্ছে, তাই এখানে the বসবে।',
   },
   {
     id: 'm3-p2', moduleId: 3, type: 'choose-correct-sentence',
@@ -101,14 +101,14 @@ export const stage1Practice: Question[] = [
     ],
     answer: 'Cars are a major source of pollution.',
     explanation:
-      'পুরো একটি শ্রেণি নিয়ে সাধারণ মন্তব্য করতে article ছাড়া বহুবচন Noun বসে।',
+      'পুরো একটা শ্রেণি নিয়ে সাধারণ কথা বলতে article ছাড়া বহুবচন Noun বসে।',
   },
   {
     id: 'm3-p3', moduleId: 3, type: 'fill-blank',
     question: 'There are ___ advantages to this approach. (much / many)',
     answer: 'many',
     explanation:
-      'Advantages একটি countable বহুবচন Noun, তাই এর সঙ্গে many বসে।',
+      'Advantages একটা countable বহুবচন Noun, তাই এর সঙ্গে many বসে।',
   },
   {
     id: 'm3-p4', moduleId: 3, type: 'error-correction',
@@ -127,7 +127,7 @@ export const stage1Practice: Question[] = [
     options: ['their', 'its', 'our', 'them'],
     answer: 'its',
     explanation:
-      'Every থাকলে Antecedent একবচন হয়, তাই অধিকারবাচক Pronoun হবে its।',
+      'Every থাকলে Antecedent একবচন হয়, তাই possessive Pronoun হবে its।',
   },
   {
     id: 'm4-p2', moduleId: 4, type: 'fill-blank',
@@ -135,7 +135,7 @@ export const stage1Practice: Question[] = [
     answer: 'It',
     acceptable: ['it'],
     explanation:
-      'Adjective ও that-clause-এর আগে মূল্যায়ন বোঝাতে it বসে; there বসে অস্তিত্ব বোঝাতে।',
+      'Adjective আর that-clause-এর আগে মতামত বোঝাতে it বসে; there বসে কোনো কিছু আছে বোঝাতে।',
   },
   {
     id: 'm4-p3', moduleId: 4, type: 'choose-correct-sentence',
@@ -148,7 +148,7 @@ export const stage1Practice: Question[] = [
     ],
     answer: 'Governments fund charities, but the charities waste money.',
     explanation:
-      'দুটি বহুবচন Noun থাকায় they অস্পষ্ট; Noun-টি আবার লিখলে অর্থ পরিষ্কার হয়।',
+      'দুটো বহুবচন Noun থাকায় they কাকে বোঝাচ্ছে বোঝা যায় না; Noun-টা আবার লিখলে অর্থ পরিষ্কার হয়।',
   },
   {
     id: 'm4-p4', moduleId: 4, type: 'rewrite',
@@ -156,7 +156,7 @@ export const stage1Practice: Question[] = [
     answer: 'This expansion causes problems.',
     acceptable: ['this expansion causes problems', 'this growth causes problems'],
     explanation:
-      'This + summary noun একটি অস্পষ্ট নির্দেশকে নির্দিষ্ট করে তোলে।',
+      'This + summary noun বসালে this কীসের কথা বলছে, তা পরিষ্কার হয়ে যায়।',
   },
 
   /* ---- Module 5 ---- */
@@ -171,7 +171,7 @@ export const stage1Practice: Question[] = [
     ],
     answer: 'Many cities face congestion; however, few have solved it.',
     explanation:
-      'However একটি linking adverbial, তাই এর আগে semicolon বা full stop এবং পরে কমা লাগে।',
+      'However একটা linking adverbial, তাই এর আগে semicolon বা full stop আর পরে কমা লাগে।',
   },
   {
     id: 'm5-p2', moduleId: 5, type: 'multiple-choice',
@@ -184,7 +184,7 @@ export const stage1Practice: Question[] = [
     ],
     answer: 'The policy was expensive, but it reduced emissions.',
     explanation:
-      'কমার পরে একটি coordinator বসলে দুটি Independent Clause সঠিকভাবে জোড়া লাগে।',
+      'কমার পরে একটা coordinator বসালে দুটো Independent Clause ঠিকভাবে জোড়া লাগে।',
   },
   {
     id: 'm5-p3', moduleId: 5, type: 'error-correction',
@@ -193,7 +193,7 @@ export const stage1Practice: Question[] = [
     options: ['Although the scheme', 'was popular,', 'but it', 'was cancelled'],
     answer: 'but it',
     explanation:
-      'Although আগেই বৈপরীত্য বুঝিয়ে দিয়েছে, তাই coordinator but দ্বিতীয় একটি connector হয়ে যাচ্ছে।',
+      'Although আগেই বৈপরীত্য বুঝিয়ে দিয়েছে, তাই but বসালে একই কাজে দুটো connector হয়ে যায়।',
   },
   {
     id: 'm5-p4', moduleId: 5, type: 'fill-blank',
@@ -201,7 +201,7 @@ export const stage1Practice: Question[] = [
     answer: ':',
     acceptable: ['colon', ':'],
     explanation:
-      'Colon একটি তালিকা উপস্থাপন করে। Semicolon বসাতে হলে দুই পাশেই পূর্ণ বাক্য লাগত।',
+      'Colon দিয়ে তালিকা শুরু হয়। Semicolon বসাতে হলে দুই পাশেই পূর্ণ বাক্য লাগত।',
   },
 ]
 
@@ -213,7 +213,7 @@ export const stage1Test: Question[] = [
     options: ['The verb', 'The subject', 'The object', 'The adverbial'],
     answer: 'The subject',
     explanation:
-      'in this chart একটি Adverbial phrase, তাই Clause-টিতে Verb আছে কিন্তু কোনো Subject নেই।',
+      'in this chart একটা Adverbial phrase, তাই Clause-টায় Verb আছে, কিন্তু কোনো Subject নেই।',
   },
   {
     id: 'm1-t2', moduleId: 1, type: 'choose-correct-sentence',
@@ -234,7 +234,7 @@ export const stage1Test: Question[] = [
     answer: 'There',
     acceptable: ['there'],
     explanation:
-      'Existential there কোনো কিছুর অস্তিত্ব জানায় এবং এর পরে একটি Noun phrase বসে।',
+      'Existential there দিয়ে বোঝানো হয় কোনো কিছু আছে, আর এর পরে একটা Noun phrase বসে।',
   },
   {
     id: 'm1-t4', moduleId: 1, type: 'error-correction',
@@ -251,7 +251,7 @@ export const stage1Test: Question[] = [
     options: ['Object', 'Complement', 'Adverbial', 'Subject'],
     answer: 'Complement',
     explanation:
-      'এটি be-এর পরে বসে Subject-কে বর্ণনা করছে, তাই এটি Subject Complement (পূরক)।',
+      'এটা be-এর পরে বসে Subject-কে বর্ণনা করছে, তাই এটা Subject Complement।',
   },
   {
     id: 'm1-t6', moduleId: 1, type: 'choose-correct-sentence',
@@ -286,7 +286,7 @@ export const stage1Test: Question[] = [
     options: ['My country', 'it has', 'a growing', 'economy'],
     answer: 'it has',
     explanation:
-      'My country আগে থেকেই Subject, তাই it সেটিকেই দ্বিতীয়বার বসিয়ে দিচ্ছে।',
+      'My country আগে থেকেই Subject, তাই it বসালে একই Subject দুবার হয়ে যায়।',
   },
   {
     id: 'm1-t9', moduleId: 1, type: 'fill-blank',
@@ -294,7 +294,7 @@ export const stage1Test: Question[] = [
     answer: 'It',
     acceptable: ['it'],
     explanation:
-      'Clause-টিকে শেষে সরিয়ে দেওয়া হয়েছে, তাই Subject-এর জায়গা পূরণ করছে dummy it।',
+      'আসল Clause-টাকে শেষে পাঠানো হয়েছে, তাই Subject-এর জায়গা পূরণ করছে dummy it।',
   },
   {
     id: 'm1-t10', moduleId: 1, type: 'choose-correct-sentence',
@@ -307,7 +307,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'According to the report, sales declined.',
     explanation:
-      'শুরুর phrase-টির পরে Clause-টি নিজের Subject ও Verb দুটোই পেয়েছে।',
+      'শুরুর phrase-এর পরে Clause-টায় নিজের Subject আর Verb দুটোই আছে।',
   },
 
   /* =========================== Module 2 test ========================== */
@@ -317,7 +317,7 @@ export const stage1Test: Question[] = [
     options: ['have', 'has', 'are', 'were'],
     answer: 'has',
     explanation:
-      'Head noun হলো quality, যা একবচন; of the roads কেবল একটি বিশেষণ অংশ।',
+      'Head noun হলো quality, যেটা একবচন; of the roads শুধু বাড়তি বর্ণনা।',
   },
   {
     id: 'm2-t2', moduleId: 2, type: 'choose-correct-sentence',
@@ -330,7 +330,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'There are many factors behind this trend.',
     explanation:
-      'Verb মেলে factors-এর সঙ্গে, অর্থাৎ there-এর পরে বসা Noun-এর সঙ্গে।',
+      'Verb মেলে factors-এর সঙ্গে, অর্থাৎ there-এর পরের Noun-এর সঙ্গে।',
   },
   {
     id: 'm2-t3', moduleId: 2, type: 'fill-blank',
@@ -346,7 +346,7 @@ export const stage1Test: Question[] = [
     options: ['The number', 'of cars', 'have increased', 'sharply'],
     answer: 'have increased',
     explanation:
-      'The number of একটি নির্দিষ্ট সংখ্যা বোঝায়, তাই Verb হবে has increased।',
+      'The number of একটা নির্দিষ্ট সংখ্যা বোঝায়, তাই Verb হবে has increased।',
   },
   {
     id: 'm2-t5', moduleId: 2, type: 'multiple-choice',
@@ -362,7 +362,7 @@ export const stage1Test: Question[] = [
     options: ['were', 'was', 'have been', 'are'],
     answer: 'was',
     explanation:
-      'Each একবচন এবং এটিই Subject phrase-এর head।',
+      'Each একবচন, আর এটাই Subject phrase-এর head।',
   },
   {
     id: 'm2-t7', moduleId: 2, type: 'choose-correct-sentence',
@@ -391,7 +391,7 @@ export const stage1Test: Question[] = [
     options: ['Modern technology', 'have changed', 'the way', 'we work'],
     answer: 'have changed',
     explanation:
-      'এখানে technology uncountable এবং একবচনের মতো আচরণ করে: has changed।',
+      'এখানে technology uncountable, তাই একবচন Verb নেয়: has changed।',
   },
   {
     id: 'm2-t10', moduleId: 2, type: 'multiple-choice',
@@ -414,7 +414,7 @@ export const stage1Test: Question[] = [
     options: ['The / the', 'A / the', 'No article / no article', 'The / a'],
     answer: 'No article / no article',
     explanation:
-      'দুটি Noun-ই এখানে সাধারণ অর্থে ও uncountable, তাই কোনোটিতেই article বসে না।',
+      'দুটো Noun-ই এখানে সাধারণ অর্থে আর uncountable, তাই কোনোটাতেই article বসে না।',
   },
   {
     id: 'm3-t2', moduleId: 3, type: 'choose-correct-sentence',
@@ -427,7 +427,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'He is an engineer at a large firm.',
     explanation:
-      'একবচন countable Noun-এর আগে সবসময় determiner লাগে, আর স্বরধ্বনির আগে an বসে।',
+      'একবচন countable Noun-এর আগে সবসময় determiner লাগে, আর vowel sound-এর আগে an বসে।',
   },
   {
     id: 'm3-t3', moduleId: 3, type: 'fill-blank',
@@ -435,7 +435,7 @@ export const stage1Test: Question[] = [
     answer: 'The',
     acceptable: ['the'],
     explanation:
-      'সবার কাছে পরিচিত ও একক জিনিসের আগে the বসে: the internet, the environment, the media।',
+      'সবার চেনা আর একটাই আছে এমন জিনিসের আগে the বসে: the internet, the environment, the media।',
   },
   {
     id: 'm3-t4', moduleId: 3, type: 'error-correction',
@@ -452,7 +452,7 @@ export const stage1Test: Question[] = [
     options: ['A', 'The', 'An', 'No article'],
     answer: 'The',
     explanation:
-      'আগে উল্লেখ করা জিনিস দ্বিতীয়বার বোঝাতে the বসে।',
+      'আগে বলা জিনিসের কথা আবার বললে the বসে।',
   },
   {
     id: 'm3-t6', moduleId: 3, type: 'multiple-choice',
@@ -481,7 +481,7 @@ export const stage1Test: Question[] = [
     answer: 'no article',
     acceptable: ['no article', 'none', '-', 'zero'],
     explanation:
-      'Information uncountable, তাই এর আগে a বসতে পারে না। গুনতে হলে a piece of যোগ করুন।',
+      'Information uncountable, তাই এর আগে a বসে না। গুনতে হলে a piece of যোগ করুন।',
   },
   {
     id: 'm3-t9', moduleId: 3, type: 'error-correction',
@@ -490,7 +490,7 @@ export const stage1Test: Question[] = [
     options: ['The children', 'in general', 'need more', 'outdoor activity'],
     answer: 'The children',
     explanation:
-      'পুরো শ্রেণি বোঝাতে article ছাড়া বহুবচন বসে; the বসালে নির্দিষ্ট একটি দল বোঝাত।',
+      'পুরো শ্রেণি বোঝাতে article ছাড়া বহুবচন বসে; the বসালে নির্দিষ্ট একটা দলকে বোঝাত।',
   },
   {
     id: 'm3-t10', moduleId: 3, type: 'multiple-choice',
@@ -503,7 +503,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'Pollution is a serious problem.',
     explanation:
-      'সাধারণ অর্থে ব্যবহৃত uncountable Noun-এ কোনো article বসে না এবং Verb একবচন হয়।',
+      'সাধারণ অর্থে uncountable Noun-এর আগে কোনো article বসে না, আর Verb একবচন হয়।',
   },
 
   /* =========================== Module 4 test ========================== */
@@ -513,7 +513,7 @@ export const stage1Test: Question[] = [
     options: ['their', 'its', 'it', 'theirs'],
     answer: 'its',
     explanation:
-      'একবচন ধরা Collective Noun-এর সঙ্গে একবচন অধিকারবাচক Pronoun its বসে।',
+      'Collective Noun-কে একবচন ধরলে possessive Pronoun-ও একবচন হবে: its।',
   },
   {
     id: 'm4-t2', moduleId: 4, type: 'choose-correct-sentence',
@@ -526,7 +526,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'People prefer cars to buses because cars are faster.',
     explanation:
-      'They দিয়ে cars, buses বা people - যে কোনোটিই বোঝানো যেতে পারত, তাই Noun-টি আবার লিখতে হবে।',
+      'They দিয়ে cars, buses বা people - যেকোনোটাই বোঝাতে পারত, তাই Noun-টা আবার লিখতে হবে।',
   },
   {
     id: 'm4-t3', moduleId: 4, type: 'fill-blank',
@@ -534,7 +534,7 @@ export const stage1Test: Question[] = [
     answer: 'There',
     acceptable: ['there'],
     explanation:
-      'There একটি Noun phrase-এর আগে বসে কোনো কিছুর অস্তিত্ব জানায়।',
+      'There একটা Noun phrase-এর আগে বসে বোঝায় যে কোনো কিছু আছে।',
   },
   {
     id: 'm4-t4', moduleId: 4, type: 'error-correction',
@@ -543,7 +543,7 @@ export const stage1Test: Question[] = [
     options: ['Technology is', 'advancing quickly,', 'which they make', 'old skills obsolete'],
     answer: 'which they make',
     explanation:
-      'Which নিজেই Clause-টির Subject, তাই they দ্বিতীয় একটি Subject হয়ে যাচ্ছে।',
+      'Which নিজেই Clause-টার Subject, তাই they বসালে দুটো Subject হয়ে যায়।',
   },
   {
     id: 'm4-t5', moduleId: 4, type: 'multiple-choice',
@@ -559,7 +559,7 @@ export const stage1Test: Question[] = [
     options: ['This thing', 'This', 'This trend', 'That'],
     answer: 'This trend',
     explanation:
-      'This + summary noun নির্দেশকে নির্দিষ্ট করে এবং cohesion উন্নত করে।',
+      'This + summary noun বসালে this কীসের কথা বলছে তা পরিষ্কার হয়, আর cohesion-ও ভালো হয়।',
   },
   {
     id: 'm4-t7', moduleId: 4, type: 'choose-correct-sentence',
@@ -572,7 +572,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'There are many museums in the city.',
     explanation:
-      'অস্তিত্ব বোঝাতে there বসে, আর Verb মেলে museums-এর সঙ্গে।',
+      'কোনো কিছু আছে বোঝাতে there বসে, আর Verb মেলে museums-এর সঙ্গে।',
   },
   {
     id: 'm4-t8', moduleId: 4, type: 'fill-blank',
@@ -588,7 +588,7 @@ export const stage1Test: Question[] = [
     options: ['Every company', 'must protect', 'their data', 'from attacks'],
     answer: 'their data',
     explanation:
-      'Every company একবচন, তাই অধিকারবাচক Pronoun হবে its।',
+      'Every company একবচন, তাই possessive Pronoun হবে its।',
   },
   {
     id: 'm4-t10', moduleId: 4, type: 'multiple-choice',
@@ -601,7 +601,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'It is clear that the policy failed.',
     explanation:
-      'Adjective ও শেষে সরিয়ে দেওয়া that-clause-এর আগে it বসে।',
+      'Adjective আর শেষে পাঠানো that-clause-এর আগে it বসে।',
   },
 
   /* =========================== Module 5 test ========================== */
@@ -611,7 +611,7 @@ export const stage1Test: Question[] = [
     options: ['Fragment', 'Comma splice', 'Missing subject', 'Subject-verb agreement'],
     answer: 'Comma splice',
     explanation:
-      'Therefore একটি linking adverbial, তাই শুধু কমা দিয়ে দুটি Clause জোড়া দেওয়া যায় না।',
+      'Therefore একটা linking adverbial, তাই শুধু কমা দিয়ে দুটো Clause জোড়া দেওয়া যায় না।',
   },
   {
     id: 'm5-t2', moduleId: 5, type: 'choose-correct-sentence',
@@ -624,7 +624,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'The report was published last year, which caused a debate.',
     explanation:
-      'which দিয়ে শুরু হওয়া Clause নির্ভরশীল, তাই এটি একা একটি বাক্য হতে পারে না।',
+      'which দিয়ে শুরু হওয়া Clause নির্ভরশীল, তাই এটা একা একটা বাক্য হতে পারে না।',
   },
   {
     id: 'm5-t3', moduleId: 5, type: 'fill-blank',
@@ -632,7 +632,7 @@ export const stage1Test: Question[] = [
     answer: ', and',
     acceptable: [', and', 'and', ';'],
     explanation:
-      'দুটি Independent Clause জোড়া দিতে কমার পরে একটি coordinator লাগে, অথবা একটি semicolon।',
+      'দুটো Independent Clause জোড়া দিতে কমার পরে একটা coordinator লাগে, অথবা একটা semicolon।',
   },
   {
     id: 'm5-t4', moduleId: 5, type: 'error-correction',
@@ -641,7 +641,7 @@ export const stage1Test: Question[] = [
     options: ['More people', 'are cycling,', 'this reduces', 'air pollution'],
     answer: 'this reduces',
     explanation:
-      'This দিয়ে নতুন একটি Independent Clause শুরু হচ্ছে, তাই কমাটি splice তৈরি করেছে; which reduces লিখুন।',
+      'This দিয়ে নতুন একটা Independent Clause শুরু হচ্ছে, তাই শুধু কমা দেওয়ায় comma splice হয়েছে; which reduces লিখুন।',
   },
   {
     id: 'm5-t5', moduleId: 5, type: 'multiple-choice',
@@ -649,7 +649,7 @@ export const stage1Test: Question[] = [
     options: ['however', 'therefore', 'although', 'moreover'],
     answer: 'although',
     explanation:
-      'Although একটি Subordinator, আর বাকি তিনটি linking adverbial।',
+      'Although একটা Subordinator, আর বাকি তিনটা linking adverbial।',
   },
   {
     id: 'm5-t6', moduleId: 5, type: 'choose-correct-sentence',
@@ -662,7 +662,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'Working from home is common; it reduces commuting.',
     explanation:
-      'Semicolon-এর দুই পাশেই একটি করে পূর্ণ বাক্য থাকতে হবে।',
+      'Semicolon-এর দুই পাশেই একটা করে পূর্ণ বাক্য থাকতে হবে।',
   },
   {
     id: 'm5-t7', moduleId: 5, type: 'multiple-choice',
@@ -670,7 +670,7 @@ export const stage1Test: Question[] = [
     options: ['semicolon', 'colon', 'comma splice', 'dash and comma'],
     answer: 'colon',
     explanation:
-      'পূর্ণ একটি Clause-এর পরে colon বসে তালিকা উপস্থাপন করে।',
+      'একটা পূর্ণ Clause-এর পরে colon বসিয়ে তালিকা শুরু করা হয়।',
   },
   {
     id: 'm5-t8', moduleId: 5, type: 'error-correction',
@@ -692,7 +692,7 @@ export const stage1Test: Question[] = [
     ],
     answer: 'The system is efficient, so it saves money.',
     explanation:
-      'কেবল এই বিকল্পটিতেই একটি Independent Clause আছে।',
+      'শুধু এই option-টাতেই একটা Independent Clause আছে।',
   },
   {
     id: 'm5-t10', moduleId: 5, type: 'multiple-choice',
