@@ -6,7 +6,6 @@ import {
   Check,
   ChevronDown,
   Flame,
-  GraduationCap,
   LayoutDashboard,
   Menu,
   Monitor,
@@ -14,15 +13,20 @@ import {
   RotateCcw,
   Settings,
   Sun,
+  Users,
   X,
 } from 'lucide-react'
 import { cn } from '@/utils/cn'
+import logoWord from '@/assets/logo-wordmark.png'
+import logoWordDark from '@/assets/logo-wordmark-dark.png'
 import { useProgress } from '@/hooks/useProgress'
 import { useStreak } from '@/hooks/useStreak'
 import { completedCount } from '@/utils/progression'
 import { MODULES } from '@/data/modules'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { Preferences } from '@/types'
+import { DeveloperCredit } from '@/components/DeveloperInfo'
+import { useVisitorCount } from '@/hooks/useVisitorCount'
 
 const NAV = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -39,18 +43,29 @@ const THEME_OPTIONS: { value: Preferences['theme']; label: string; icon: typeof 
 ]
 
 function Logo({ compact = false }: { compact?: boolean }) {
+  const word = cn(
+    'w-auto select-none transition-transform duration-300 ease-spring group-hover:scale-[1.03]',
+    compact ? 'h-[22px]' : 'h-7',
+  )
   return (
-    <div className="flex items-center gap-2.5">
-      <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-accent-600 text-white shadow-glow">
-        <GraduationCap size={19} strokeWidth={2.2} />
+    <NavLink
+      to="/"
+      aria-label="Grammar for IELTS - home"
+      className="group inline-flex flex-col items-center gap-1 rounded-lg focus-ring"
+    >
+      {/* Wordmark artwork: dark green in light theme, white in dark theme. */}
+      <img src={logoWord} alt="" className={cn(word, 'dark:hidden')} draggable={false} />
+      <img src={logoWordDark} alt="" className={cn(word, 'hidden dark:block')} draggable={false} />
+      {/* Tagline as live text so it stays crisp and readable at small sizes. */}
+      <span
+        className={cn(
+          'font-logo font-semibold uppercase leading-none text-[#1f7a37] dark:text-white',
+          compact ? 'pl-[0.32em] text-[10px] tracking-[0.32em]' : 'pl-[0.38em] text-[12px] tracking-[0.38em]',
+        )}
+      >
+        for IELTS
       </span>
-      <div className="leading-tight">
-        <p className="font-display text-[15px] font-bold tracking-tight">Grammar Path</p>
-        {!compact ? (
-          <p className="text-[11px] font-medium text-ink-500 dark:text-ink-400">IELTS Band 8+ track</p>
-        ) : null}
-      </div>
-    </div>
+    </NavLink>
   )
 }
 
@@ -103,6 +118,7 @@ function SidebarSummary() {
   const { current } = useStreak()
   const done = completedCount(state)
   const pct = Math.round((done / MODULES.length) * 100)
+  const visitors = useVisitorCount()
 
   return (
     <div className="rounded-2xl border border-ink-200/80 bg-white p-4 shadow-card dark:border-ink-800 dark:bg-ink-900">
@@ -125,6 +141,15 @@ function SidebarSummary() {
           {current}
         </span>
       </div>
+      {visitors.status === 'ready' ? (
+        <p className="mt-3 flex animate-fade-in items-center gap-1.5 border-t border-dashed border-ink-200 pt-3 text-[12px] text-ink-500 dark:border-ink-700 dark:text-ink-400">
+          <Users size={13} className="text-emerald-500" />
+          <span className="font-semibold tabular-nums text-ink-700 dark:text-ink-200">
+            {visitors.count.toLocaleString()}
+          </span>
+          learners visited
+        </p>
+      ) : null}
     </div>
   )
 }
@@ -285,7 +310,10 @@ export function Layout({ children }: { children: ReactNode }) {
             </div>
             <NavItems onNavigate={() => setOpen(false)} />
           </div>
-          <SidebarSummary />
+          <div>
+            <SidebarSummary />
+            <DeveloperCredit />
+          </div>
         </aside>
       </div>
 
@@ -299,7 +327,10 @@ export function Layout({ children }: { children: ReactNode }) {
           <p className="label-xs mb-2 px-3">Menu</p>
           <NavItems />
         </div>
-        <SidebarSummary />
+        <div>
+          <SidebarSummary />
+          <DeveloperCredit />
+        </div>
       </aside>
 
       <main className="min-w-0 lg:pl-72">

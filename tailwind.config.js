@@ -49,6 +49,7 @@ export default {
           'sans-serif',
         ],
         display: ['Plus Jakarta Sans', 'Inter', 'Hind Siliguri', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        logo: ['Jost', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ['Source Serif 4', 'Hind Siliguri', 'Georgia', 'serif'],
       },
       boxShadow: {

@@ -33,6 +33,7 @@ import { StatTile } from '@/components/ui/StatTile'
 import { Reveal } from '@/components/ui/Reveal'
 import { StageTrack } from '@/components/dashboard/StageTrack'
 import { ActivityCalendar } from '@/components/dashboard/ActivityCalendar'
+import { CommunityCard } from '@/components/dashboard/CommunityCard'
 import { PageHeader } from '@/components/PageHeader'
 
 function HeroGlow() {
@@ -314,6 +315,10 @@ export function Dashboard() {
           </Card>
         </Reveal>
       </div>
+
+      <Reveal>
+        <CommunityCard />
+      </Reveal>
 
       {state.badges.length ? (
         <Reveal>

@@ -7,6 +7,7 @@ import { Card, CardBody, CardHeader } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/utils/cn'
 import { Badge } from '@/components/ui/Badge'
+import { DeveloperCard } from '@/components/DeveloperInfo'
 import { readStorage, removeStorage, STORAGE_KEYS, writeStorage } from '@/utils/storage'
 
 const THEMES: { value: Preferences['theme']; label: string; icon: typeof Sun }[] = [
@@ -311,6 +312,8 @@ export function Settings() {
           )}
         </CardBody>
       </Card>
+
+      <DeveloperCard />
     </div>
   )
 }
