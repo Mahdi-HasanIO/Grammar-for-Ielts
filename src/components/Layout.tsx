@@ -88,7 +88,7 @@ export function Layout({ children }: { children: ReactNode }) {
   }, [location.pathname])
 
   return (
-    <div className="min-h-screen lg:flex">
+    <div className="h-screen overflow-hidden lg:flex">
       {/* Mobile top bar */}
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-ink-200 bg-white/90 px-4 py-3 backdrop-blur lg:hidden dark:border-ink-800 dark:bg-ink-950/90">
         <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export function Layout({ children }: { children: ReactNode }) {
       ) : null}
 
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r border-ink-200 bg-white px-4 py-6 lg:flex lg:flex-col lg:justify-between dark:border-ink-800 dark:bg-ink-900/40">
+      <aside className="hidden h-screen w-64 shrink-0 border-r border-ink-200 bg-white px-4 py-6 lg:flex lg:flex-col lg:justify-between dark:border-ink-800 dark:bg-ink-900/40">
         <div>
           <div className="mb-7 flex items-center gap-2 px-2">
             <GraduationCap size={22} className="text-brand-600" />
@@ -129,7 +129,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <SidebarSummary />
       </aside>
 
-      <main className="min-w-0 flex-1">
+      <main className="min-w-0 flex-1 overflow-y-auto lg:h-screen">
         <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10">{children}</div>
       </main>
     </div>
