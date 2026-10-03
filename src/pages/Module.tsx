@@ -9,11 +9,14 @@ import {
   ListChecks,
   Lock,
   PenLine,
+  Sparkles,
 } from 'lucide-react'
 import { useProgress } from '@/hooks/useProgress'
 import { useStudyTimer } from '@/hooks/useStudyTimer'
 import { getLesson } from '@/data/lessons'
 import { getPracticeQuestions } from '@/data/questions'
+import { generateGeminiPractice } from '@/utils/aiPractice'
+import { readStorage, STORAGE_KEYS } from '@/utils/storage'
 import {
   getModuleProgress,
   getModuleStatus,
@@ -66,14 +69,22 @@ export function ModulePage() {
   const { state, markLessonViewed, markPracticeCompleted, recordAnswers } = useProgress()
   useStudyTimer(true)
 
-  const practice = useMemo(() => getPracticeQuestions(moduleId), [moduleId])
+  const staticPractice = useMemo(() => getPracticeQuestions(moduleId), [moduleId])
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [practiceSubmitted, setPracticeSubmitted] = useState(false)
+  const [generatedPractice, setGeneratedPractice] = useState<typeof staticPractice | null>(null)
+  const [aiStatus, setAiStatus] = useState<string | null>(null)
+  const [isGeneratingAi, setIsGeneratingAi] = useState(false)
+  const [geminiKey] = useState(() => readStorage<string>(STORAGE_KEYS.geminiApiKey, ''))
 
   useEffect(() => {
     setAnswers({})
     setPracticeSubmitted(false)
+    setGeneratedPractice(null)
+    setAiStatus(null)
   }, [moduleId])
+
+  const practice = generatedPractice ?? staticPractice
 
   useEffect(() => {
     if (module) markLessonViewed(moduleId)
@@ -104,6 +115,29 @@ export function ModulePage() {
   const stage = stageById(module.stage)
   const progress = getModuleProgress(state, moduleId)
   const answeredAll = practice.every((q) => (answers[q.id] ?? '').length > 0)
+
+  async function generateAiPractice() {
+    if (!module) return
+
+    const key = readStorage<string>(STORAGE_KEYS.geminiApiKey, '')
+    if (!key.trim()) {
+      setGeneratedPractice(staticPractice)
+      setAnswers({})
+      setPracticeSubmitted(false)
+      setAiStatus('Add a Gemini API key in Settings to enable AI quick practice.')
+      return
+    }
+
+    setIsGeneratingAi(true)
+    setAiStatus(null)
+    setAnswers({})
+    setPracticeSubmitted(false)
+
+    const result = await generateGeminiPractice(moduleId, module.title, module.topics, key)
+    setGeneratedPractice(result.questions)
+    setAiStatus(result.message ?? 'AI-generated practice has replaced the current set.')
+    setIsGeneratingAi(false)
+  }
 
   function submitPractice() {
     const correct = practice.reduce(
@@ -216,6 +250,30 @@ export function ModulePage() {
             title="Quick practice"
             description="Low-stakes questions with instant feedback. These do not affect your module score."
           />
+
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={generateAiPractice}
+              disabled={isGeneratingAi}
+            >
+              <Sparkles size={14} />
+              {isGeneratingAi ? 'Generating...' : 'Generate Gemini practice set'}
+            </Button>
+            {geminiKey ? (
+              <span className="text-[12px] text-ink-500 dark:text-ink-400">
+                AI mode is enabled for this browser.
+              </span>
+            ) : null}
+          </div>
+
+          {aiStatus ? (
+            <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-[13px] text-amber-900 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
+              {aiStatus}
+            </p>
+          ) : null}
+
           <div className="space-y-3">
             {practice.map((q, i) => (
               <QuestionCard

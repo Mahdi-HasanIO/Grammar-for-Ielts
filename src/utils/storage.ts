@@ -5,6 +5,7 @@ const PREFIX = 'grammar-path:'
 export const STORAGE_KEYS = {
   progress: `${PREFIX}progress`,
   preferences: `${PREFIX}preferences`,
+  geminiApiKey: `${PREFIX}geminiApiKey`,
 } as const
 
 export function readStorage<T>(key: string, fallback: T): T {

@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react'
-import { Download, Monitor, Moon, Sun, Trash2, Upload } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Download, KeyRound, Monitor, Moon, Sun, Trash2, Upload } from 'lucide-react'
 import { useProgress, DEFAULT_PREFERENCES } from '@/hooks/useProgress'
 import type { Preferences, ProgressState } from '@/types'
 import { PageHeader } from '@/components/PageHeader'
 import { Card, CardBody, CardHeader } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/utils/cn'
+import { readStorage, removeStorage, STORAGE_KEYS, writeStorage } from '@/utils/storage'
 
 const THEMES: { value: Preferences['theme']; label: string; icon: typeof Sun }[] = [
   { value: 'light', label: 'Light', icon: Sun },
@@ -19,7 +20,31 @@ export function Settings() {
   const { state, preferences, setPreferences, resetProgress, importState } = useProgress()
   const [confirming, setConfirming] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
+  const [geminiKey, setGeminiKey] = useState('')
+  const [geminiStatus, setGeminiStatus] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    setGeminiKey(readStorage<string>(STORAGE_KEYS.geminiApiKey, ''))
+  }, [])
+
+  function saveGeminiKey() {
+    const nextKey = geminiKey.trim()
+    if (!nextKey) {
+      removeStorage(STORAGE_KEYS.geminiApiKey)
+      setGeminiStatus('Gemini API key removed. Built-in practice questions will be used.')
+      return
+    }
+
+    writeStorage(STORAGE_KEYS.geminiApiKey, nextKey)
+    setGeminiStatus('Gemini API key saved in this browser only. It will be reused automatically.')
+  }
+
+  function clearGeminiKey() {
+    removeStorage(STORAGE_KEYS.geminiApiKey)
+    setGeminiKey('')
+    setGeminiStatus('Gemini API key cleared. Built-in practice questions are active again.')
+  }
 
   function exportData() {
     const blob = new Blob([JSON.stringify({ state, preferences }, null, 2)], {
@@ -104,6 +129,48 @@ export function Settings() {
               {min} min
             </button>
           ))}
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="AI quick practice"
+          subtitle="Use a Gemini API key for fresh, on-demand grammar prompts"
+          icon={<KeyRound size={16} />}
+        />
+        <CardBody className="space-y-4 pt-1">
+          <div className="rounded-xl border border-dashed border-brand-300 bg-brand-50 p-3 text-[13px] leading-6 text-brand-900 dark:border-brand-700 dark:bg-brand-950/40 dark:text-brand-100">
+            <p className="font-medium">How to create a Gemini key</p>
+            <ol className="mt-2 list-decimal space-y-1 pl-5">
+              <li>Open Google AI Studio and create a new API key.</li>
+              <li>Copy the generated key.</li>
+              <li>Paste it once below and save it locally.</li>
+            </ol>
+          </div>
+
+          <label className="block text-[12px] font-medium uppercase tracking-[0.18em] text-ink-500 dark:text-ink-400">
+            Gemini API key
+          </label>
+          <input
+            type="password"
+            value={geminiKey}
+            onChange={(event) => setGeminiKey(event.target.value)}
+            placeholder="AIza..."
+            className="w-full rounded-xl border border-ink-200 bg-white px-3 py-2.5 text-sm text-ink-900 outline-none ring-0 placeholder:text-ink-400 focus:border-brand-500 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100"
+          />
+
+          <div className="flex flex-wrap gap-2">
+            <Button variant="secondary" onClick={saveGeminiKey}>
+              Save key locally
+            </Button>
+            <Button variant="ghost" onClick={clearGeminiKey}>
+              Clear key
+            </Button>
+          </div>
+
+          {geminiStatus ? (
+            <p className="text-[13px] text-ink-600 dark:text-ink-400">{geminiStatus}</p>
+          ) : null}
         </CardBody>
       </Card>
 
