@@ -6,6 +6,8 @@ export const STORAGE_KEYS = {
   progress: `${PREFIX}progress`,
   preferences: `${PREFIX}preferences`,
   geminiApiKey: `${PREFIX}geminiApiKey`,
+  /** 'en' | 'bn': the learner's chosen lesson language. Absent until they choose. */
+  lessonLanguage: `${PREFIX}lessonLanguage`,
   /** Per-module suffix: the AI practice set currently shown (sessionStorage). */
   aiSetPrefix: `${PREFIX}ai-set:`,
   /** Per-module suffix: stems of AI questions already seen, to avoid repeats. */

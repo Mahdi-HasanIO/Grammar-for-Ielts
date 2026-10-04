@@ -12,9 +12,12 @@ import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Reveal } from '@/components/ui/Reveal'
+import { useLessonLanguage } from '@/hooks/useLessonLanguage'
+import { localizeModule } from '@/utils/i18n'
 
 export function Review() {
   const { state } = useProgress()
+  const { language } = useLessonLanguage()
   const completed = MODULES.filter((m) => isModuleCompleted(state, m.id))
   const weak = weakAreas(state)
 
@@ -124,7 +127,7 @@ export function Review() {
                   />
                   <CardBody className="pt-3">
                     <p className="bn-text text-[13.5px] text-ink-600 dark:text-ink-400">
-                      {module.summary}
+                      {localizeModule(module, language).summary}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
                       <span className="text-[12px] text-ink-500 dark:text-ink-400">

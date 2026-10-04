@@ -5,6 +5,9 @@
 
 export type StageId = 1 | 2 | 3 | 4 | 5
 
+/** Language the lesson explanations are shown in. Examples stay in English either way. */
+export type LessonLanguage = 'en' | 'bn'
+
 export interface Stage {
   id: StageId
   name: string

@@ -35,6 +35,8 @@ import { StageTrack } from '@/components/dashboard/StageTrack'
 import { ActivityCalendar } from '@/components/dashboard/ActivityCalendar'
 import { CommunityCard } from '@/components/dashboard/CommunityCard'
 import { PageHeader } from '@/components/PageHeader'
+import { useLessonLanguage } from '@/hooks/useLessonLanguage'
+import { localizeModule } from '@/utils/i18n'
 
 function HeroGlow() {
   return (
@@ -105,7 +107,8 @@ function ContinueCard() {
   const { state } = useProgress()
   const done = completedCount(state)
   const pct = overallPercentage(state)
-  const current = getCurrentModule(state)
+  const { language } = useLessonLanguage()
+  const current = localizeModule(getCurrentModule(state), language)
   const currentStage = stageById(current.stage)
 
   return (

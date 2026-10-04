@@ -2,6 +2,9 @@ import { AlertTriangle, Check, CheckCircle2, Lightbulb, X } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import type { CommonMistake, ExamplePair, Lesson, RuleBlock } from '@/types'
 import { Badge } from '@/components/ui/Badge'
+import { lessonLabels, type LessonLabels } from '@/utils/i18n'
+
+const DEFAULT_LABELS = lessonLabels('bn')
 
 function ExampleRow({ example, style }: { example: ExamplePair; style?: CSSProperties }) {
   return (
@@ -38,7 +41,15 @@ function ExampleRow({ example, style }: { example: ExamplePair; style?: CSSPrope
   )
 }
 
-export function RuleCard({ rule, index }: { rule: RuleBlock; index: number }) {
+export function RuleCard({
+  rule,
+  index,
+  labels = DEFAULT_LABELS,
+}: {
+  rule: RuleBlock
+  index: number
+  labels?: LessonLabels
+}) {
   return (
     <section className="card overflow-hidden">
       <div className="relative border-b border-ink-200/80 bg-gradient-to-r from-ink-50 to-white px-5 py-4 sm:px-6 dark:border-ink-800 dark:from-ink-900 dark:to-ink-900/40">
@@ -54,17 +65,17 @@ export function RuleCard({ rule, index }: { rule: RuleBlock; index: number }) {
 
       <div className="space-y-6 px-5 py-6 sm:px-6">
         <div>
-          <p className="label-xs mb-2">Rule</p>
+          <p className="label-xs mb-2">{labels.rule}</p>
           <p className="bn-text text-[15.5px] text-ink-800 dark:text-ink-100">{rule.rule}</p>
         </div>
 
         <div className="rounded-xl bg-brand-50/50 px-4 py-3 ring-1 ring-inset ring-brand-100 dark:bg-brand-950/30 dark:ring-brand-900/50">
-          <p className="label-xs mb-1.5 text-brand-700 dark:text-brand-300">When to use it</p>
+          <p className="label-xs mb-1.5 text-brand-700 dark:text-brand-300">{labels.whenToUse}</p>
           <p className="bn-text text-[14.5px] text-ink-700 dark:text-ink-300">{rule.whenToUse}</p>
         </div>
 
         <div>
-          <p className="label-xs mb-2.5">Structure</p>
+          <p className="label-xs mb-2.5">{labels.structure}</p>
           <ul className="space-y-2">
             {rule.structure.map((line) => (
               <li
@@ -128,7 +139,7 @@ export function RuleCard({ rule, index }: { rule: RuleBlock; index: number }) {
           <div className="rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50 to-orange-50/40 px-4 py-3.5 dark:border-amber-900/60 dark:from-amber-950/40 dark:to-ink-900">
             <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-800 dark:text-amber-300">
               <Lightbulb size={13} />
-              Important notes
+              {labels.notes}
             </p>
             <ul className="mt-2.5 space-y-2">
               {rule.notes.map((note) => (
@@ -162,14 +173,20 @@ export function ExamplesSection({ examples }: { examples: ExamplePair[] }) {
   )
 }
 
-export function MistakesSection({ mistakes }: { mistakes: CommonMistake[] }) {
+export function MistakesSection({
+  mistakes,
+  labels = DEFAULT_LABELS,
+}: {
+  mistakes: CommonMistake[]
+  labels?: LessonLabels
+}) {
   return (
     <div className="rounded-3xl border border-rose-200/80 bg-gradient-to-br from-rose-50/80 to-white p-4 sm:p-5 dark:border-rose-900/50 dark:from-rose-950/30 dark:to-ink-900">
       <p className="mb-4 flex items-center gap-2 text-[13.5px] font-bold text-rose-800 dark:text-rose-200">
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-rose-100 dark:bg-rose-950">
           <AlertTriangle size={15} />
         </span>
-        Watch out for these
+        {labels.watchOut}
         <Badge tone="danger" className="ml-auto">
           {mistakes.length}
         </Badge>
@@ -204,12 +221,18 @@ export function MistakesSection({ mistakes }: { mistakes: CommonMistake[] }) {
   )
 }
 
-export function TakeawaysSection({ lesson }: { lesson: Lesson }) {
+export function TakeawaysSection({
+  lesson,
+  labels = DEFAULT_LABELS,
+}: {
+  lesson: Lesson
+  labels?: LessonLabels
+}) {
   return (
     <div className="relative overflow-hidden rounded-3xl border border-brand-200/80 bg-gradient-to-br from-brand-50 via-white to-purple-50/60 p-5 sm:p-6 dark:border-brand-900/60 dark:from-brand-950/60 dark:via-ink-900 dark:to-purple-950/30">
       <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-400/10 blur-2xl" />
       <p className="relative mb-4 flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.12em] text-brand-700 dark:text-brand-300">
-        <Lightbulb size={15} /> Key takeaways
+        <Lightbulb size={15} /> {labels.takeaways}
       </p>
       <ul className="relative space-y-3">
         {lesson.keyTakeaways.map((t) => (

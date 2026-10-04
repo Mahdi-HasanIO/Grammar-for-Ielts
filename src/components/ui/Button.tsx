@@ -33,21 +33,30 @@ const sizes: Record<Size, string> = {
   lg: 'h-12 px-6 text-[15px] gap-2 rounded-2xl',
 }
 
+/** Button styling for elements that are not <button>, such as router links. */
+export function buttonClasses({
+  variant = 'primary',
+  size = 'md',
+  className,
+}: { variant?: Variant; size?: Size; className?: string } = {}) {
+  return cn(
+    'relative inline-flex select-none items-center justify-center whitespace-nowrap font-semibold',
+    'transition-[transform,background-color,border-color,box-shadow,color,opacity] duration-200 ease-spring',
+    'active:scale-[0.97] disabled:active:scale-100',
+    'focus-ring disabled:cursor-not-allowed disabled:opacity-60',
+    variants[variant],
+    sizes[size],
+    className,
+  )
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', loading = false, disabled, children, ...props }, ref) => (
     <button
       ref={ref}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={cn(
-        'relative inline-flex select-none items-center justify-center whitespace-nowrap font-semibold',
-        'transition-[transform,background-color,border-color,box-shadow,color,opacity] duration-200 ease-spring',
-        'active:scale-[0.97] disabled:active:scale-100',
-        'focus-ring disabled:cursor-not-allowed disabled:opacity-60',
-        variants[variant],
-        sizes[size],
-        className,
-      )}
+      className={buttonClasses({ variant, size, className })}
       {...props}
     >
       {loading ? <Loader2 size={size === 'sm' ? 14 : 16} className="animate-spin" /> : null}

@@ -5,11 +5,15 @@ import {
   BookOpen,
   Check,
   ChevronDown,
+  Dumbbell,
   Flame,
+  House,
   LayoutDashboard,
+  Library,
   Menu,
   Monitor,
   Moon,
+  Newspaper,
   RotateCcw,
   Settings,
   Sun,
@@ -29,11 +33,19 @@ import { DeveloperCredit } from '@/components/DeveloperInfo'
 import { useVisitorCount } from '@/hooks/useVisitorCount'
 
 const NAV = [
-  { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/course', label: 'Course', icon: BookOpen, end: false },
   { to: '/review', label: 'Review', icon: RotateCcw, end: false },
   { to: '/progress', label: 'Progress', icon: BarChart3, end: false },
   { to: '/settings', label: 'Settings', icon: Settings, end: false },
+]
+
+/* Public pages, so learners can leave the workspace without hunting for a link. */
+const EXPLORE = [
+  { to: '/', label: 'Home', icon: House, end: true },
+  { to: '/grammar', label: 'Grammar', icon: Library, end: false },
+  { to: '/blog', label: 'Blog', icon: Newspaper, end: false },
+  { to: '/practice', label: 'Practice', icon: Dumbbell, end: false },
 ]
 
 const THEME_OPTIONS: { value: Preferences['theme']; label: string; icon: typeof Sun }[] = [
@@ -42,7 +54,7 @@ const THEME_OPTIONS: { value: Preferences['theme']; label: string; icon: typeof 
   { value: 'system', label: 'System', icon: Monitor },
 ]
 
-function Logo({ compact = false }: { compact?: boolean }) {
+export function Logo({ compact = false }: { compact?: boolean }) {
   const word = cn(
     'w-auto select-none transition-transform duration-300 ease-spring group-hover:scale-[1.03]',
     compact ? 'h-[22px]' : 'h-7',
@@ -69,10 +81,18 @@ function Logo({ compact = false }: { compact?: boolean }) {
   )
 }
 
-function NavItems({ onNavigate }: { onNavigate?: () => void }) {
+function NavItems({
+  onNavigate,
+  items = NAV,
+  label = 'Main',
+}: {
+  onNavigate?: () => void
+  items?: typeof NAV
+  label?: string
+}) {
   return (
-    <nav className="flex flex-col gap-1" aria-label="Main">
-      {NAV.map(({ to, label, icon: Icon, end }, i) => (
+    <nav className="flex flex-col gap-1" aria-label={label}>
+      {items.map(({ to, label, icon: Icon, end }, i) => (
         <NavLink
           key={to}
           to={to}
@@ -155,7 +175,7 @@ function SidebarSummary() {
 }
 
 /** Small dropdown for switching theme without leaving the page. */
-function ThemeMenu({ align = 'right' }: { align?: 'left' | 'right' }) {
+export function ThemeMenu({ align = 'right' }: { align?: 'left' | 'right' }) {
   const { preferences, setPreferences } = useProgress()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -292,7 +312,7 @@ export function Layout({ children }: { children: ReactNode }) {
         />
         <aside
           className={cn(
-            'safe-bottom absolute inset-y-0 left-0 flex w-[84%] max-w-xs flex-col justify-between bg-ink-50 px-4 py-5 shadow-2xl transition-transform duration-300 ease-spring dark:bg-ink-950',
+            'safe-bottom absolute inset-y-0 left-0 flex w-[84%] max-w-xs flex-col justify-between gap-6 overflow-y-auto bg-ink-50 px-4 py-5 shadow-2xl transition-transform duration-300 ease-spring dark:bg-ink-950',
             open ? 'translate-x-0' : '-translate-x-full',
           )}
         >
@@ -309,6 +329,8 @@ export function Layout({ children }: { children: ReactNode }) {
               </button>
             </div>
             <NavItems onNavigate={() => setOpen(false)} />
+            <p className="label-xs mb-2 mt-6 px-3">Explore</p>
+            <NavItems onNavigate={() => setOpen(false)} items={EXPLORE} label="Explore" />
           </div>
           <div>
             <SidebarSummary />
@@ -318,7 +340,7 @@ export function Layout({ children }: { children: ReactNode }) {
       </div>
 
       {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-20 hidden w-72 flex-col justify-between border-r border-ink-200/70 bg-ink-50/80 px-5 py-6 backdrop-blur-xl lg:flex dark:border-ink-800/70 dark:bg-ink-950/60">
+      <aside className="no-scrollbar fixed inset-y-0 left-0 z-20 hidden w-72 flex-col justify-between gap-6 overflow-y-auto border-r border-ink-200/70 bg-ink-50/80 px-5 py-6 backdrop-blur-xl lg:flex dark:border-ink-800/70 dark:bg-ink-950/60">
         <div>
           <div className="mb-8 flex items-center justify-between px-1">
             <Logo />
@@ -326,6 +348,8 @@ export function Layout({ children }: { children: ReactNode }) {
           </div>
           <p className="label-xs mb-2 px-3">Menu</p>
           <NavItems />
+          <p className="label-xs mb-2 mt-6 px-3">Explore</p>
+          <NavItems items={EXPLORE} label="Explore" />
         </div>
         <div>
           <SidebarSummary />

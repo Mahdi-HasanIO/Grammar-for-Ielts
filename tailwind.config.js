@@ -138,7 +138,9 @@ export default {
       },
       animation: {
         'fade-in': 'fade-in 0.4s ease-out both',
-        'fade-up': 'fade-up 0.5s cubic-bezier(0.16,1,0.3,1) both',
+        // `backwards`, not `both`: holding the end transform would make the animated page
+        // wrapper the containing block for position: fixed children (e.g. the reading bar).
+        'fade-up': 'fade-up 0.5s cubic-bezier(0.16,1,0.3,1) backwards',
         'fade-down': 'fade-down 0.22s cubic-bezier(0.16,1,0.3,1) both',
         'scale-in': 'scale-in 0.35s cubic-bezier(0.16,1,0.3,1) both',
         'pop-in': 'pop-in 0.45s cubic-bezier(0.16,1,0.3,1) both',

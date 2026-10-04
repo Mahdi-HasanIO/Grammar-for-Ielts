@@ -13,20 +13,27 @@ import { Badge } from '@/components/ui/Badge'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { Reveal } from '@/components/ui/Reveal'
 import { cn } from '@/utils/cn'
+import { localizeModule, localizeStage } from '@/utils/i18n'
+import { useLessonLanguage } from '@/hooks/useLessonLanguage'
+import { LanguageChooser, LanguageToggle } from '@/components/lesson/LanguageSwitch'
 
 export function Course() {
   const { state } = useProgress()
+  const { language } = useLessonLanguage()
 
   return (
     <div>
+      <LanguageChooser />
       <PageHeader
         eyebrow="Course"
         title="The grammar roadmap"
         description="Twenty-four modules in a fixed order. Each one unlocks when you pass the test before it, so complexity is only introduced once the foundations are secure."
+        action={<LanguageToggle />}
       />
 
       <div className="relative space-y-12">
-        {STAGES.map((stage) => {
+        {STAGES.map((baseStage) => {
+          const stage = localizeStage(baseStage, language)
           const modules = stageModules(stage.id)
           const { done, total, percentage, status } = stageProgress(state, stage.id)
 
@@ -77,7 +84,7 @@ export function Course() {
                 {modules.map((module, i) => (
                   <ModuleCard
                     key={module.id}
-                    module={module}
+                    module={localizeModule(module, language)}
                     status={getModuleStatus(state, module.id)}
                     bestScore={getModuleProgress(state, module.id).bestScore}
                     style={{ '--i': i } as React.CSSProperties}

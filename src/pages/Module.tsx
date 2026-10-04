@@ -37,6 +37,9 @@ import {
 } from '@/components/lesson/LessonSections'
 import { IeltsRelevance } from '@/components/lesson/IeltsRelevance'
 import { AiPracticePanel } from '@/components/lesson/AiPracticePanel'
+import { LanguageChooser, LanguageToggle } from '@/components/lesson/LanguageSwitch'
+import { useLessonLanguage } from '@/hooks/useLessonLanguage'
+import { lessonLabels, localizeModule } from '@/utils/i18n'
 
 const SECTIONS = [
   { id: 'rule', label: 'Rules', icon: BookOpen },
@@ -152,7 +155,8 @@ function SectionNav({ ids }: { ids: readonly string[] }) {
 
   return (
     <div className="sticky top-[57px] z-20 -mx-4 mb-8 border-y border-ink-200/60 bg-ink-50/80 px-4 py-2 backdrop-blur-xl sm:-mx-6 sm:px-6 lg:top-0 lg:-mx-10 lg:px-10 dark:border-ink-800/60 dark:bg-ink-950/80">
-      <nav ref={barRef} className="no-scrollbar relative flex gap-1.5 overflow-x-auto" aria-label="Lesson sections">
+      <div className="flex items-center gap-3">
+      <nav ref={barRef} className="no-scrollbar relative flex min-w-0 flex-1 gap-1.5 overflow-x-auto" aria-label="Lesson sections">
         {SECTIONS.filter((s) => ids.includes(s.id)).map(({ id, label, icon: Icon }) => (
           <a
             key={id}
@@ -175,6 +179,8 @@ function SectionNav({ ids }: { ids: readonly string[] }) {
           </a>
         ))}
       </nav>
+      <LanguageToggle className="hidden shrink-0 sm:inline-flex" />
+      </div>
     </div>
   )
 }
@@ -182,16 +188,19 @@ function SectionNav({ ids }: { ids: readonly string[] }) {
 export function ModulePage() {
   const { id } = useParams()
   const moduleId = Number(id)
-  const module = moduleById(moduleId)
+  const baseModule = moduleById(moduleId)
+  const { language } = useLessonLanguage()
+  const labels = lessonLabels(language)
 
   const { state, markLessonViewed } = useProgress()
   useStudyTimer(true)
 
   useEffect(() => {
-    if (module) markLessonViewed(moduleId)
-  }, [module, moduleId, markLessonViewed])
+    if (baseModule) markLessonViewed(moduleId)
+  }, [baseModule, moduleId, markLessonViewed])
 
-  if (!module) return <Navigate to="/course" replace />
+  if (!baseModule) return <Navigate to="/course" replace />
+  const module = localizeModule(baseModule, language)
 
   const status = getModuleStatus(state, moduleId)
   if (status === 'locked') {
@@ -214,7 +223,7 @@ export function ModulePage() {
     )
   }
 
-  const lesson = getLesson(moduleId)
+  const lesson = getLesson(moduleId, language)
   const stage = stageById(module.stage)
   const progress = getModuleProgress(state, moduleId)
   const prevModule = moduleById(module.id - 1)
@@ -226,6 +235,7 @@ export function ModulePage() {
 
   return (
     <div>
+      <LanguageChooser />
       <ReadingProgress />
 
       {/* Header */}
@@ -262,6 +272,10 @@ export function ModulePage() {
                 {module.summary}
               </p>
 
+              <div className="mt-4">
+                <LanguageToggle />
+              </div>
+
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 <Badge tone="brand">{module.difficulty}</Badge>
                 <Badge tone="muted">
@@ -294,7 +308,7 @@ export function ModulePage() {
 
       <div className="space-y-14">
         <Reveal>
-          <IeltsRelevance module={module} />
+          <IeltsRelevance module={module} title={labels.ieltsTitle} />
         </Reveal>
 
         {lesson ? (
@@ -303,13 +317,13 @@ export function ModulePage() {
               <SectionTitle
                 step={1}
                 icon={<BookOpen size={18} />}
-                title="The rule"
+                title={labels.theRule}
                 description={lesson.intro}
               />
               <div className="space-y-5">
                 {lesson.rules.map((rule, i) => (
                   <Reveal key={rule.id}>
-                    <RuleCard rule={rule} index={i} />
+                    <RuleCard rule={rule} index={i} labels={labels} />
                   </Reveal>
                 ))}
               </div>
@@ -319,8 +333,8 @@ export function ModulePage() {
               <SectionTitle
                 step={2}
                 icon={<PenLine size={18} />}
-                title="Examples"
-                description="Each pair shows the error, the correction and the reason behind it."
+                title={labels.examples}
+                description={labels.examplesDesc}
               />
               <ExamplesSection examples={lesson.examples} />
             </Reveal>
@@ -329,14 +343,14 @@ export function ModulePage() {
               <SectionTitle
                 step={3}
                 icon={<TriangleAlert size={18} />}
-                title="Common mistakes"
-                description="The errors that cost the most marks in this area."
+                title={labels.mistakes}
+                description={labels.mistakesDesc}
               />
-              <MistakesSection mistakes={lesson.mistakes} />
+              <MistakesSection mistakes={lesson.mistakes} labels={labels} />
             </Reveal>
 
             <Reveal as="section" id="takeaways" className="scroll-mt-32">
-              <TakeawaysSection lesson={lesson} />
+              <TakeawaysSection lesson={lesson} labels={labels} />
             </Reveal>
           </>
         ) : null}
