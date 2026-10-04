@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, ClipboardCheck, Dumbbell, RotateCcw, Sparkles } from 'lucide-react'
 import { GRAMMAR_TOPICS, topicModule } from '@/data/grammarTopics'
-import { STAGES } from '@/data/modules'
+import { MODULES, STAGES } from '@/data/modules'
+import { useHydrated } from '@/hooks/useHydrated'
 import { useProgress } from '@/hooks/useProgress'
-import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { getCurrentModule, completedCount } from '@/utils/progression'
 import { readStorage, STORAGE_KEYS } from '@/utils/storage'
 import { Reveal } from '@/components/ui/Reveal'
@@ -12,13 +12,16 @@ import { buttonClasses } from '@/components/ui/Button'
 import { Blob } from '@/components/public/motion'
 import { Container, SectionHeading } from '@/components/public/PublicUi'
 import { cn } from '@/utils/cn'
+import { OfflineDownload } from '@/components/OfflineDownload'
 
 export function Practice() {
-  useDocumentTitle('Practice')
-  const { state } = useProgress()
-  const current = getCurrentModule(state)
-  const done = completedCount(state)
-  const aiConnected = Boolean(readStorage<string>(STORAGE_KEYS.geminiApiKey, ''))
+  const { state: savedState } = useProgress()
+  // Progress and the AI key live in localStorage, so the prerendered page shows a fresh learner until hydration.
+  const hydrated = useHydrated()
+  const state = hydrated ? savedState : null
+  const current = state ? getCurrentModule(state) : MODULES[0]
+  const done = state ? completedCount(state) : 0
+  const aiConnected = hydrated && Boolean(readStorage<string>(STORAGE_KEYS.geminiApiKey, ''))
 
   const modes = [
     {
@@ -154,6 +157,11 @@ export function Practice() {
         </section>
 
         <Reveal className="mt-16">
+          <h2 className="mb-4 text-[22px] font-extrabold tracking-tight text-ink-900 dark:text-ink-50">Practise offline</h2>
+          <OfflineDownload />
+        </Reveal>
+
+        <Reveal className="mt-8">
           <div className="flex flex-col items-start justify-between gap-5 rounded-3xl border border-ink-200/80 bg-white p-6 shadow-card sm:flex-row sm:items-center sm:p-8 dark:border-ink-800 dark:bg-ink-900">
             <div>
               <h2 className="text-[20px] font-extrabold tracking-tight text-ink-900 dark:text-ink-50">Track your practice</h2>

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, Check, Lightbulb, X } from 'lucide-react'
+import { ArrowRight, Check, Lightbulb, X } from 'lucide-react'
 import { ARTICLES, type BlogBlock } from '@/data/blog/articles'
-import { postBySlug, relatedPosts } from '@/data/blog/posts'
+import { postBySlug, postCover, relatedPosts } from '@/data/blog/posts'
 import { topicBySlug, topicModule } from '@/data/grammarTopics'
 import { Reveal } from '@/components/ui/Reveal'
 import { Badge } from '@/components/ui/Badge'
 import { buttonClasses } from '@/components/ui/Button'
 import { Blob } from '@/components/public/motion'
-import { BlogCard, Container, PostMeta, RichText } from '@/components/public/PublicUi'
+import { BookmarkButton } from '@/components/BookmarkButton'
+import { BlogCard, Breadcrumbs, Container, PostMeta, RichText } from '@/components/public/PublicUi'
 import { useCourseCta } from '@/hooks/useCourseCta'
-import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 function ReadingProgress() {
   const [pct, setPct] = useState(0)
@@ -119,12 +119,12 @@ export function BlogPost() {
   const { slug } = useParams()
   const post = postBySlug(slug)
   const cta = useCourseCta()
-  useDocumentTitle(post?.title)
 
   if (!post) return <Navigate to="/blog" replace />
   const blocks = ARTICLES[post.slug] ?? []
   const topics = post.topics.map((t) => topicBySlug(t)).filter((t) => t !== undefined)
   const related = relatedPosts(post)
+  const cover = postCover(post)
 
   return (
     <div className="relative isolate">
@@ -136,13 +136,10 @@ export function BlogPost() {
 
       <Container className="pt-8 sm:pt-12">
         <article className="mx-auto max-w-[720px]">
-          <Link
-            to="/blog"
-            className="group inline-flex animate-fade-in items-center gap-1.5 rounded-full px-1 text-[13px] font-semibold text-ink-500 transition-colors hover:text-brand-700 focus-ring dark:text-ink-400 dark:hover:text-brand-300"
-          >
-            <ArrowLeft size={14} className="transition-transform duration-200 group-hover:-translate-x-0.5" />
-            All articles
-          </Link>
+          <Breadcrumbs
+            className="animate-fade-in"
+            items={[{ name: 'Home', to: '/' }, { name: 'Blog', to: '/blog' }, { name: post.title }]}
+          />
 
           <header className="mt-6">
             <Link to={`/blog?category=${encodeURIComponent(post.category)}`} className="inline-block animate-fade-up rounded-full focus-ring">
@@ -154,8 +151,25 @@ export function BlogPost() {
             <p className="mt-4 animate-fade-up stagger text-[17px] leading-8 text-ink-600 dark:text-ink-400" style={{ '--i': 2 } as React.CSSProperties}>
               {post.excerpt}
             </p>
-            <PostMeta post={post} className="mt-5 animate-fade-up stagger border-b border-ink-200 pb-6 text-[13.5px] dark:border-ink-800" />
+            <div className="mt-5 flex animate-fade-up stagger flex-wrap items-center justify-between gap-3 border-b border-ink-200 pb-6 dark:border-ink-800">
+              <PostMeta post={post} className="text-[13.5px]" />
+              <BookmarkButton kind="article" path={`/blog/${post.slug}`} title={post.title} />
+            </div>
           </header>
+
+          <figure className="mt-8 overflow-hidden rounded-3xl border border-ink-200/80 shadow-lift dark:border-ink-800">
+            <img
+              src={cover.src}
+              srcSet={cover.srcSet}
+              sizes="(min-width: 768px) 720px, 100vw"
+              alt={cover.alt}
+              width={cover.width}
+              height={cover.height}
+              fetchPriority="high"
+              decoding="async"
+              className="aspect-[16/9] h-auto w-full object-cover"
+            />
+          </figure>
 
           <div className="pb-4">
             {blocks.map((block, i) => (

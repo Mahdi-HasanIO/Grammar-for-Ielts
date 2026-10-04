@@ -88,7 +88,7 @@ function OptionList({
               state === 'idle' &&
                 'border-ink-200 bg-white hover:-translate-y-px hover:border-brand-300 hover:bg-brand-50/40 hover:shadow-card active:scale-[0.99] dark:border-ink-700/80 dark:bg-ink-900 dark:hover:border-brand-700 dark:hover:bg-brand-950/30',
               state === 'selected' &&
-                'border-brand-500 bg-brand-50 text-brand-950 shadow-[0_0_0_3px_rgba(99,102,241,0.15)] dark:border-brand-500 dark:bg-brand-950/60 dark:text-brand-50',
+                'border-brand-500 bg-brand-50 text-brand-950 shadow-[0_0_0_3px_rgba(37,99,235,0.15)] dark:border-brand-500 dark:bg-brand-950/60 dark:text-brand-50',
               state === 'correct' &&
                 'animate-celebrate border-emerald-500 bg-emerald-50 text-emerald-950 shadow-[0_0_0_3px_rgba(16,185,129,0.15)] dark:border-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-50',
               state === 'wrong' &&
@@ -199,7 +199,7 @@ export function QuestionCard({
           spellCheck={false}
           className={cn(
             'mt-5 w-full rounded-xl border px-4 py-3 text-[15px] outline-none transition-[border-color,box-shadow] duration-200',
-            'border-ink-200 bg-white placeholder:text-ink-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(99,102,241,0.15)]',
+            'border-ink-200 bg-white placeholder:text-ink-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(37,99,235,0.15)]',
             'dark:border-ink-700 dark:bg-ink-900 dark:placeholder:text-ink-500',
             showResult && correct && 'border-emerald-500 bg-emerald-50/50 dark:border-emerald-600 dark:bg-emerald-950/30',
             showResult && !correct && 'animate-shake border-rose-500 bg-rose-50/50 dark:border-rose-600 dark:bg-rose-950/30',

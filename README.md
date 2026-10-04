@@ -21,6 +21,25 @@ npm run preview   # serve the production build
 No backend, no database, no authentication. Everything runs in the browser and all progress
 is stored in `localStorage` under the `grammar-path:` prefix.
 
+## Production build, SEO and offline
+
+`npm run build` runs four steps:
+
+1. `tsc -b` type-check
+2. `vite build` – the browser bundle in `dist/`
+3. `vite build --ssr src/entry-server.tsx` – a build-time renderer in `dist-server/` (not deployed)
+4. `node scripts/postbuild.mjs` – prerenders every public page (home, grammar, blog, practice) to
+   static HTML with its own title, description, canonical URL, Open Graph tags and JSON-LD, and writes
+   `sitemap.xml`, `robots.txt`, `offline-manifest.json` and the service worker `sw.js`.
+
+Page metadata lives in `src/seo/meta.ts`. The production domain is set in `src/config/site.ts`
+(`https://grammar-for-ielts.vercel.app`); to use a custom domain, set the `VITE_SITE_URL` environment
+variable in Vercel (e.g. `https://www.example.com`) and redeploy.
+
+`vercel.json` serves prerendered pages via `cleanUrls` and sends every other route (dashboard, course,
+lessons) to the `app.html` shell. Offline Mode ("Download for Offline") is implemented in
+`src/offline/offline.ts` and `scripts/sw-template.js`.
+
 ## The teaching model
 
 The course is sequential. A module unlocks only when the one before it has been passed:

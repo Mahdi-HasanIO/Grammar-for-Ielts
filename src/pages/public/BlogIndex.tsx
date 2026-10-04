@@ -2,14 +2,14 @@ import { useSearchParams } from 'react-router-dom'
 import { BLOG_CATEGORIES, BLOG_POSTS, featuredPost, type BlogCategory } from '@/data/blog/posts'
 import { Reveal } from '@/components/ui/Reveal'
 import { Blob } from '@/components/public/motion'
-import { BlogCard, Container, FeaturedPostCard, SectionHeading } from '@/components/public/PublicUi'
-import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import { BlogCard, Breadcrumbs, Container, FeaturedPostCard, SectionHeading } from '@/components/public/PublicUi'
 import { cn } from '@/utils/cn'
+import { useHydrated } from '@/hooks/useHydrated'
 
 export function BlogIndex() {
-  useDocumentTitle('Blog')
   const [params, setParams] = useSearchParams()
-  const raw = params.get('category')
+  const hydrated = useHydrated()
+  const raw = hydrated ? params.get('category') : null
   const category = BLOG_CATEGORIES.find((c) => c === raw) as BlogCategory | undefined
   const featured = featuredPost()
   const posts = category
@@ -36,6 +36,7 @@ export function BlogIndex() {
 
       <Container className="pt-10 sm:pt-16">
         <div className="animate-fade-up">
+          <Breadcrumbs className="mb-5" items={[{ name: 'Home', to: '/' }, { name: 'Blog' }]} />
           <SectionHeading
             as="h1"
             eyebrow="Blog"
@@ -80,7 +81,7 @@ export function BlogIndex() {
 
         {!category ? (
           <Reveal className="mb-12">
-            <FeaturedPostCard post={featured} />
+            <FeaturedPostCard post={featured} eager />
           </Reveal>
         ) : null}
 

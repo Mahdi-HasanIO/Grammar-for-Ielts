@@ -229,7 +229,7 @@ export function TakeawaysSection({
   labels?: LessonLabels
 }) {
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-brand-200/80 bg-gradient-to-br from-brand-50 via-white to-purple-50/60 p-5 sm:p-6 dark:border-brand-900/60 dark:from-brand-950/60 dark:via-ink-900 dark:to-purple-950/30">
+    <div className="relative overflow-hidden rounded-3xl border border-brand-200/80 bg-gradient-to-br from-brand-50 via-white to-cyan-50/60 p-5 sm:p-6 dark:border-brand-900/60 dark:from-brand-950/60 dark:via-ink-900 dark:to-cyan-950/30">
       <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-400/10 blur-2xl" />
       <p className="relative mb-4 flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.12em] text-brand-700 dark:text-brand-300">
         <Lightbulb size={15} /> {labels.takeaways}

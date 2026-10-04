@@ -109,7 +109,7 @@ export function LanguageChooser() {
         className="relative w-full max-w-md animate-scale-in overflow-hidden rounded-3xl border border-ink-200 bg-white p-6 text-center shadow-lift sm:p-8 dark:border-ink-800 dark:bg-ink-900"
       >
         <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br from-brand-400/25 to-accent-500/25 blur-3xl" />
-        <span className="icon-chip relative mx-auto mb-4 h-12 w-12 bg-gradient-to-br from-brand-50 to-purple-50 text-brand-600 ring-brand-200/70 dark:from-brand-950 dark:to-purple-950/50 dark:text-brand-300 dark:ring-brand-800/60">
+        <span className="icon-chip relative mx-auto mb-4 h-12 w-12 bg-gradient-to-br from-brand-50 to-cyan-50 text-brand-600 ring-brand-200/70 dark:from-brand-950 dark:to-cyan-950/50 dark:text-brand-300 dark:ring-brand-800/60">
           <Languages size={22} />
         </span>
         <h2 id="lang-chooser-title" className="relative text-[22px] font-extrabold tracking-tight text-ink-900 dark:text-ink-50">

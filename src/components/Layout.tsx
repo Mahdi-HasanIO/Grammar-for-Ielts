@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import {
   BarChart3,
+  BookMarked,
   BookOpen,
   Check,
   ChevronDown,
@@ -21,8 +22,8 @@ import {
   X,
 } from 'lucide-react'
 import { cn } from '@/utils/cn'
-import logoWord from '@/assets/logo-wordmark.png'
-import logoWordDark from '@/assets/logo-wordmark-dark.png'
+import logoWord from '@/assets/logo-wordmark.webp'
+import logoWordDark from '@/assets/logo-wordmark-dark.webp'
 import { useProgress } from '@/hooks/useProgress'
 import { useStreak } from '@/hooks/useStreak'
 import { completedCount } from '@/utils/progression'
@@ -31,11 +32,14 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { Preferences } from '@/types'
 import { DeveloperCredit } from '@/components/DeveloperInfo'
 import { useVisitorCount } from '@/hooks/useVisitorCount'
+import { useHydrated } from '@/hooks/useHydrated'
+import { ConnectionStatus } from '@/components/ConnectionStatus'
 
 const NAV = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/course', label: 'Course', icon: BookOpen, end: false },
   { to: '/review', label: 'Review', icon: RotateCcw, end: false },
+  { to: '/bookmarks', label: 'Bookmarks', icon: BookMarked, end: false },
   { to: '/progress', label: 'Progress', icon: BarChart3, end: false },
   { to: '/settings', label: 'Settings', icon: Settings, end: false },
 ]
@@ -65,13 +69,13 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       aria-label="Grammar for IELTS - home"
       className="group inline-flex flex-col items-center gap-1 rounded-lg focus-ring"
     >
-      {/* Wordmark artwork: dark green in light theme, white in dark theme. */}
-      <img src={logoWord} alt="" className={cn(word, 'dark:hidden')} draggable={false} />
-      <img src={logoWordDark} alt="" className={cn(word, 'hidden dark:block')} draggable={false} />
+      {/* Wordmark artwork: deep blue in light theme, white in dark theme. Fixed size avoids layout shift. */}
+      <img src={logoWord} alt="" width={540} height={83} className={cn(word, 'dark:hidden')} draggable={false} />
+      <img src={logoWordDark} alt="" width={540} height={83} className={cn(word, 'hidden dark:block')} draggable={false} />
       {/* Tagline as live text so it stays crisp and readable at small sizes. */}
       <span
         className={cn(
-          'font-logo font-semibold uppercase leading-none text-[#1f7a37] dark:text-white',
+          'font-logo font-semibold uppercase leading-none text-[#1e3a8a] dark:text-white',
           compact ? 'pl-[0.32em] text-[10px] tracking-[0.32em]' : 'pl-[0.38em] text-[12px] tracking-[0.38em]',
         )}
       >
@@ -179,7 +183,9 @@ export function ThemeMenu({ align = 'right' }: { align?: 'left' | 'right' }) {
   const { preferences, setPreferences } = useProgress()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const active = THEME_OPTIONS.find((t) => t.value === preferences.theme) ?? THEME_OPTIONS[2]
+  // Prerendered pages show the default until hydration, then the saved preference.
+  const hydrated = useHydrated()
+  const active = (hydrated && THEME_OPTIONS.find((t) => t.value === preferences.theme)) || THEME_OPTIONS[2]
 
   useEffect(() => {
     if (!open) return
@@ -284,6 +290,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-ink-200/70 bg-white/75 px-4 py-2.5 backdrop-blur-xl lg:hidden dark:border-ink-800/70 dark:bg-ink-950/75">
         <Logo compact />
         <div className="flex items-center gap-1">
+          <ConnectionStatus />
           <ThemeMenu />
           <button
             type="button"
@@ -333,6 +340,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <NavItems onNavigate={() => setOpen(false)} items={EXPLORE} label="Explore" />
           </div>
           <div>
+            <ConnectionStatus className="mb-2" />
             <SidebarSummary />
             <DeveloperCredit />
           </div>
@@ -352,6 +360,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <NavItems items={EXPLORE} label="Explore" />
         </div>
         <div>
+          <ConnectionStatus className="mb-2" />
           <SidebarSummary />
           <DeveloperCredit />
         </div>

@@ -7,17 +7,18 @@ import { STAGES_EN } from '@/data/modulesEn'
 import { Reveal } from '@/components/ui/Reveal'
 import { buttonClasses } from '@/components/ui/Button'
 import { Blob } from '@/components/public/motion'
-import { Container, GrammarCard, SectionHeading } from '@/components/public/PublicUi'
+import { Breadcrumbs, Container, GrammarCard, SectionHeading } from '@/components/public/PublicUi'
 import { useCourseCta } from '@/hooks/useCourseCta'
 import { cn } from '@/utils/cn'
-import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import { useHydrated } from '@/hooks/useHydrated'
 
 export function GrammarIndex() {
-  useDocumentTitle('Grammar topics')
   const [params, setParams] = useSearchParams()
-  const stageParam = Number(params.get('stage'))
+  // Filters come from the URL; ignore them until hydration so the prerendered list matches.
+  const hydrated = useHydrated()
+  const stageParam = hydrated ? Number(params.get('stage')) : 0
   const stage = STAGES.some((s) => s.id === stageParam) ? stageParam : 0
-  const query = params.get('q') ?? ''
+  const query = hydrated ? (params.get('q') ?? '') : ''
   const cta = useCourseCta()
 
   const update = (next: { stage?: number; q?: string }) => {
@@ -52,6 +53,7 @@ export function GrammarIndex() {
 
       <Container className="pt-10 sm:pt-16">
         <div className="animate-fade-up">
+          <Breadcrumbs className="mb-5" items={[{ name: 'Home', to: '/' }, { name: 'Grammar' }]} />
           <SectionHeading
             as="h1"
             eyebrow="Grammar"
@@ -91,7 +93,7 @@ export function GrammarIndex() {
               value={query}
               onChange={(e) => update({ q: e.target.value })}
               placeholder="Search topics, e.g. passive"
-              className="h-11 w-full rounded-xl border border-ink-200 bg-white pl-10 pr-10 text-[14.5px] outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-ink-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(99,102,241,0.15)] dark:border-ink-700 dark:bg-ink-900 dark:placeholder:text-ink-500"
+              className="h-11 w-full rounded-xl border border-ink-200 bg-white pl-10 pr-10 text-[14.5px] outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-ink-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(37,99,235,0.15)] dark:border-ink-700 dark:bg-ink-900 dark:placeholder:text-ink-500"
             />
             {query ? (
               <button
@@ -140,7 +142,7 @@ export function GrammarIndex() {
         )}
 
         <Reveal className="mt-16">
-          <div className="flex flex-col items-start justify-between gap-5 rounded-3xl border border-brand-200/80 bg-gradient-to-br from-brand-50 via-white to-purple-50/60 p-6 sm:flex-row sm:items-center sm:p-8 dark:border-brand-900/60 dark:from-brand-950/60 dark:via-ink-900 dark:to-purple-950/30">
+          <div className="flex flex-col items-start justify-between gap-5 rounded-3xl border border-brand-200/80 bg-gradient-to-br from-brand-50 via-white to-cyan-50/60 p-6 sm:flex-row sm:items-center sm:p-8 dark:border-brand-900/60 dark:from-brand-950/60 dark:via-ink-900 dark:to-cyan-950/30">
             <div>
               <h2 className="text-[20px] font-extrabold tracking-tight text-ink-900 dark:text-ink-50">
                 Prefer a guided path?

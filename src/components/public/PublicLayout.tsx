@@ -9,6 +9,7 @@ import { useCourseCta } from '@/hooks/useCourseCta'
 import { cn } from '@/utils/cn'
 import { BLOG_CATEGORIES } from '@/data/blog/posts'
 import { detectLowPowerDevice } from './motion'
+import { ConnectionStatus } from '@/components/ConnectionStatus'
 
 const PUBLIC_NAV = [
   { to: '/', label: 'Home', end: true },
@@ -92,6 +93,7 @@ function PublicHeader() {
         </nav>
 
         <div className="flex items-center gap-1.5">
+          <ConnectionStatus />
           <ThemeMenu />
           <Link
             to={cta.to}
@@ -207,7 +209,7 @@ function PublicFooter() {
       </div>
       <div className="border-t border-ink-200/70 dark:border-ink-800/70">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-[12.5px] text-ink-500 sm:flex-row sm:px-6 lg:px-8 dark:text-ink-400">
-          <p>© {new Date().getFullYear()} Grammar for IELTS. Progress is saved in your browser.</p>
+          <p suppressHydrationWarning>© {new Date().getFullYear()} Grammar for IELTS. Progress is saved in your browser.</p>
           <div className="[&>a]:mt-0">
             <DeveloperCredit />
           </div>

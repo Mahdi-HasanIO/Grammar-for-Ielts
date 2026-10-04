@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Download, ExternalLink, Eye, EyeOff, Monitor, Moon, Palette, Sparkles, Sun, Target, Trash2, Upload } from 'lucide-react'
+import { CloudDownload, Download, ExternalLink, Eye, EyeOff, Monitor, Moon, Palette, Sparkles, Sun, Target, Trash2, Upload } from 'lucide-react'
 import { useProgress, DEFAULT_PREFERENCES } from '@/hooks/useProgress'
 import type { Preferences, ProgressState } from '@/types'
 import { PageHeader } from '@/components/PageHeader'
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { cn } from '@/utils/cn'
 import { Badge } from '@/components/ui/Badge'
 import { DeveloperCard } from '@/components/DeveloperInfo'
+import { OfflineDownload } from '@/components/OfflineDownload'
 import { readStorage, removeStorage, STORAGE_KEYS, writeStorage } from '@/utils/storage'
 
 const THEMES: { value: Preferences['theme']; label: string; icon: typeof Sun }[] = [
@@ -106,7 +107,7 @@ export function Settings() {
               className={cn(
                 'inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-[13px] font-semibold transition-all duration-200 ease-spring focus-ring active:scale-95',
                 preferences.theme === value
-                  ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-[0_0_0_3px_rgba(99,102,241,0.12)] dark:border-brand-600 dark:bg-brand-950 dark:text-brand-200'
+                  ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-[0_0_0_3px_rgba(37,99,235,0.12)] dark:border-brand-600 dark:bg-brand-950 dark:text-brand-200'
                   : 'border-ink-200 bg-white text-ink-700 hover:-translate-y-px hover:border-ink-300 hover:shadow-card dark:border-ink-700 dark:bg-ink-900 dark:text-ink-200 dark:hover:bg-ink-800',
               )}
             >
@@ -132,13 +133,24 @@ export function Settings() {
               className={cn(
                 'rounded-xl border px-4 py-2.5 text-[13px] font-semibold tabular-nums transition-all duration-200 ease-spring focus-ring active:scale-95',
                 preferences.dailyGoalMinutes === min
-                  ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-[0_0_0_3px_rgba(99,102,241,0.12)] dark:border-brand-600 dark:bg-brand-950 dark:text-brand-200'
+                  ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-[0_0_0_3px_rgba(37,99,235,0.12)] dark:border-brand-600 dark:bg-brand-950 dark:text-brand-200'
                   : 'border-ink-200 bg-white text-ink-700 hover:-translate-y-px hover:border-ink-300 hover:shadow-card dark:border-ink-700 dark:bg-ink-900 dark:text-ink-200 dark:hover:bg-ink-800',
               )}
             >
               {min} min
             </button>
           ))}
+        </CardBody>
+      </Card>
+
+      <Card id="offline" className="scroll-mt-24 overflow-hidden">
+        <CardHeader
+          title="Offline Mode"
+          subtitle="Keep learning without an internet connection"
+          icon={<CloudDownload size={16} />}
+        />
+        <CardBody className="pt-4">
+          <OfflineDownload variant="plain" />
         </CardBody>
       </Card>
 
@@ -158,7 +170,7 @@ export function Settings() {
           }
         />
         <CardBody className="space-y-5 pt-4">
-          <div className="rounded-2xl border border-brand-200/80 bg-gradient-to-br from-brand-50 to-purple-50/60 p-4 text-[13.5px] leading-6 text-ink-800 dark:border-brand-800/60 dark:from-brand-950/50 dark:to-purple-950/30 dark:text-ink-100">
+          <div className="rounded-2xl border border-brand-200/80 bg-gradient-to-br from-brand-50 to-cyan-50/60 p-4 text-[13.5px] leading-6 text-ink-800 dark:border-brand-800/60 dark:from-brand-950/50 dark:to-cyan-950/30 dark:text-ink-100">
             <p className="font-bold">Set up in under a minute (free)</p>
             <ol className="mt-2 space-y-1.5">
               {[
@@ -203,7 +215,7 @@ export function Settings() {
                 placeholder="AIza..."
                 autoComplete="off"
                 spellCheck={false}
-                className="w-full rounded-xl border border-ink-200 bg-white py-3 pl-4 pr-11 font-mono text-sm text-ink-900 outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-ink-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(99,102,241,0.15)] dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100"
+                className="w-full rounded-xl border border-ink-200 bg-white py-3 pl-4 pr-11 font-mono text-sm text-ink-900 outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-ink-400 focus:border-brand-500 focus:shadow-[0_0_0_4px_rgba(37,99,235,0.15)] dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100"
               />
               <button
                 type="button"

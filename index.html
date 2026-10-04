@@ -3,10 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="A sequential grammar course for IELTS Band 8+ and professional English writing." />
+    <script>
+      // Runs before first paint: mark JS as available (scroll reveals hide content only when JS can reveal it)
+      // and apply the saved theme so dark-mode users never see a flash of the light theme.
+      ;(function () {
+        var root = document.documentElement
+        root.classList.add('js')
+        try {
+          var prefs = JSON.parse(localStorage.getItem('grammar-path:preferences') || '{}')
+          var theme = prefs.theme || 'system'
+          if (theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)) {
+            root.classList.add('dark')
+          }
+        } catch (e) {}
+      })()
+    </script>
+    <!-- seo:start -->
+    <title>Grammar for IELTS – IELTS Writing Grammar Course for Band 7-8+</title>
+    <meta
+      name="description"
+      content="A structured grammar course for IELTS Writing Band 7-8+. Clear rules, common mistakes and practice for every topic, with every lesson in English and Bangla."
+    />
+    <!-- seo:end -->
     <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#090d17" media="(prefers-color-scheme: dark)" />
+    <meta name="application-name" content="Grammar for IELTS" />
+    <meta name="apple-mobile-web-app-title" content="Grammar IELTS" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,10 +41,15 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Jost:wght@500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
     />
-    <title>Grammar Path - IELTS Band 8+ &amp; Professional Writing</title>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding: 16px; font-family: sans-serif">
+        Grammar for IELTS works best with JavaScript enabled. Grammar topics and articles are still readable,
+        but practice, tests and progress tracking need JavaScript.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -10,7 +10,7 @@ const tones: Record<Tone, string> = {
   warning: 'bg-amber-50 text-amber-700 ring-amber-200/70 dark:bg-amber-950/60 dark:text-amber-300 dark:ring-amber-800/60',
   danger: 'bg-rose-50 text-rose-700 ring-rose-200/70 dark:bg-rose-950/60 dark:text-rose-300 dark:ring-rose-800/60',
   muted: 'bg-transparent text-ink-500 ring-ink-200 dark:text-ink-400 dark:ring-ink-700',
-  ai: 'bg-gradient-to-r from-brand-50 to-purple-50 text-brand-700 ring-brand-200/80 dark:from-brand-950/80 dark:to-purple-950/60 dark:text-brand-200 dark:ring-brand-800/60',
+  ai: 'bg-gradient-to-r from-brand-50 to-cyan-50 text-brand-700 ring-brand-200/80 dark:from-brand-950/80 dark:to-cyan-950/60 dark:text-brand-200 dark:ring-brand-800/60',
 }
 
 export function Badge({

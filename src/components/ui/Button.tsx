@@ -24,7 +24,7 @@ const variants: Record<Variant, string> = {
   subtle:
     'bg-brand-50 text-brand-700 hover:bg-brand-100 dark:bg-brand-950/70 dark:text-brand-200 dark:hover:bg-brand-900/70',
   ai:
-    'bg-[linear-gradient(110deg,#4f46e5,#9333ea,#6366f1,#4f46e5)] bg-[length:250%_100%] text-white shadow-glow shadow-inner-top animate-gradient-pan hover:shadow-glow-lg disabled:opacity-80',
+    'bg-[linear-gradient(110deg,#2563eb,#0891b2,#3b82f6,#2563eb)] bg-[length:250%_100%] text-white shadow-glow shadow-inner-top animate-gradient-pan hover:shadow-glow-lg disabled:opacity-80',
 }
 
 const sizes: Record<Size, string> = {

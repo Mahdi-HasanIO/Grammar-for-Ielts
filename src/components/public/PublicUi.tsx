@@ -1,9 +1,9 @@
 import { Fragment, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowUpRight, Calendar, Clock } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Calendar, ChevronRight, Clock } from 'lucide-react'
 import type { GrammarTopic } from '@/data/grammarTopics'
 import { topicModule } from '@/data/grammarTopics'
-import { formatPostDate, type BlogPostMeta } from '@/data/blog/posts'
+import { formatPostDate, postCover, type BlogPostMeta } from '@/data/blog/posts'
 import { STAGES } from '@/data/modules'
 import { Badge } from '@/components/ui/Badge'
 import { cn } from '@/utils/cn'
@@ -92,7 +92,7 @@ export function GrammarCard({ topic, style, className }: { topic: GrammarTopic; 
       )}
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-purple-50 font-display text-[14px] font-bold text-brand-700 ring-1 ring-inset ring-brand-200/70 transition-transform duration-300 ease-bounce group-hover:scale-110 group-hover:-rotate-3 dark:from-brand-950 dark:to-purple-950/50 dark:text-brand-200 dark:ring-brand-800/60">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-cyan-50 font-display text-[14px] font-bold text-brand-700 ring-1 ring-inset ring-brand-200/70 transition-transform duration-300 ease-bounce group-hover:scale-110 group-hover:-rotate-3 dark:from-brand-950 dark:to-cyan-950/50 dark:text-brand-200 dark:ring-brand-800/60">
           {module.id}
         </span>
         <Badge tone={DIFFICULTY_TONE[module.difficulty]}>{module.difficulty}</Badge>
@@ -129,37 +129,40 @@ export function PostMeta({ post, className }: { post: BlogPostMeta; className?: 
   )
 }
 
-/** Decorative cover for a post: a gradient panel with the category. No image downloads. */
-function PostCover({ post, large = false }: { post: BlogPostMeta; large?: boolean }) {
-  const hues: Record<string, string> = {
-    'Grammar Tips': 'from-brand-500 via-brand-600 to-accent-600',
-    'IELTS Writing': 'from-sky-500 via-brand-600 to-brand-700',
-    'Task 1': 'from-emerald-500 via-teal-600 to-brand-600',
-    'Task 2': 'from-accent-500 via-brand-600 to-brand-700',
-    'Study Strategy': 'from-amber-500 via-orange-500 to-rose-500',
-  }
+/** Article cover: a bundled, topic-specific illustration with responsive sources. */
+export function PostCover({
+  post,
+  large = false,
+  eager = false,
+  sizes = '(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw',
+}: {
+  post: BlogPostMeta
+  large?: boolean
+  eager?: boolean
+  sizes?: string
+}) {
+  const cover = postCover(post)
   return (
     <div
       className={cn(
-        'relative overflow-hidden bg-gradient-to-br',
-        hues[post.category] ?? hues['Grammar Tips'],
-        large ? 'aspect-[16/9] md:aspect-auto md:h-full md:min-h-[280px]' : 'aspect-[16/8]',
+        'relative overflow-hidden bg-ink-100 dark:bg-ink-800',
+        large ? 'aspect-[16/9] md:aspect-auto md:h-full md:min-h-[300px]' : 'aspect-[16/9]',
       )}
-      aria-hidden
     >
-      <div
-        className="absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
-          backgroundSize: '20px 20px',
-        }}
+      <img
+        src={cover.src}
+        srcSet={cover.srcSet}
+        sizes={sizes}
+        alt={cover.alt}
+        width={cover.width}
+        height={cover.height}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        {...(eager ? { fetchPriority: 'high' as const } : {})}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.04]"
       />
-      <div className="absolute -bottom-10 -right-8 h-40 w-40 rounded-full bg-white/15 blur-2xl transition-transform duration-700 ease-spring group-hover:scale-125" />
-      <span className="absolute left-4 top-4 rounded-full bg-white/20 px-3 py-1 text-[11.5px] font-bold uppercase tracking-wider text-white ring-1 ring-inset ring-white/30 backdrop-blur">
+      <span className="absolute left-3 top-3 rounded-full bg-ink-950/70 px-3 py-1 text-[11.5px] font-bold uppercase tracking-wider text-white backdrop-blur">
         {post.category}
-      </span>
-      <span className="absolute bottom-3 right-4 font-serif text-[64px] leading-none text-white/25 transition-transform duration-500 ease-spring group-hover:-translate-y-1">
-        “
       </span>
     </div>
   )
@@ -191,13 +194,13 @@ export function BlogCard({ post, style, className }: { post: BlogPostMeta; style
   )
 }
 
-export function FeaturedPostCard({ post }: { post: BlogPostMeta }) {
+export function FeaturedPostCard({ post, eager = false }: { post: BlogPostMeta; eager?: boolean }) {
   return (
     <Link
       to={`/blog/${post.slug}`}
       className="group grid overflow-hidden rounded-3xl border border-ink-200/80 bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-spring hover:-translate-y-1 hover:shadow-lift focus-ring md:grid-cols-2 dark:border-ink-800 dark:bg-ink-900"
     >
-      <PostCover post={post} large />
+      <PostCover post={post} large eager={eager} sizes="(min-width: 768px) 560px, 100vw" />
       <div className="flex flex-col justify-center p-6 sm:p-8">
         <Badge tone="ai" className="self-start">Featured</Badge>
         <h3 className="mt-3 text-[22px] font-extrabold leading-tight tracking-tight text-ink-900 transition-colors group-hover:text-brand-700 sm:text-[26px] dark:text-ink-50 dark:group-hover:text-brand-300">
@@ -236,5 +239,29 @@ export function RichText({ text }: { text: string }) {
         )
       })}
     </>
+  )
+}
+
+/** Visible breadcrumb trail. Mirrors the BreadcrumbList structured data in src/seo/meta.ts. */
+export function Breadcrumbs({ items, className }: { items: { name: string; to?: string }[]; className?: string }) {
+  return (
+    <nav aria-label="Breadcrumb" className={className}>
+      <ol className="flex flex-wrap items-center gap-1.5 text-[13px] font-medium text-ink-500 dark:text-ink-400">
+        {items.map((item, i) => (
+          <li key={item.name} className="flex min-w-0 items-center gap-1.5">
+            {i > 0 ? <ChevronRight size={13} aria-hidden className="shrink-0" /> : null}
+            {item.to ? (
+              <Link to={item.to} className="rounded transition-colors hover:text-brand-700 focus-ring dark:hover:text-brand-300">
+                {item.name}
+              </Link>
+            ) : (
+              <span aria-current="page" className="truncate text-ink-800 dark:text-ink-200">
+                {item.name}
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
   )
 }

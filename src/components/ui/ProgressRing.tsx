@@ -41,8 +41,8 @@ export function ProgressRing({
       <svg width={size} height={size} className="-rotate-90" aria-hidden>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor={inverted ? '#ffffff' : '#6366f1'} />
-            <stop offset="100%" stopColor={inverted ? '#e9d5ff' : '#a855f7'} />
+            <stop offset="0%" stopColor={inverted ? '#ffffff' : '#3b82f6'} />
+            <stop offset="100%" stopColor={inverted ? '#cffafe' : '#06b6d4'} />
           </linearGradient>
         </defs>
         <circle

@@ -38,6 +38,7 @@ import {
 import { IeltsRelevance } from '@/components/lesson/IeltsRelevance'
 import { AiPracticePanel } from '@/components/lesson/AiPracticePanel'
 import { LanguageChooser, LanguageToggle } from '@/components/lesson/LanguageSwitch'
+import { BookmarkButton } from '@/components/BookmarkButton'
 import { useLessonLanguage } from '@/hooks/useLessonLanguage'
 import { lessonLabels, localizeModule } from '@/utils/i18n'
 
@@ -64,7 +65,7 @@ function SectionTitle({
   return (
     <div className="mb-5">
       <div className="flex items-center gap-3">
-        <span className="icon-chip h-10 w-10 bg-gradient-to-br from-brand-50 to-purple-50 text-brand-600 ring-brand-200/70 dark:from-brand-950 dark:to-purple-950/50 dark:text-brand-300 dark:ring-brand-800/60">
+        <span className="icon-chip h-10 w-10 bg-gradient-to-br from-brand-50 to-cyan-50 text-brand-600 ring-brand-200/70 dark:from-brand-950 dark:to-cyan-950/50 dark:text-brand-300 dark:ring-brand-800/60">
           {icon}
         </span>
         <div>
@@ -272,8 +273,9 @@ export function ModulePage() {
                 {module.summary}
               </p>
 
-              <div className="mt-4">
+              <div className="mt-4 flex flex-wrap items-center gap-2">
                 <LanguageToggle />
+                <BookmarkButton kind="lesson" path={`/module/${module.id}`} title={`Module ${module.id}: ${module.title}`} />
               </div>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">

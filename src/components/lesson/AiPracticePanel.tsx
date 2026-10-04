@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import {
   AlertCircle,
@@ -9,9 +9,11 @@ import {
   Sparkles,
   Trophy,
   Wand2,
+  WifiOff,
 } from 'lucide-react'
 import type { Lesson, ModuleMeta } from '@/types'
 import { useAiPractice } from '@/hooks/useAiPractice'
+import { useOnlineStatus } from '@/hooks/useOnlineStatus'
 import { useProgress } from '@/hooks/useProgress'
 import { AI_SET_SIZE, type AiDifficulty } from '@/utils/aiPractice'
 import { isCorrect } from '@/utils/answers'
@@ -44,7 +46,7 @@ function GeneratingBanner() {
 
   return (
     <div
-      className="relative mb-4 animate-scale-in overflow-hidden rounded-2xl border border-brand-200 bg-gradient-to-r from-brand-50 via-white to-purple-50 px-4 py-3.5 dark:border-brand-800/60 dark:from-brand-950/70 dark:via-ink-900 dark:to-purple-950/40"
+      className="relative mb-4 animate-scale-in overflow-hidden rounded-2xl border border-brand-200 bg-gradient-to-r from-brand-50 via-white to-cyan-50 px-4 py-3.5 dark:border-brand-800/60 dark:from-brand-950/70 dark:via-ink-900 dark:to-cyan-950/40"
       role="status"
       aria-live="polite"
     >
@@ -71,7 +73,11 @@ function GeneratingBanner() {
 export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson?: Lesson }) {
   const { recordAnswers, markPracticeCompleted } = useProgress()
   const ai = useAiPractice(module, lesson)
-  const { questions, usingAi, status, hasKey, generation, generate } = ai
+  const { questions, usingAi, status, hasKey, generation } = ai
+  // AI generation needs the network. Offline, every trigger is disabled and nothing is faked;
+  // the built-in questions stay available and the buttons come back when the connection does.
+  const online = useOnlineStatus()
+  const generate = useCallback(() => (navigator.onLine ? ai.generate() : Promise.resolve()), [ai.generate])
 
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [checked, setChecked] = useState<Record<string, boolean>>({})
@@ -96,7 +102,7 @@ export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson
   // the lesson doesn't spend API quota.
   useEffect(() => {
     const node = rootRef.current
-    if (!node || !hasKey || usingAi || status !== 'idle' || autoTried.current) return
+    if (!node || !online || !hasKey || usingAi || status !== 'idle' || autoTried.current) return
     if (typeof IntersectionObserver === 'undefined') return
     const observer = new IntersectionObserver(
       (entries) => {
@@ -110,7 +116,7 @@ export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson
     )
     observer.observe(node)
     return () => observer.disconnect()
-  }, [hasKey, usingAi, status, generate])
+  }, [online, hasKey, usingAi, status, generate])
 
   const loading = status === 'loading'
   const answeredAll = questions.every((q) => (answers[q.id] ?? '').length > 0)
@@ -127,7 +133,7 @@ export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson
   return (
     <div ref={rootRef}>
       {/* Control panel */}
-      <div className="relative mb-5 overflow-hidden rounded-3xl border border-brand-200/70 bg-gradient-to-br from-white via-brand-50/60 to-purple-50/70 p-5 shadow-card sm:p-6 dark:border-brand-900/60 dark:from-ink-900 dark:via-brand-950/40 dark:to-purple-950/30">
+      <div className="relative mb-5 overflow-hidden rounded-3xl border border-brand-200/70 bg-gradient-to-br from-white via-brand-50/60 to-cyan-50/70 p-5 shadow-card sm:p-6 dark:border-brand-900/60 dark:from-ink-900 dark:via-brand-950/40 dark:to-cyan-950/30">
         <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent-500/10 blur-3xl" />
         <div className="relative">
           <div className="flex flex-wrap items-start justify-between gap-3">
@@ -185,6 +191,7 @@ export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson
                 variant="ai"
                 onClick={() => void generate()}
                 loading={loading}
+                disabled={!online}
                 className="w-full sm:w-auto"
               >
                 {!loading ? (usingAi ? <RefreshCw size={15} /> : <Sparkles size={15} />) : null}
@@ -211,6 +218,19 @@ export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson
               </Link>
             </div>
           )}
+
+          {!online ? (
+            <p
+              role="status"
+              className="mt-4 flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-2.5 text-[13px] leading-6 text-amber-900 dark:border-amber-900/70 dark:bg-amber-950/40 dark:text-amber-100"
+            >
+              <WifiOff size={15} className="mt-1 shrink-0" aria-hidden />
+              <span>
+                AI Practice Generation requires an internet connection. The built-in practice set below works
+                offline.
+              </span>
+            </p>
+          ) : null}
 
           {/* Current set status */}
           <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-ink-500 dark:text-ink-400">
@@ -245,7 +265,7 @@ export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson
             {!usingAi ? <p className="opacity-80">Showing the built-in practice set for now.</p> : null}
           </div>
           {hasKey ? (
-            <Button size="sm" variant="secondary" onClick={() => void generate()} className="shrink-0">
+            <Button size="sm" variant="secondary" onClick={() => void generate()} disabled={!online} className="shrink-0">
               <RefreshCw size={13} /> Retry
             </Button>
           ) : null}
@@ -316,7 +336,7 @@ export function AiPracticePanel({ module, lesson }: { module: ModuleMeta; lesson
               </p>
             </div>
             {hasKey ? (
-              <Button variant="ai" size="sm" onClick={() => void generate()}>
+              <Button variant="ai" size="sm" onClick={() => void generate()} disabled={!online}>
                 <RefreshCw size={14} /> New AI set
               </Button>
             ) : null}

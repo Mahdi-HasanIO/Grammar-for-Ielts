@@ -4,7 +4,6 @@ import {
   ArrowRight,
   BookOpen,
   CheckCircle2,
-  ChevronRight,
   Clock,
   Dumbbell,
   Lock,
@@ -20,7 +19,6 @@ import { getPracticeQuestions } from '@/data/questions'
 import { BLOG_POSTS } from '@/data/blog/posts'
 import { useProgress } from '@/hooks/useProgress'
 import { useLessonLanguage } from '@/hooks/useLessonLanguage'
-import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { getCurrentModule, getModuleProgress, getModuleStatus } from '@/utils/progression'
 import { lessonLabels, localizeModule } from '@/utils/i18n'
 import { Badge } from '@/components/ui/Badge'
@@ -30,8 +28,12 @@ import { QuestionCard } from '@/components/lesson/QuestionCard'
 import { IeltsRelevance } from '@/components/lesson/IeltsRelevance'
 import { LanguageToggle } from '@/components/lesson/LanguageSwitch'
 import { Blob } from '@/components/public/motion'
-import { BlogCard, Container, DIFFICULTY_TONE, GrammarCard } from '@/components/public/PublicUi'
-import type { ModuleMeta } from '@/types'
+import { BookmarkButton } from '@/components/BookmarkButton'
+import { BlogCard, Breadcrumbs, Container, DIFFICULTY_TONE, GrammarCard } from '@/components/public/PublicUi'
+import type { ModuleMeta, ProgressState } from '@/types'
+import { useHydrated } from '@/hooks/useHydrated'
+
+const EMPTY_STATE: ProgressState = { modules: {}, attempts: [], activity: {}, badges: [], xp: 0, startedAt: '' }
 
 function QuickPractice({ module }: { module: ModuleMeta }) {
   const questions = getPracticeQuestions(module.id)
@@ -96,7 +98,7 @@ function QuickPractice({ module }: { module: ModuleMeta }) {
 function SectionTitle({ icon, title, id }: { icon: React.ReactNode; title: string; id?: string }) {
   return (
     <h2 id={id} className="mb-4 flex scroll-mt-24 items-center gap-3 text-[20px] font-extrabold tracking-tight text-ink-900 dark:text-ink-50">
-      <span className="icon-chip h-9 w-9 bg-gradient-to-br from-brand-50 to-purple-50 text-brand-600 ring-brand-200/70 dark:from-brand-950 dark:to-purple-950/50 dark:text-brand-300 dark:ring-brand-800/60">
+      <span className="icon-chip h-9 w-9 bg-gradient-to-br from-brand-50 to-cyan-50 text-brand-600 ring-brand-200/70 dark:from-brand-950 dark:to-cyan-950/50 dark:text-brand-300 dark:ring-brand-800/60">
         {icon}
       </span>
       {title}
@@ -108,8 +110,10 @@ export function GrammarTopic() {
   const { slug } = useParams()
   const topic = topicBySlug(slug)
   const { chosen } = useLessonLanguage()
-  const { state } = useProgress()
-  useDocumentTitle(topic?.name)
+  const { state: savedState } = useProgress()
+  // Learner progress lives in localStorage, so the prerendered page uses a fresh state until hydration.
+  const hydrated = useHydrated()
+  const state = hydrated ? savedState : EMPTY_STATE
 
   if (!topic) return <Navigate to="/grammar" replace />
 
@@ -137,21 +141,10 @@ export function GrammarTopic() {
       </div>
 
       <Container className="pt-8 sm:pt-12">
-        <nav aria-label="Breadcrumb" className="mb-6 animate-fade-in">
-          <ol className="flex flex-wrap items-center gap-1.5 text-[13px] font-medium text-ink-500 dark:text-ink-400">
-            <li>
-              <Link to="/grammar" className="rounded transition-colors hover:text-brand-700 focus-ring dark:hover:text-brand-300">
-                Grammar
-              </Link>
-            </li>
-            <li aria-hidden>
-              <ChevronRight size={13} />
-            </li>
-            <li aria-current="page" className="text-ink-800 dark:text-ink-200">
-              {topic.name}
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumbs
+          className="mb-6 animate-fade-in"
+          items={[{ name: 'Home', to: '/' }, { name: 'Grammar', to: '/grammar' }, { name: topic.name }]}
+        />
 
         {/* Header */}
         <header className="grid gap-8 lg:grid-cols-[1fr_320px] lg:items-end">
@@ -188,6 +181,7 @@ export function GrammarTopic() {
                 <Dumbbell size={16} className="transition-transform duration-300 group-hover:-rotate-12" />
                 Practice
               </a>
+              <BookmarkButton kind="grammar" path={`/grammar/${topic.slug}`} title={topic.name} className="h-12 justify-center rounded-2xl px-5" />
             </div>
             {status === 'locked' ? (
               <p className="mt-3 text-[13px] text-ink-500 dark:text-ink-400">
@@ -345,7 +339,7 @@ export function GrammarTopic() {
                 </ul>
               </div>
             ) : null}
-            <div className="rounded-2xl border border-brand-200/80 bg-gradient-to-br from-brand-50 to-purple-50/60 p-5 dark:border-brand-900/60 dark:from-brand-950/60 dark:to-purple-950/30">
+            <div className="rounded-2xl border border-brand-200/80 bg-gradient-to-br from-brand-50 to-cyan-50/60 p-5 dark:border-brand-900/60 dark:from-brand-950/60 dark:to-cyan-950/30">
               <p className="text-[14px] font-bold text-ink-900 dark:text-ink-50">Learn it properly</p>
               <p className="mt-1 text-[13px] leading-5 text-ink-600 dark:text-ink-400">
                 Full lesson, worked examples and a 10-question test in the course.

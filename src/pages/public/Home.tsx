@@ -37,7 +37,7 @@ import {
 } from '@/components/public/PublicUi'
 import { useCourseCta } from '@/hooks/useCourseCta'
 import { cn } from '@/utils/cn'
-import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import { OfflineDownload } from '@/components/OfflineDownload'
 
 /** Every module has 4 practice questions and a 10-question test. */
 const QUESTION_COUNT = MODULES.length * 14
@@ -520,14 +520,14 @@ function Features() {
                 <span className="icon-chip h-12 w-12 bg-gradient-to-br from-sky-50 to-brand-50 text-sky-600 ring-sky-200/70 dark:from-sky-950/60 dark:to-brand-950 dark:text-sky-300 dark:ring-sky-800/60">
                   <CloudOff size={22} />
                 </span>
-                <Badge tone="warning">Coming soon</Badge>
+                <Badge tone="success">Works offline</Badge>
               </div>
               <h2 className="mt-5 text-[22px] font-extrabold leading-tight tracking-tight text-ink-900 dark:text-ink-50">
                 Offline learning
               </h2>
               <p className="mt-3 text-[14.5px] leading-7 text-ink-600 dark:text-ink-400">
                 Install Grammar for IELTS on your phone and keep studying on the bus, in a power cut or
-                anywhere without a connection. Lessons, practice and progress will all work offline.
+                anywhere without a connection. Lessons, practice and your progress all work offline.
               </p>
               <ul className="mt-5 space-y-2.5 text-[14px] text-ink-700 dark:text-ink-300">
                 {[
@@ -541,6 +541,7 @@ function Features() {
                   </li>
                 ))}
               </ul>
+              <OfflineDownload variant="plain" className="mt-6 border-t border-dashed border-ink-200 pt-5 dark:border-ink-800" />
             </div>
           </Reveal>
         </div>
@@ -598,7 +599,7 @@ function Why() {
           {WHY.map(({ icon: Icon, title, text }, i) => (
             <Reveal key={title} delay={(i % 3) * 90} className="h-full">
               <div className="group h-full rounded-2xl border border-ink-200/80 bg-white/70 p-6 backdrop-blur-sm transition-[transform,box-shadow,background-color] duration-300 ease-spring hover:-translate-y-1 hover:bg-white hover:shadow-lift dark:border-ink-800 dark:bg-ink-900/60 dark:hover:bg-ink-900">
-                <span className="icon-chip h-11 w-11 bg-gradient-to-br from-brand-50 to-purple-50 text-brand-600 ring-brand-200/70 transition-transform duration-300 ease-bounce group-hover:-translate-y-0.5 group-hover:scale-110 dark:from-brand-950 dark:to-purple-950/50 dark:text-brand-300 dark:ring-brand-800/60">
+                <span className="icon-chip h-11 w-11 bg-gradient-to-br from-brand-50 to-cyan-50 text-brand-600 ring-brand-200/70 transition-transform duration-300 ease-bounce group-hover:-translate-y-0.5 group-hover:scale-110 dark:from-brand-950 dark:to-cyan-950/50 dark:text-brand-300 dark:ring-brand-800/60">
                   <Icon size={20} />
                 </span>
                 <h3 className="mt-4 text-[16.5px] font-bold tracking-tight text-ink-900 dark:text-ink-50">{title}</h3>
@@ -697,7 +698,6 @@ function FinalCta() {
 }
 
 export function Home() {
-  useDocumentTitle()
   return (
     <>
       <Hero />

@@ -8,6 +8,8 @@ export function useVisitorCount(): State {
 
   useEffect(() => {
     let alive = true
+    // The counter is an online-only nicety; skip the request entirely when offline.
+    if (!navigator.onLine) return
     getVisitorCount().then((count) => {
       if (alive) setState(count === null ? { status: 'error' } : { status: 'ready', count })
     })

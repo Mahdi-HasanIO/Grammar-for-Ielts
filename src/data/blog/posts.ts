@@ -16,6 +16,8 @@ export interface BlogPostMeta {
   slug: string
   title: string
   excerpt: string
+  /** Describes what the cover illustration shows, for screen readers and image search. */
+  coverAlt: string
   category: BlogCategory
   /** ISO date (YYYY-MM-DD). */
   date: string
@@ -29,6 +31,8 @@ export interface BlogPostMeta {
 const POSTS: Omit<BlogPostMeta, 'readingMinutes'>[] = [
   {
     slug: 'common-grammar-mistakes-in-ielts',
+    coverAlt:
+      'An IELTS Task 2 essay page marked in red pen, correcting subject-verb agreement, an article error and a comma splice.',
     title: '10 Common Grammar Mistakes in IELTS Writing (and How to Fix Them)',
     excerpt:
       'The errors examiners see most often are not advanced at all. Here are the ten that cost the most marks, with a quick fix for each.',
@@ -39,6 +43,8 @@ const POSTS: Omit<BlogPostMeta, 'readingMinutes'>[] = [
   },
   {
     slug: 'how-to-improve-ielts-writing-grammar',
+    coverAlt:
+      'A rising staircase chart from Band 6 to Band 8, labelled accuracy, range and control.',
     title: 'How to Improve Your IELTS Writing Grammar Score',
     excerpt:
       'What Grammatical Range and Accuracy actually measures, why accuracy comes before complexity, and a practical plan to move from Band 6 to Band 7 and beyond.',
@@ -48,6 +54,8 @@ const POSTS: Omit<BlogPostMeta, 'readingMinutes'>[] = [
   },
   {
     slug: 'how-to-use-complex-sentences-in-ielts',
+    coverAlt:
+      'A sentence diagram joining the subordinate clause "Although the scheme was costly" to the main clause "it reduced emissions".',
     title: 'How to Use Complex Sentences in IELTS (Without Making Errors)',
     excerpt:
       'Complex sentences only help your band score when they are accurate. Five safe structures, the mistakes to avoid, and how many you really need.',
@@ -57,6 +65,8 @@ const POSTS: Omit<BlogPostMeta, 'readingMinutes'>[] = [
   },
   {
     slug: 'articles-a-an-the-for-ielts',
+    coverAlt:
+      'Cards showing the articles a, an, the and zero article next to three questions: countable, singular, specific.',
     title: 'A, An or The? A Simple Article System for IELTS Writers',
     excerpt:
       'Articles are small, but a single essay needs around a hundred article decisions. A three-question system that makes them almost automatic.',
@@ -66,6 +76,8 @@ const POSTS: Omit<BlogPostMeta, 'readingMinutes'>[] = [
   },
   {
     slug: 'describing-trends-in-ielts-task-1',
+    coverAlt:
+      'A line graph from 2000 to 2020 annotated with the phrases rose by 20%, peaked at 90m and fell to 60m.',
     title: 'Describing Trends in IELTS Task 1: Grammar That Gets the Numbers Right',
     excerpt:
       'Rose by or rose to? A sharp rise or rose sharply? The small grammar choices that decide whether your Task 1 report is accurate.',
@@ -75,6 +87,8 @@ const POSTS: Omit<BlogPostMeta, 'readingMinutes'>[] = [
   },
   {
     slug: 'hedging-in-ielts-task-2',
+    coverAlt:
+      'A certainty scale running from will and should to may, might and cannot, above a sentence softened from "always improves" to "can improve".',
     title: 'Sound Academic Without Overclaiming: Hedging in IELTS Task 2',
     excerpt:
       'Absolute claims invite counter-examples. Learn the hedging toolkit that keeps your arguments strong, measured and defensible.',
@@ -84,6 +98,8 @@ const POSTS: Omit<BlogPostMeta, 'readingMinutes'>[] = [
   },
   {
     slug: 'ielts-grammar-study-plan',
+    coverAlt:
+      'A six-week grammar study calendar with the first two weeks ticked off and topics for each week.',
     title: 'A 6-Week IELTS Grammar Study Plan That Actually Works',
     excerpt:
       'Studying grammar in the right order saves weeks. A week-by-week plan that builds accuracy first, then complexity, then style.',
@@ -121,11 +137,44 @@ export function relatedPosts(post: BlogPostMeta, limit = 3): BlogPostMeta[] {
     .map((x) => x.post)
 }
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+/** "22 Sep 2026". Formatted by hand so build-time HTML and the browser always agree. */
 export function formatPostDate(iso: string): string {
   const [y, m, d] = iso.split('-').map(Number)
-  return new Date(y, m - 1, d).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })
+  return `${d} ${MONTHS[m - 1]} ${y}`
+}
+
+/* Covers are bundled in /public/blog/covers so they are cached for offline reading. */
+const COVER_SLUGS = new Set([
+  'common-grammar-mistakes-in-ielts',
+  'how-to-improve-ielts-writing-grammar',
+  'how-to-use-complex-sentences-in-ielts',
+  'articles-a-an-the-for-ielts',
+  'describing-trends-in-ielts-task-1',
+  'hedging-in-ielts-task-2',
+  'ielts-grammar-study-plan',
+])
+
+export interface CoverImage {
+  src: string
+  srcSet: string
+  /** 1200x630 JPEG for Open Graph and Twitter cards. */
+  og: string
+  alt: string
+  width: number
+  height: number
+}
+
+export function postCover(post: Pick<BlogPostMeta, 'slug' | 'coverAlt'>): CoverImage {
+  const known = COVER_SLUGS.has(post.slug)
+  const base = `/blog/covers/${known ? post.slug : 'default'}`
+  return {
+    src: `${base}-800.webp`,
+    srcSet: `${base}-800.webp 800w, ${base}-1600.webp 1600w`,
+    og: `${base}-og.jpg`,
+    alt: known ? post.coverAlt : 'Grammar for IELTS article cover',
+    width: 1600,
+    height: 900,
+  }
 }

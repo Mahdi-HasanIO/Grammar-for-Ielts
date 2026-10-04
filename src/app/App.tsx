@@ -6,6 +6,7 @@ import { Layout } from '@/components/Layout'
 import { PublicLayout } from '@/components/public/PublicLayout'
 import { Home } from '@/pages/public/Home'
 import { Skeleton } from '@/components/ui/Skeleton'
+import { SeoManager } from '@/seo/SeoManager'
 
 /* The lesson and question banks are large, so the content-heavy routes load on demand. */
 const Dashboard = lazy(() => import('@/pages/Dashboard').then((m) => ({ default: m.Dashboard })))
@@ -17,6 +18,7 @@ const ProgressPage = lazy(() =>
   import('@/pages/Progress').then((m) => ({ default: m.ProgressPage })),
 )
 const Settings = lazy(() => import('@/pages/Settings').then((m) => ({ default: m.Settings })))
+const Bookmarks = lazy(() => import('@/pages/Bookmarks').then((m) => ({ default: m.Bookmarks })))
 
 /* Public pages. The homepage is eager so the landing page paints without a second request. */
 const GrammarIndex = lazy(() =>
@@ -59,26 +61,30 @@ function ThemedRoutes() {
   useTheme()
 
   return (
-    <Routes>
-      <Route element={<PublicLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/grammar" element={<GrammarIndex />} />
-        <Route path="/grammar/:slug" element={<GrammarTopic />} />
-        <Route path="/blog" element={<BlogIndex />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/practice" element={<Practice />} />
-      </Route>
-      <Route element={<Workspace />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/course" element={<Course />} />
-        <Route path="/module/:id" element={<ModulePage />} />
-        <Route path="/module/:id/test" element={<TestPage />} />
-        <Route path="/review" element={<Review />} />
-        <Route path="/progress" element={<ProgressPage />} />
-        <Route path="/settings" element={<Settings />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <SeoManager />
+      <Routes>
+        <Route element={<PublicLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/grammar" element={<GrammarIndex />} />
+          <Route path="/grammar/:slug" element={<GrammarTopic />} />
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/practice" element={<Practice />} />
+        </Route>
+        <Route element={<Workspace />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/course" element={<Course />} />
+          <Route path="/module/:id" element={<ModulePage />} />
+          <Route path="/module/:id/test" element={<TestPage />} />
+          <Route path="/review" element={<Review />} />
+          <Route path="/progress" element={<ProgressPage />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   )
 }
 

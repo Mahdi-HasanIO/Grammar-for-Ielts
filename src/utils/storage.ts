@@ -8,6 +8,10 @@ export const STORAGE_KEYS = {
   geminiApiKey: `${PREFIX}geminiApiKey`,
   /** 'en' | 'bn': the learner's chosen lesson language. Absent until they choose. */
   lessonLanguage: `${PREFIX}lessonLanguage`,
+  /** Saved grammar topics, articles and lessons. */
+  bookmarks: `${PREFIX}bookmarks`,
+  /** Offline Mode: whether the learner downloaded content, and when. */
+  offline: `${PREFIX}offline`,
   /** Per-module suffix: the AI practice set currently shown (sessionStorage). */
   aiSetPrefix: `${PREFIX}ai-set:`,
   /** Per-module suffix: stems of AI questions already seen, to avoid repeats. */

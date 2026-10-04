@@ -87,15 +87,17 @@ export function CountUp({
   className?: string
 }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const [shown, setShown] = useState(0)
+  // Starts at the final value so prerendered HTML and no-JS readers see real numbers.
+  const [shown, setShown] = useState(value)
 
   useEffect(() => {
     const node = ref.current
     if (!node) return
-    if (motionReduced() || typeof IntersectionObserver === 'undefined') {
-      setShown(value)
-      return
-    }
+    if (motionReduced() || typeof IntersectionObserver === 'undefined') return
+    // Already on screen at load: keep the real number rather than flashing to zero.
+    const rect = node.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) return
+    setShown(0)
     let frame = 0
     const observer = new IntersectionObserver(
       (entries) => {
