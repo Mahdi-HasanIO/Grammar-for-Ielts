@@ -2,7 +2,7 @@ import { useEffect, useState, type CSSProperties } from 'react'
 import { Check, Lightbulb, Sparkles, X } from 'lucide-react'
 import type { Question } from '@/types'
 import { cn } from '@/utils/cn'
-import { isCorrect, QUESTION_TYPE_LABEL } from '@/utils/answers'
+import { isCorrect, isTypedQuestion, QUESTION_TYPE_LABEL } from '@/utils/answers'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 
@@ -137,7 +137,7 @@ export function QuestionCard({
   style,
 }: Props) {
   const [checked, setChecked] = useState(false)
-  const typed = question.type === 'fill-blank' || question.type === 'rewrite'
+  const typed = isTypedQuestion(question)
 
   useEffect(() => {
     setChecked(false)

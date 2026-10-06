@@ -18,7 +18,10 @@ import {
 } from 'lucide-react'
 import { useProgress } from '@/hooks/useProgress'
 import { useStudyTimer } from '@/hooks/useStudyTimer'
-import { getLesson } from '@/data/lessons'
+import { contentService, useContent } from '@/services/content'
+// Bundled with this route so the lesson renders in the first pass (no Suspense, no extra request).
+import '@/services/content/lessonPack'
+import { modulePath, moduleTestPath } from '@/content/paths'
 import {
   getModuleProgress,
   getModuleStatus,
@@ -187,20 +190,26 @@ function SectionNav({ ids }: { ids: readonly string[] }) {
 }
 
 export function ModulePage() {
-  const { id } = useParams()
-  const moduleId = Number(id)
-  const baseModule = moduleById(moduleId)
+  const { id = '' } = useParams()
+  // Accepts the legacy numeric id or a stable slug; slugs redirect to the canonical numeric URL for now.
+  const entry = useContent(contentService.getModule(id))
+  const baseModule = entry?.module
+  const moduleId = entry?.legacyId ?? Number.NaN
+  const isCanonical = entry !== undefined && id === String(entry.legacyId)
   const { language } = useLessonLanguage()
   const labels = lessonLabels(language)
+  // Read before the early returns below so hooks run in the same order on every render.
+  const lesson = useContent(contentService.getLesson(entry?.slug ?? id, language))
 
   const { state, markLessonViewed } = useProgress()
   useStudyTimer(true)
 
   useEffect(() => {
-    if (baseModule) markLessonViewed(moduleId)
-  }, [baseModule, moduleId, markLessonViewed])
+    if (isCanonical) markLessonViewed(moduleId)
+  }, [isCanonical, moduleId, markLessonViewed])
 
   if (!baseModule) return <Navigate to="/course" replace />
+  if (!isCanonical) return <Navigate to={modulePath(moduleId)} replace />
   const module = localizeModule(baseModule, language)
 
   const status = getModuleStatus(state, moduleId)
@@ -215,7 +224,7 @@ export function ModulePage() {
           Pass the test for Module {module.id - 1} to unlock {module.title}. The course is
           sequential so that each structure rests on the one before it.
         </p>
-        <Link to={`/module/${module.id - 1}`} className="mt-6 inline-block">
+        <Link to={modulePath(module.id - 1)} className="mt-6 inline-block">
           <Button>
             Go to Module {module.id - 1} <ArrowRight size={15} />
           </Button>
@@ -224,7 +233,6 @@ export function ModulePage() {
     )
   }
 
-  const lesson = getLesson(moduleId, language)
   const stage = stageById(module.stage)
   const progress = getModuleProgress(state, moduleId)
   const prevModule = moduleById(module.id - 1)
@@ -275,7 +283,7 @@ export function ModulePage() {
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 <LanguageToggle />
-                <BookmarkButton kind="lesson" path={`/module/${module.id}`} title={`Module ${module.id}: ${module.title}`} />
+                <BookmarkButton kind="lesson" path={modulePath(module.id)} title={`Module ${module.id}: ${module.title}`} />
               </div>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -391,7 +399,7 @@ export function ModulePage() {
                       : 'Score 8 out of 10 or higher to complete the final module of the course.'}
                 </p>
               </div>
-              <Link to={`/module/${module.id}/test`} className="shrink-0">
+              <Link to={moduleTestPath(module.id)} className="shrink-0">
                 <Button
                   size="lg"
                   variant="secondary"
@@ -409,7 +417,7 @@ export function ModulePage() {
         <nav className="grid gap-3 sm:grid-cols-2" aria-label="Module navigation">
           {prevModule ? (
             <Link
-              to={`/module/${prevModule.id}`}
+              to={modulePath(prevModule.id)}
               className="card card-interactive group flex items-center gap-3 p-4 focus-ring"
             >
               <ChevronLeft
@@ -429,7 +437,7 @@ export function ModulePage() {
           {nextModule ? (
             nextUnlocked ? (
               <Link
-                to={`/module/${nextModule.id}`}
+                to={modulePath(nextModule.id)}
                 className="card card-interactive group flex items-center justify-end gap-3 p-4 text-right focus-ring"
               >
                 <div className="min-w-0">

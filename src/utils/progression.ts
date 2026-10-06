@@ -1,4 +1,5 @@
 import { MODULES, STAGES } from '@/data/modules'
+import { moduleByLegacyId, resolveModule } from '@/content/catalog'
 import type { ModuleMeta, ModuleProgress, ProgressState, StageId } from '@/types'
 
 export const PASS_THRESHOLD = 80
@@ -90,9 +91,10 @@ export function stageById(stage: StageId) {
 }
 
 export function moduleById(id: number): ModuleMeta | undefined {
-  return MODULES.find((m) => m.id === id)
+  return moduleByLegacyId(id)?.module
 }
 
+/** Accepts a stable module slug or a public topic slug. */
 export function moduleBySlug(slug: string): ModuleMeta | undefined {
-  return MODULES.find((m) => m.slug === slug)
+  return resolveModule(slug)?.module
 }

@@ -2,11 +2,13 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useState,
   type ReactNode,
 } from 'react'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { STORAGE_KEYS } from '@/utils/storage'
+import { progressRepository, type ProgressRepository } from '@/repositories'
+import { createInitialState, DEFAULT_PREFERENCES } from '@/services/progress'
 import { toDateKey } from '@/utils/date'
 import { earnedBadges } from '@/utils/badges'
 import {
@@ -21,22 +23,7 @@ import type {
   TestAttempt,
 } from '@/types'
 
-export const DEFAULT_PREFERENCES: Preferences = {
-  theme: 'system',
-  dailyGoalMinutes: 20,
-  showHints: true,
-}
-
-function createInitialState(): ProgressState {
-  return {
-    modules: {},
-    attempts: [],
-    activity: {},
-    badges: [],
-    xp: 0,
-    startedAt: new Date().toISOString(),
-  }
-}
+export { DEFAULT_PREFERENCES }
 
 function emptyDay(date: string): DayActivity {
   return {
@@ -83,14 +70,34 @@ interface ProgressContextValue {
 
 const ProgressContext = createContext<ProgressContextValue | null>(null)
 
-export function ProgressProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useLocalStorage<ProgressState>(
-    STORAGE_KEYS.progress,
-    createInitialState(),
-  )
-  const [preferences, setPrefsRaw] = useLocalStorage<Preferences>(
-    STORAGE_KEYS.preferences,
-    DEFAULT_PREFERENCES,
+export function ProgressProvider({
+  children,
+  repository = progressRepository,
+}: {
+  children: ReactNode
+  /** Where progress is loaded from and saved to. Defaults to this browser's localStorage. */
+  repository?: ProgressRepository
+}) {
+  // Loading migrates older saves to the current schema; the first save below persists that.
+  const [state, setState] = useState<ProgressState>(() => repository.loadProgress())
+  const [preferences, setPrefsRaw] = useState<Preferences>(() => repository.loadPreferences())
+
+  useEffect(() => {
+    repository.saveProgress(state)
+  }, [repository, state])
+
+  useEffect(() => {
+    repository.savePreferences(preferences)
+  }, [repository, preferences])
+
+  // Keep tabs in sync: another tab's save replaces this tab's copy.
+  useEffect(
+    () =>
+      repository.subscribe((change) => {
+        if (change.progress) setState(change.progress)
+        if (change.preferences) setPrefsRaw(change.preferences)
+      }),
+    [repository],
   )
 
   const setPreferences = useCallback(

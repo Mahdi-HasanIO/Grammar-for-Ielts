@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { CloudDownload, Download, ExternalLink, Eye, EyeOff, Monitor, Moon, Palette, Sparkles, Sun, Target, Trash2, Upload } from 'lucide-react'
 import { useProgress, DEFAULT_PREFERENCES } from '@/hooks/useProgress'
-import type { Preferences, ProgressState } from '@/types'
+import type { Preferences } from '@/types'
 import { PageHeader } from '@/components/PageHeader'
 import { Card, CardBody, CardHeader } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/Badge'
 import { DeveloperCard } from '@/components/DeveloperInfo'
 import { OfflineDownload } from '@/components/OfflineDownload'
 import { readStorage, removeStorage, STORAGE_KEYS, writeStorage } from '@/utils/storage'
+import { createBackup, MAX_BACKUP_BYTES, parseBackup } from '@/services/progress'
 
 const THEMES: { value: Preferences['theme']; label: string; icon: typeof Sun }[] = [
   { value: 'light', label: 'Light', icon: Sun },
@@ -57,7 +58,7 @@ export function Settings() {
   }
 
   function exportData() {
-    const blob = new Blob([JSON.stringify({ state, preferences }, null, 2)], {
+    const blob = new Blob([JSON.stringify(createBackup(state, preferences), null, 2)], {
       type: 'application/json',
     })
     const url = URL.createObjectURL(blob)
@@ -70,21 +71,23 @@ export function Settings() {
   }
 
   function importData(file: File) {
+    if (file.size > MAX_BACKUP_BYTES) {
+      setMessage('That file could not be read as a Grammar Path backup. The file is too large to be a progress backup.')
+      return
+    }
     const reader = new FileReader()
     reader.onload = () => {
-      try {
-        const parsed = JSON.parse(String(reader.result)) as {
-          state?: ProgressState
-          preferences?: Preferences
-        }
-        if (!parsed.state?.modules) throw new Error('bad file')
-        importState(parsed.state)
-        if (parsed.preferences) setPreferences(parsed.preferences)
-        setMessage('Progress restored from file.')
-      } catch {
-        setMessage('That file could not be read as a Grammar Path backup.')
+      // Validated in full before anything is applied, so a damaged file never half-overwrites progress.
+      const parsed = parseBackup(String(reader.result))
+      if (!parsed.ok) {
+        setMessage(`That file could not be read as a Grammar Path backup. ${parsed.error}`)
+        return
       }
+      importState(parsed.state)
+      if (parsed.preferences) setPreferences(parsed.preferences)
+      setMessage('Progress restored from file.')
     }
+    reader.onerror = () => setMessage('That file could not be read as a Grammar Path backup.')
     reader.readAsText(file)
   }
 

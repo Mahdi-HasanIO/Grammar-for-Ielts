@@ -8,3 +8,7 @@ dist-ssr
 
 # Server-side render bundle used only at build time
 dist-server
+
+# Playwright output
+test-results
+playwright-report

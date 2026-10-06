@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -12,7 +12,10 @@ import {
 } from 'lucide-react'
 import { useProgress, type TestResultSummary } from '@/hooks/useProgress'
 import { useStudyTimer } from '@/hooks/useStudyTimer'
-import { getTestQuestions } from '@/data/questions'
+import { contentService, useContent } from '@/services/content'
+// Bundled with this route so the test renders in the first pass.
+import '@/services/content/questionPack'
+import { modulePath, moduleTestPath } from '@/content/paths'
 import { getModuleStatus, moduleById, PASS_THRESHOLD } from '@/utils/progression'
 import { isCorrect, scoreAnswers } from '@/utils/answers'
 import { badgeById } from '@/utils/badges'
@@ -25,14 +28,16 @@ import { QuestionCard } from '@/components/lesson/QuestionCard'
 import { cn } from '@/utils/cn'
 
 export function TestPage() {
-  const { id } = useParams()
-  const moduleId = Number(id)
-  const module = moduleById(moduleId)
+  const { id = '' } = useParams()
+  const entry = useContent(contentService.getModule(id))
+  const moduleId = entry?.legacyId ?? Number.NaN
+  const module = entry?.module
 
   const { state, recordTest } = useProgress()
   useStudyTimer(true)
 
-  const questions = useMemo(() => getTestQuestions(moduleId), [moduleId])
+  // The service returns the same array for the same module, so this is stable across renders.
+  const questions = useContent(contentService.getTestQuestions(entry?.slug ?? id))
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [index, setIndexRaw] = useState(0)
   /** Which way the last navigation went, so the next card slides in from that side. */
@@ -51,10 +56,11 @@ export function TestPage() {
   }
 
   if (!module) return <Navigate to="/course" replace />
+  if (id !== String(moduleId)) return <Navigate to={moduleTestPath(moduleId)} replace />
   if (getModuleStatus(state, moduleId) === 'locked') {
-    return <Navigate to={`/module/${moduleId}`} replace />
+    return <Navigate to={modulePath(moduleId)} replace />
   }
-  if (!questions.length) return <Navigate to={`/module/${moduleId}`} replace />
+  if (!questions.length) return <Navigate to={modulePath(moduleId)} replace />
 
   const answeredCount = questions.filter((q) => (answers[q.id] ?? '').length > 0).length
   const current = questions[index]
@@ -144,11 +150,11 @@ export function TestPage() {
             <Button onClick={retake} variant={result.passed ? 'secondary' : 'primary'}>
               <RefreshCw size={15} /> Retake test
             </Button>
-            <Link to={`/module/${module.id}`}>
+            <Link to={modulePath(module.id)}>
               <Button variant="secondary">Review module</Button>
             </Link>
             {result.passed && nextModule ? (
-              <Link to={`/module/${nextModule.id}`}>
+              <Link to={modulePath(nextModule.id)}>
                 <Button>
                   Continue to Module {nextModule.id} <ArrowRight size={15} />
                 </Button>
@@ -217,7 +223,7 @@ export function TestPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <Link
-        to={`/module/${module.id}`}
+        to={modulePath(module.id)}
         className="group mb-5 inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink-500 transition-colors hover:text-brand-700 dark:text-ink-400 dark:hover:text-brand-300"
       >
         <ArrowLeft size={14} className="transition-transform duration-200 group-hover:-translate-x-0.5" />

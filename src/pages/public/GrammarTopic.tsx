@@ -12,11 +12,12 @@ import {
   Check,
   X,
 } from 'lucide-react'
-import { topicBySlug, topicModule } from '@/data/grammarTopics'
-import { STAGES } from '@/data/modules'
-import { getLesson } from '@/data/lessons'
-import { getPracticeQuestions } from '@/data/questions'
-import { BLOG_POSTS } from '@/data/blog/posts'
+import { contentService, useContent } from '@/services/content'
+// Bundled with this route so the prerendered lesson and practice render in the first pass.
+import '@/services/content/lessonPack'
+import '@/services/content/questionPack'
+import { modulePath } from '@/content/paths'
+import { createInitialState } from '@/services/progress'
 import { useProgress } from '@/hooks/useProgress'
 import { useLessonLanguage } from '@/hooks/useLessonLanguage'
 import { getCurrentModule, getModuleProgress, getModuleStatus } from '@/utils/progression'
@@ -33,10 +34,10 @@ import { BlogCard, Breadcrumbs, Container, DIFFICULTY_TONE, GrammarCard } from '
 import type { ModuleMeta, ProgressState } from '@/types'
 import { useHydrated } from '@/hooks/useHydrated'
 
-const EMPTY_STATE: ProgressState = { modules: {}, attempts: [], activity: {}, badges: [], xp: 0, startedAt: '' }
+const EMPTY_STATE: ProgressState = createInitialState('')
 
 function QuickPractice({ module }: { module: ModuleMeta }) {
-  const questions = getPracticeQuestions(module.id)
+  const questions = useContent(contentService.getPracticeQuestions(module.slug))
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [checked, setChecked] = useState<Record<string, boolean>>({})
   const [round, setRound] = useState(0)
@@ -107,29 +108,34 @@ function SectionTitle({ icon, title, id }: { icon: React.ReactNode; title: strin
 }
 
 export function GrammarTopic() {
-  const { slug } = useParams()
-  const topic = topicBySlug(slug)
+  const { slug = '' } = useParams()
+  const entry = useContent(contentService.getGrammarTopic(slug))
+  const topics = useContent(contentService.getGrammarTopics())
+  const stages = useContent(contentService.getStages())
+  const posts = useContent(contentService.getBlogPosts())
   const { chosen } = useLessonLanguage()
+  // Public pages default to English until the learner picks a language.
+  const language = chosen ?? 'en'
+  // Read before the early return below so hooks run in the same order on every render.
+  const lesson = useContent(contentService.getLesson(entry?.slug ?? slug, language))
   const { state: savedState } = useProgress()
   // Learner progress lives in localStorage, so the prerendered page uses a fresh state until hydration.
   const hydrated = useHydrated()
   const state = hydrated ? savedState : EMPTY_STATE
 
-  if (!topic) return <Navigate to="/grammar" replace />
+  if (!entry) return <Navigate to="/grammar" replace />
+  const topic = entry.topic
 
-  // Public pages default to English until the learner picks a language.
-  const language = chosen ?? 'en'
   const labels = lessonLabels(language)
-  const module = localizeModule(topicModule(topic), language)
-  const stage = STAGES.find((s) => s.id === module.stage)
-  const lesson = getLesson(module.id, language)
+  const module = localizeModule(entry.module, language)
+  const stage = stages.find((s) => s.id === module.stage)
   const status = getModuleStatus(state, module.id)
   const progress = getModuleProgress(state, module.id)
   const current = getCurrentModule(state)
-  const related = topic.related.map((s) => topicBySlug(s)).filter((t) => t !== undefined)
-  const articles = BLOG_POSTS.filter((p) => p.topics.includes(topic.slug)).slice(0, 2)
+  const related = topic.related.flatMap((s) => topics.find((t) => t.topic.slug === s)?.topic ?? [])
+  const articles = posts.filter((p) => p.topics.includes(topic.slug)).slice(0, 2)
 
-  const learnTo = status === 'locked' ? `/module/${current.id}` : `/module/${module.id}`
+  const learnTo = status === 'locked' ? modulePath(current.id) : modulePath(module.id)
   const learnLabel =
     status === 'completed' ? 'Review the lesson' : status === 'locked' ? 'Continue Course' : 'Start Learning'
 

@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Lesson, ModuleMeta, Question } from '@/types'
-import { getPracticeQuestions } from '@/data/questions'
+import { contentService, useContent } from '@/services/content'
+// Bundled with the lesson page that uses this hook, so the built-in set is available immediately.
+import '@/services/content/questionPack'
 import { generateAiPractice, type AiDifficulty } from '@/utils/aiPractice'
 import { readStorage, STORAGE_KEYS, writeStorage } from '@/utils/storage'
 
@@ -103,7 +105,7 @@ export function useAiPractice(module: ModuleMeta | undefined, lesson: Lesson | u
     [module, lesson, difficulty, aiSet?.generation],
   )
 
-  const staticQuestions = getPracticeQuestions(moduleId)
+  const staticQuestions = useContent(contentService.getPracticeQuestions(moduleId))
   const usingAi = Boolean(aiSet?.questions.length)
 
   return {

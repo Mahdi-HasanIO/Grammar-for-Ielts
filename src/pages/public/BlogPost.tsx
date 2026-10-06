@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowRight, Check, Lightbulb, X } from 'lucide-react'
-import { ARTICLES, type BlogBlock } from '@/data/blog/articles'
-import { postBySlug, postCover, relatedPosts } from '@/data/blog/posts'
-import { topicBySlug, topicModule } from '@/data/grammarTopics'
+import type { BlogBlock } from '@/data/blog/articles'
+import { postCover, relatedPosts } from '@/data/blog/posts'
+import { contentService, useContent } from '@/services/content'
+import { blogPostPath, grammarTopicPath } from '@/content/paths'
 import { Reveal } from '@/components/ui/Reveal'
 import { Badge } from '@/components/ui/Badge'
 import { buttonClasses } from '@/components/ui/Button'
@@ -116,13 +117,14 @@ function Block({ block }: { block: BlogBlock }) {
 }
 
 export function BlogPost() {
-  const { slug } = useParams()
-  const post = postBySlug(slug)
+  const { slug = '' } = useParams()
+  const article = useContent(contentService.getBlogPost(slug))
+  const grammarTopics = useContent(contentService.getGrammarTopics())
   const cta = useCourseCta()
 
-  if (!post) return <Navigate to="/blog" replace />
-  const blocks = ARTICLES[post.slug] ?? []
-  const topics = post.topics.map((t) => topicBySlug(t)).filter((t) => t !== undefined)
+  if (!article) return <Navigate to="/blog" replace />
+  const { meta: post, blocks } = article
+  const topics = post.topics.flatMap((t) => grammarTopics.find((m) => m.topic.slug === t) ?? [])
   const related = relatedPosts(post)
   const cover = postCover(post)
 
@@ -153,7 +155,7 @@ export function BlogPost() {
             </p>
             <div className="mt-5 flex animate-fade-up stagger flex-wrap items-center justify-between gap-3 border-b border-ink-200 pb-6 dark:border-ink-800">
               <PostMeta post={post} className="text-[13.5px]" />
-              <BookmarkButton kind="article" path={`/blog/${post.slug}`} title={post.title} />
+              <BookmarkButton kind="article" path={blogPostPath(post.slug)} title={post.title} />
             </div>
           </header>
 
@@ -181,14 +183,14 @@ export function BlogPost() {
             <Reveal as="section" className="mt-12">
               <h2 className="label-xs mb-3">Grammar topics in this article</h2>
               <div className="flex flex-wrap gap-2">
-                {topics.map((t) => (
+                {topics.map(({ topic: t, legacyId }) => (
                   <Link
                     key={t.slug}
-                    to={`/grammar/${t.slug}`}
+                    to={grammarTopicPath(t.slug)}
                     className="group inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3.5 py-2 text-[13.5px] font-semibold text-ink-700 transition-all duration-200 ease-spring hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-700 focus-ring dark:border-ink-700 dark:bg-ink-900 dark:text-ink-200 dark:hover:border-brand-700 dark:hover:text-brand-300"
                   >
                     {t.name}
-                    <span className="text-[11.5px] font-medium text-ink-400">Module {topicModule(t).id}</span>
+                    <span className="text-[11.5px] font-medium text-ink-400">Module {legacyId}</span>
                   </Link>
                 ))}
               </div>

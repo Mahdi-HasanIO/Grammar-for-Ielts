@@ -165,12 +165,28 @@ export interface Preferences {
 }
 
 export interface ProgressState {
+  /**
+   * Version of this stored shape (see services/progress/migrations.ts).
+   * Absent in data saved before versioning; migrated to 1 on load.
+   */
+  schemaVersion: number
   modules: Record<number, ModuleProgress>
   attempts: TestAttempt[]
   activity: Record<string, DayActivity>
   badges: string[]
   xp: number
   startedAt: string
+}
+
+export type BookmarkKind = 'grammar' | 'article' | 'lesson'
+
+export interface Bookmark {
+  kind: BookmarkKind
+  /** Path inside the app, e.g. /grammar/articles. Doubles as the unique id. */
+  path: string
+  title: string
+  /** ISO timestamp. */
+  savedAt: string
 }
 
 export interface Badge {

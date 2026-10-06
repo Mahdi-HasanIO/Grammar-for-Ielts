@@ -1,0 +1,59 @@
+{
+  "modules": {
+    "1": {
+      "moduleId": 1,
+      "completed": true,
+      "lessonViewed": true,
+      "practiceCompleted": true,
+      "bestScore": 90,
+      "latestScore": 90,
+      "attempts": 1,
+      "completedAt": "2026-09-01T10:15:00.000Z"
+    },
+    "2": {
+      "moduleId": 2,
+      "completed": true,
+      "lessonViewed": true,
+      "practiceCompleted": false,
+      "bestScore": 80,
+      "latestScore": 80,
+      "attempts": 2,
+      "completedAt": "2026-09-02T09:00:00.000Z"
+    },
+    "3": {
+      "moduleId": 3,
+      "completed": true,
+      "lessonViewed": true,
+      "practiceCompleted": true,
+      "bestScore": 100,
+      "latestScore": 100,
+      "attempts": 1,
+      "completedAt": "2026-09-03T18:30:00.000Z"
+    },
+    "4": {
+      "moduleId": 4,
+      "completed": false,
+      "lessonViewed": true,
+      "practiceCompleted": false,
+      "bestScore": 60,
+      "latestScore": 60,
+      "attempts": 1
+    }
+  },
+  "attempts": [
+    { "moduleId": 1, "at": "2026-09-01T10:15:00.000Z", "score": 9, "total": 10, "percentage": 90, "passed": true },
+    { "moduleId": 2, "at": "2026-09-02T08:40:00.000Z", "score": 7, "total": 10, "percentage": 70, "passed": false },
+    { "moduleId": 2, "at": "2026-09-02T09:00:00.000Z", "score": 8, "total": 10, "percentage": 80, "passed": true },
+    { "moduleId": 3, "at": "2026-09-03T18:30:00.000Z", "score": 10, "total": 10, "percentage": 100, "passed": true },
+    { "moduleId": 4, "at": "2026-09-04T20:05:00.000Z", "score": 6, "total": 10, "percentage": 60, "passed": false }
+  ],
+  "activity": {
+    "2026-09-01": { "date": "2026-09-01", "minutes": 25, "modulesCompleted": 1, "testsTaken": 1, "questionsAnswered": 14, "questionsCorrect": 12 },
+    "2026-09-02": { "date": "2026-09-02", "minutes": 31, "modulesCompleted": 1, "testsTaken": 2, "questionsAnswered": 20, "questionsCorrect": 15 },
+    "2026-09-03": { "date": "2026-09-03", "minutes": 18, "modulesCompleted": 1, "testsTaken": 1, "questionsAnswered": 10, "questionsCorrect": 10 },
+    "2026-09-04": { "date": "2026-09-04", "minutes": 12, "modulesCompleted": 0, "testsTaken": 1, "questionsAnswered": 10, "questionsCorrect": 6 }
+  },
+  "badges": ["first-module", "flawless"],
+  "xp": 512,
+  "startedAt": "2026-08-31T19:00:00.000Z"
+}
