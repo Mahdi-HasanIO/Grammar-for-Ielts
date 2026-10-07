@@ -7,6 +7,8 @@ import { describe, expect, it } from 'vitest'
 
 const ROOT = path.resolve(__dirname, '../..')
 const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8')) as {
+  cleanUrls?: boolean
+  rewrites: { source: string; destination: string }[]
   headers: { source: string; headers: { key: string; value: string }[] }[]
 }
 const all = vercel.headers.find((h) => h.source === '/(.*)')!
@@ -89,5 +91,19 @@ describe('Content-Security-Policy', () => {
     expect(csp['img-src']).toEqual(["'self'"])
     expect(csp['worker-src']).toEqual(["'self'"])
     expect(csp['manifest-src']).toEqual(["'self'"])
+  })
+})
+
+describe('routing (vercel.json)', () => {
+  // Regression: with cleanUrls, Vercel redirects /app.html to /app instead of serving it, so a rewrite to
+  // "/app.html" never resolves and every client-only route returned 404 in production.
+  it('rewrites to clean URLs when cleanUrls is on', () => {
+    expect(vercel.cleanUrls).toBe(true)
+    for (const rewrite of vercel.rewrites) expect(rewrite.destination, rewrite.source).not.toMatch(/\.html$/)
+  })
+
+  it('sends every other path to the app shell written by postbuild (dist/app.html)', () => {
+    expect(vercel.rewrites).toEqual([{ source: '/(.*)', destination: '/app' }])
+    expect(fs.readFileSync(path.join(ROOT, 'scripts/postbuild.mjs'), 'utf8')).toContain("path.join(dist, 'app.html')")
   })
 })
