@@ -7,7 +7,7 @@ import { buttonClasses } from '@/components/ui/Button'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { useCourseCta } from '@/hooks/useCourseCta'
 import { cn } from '@/utils/cn'
-import { BLOG_CATEGORIES } from '@/data/blog/posts'
+import { contentService, useContent } from '@/services/content'
 import { detectLowPowerDevice } from './motion'
 import { ConnectionStatus } from '@/components/ConnectionStatus'
 
@@ -177,6 +177,7 @@ function FooterLink({ to, children }: { to: string; children: ReactNode }) {
 }
 
 function PublicFooter() {
+  const categories = useContent(contentService.getBlogCategories())
   return (
     <footer className="relative mt-24 border-t border-ink-200/70 bg-white/60 backdrop-blur-sm dark:border-ink-800/70 dark:bg-ink-950/60">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
@@ -195,7 +196,7 @@ function PublicFooter() {
         </FooterColumn>
         <FooterColumn title="Read">
           <FooterLink to="/blog">All articles</FooterLink>
-          {BLOG_CATEGORIES.slice(0, 3).map((c) => (
+          {categories.slice(0, 3).map((c) => (
             <FooterLink key={c} to={`/blog?category=${encodeURIComponent(c)}`}>
               {c}
             </FooterLink>

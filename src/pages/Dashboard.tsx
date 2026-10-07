@@ -10,7 +10,7 @@ import {
   Target,
   Trophy,
 } from 'lucide-react'
-import { MODULES, STAGES } from '@/data/modules'
+import { contentService, useContent } from '@/services/content'
 import { useProgress } from '@/hooks/useProgress'
 import { useStreak } from '@/hooks/useStreak'
 import {
@@ -37,6 +37,7 @@ import { CommunityCard } from '@/components/dashboard/CommunityCard'
 import { PageHeader } from '@/components/PageHeader'
 import { useLessonLanguage } from '@/hooks/useLessonLanguage'
 import { localizeModule } from '@/utils/i18n'
+import { modulePath } from '@/content/paths'
 
 function HeroGlow() {
   return (
@@ -88,7 +89,7 @@ function WelcomeHero() {
           ))}
         </div>
 
-        <Link to="/module/1" className="mt-7 inline-block w-full sm:w-auto">
+        <Link to={modulePath(1)} className="mt-7 inline-block w-full sm:w-auto">
           <Button
             size="lg"
             variant="secondary"
@@ -104,6 +105,7 @@ function WelcomeHero() {
 }
 
 function ContinueCard() {
+  const moduleCount = useContent(contentService.getModules()).length
   const { state } = useProgress()
   const done = completedCount(state)
   const pct = overallPercentage(state)
@@ -127,7 +129,7 @@ function ContinueCard() {
           </h2>
           <p className="bn-text mt-2 text-[14px] text-white/80">{current.summary}</p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Link to={`/module/${current.id}`}>
+            <Link to={modulePath(current.id)}>
               <Button
                 variant="secondary"
                 className="group border-transparent bg-white text-brand-700 hover:bg-white hover:shadow-lift dark:border-transparent dark:bg-white dark:text-brand-700 dark:hover:bg-white"
@@ -137,7 +139,7 @@ function ContinueCard() {
               </Button>
             </Link>
             <span className="text-[13px] font-medium text-white/75">
-              {done} of {MODULES.length} modules complete
+              {done} of {moduleCount} modules complete
             </span>
           </div>
         </div>
@@ -179,6 +181,7 @@ function WeekStrip() {
 }
 
 export function Dashboard() {
+  const stageCount = useContent(contentService.getStages()).length
   const { state } = useProgress()
   const streak = useStreak()
   const stats = overviewStats(state)
@@ -296,7 +299,7 @@ export function Dashboard() {
           <Card className="h-full">
             <CardHeader
               title="Grammar stages"
-              subtitle={`${STAGES.length} stages in order`}
+              subtitle={`${stageCount} stages in order`}
               icon={<Trophy size={16} />}
             />
             <CardBody className="pt-4">

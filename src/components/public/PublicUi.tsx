@@ -1,10 +1,9 @@
 import { Fragment, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight, Calendar, ChevronRight, Clock } from 'lucide-react'
-import type { GrammarTopic } from '@/data/grammarTopics'
-import { topicModule } from '@/data/grammarTopics'
-import { formatPostDate, postCover, type BlogPostMeta } from '@/data/blog/posts'
-import { STAGES } from '@/data/modules'
+import { contentService, useContent, type BlogPostMeta, type GrammarModule } from '@/services/content'
+import { formatPostDate, postCover } from '@/content/blog'
+import { blogPostPath, grammarTopicPath } from '@/content/paths'
 import { Badge } from '@/components/ui/Badge'
 import { cn } from '@/utils/cn'
 
@@ -79,12 +78,12 @@ export const DIFFICULTY_TONE = {
 } as const
 
 /** Card linking to a grammar topic page. */
-export function GrammarCard({ topic, style, className }: { topic: GrammarTopic; style?: CSSProperties; className?: string }) {
-  const module = topicModule(topic)
-  const stage = STAGES.find((s) => s.id === module.stage)
+export function GrammarCard({ entry, style, className }: { entry: GrammarModule; style?: CSSProperties; className?: string }) {
+  const { module, topic } = entry
+  const stage = useContent(contentService.getStages()).find((s) => s.id === module.stage)
   return (
     <Link
-      to={`/grammar/${topic.slug}`}
+      to={grammarTopicPath(topic.slug)}
       style={style}
       className={cn(
         'glow-card group flex h-full flex-col rounded-2xl border border-ink-200/80 bg-white p-5 shadow-card transition-[transform,box-shadow,border-color] duration-300 ease-spring hover:-translate-y-1 hover:border-transparent hover:shadow-lift focus-ring dark:border-ink-800 dark:bg-ink-900',
@@ -171,7 +170,7 @@ export function PostCover({
 export function BlogCard({ post, style, className }: { post: BlogPostMeta; style?: CSSProperties; className?: string }) {
   return (
     <Link
-      to={`/blog/${post.slug}`}
+      to={blogPostPath(post.slug)}
       style={style}
       className={cn(
         'group flex h-full flex-col overflow-hidden rounded-2xl border border-ink-200/80 bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-spring hover:-translate-y-1 hover:shadow-lift focus-ring dark:border-ink-800 dark:bg-ink-900',
@@ -197,7 +196,7 @@ export function BlogCard({ post, style, className }: { post: BlogPostMeta; style
 export function FeaturedPostCard({ post, eager = false }: { post: BlogPostMeta; eager?: boolean }) {
   return (
     <Link
-      to={`/blog/${post.slug}`}
+      to={blogPostPath(post.slug)}
       className="group grid overflow-hidden rounded-3xl border border-ink-200/80 bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-spring hover:-translate-y-1 hover:shadow-lift focus-ring md:grid-cols-2 dark:border-ink-800 dark:bg-ink-900"
     >
       <PostCover post={post} large eager={eager} sizes="(min-width: 768px) 560px, 100vw" />

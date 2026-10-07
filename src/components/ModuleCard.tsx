@@ -5,6 +5,7 @@ import type { ModuleMeta } from '@/types'
 import { cn } from '@/utils/cn'
 import { Badge } from '@/components/ui/Badge'
 import type { ModuleStatus } from '@/utils/progression'
+import { modulePath } from '@/content/paths'
 
 export function ModuleCard({
   module,
@@ -121,7 +122,7 @@ export function ModuleCard({
 
   return (
     <Link
-      to={`/module/${module.id}`}
+      to={modulePath(module.id)}
       style={style}
       className="block animate-fade-up stagger rounded-2xl focus-ring"
     >

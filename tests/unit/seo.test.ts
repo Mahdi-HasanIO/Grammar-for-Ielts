@@ -134,3 +134,53 @@ describe('private and unknown pages stay out of search', () => {
     expect(getSeo('/dashboard?tab=1').noindex).toBe(true)
   })
 })
+
+describe('course lesson URLs: numeric, slug and /learn forms share one canonical URL', () => {
+  const canonicalOf = (path: string) => attr(headTags(getSeo(path)), 'link', 'rel', 'canonical', 'href')
+
+  it.each([
+    '/module/3',
+    '/module/articles-and-determiners',
+    '/module/articles',
+    '/learn/articles-and-determiners',
+    '/learn/articles',
+    '/learn/3',
+  ])('%s is a noindex course lesson whose canonical URL is /module/3', (path) => {
+    const seo = getSeo(path)
+    expect(seo).toMatchObject({ title: `Course lesson | ${SITE_NAME}`, noindex: true, path: '/module/3' })
+    expect(canonicalOf(path)).toBe(`${SITE_URL}/module/3`)
+    expect(attr(headTags(seo), 'meta', 'property', 'og:url', 'content')).toBe(`${SITE_URL}/module/3`)
+  })
+
+  it.each(['/module/3/test', '/module/articles-and-determiners/test', '/learn/articles-and-determiners/test', '/learn/articles/test'])(
+    '%s points at the canonical test URL /module/3/test',
+    (path) => {
+      expect(getSeo(path)).toMatchObject({ noindex: true, path: '/module/3/test' })
+      expect(canonicalOf(path)).toBe(`${SITE_URL}/module/3/test`)
+    },
+  )
+
+  it('resolves every module by its stable slug and its topic slug', () => {
+    for (const topic of GRAMMAR_TOPICS) {
+      const expected = `${SITE_URL}/module/${topic.moduleId}`
+      expect(canonicalOf(`/learn/${topic.slug}`)).toBe(expected)
+    }
+    expect(canonicalOf('/learn/register-and-sentence-variety')).toBe(`${SITE_URL}/module/24`)
+    expect(canonicalOf('/module/clause-anatomy-and-word-order')).toBe(`${SITE_URL}/module/1`)
+  })
+
+  it.each(['/module/not-a-module', '/learn/not-a-module', '/learn/not-a-module/test', '/module/99', '/learn/'])(
+    'unknown lesson reference %s stays noindex and is not mapped to a lesson',
+    (path) => {
+      const seo = getSeo(path)
+      expect(seo.noindex).toBe(true)
+      expect(seo.title).toBe(SITE_NAME)
+      expect(seo.path).toBe(normalizePath(path))
+    },
+  )
+
+  it('leaves public grammar and blog URLs as their own canonical URLs', () => {
+    expect(canonicalOf('/grammar/articles')).toBe(`${SITE_URL}/grammar/articles`)
+    expect(canonicalOf('/blog/hedging-in-ielts-task-2')).toBe(`${SITE_URL}/blog/hedging-in-ielts-task-2`)
+  })
+})

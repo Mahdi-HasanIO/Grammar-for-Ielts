@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowRight, Check, Lightbulb, X } from 'lucide-react'
-import type { BlogBlock } from '@/data/blog/articles'
-import { postCover, relatedPosts } from '@/data/blog/posts'
-import { contentService, useContent } from '@/services/content'
+import { contentService, useContent, type BlogBlock } from '@/services/content'
+import { postCover, relatedPosts } from '@/content/blog'
 import { blogPostPath, grammarTopicPath } from '@/content/paths'
 import { Reveal } from '@/components/ui/Reveal'
 import { Badge } from '@/components/ui/Badge'
@@ -120,12 +119,13 @@ export function BlogPost() {
   const { slug = '' } = useParams()
   const article = useContent(contentService.getBlogPost(slug))
   const grammarTopics = useContent(contentService.getGrammarTopics())
+  const allPosts = useContent(contentService.getBlogPosts())
   const cta = useCourseCta()
 
   if (!article) return <Navigate to="/blog" replace />
   const { meta: post, blocks } = article
   const topics = post.topics.flatMap((t) => grammarTopics.find((m) => m.topic.slug === t) ?? [])
-  const related = relatedPosts(post)
+  const related = relatedPosts(post, allPosts)
   const cover = postCover(post)
 
   return (

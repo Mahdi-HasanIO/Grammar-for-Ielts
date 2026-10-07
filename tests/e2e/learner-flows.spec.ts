@@ -210,6 +210,10 @@ test.describe('module URLs by slug', () => {
     ['/module/sentence-structure', '/module/1', 'Clause Anatomy & Word Order'],
     ['/module/articles-and-determiners', '/module/3', 'Module 3 is locked'],
     ['/module/1', '/module/1', 'Clause Anatomy & Word Order'],
+    ['/learn/clause-anatomy-and-word-order', '/module/1', 'Clause Anatomy & Word Order'],
+    ['/learn/sentence-structure', '/module/1', 'Clause Anatomy & Word Order'],
+    ['/learn/1', '/module/1', 'Clause Anatomy & Word Order'],
+    ['/learn/articles-and-determiners', '/module/3', 'Module 3 is locked'],
   ] as const) {
     test(`${from} → ${to}`, async ({ page, problems }) => {
       await page.goto(from)
@@ -228,10 +232,42 @@ test.describe('module URLs by slug', () => {
     await expect(page.getByRole('button', { name: 'Next', exact: true })).toBeVisible()
   })
 
-  test('an unknown module goes to the course page', async ({ page }) => {
-    await page.goto('/module/not-a-module')
+  test('a /learn test URL redirects to the numeric test URL', async ({ page }) => {
+    await page.goto('/learn/clause-anatomy-and-word-order/test')
     await waitForApp(page)
-    await expect(page).toHaveURL('/course')
+    await expect(page).toHaveURL('/module/1/test')
+    await expect(page.getByRole('button', { name: 'Next', exact: true })).toBeVisible()
+  })
+
+  for (const from of ['/module/not-a-module', '/learn/not-a-module']) {
+    test(`unknown module ${from} goes to the course page`, async ({ page }) => {
+      await page.goto(from)
+      await waitForApp(page)
+      await expect(page).toHaveURL('/course')
+    })
+  }
+
+  test('after a slug redirect the page is noindex and its canonical URL is /module/:id', async ({ page }) => {
+    await page.goto('/learn/sentence-structure')
+    await waitForApp(page)
+    await expect(page).toHaveURL('/module/1')
+    await expect(page.locator('head link[rel="canonical"]')).toHaveAttribute('href', /\/module\/1$/)
+    await expect(page.locator('head meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow')
+    await expect(page.locator('head link[rel="canonical"]')).toHaveCount(1)
+  })
+
+  test('course links built by the path helpers still use /module/:id', async ({ page }) => {
+    await seedStorage(page, { [STORAGE.progress]: LEGACY_PROGRESS_JSON, [STORAGE.lessonLanguage]: '"en"' })
+    await page.goto('/course')
+    await waitForApp(page)
+    for (const id of [1, 4]) await expect(page.locator(`a[href="/module/${id}"]`).first()).toBeVisible()
+    await page.goto('/dashboard')
+    await waitForApp(page)
+    // The learner's current module (4, after passing 1-3) is linked from the dashboard.
+    await expect(page.locator('a[href="/module/4"]').first()).toBeVisible()
+    await page.locator('a[href="/module/4"]').first().click()
+    await expect(page).toHaveURL('/module/4')
+    await expect(page.locator('h1')).toHaveText('Pronoun Reference')
   })
 })
 

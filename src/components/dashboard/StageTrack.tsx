@@ -1,16 +1,17 @@
 import { CheckCircle2, Loader, Lock } from 'lucide-react'
-import { STAGES } from '@/data/modules'
+import { contentService, useContent } from '@/services/content'
 import { useProgress } from '@/hooks/useProgress'
 import { stageProgress } from '@/utils/progression'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { cn } from '@/utils/cn'
 
 export function StageTrack() {
+  const stages = useContent(contentService.getStages())
   const { state } = useProgress()
 
   return (
     <ol className="space-y-4">
-      {STAGES.map((stage, i) => {
+      {stages.map((stage, i) => {
         const { done, total, percentage, status } = stageProgress(state, stage.id)
         return (
           <li

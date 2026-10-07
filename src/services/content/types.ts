@@ -1,7 +1,11 @@
 import type { GrammarModule, ModuleRef } from '@/content/catalog'
-import type { BlogPostMeta } from '@/data/blog/posts'
+import type { BlogCategory, BlogPostMeta } from '@/data/blog/posts'
 import type { BlogBlock } from '@/data/blog/articles'
 import type { LessonLanguage, Lesson, Question, Stage } from '@/types'
+
+/* Content record types, re-exported so UI code never imports from src/data. */
+export type { BlogBlock, BlogCategory, BlogPostMeta, GrammarModule, ModuleRef }
+export type { GrammarTopic } from '@/content/catalog'
 
 export interface BlogPost {
   meta: BlogPostMeta
@@ -28,7 +32,11 @@ export interface ContentService {
   /** Public grammar topics. Same entities as getModules(), in topic order. */
   getGrammarTopics(): Promise<readonly GrammarModule[]>
   getGrammarTopic(topicSlug: string): Promise<GrammarModule | undefined>
+  /** Topics featured on the homepage, in display order. */
+  getFeaturedGrammarTopics(): Promise<readonly GrammarModule[]>
   /** Newest first. */
-  getBlogPosts(): Promise<BlogPostMeta[]>
+  getBlogPosts(): Promise<readonly BlogPostMeta[]>
   getBlogPost(slug: string): Promise<BlogPost | undefined>
+  /** Blog categories, in display order. */
+  getBlogCategories(): Promise<readonly BlogCategory[]>
 }

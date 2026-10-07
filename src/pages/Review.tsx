@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { AlertTriangle, ArrowRight, BookMarked, RotateCcw } from 'lucide-react'
-import { MODULES } from '@/data/modules'
+import { contentService, useContent } from '@/services/content'
 import { useProgress } from '@/hooks/useProgress'
 import { getModuleProgress, isModuleCompleted, stageById } from '@/utils/progression'
 import { weakAreas } from '@/utils/stats'
@@ -14,11 +14,13 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { Reveal } from '@/components/ui/Reveal'
 import { useLessonLanguage } from '@/hooks/useLessonLanguage'
 import { localizeModule } from '@/utils/i18n'
+import { modulePath } from '@/content/paths'
 
 export function Review() {
+  const modules = useContent(contentService.getModules())
   const { state } = useProgress()
   const { language } = useLessonLanguage()
-  const completed = MODULES.filter((m) => isModuleCompleted(state, m.id))
+  const completed = modules.map((m) => m.module).filter((m) => isModuleCompleted(state, m.id))
   const weak = weakAreas(state)
 
   return (
@@ -75,7 +77,7 @@ export function Review() {
                       {area.attempts} attempt{area.attempts === 1 ? '' : 's'} - best {area.bestScore}%
                     </p>
                   </div>
-                  <Link to={`/module/${area.moduleId}`}>
+                  <Link to={modulePath(area.moduleId)}>
                     <Button variant="secondary" size="sm">
                       Review now <ArrowRight size={14} />
                     </Button>
@@ -103,7 +105,7 @@ export function Review() {
             title="Nothing completed yet"
             description="Pass a module test and it will appear here for review at any time."
             action={
-              <Link to="/module/1">
+              <Link to={modulePath(1)}>
                 <Button size="sm">Start Module 1</Button>
               </Link>
             }
@@ -135,7 +137,7 @@ export function Review() {
                           ? `Passed ${formatRelative(progress.completedAt)}`
                           : 'Passed'}
                       </span>
-                      <Link to={`/module/${module.id}`}>
+                      <Link to={modulePath(module.id)}>
                         <Button variant="ghost" size="sm">
                           <RotateCcw size={13} /> Review
                         </Button>

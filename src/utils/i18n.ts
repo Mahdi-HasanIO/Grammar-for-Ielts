@@ -1,10 +1,10 @@
 import type { LessonLanguage, ModuleMeta, Stage } from '@/types'
-import { MODULES_EN, STAGES_EN } from '@/data/modulesEn'
+import { moduleTextEn, stageTextEn } from '@/content/catalog'
 
 /** Returns the module with its summary and IELTS note in the requested language. */
 export function localizeModule(module: ModuleMeta, language: LessonLanguage): ModuleMeta {
   if (language === 'bn') return module
-  const en = MODULES_EN[module.id]
+  const en = moduleTextEn(module.id)
   if (!en) return module
   return { ...module, summary: en.summary, ielts: { ...module.ielts, note: en.ieltsNote } }
 }
@@ -12,7 +12,7 @@ export function localizeModule(module: ModuleMeta, language: LessonLanguage): Mo
 /** Returns the stage with its tagline and description in the requested language. */
 export function localizeStage(stage: Stage, language: LessonLanguage): Stage {
   if (language === 'bn') return stage
-  const en = STAGES_EN[stage.id]
+  const en = stageTextEn(stage.id)
   return en ? { ...stage, ...en } : stage
 }
 

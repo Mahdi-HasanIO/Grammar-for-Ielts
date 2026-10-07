@@ -16,7 +16,7 @@ import { contentService, useContent } from '@/services/content'
 // Bundled with this route so the prerendered lesson and practice render in the first pass.
 import '@/services/content/lessonPack'
 import '@/services/content/questionPack'
-import { modulePath } from '@/content/paths'
+import { blogPostPath, grammarTopicPath, modulePath } from '@/content/paths'
 import { createInitialState } from '@/services/progress'
 import { useProgress } from '@/hooks/useProgress'
 import { useLessonLanguage } from '@/hooks/useLessonLanguage'
@@ -132,7 +132,7 @@ export function GrammarTopic() {
   const status = getModuleStatus(state, module.id)
   const progress = getModuleProgress(state, module.id)
   const current = getCurrentModule(state)
-  const related = topic.related.flatMap((s) => topics.find((t) => t.topic.slug === s)?.topic ?? [])
+  const related = topic.related.flatMap((s) => topics.find((t) => t.topic.slug === s) ?? [])
   const articles = posts.filter((p) => p.topics.includes(topic.slug)).slice(0, 2)
 
   const learnTo = status === 'locked' ? modulePath(current.id) : modulePath(module.id)
@@ -187,7 +187,7 @@ export function GrammarTopic() {
                 <Dumbbell size={16} className="transition-transform duration-300 group-hover:-rotate-12" />
                 Practice
               </a>
-              <BookmarkButton kind="grammar" path={`/grammar/${topic.slug}`} title={topic.name} className="h-12 justify-center rounded-2xl px-5" />
+              <BookmarkButton kind="grammar" path={grammarTopicPath(topic.slug)} title={topic.name} className="h-12 justify-center rounded-2xl px-5" />
             </div>
             {status === 'locked' ? (
               <p className="mt-3 text-[13px] text-ink-500 dark:text-ink-400">
@@ -335,7 +335,7 @@ export function GrammarTopic() {
                   {articles.map((p) => (
                     <li key={p.slug}>
                       <Link
-                        to={`/blog/${p.slug}`}
+                        to={blogPostPath(p.slug)}
                         className="block rounded-lg py-1 text-[14px] font-medium leading-6 text-ink-700 transition-colors hover:text-brand-700 focus-ring dark:text-ink-300 dark:hover:text-brand-300"
                       >
                         {p.title}
@@ -365,8 +365,8 @@ export function GrammarTopic() {
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((t, i) => (
-                <Reveal key={t.slug} delay={i * 80} className="reveal-scale h-full">
-                  <GrammarCard topic={t} />
+                <Reveal key={t.topic.slug} delay={i * 80} className="reveal-scale h-full">
+                  <GrammarCard entry={t} />
                 </Reveal>
               ))}
             </div>

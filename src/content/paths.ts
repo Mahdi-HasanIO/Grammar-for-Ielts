@@ -18,6 +18,10 @@ export function learnPath(slug: string): string {
   return `/learn/${slug}`
 }
 
+export function learnTestPath(slug: string): string {
+  return `/learn/${slug}/test`
+}
+
 export function grammarTopicPath(topicSlug: string): string {
   return `/grammar/${topicSlug}`
 }

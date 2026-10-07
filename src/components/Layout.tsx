@@ -27,7 +27,7 @@ import logoWordDark from '@/assets/logo-wordmark-dark.webp'
 import { useProgress } from '@/hooks/useProgress'
 import { useStreak } from '@/hooks/useStreak'
 import { completedCount } from '@/utils/progression'
-import { MODULES } from '@/data/modules'
+import { contentService, useContent } from '@/services/content'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import type { Preferences } from '@/types'
 import { DeveloperCredit } from '@/components/DeveloperInfo'
@@ -138,10 +138,11 @@ function NavItems({
 }
 
 function SidebarSummary() {
+  const moduleCount = useContent(contentService.getModules()).length
   const { state } = useProgress()
   const { current } = useStreak()
   const done = completedCount(state)
-  const pct = Math.round((done / MODULES.length) * 100)
+  const pct = Math.round((done / moduleCount) * 100)
   const visitors = useVisitorCount()
 
   return (
@@ -153,7 +154,7 @@ function SidebarSummary() {
       <ProgressBar value={pct} className="mt-2.5" size="sm" />
       <div className="mt-3 flex items-center justify-between text-[12px] text-ink-500 dark:text-ink-400">
         <span className="tabular-nums">
-          {done} / {MODULES.length} modules
+          {done} / {moduleCount} modules
         </span>
         <span
           className={cn(

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, ClipboardCheck, Dumbbell, RotateCcw, Sparkles } from 'lucide-react'
-import { GRAMMAR_TOPICS, topicModule } from '@/data/grammarTopics'
-import { MODULES, STAGES } from '@/data/modules'
+import { contentService, useContent } from '@/services/content'
 import { useHydrated } from '@/hooks/useHydrated'
 import { useProgress } from '@/hooks/useProgress'
 import { getCurrentModule, completedCount } from '@/utils/progression'
@@ -13,13 +12,17 @@ import { Blob } from '@/components/public/motion'
 import { Container, SectionHeading } from '@/components/public/PublicUi'
 import { cn } from '@/utils/cn'
 import { OfflineDownload } from '@/components/OfflineDownload'
+import { grammarTopicPath, modulePath, moduleTestPath } from '@/content/paths'
 
 export function Practice() {
   const { state: savedState } = useProgress()
+  const modules = useContent(contentService.getModules())
+  const grammarTopics = useContent(contentService.getGrammarTopics())
+  const stages = useContent(contentService.getStages())
   // Progress and the AI key live in localStorage, so the prerendered page shows a fresh learner until hydration.
   const hydrated = useHydrated()
   const state = hydrated ? savedState : null
-  const current = state ? getCurrentModule(state) : MODULES[0]
+  const current = state ? getCurrentModule(state) : modules[0].module
   const done = state ? completedCount(state) : 0
   const aiConnected = hydrated && Boolean(readStorage<string>(STORAGE_KEYS.geminiApiKey, ''))
 
@@ -38,7 +41,7 @@ export function Practice() {
       text: aiConnected
         ? 'Your Gemini key is connected. Open any lesson to generate fresh questions on its rule.'
         : 'Connect a free Gemini key once and every lesson can generate new questions at three levels.',
-      to: aiConnected ? `/module/${current.id}#practice` : '/settings#ai',
+      to: aiConnected ? `${modulePath(current.id)}#practice` : '/settings#ai',
       cta: aiConnected ? 'Practise in your lesson' : 'Connect AI practice',
       tone: 'from-accent-500 to-brand-600',
       badge: aiConnected ? 'Connected' : undefined,
@@ -47,7 +50,7 @@ export function Practice() {
       icon: ClipboardCheck,
       title: 'Module test',
       text: `Ten questions, 80% to pass. Your next test is Module ${current.id}: ${current.title}.`,
-      to: `/module/${current.id}/test`,
+      to: moduleTestPath(current.id),
       cta: 'Take the test',
       tone: 'from-emerald-500 to-teal-600',
     },
@@ -124,20 +127,19 @@ export function Practice() {
             Each topic opens with its key rules, then four practice questions with explanations.
           </p>
           <div className="mt-8 space-y-10">
-            {STAGES.map((stage) => {
-              const topics = GRAMMAR_TOPICS.filter((t) => topicModule(t).stage === stage.id)
+            {stages.map((stage) => {
+              const topics = grammarTopics.filter((entry) => entry.stage === stage.id)
               return (
                 <Reveal key={stage.id} as="div">
                   <h3 className="label-xs mb-3">
                     Stage {stage.id} · {stage.name}
                   </h3>
                   <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-                    {topics.map((t) => {
-                      const m = topicModule(t)
+                    {topics.map(({ topic: t, module: m }) => {
                       return (
                         <li key={t.slug}>
                           <Link
-                            to={`/grammar/${t.slug}#practice`}
+                            to={`${grammarTopicPath(t.slug)}#practice`}
                             className="group flex min-h-[56px] items-center gap-3 rounded-xl border border-ink-200/80 bg-white px-4 py-3 shadow-card transition-all duration-300 ease-spring hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-lift focus-ring dark:border-ink-800 dark:bg-ink-900 dark:hover:border-brand-800"
                           >
                             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-ink-100 font-display text-[12px] font-bold text-ink-600 transition-colors group-hover:bg-brand-50 group-hover:text-brand-700 dark:bg-ink-800 dark:text-ink-300 dark:group-hover:bg-brand-950 dark:group-hover:text-brand-300">

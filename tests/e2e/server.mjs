@@ -1,11 +1,15 @@
 /*
- * Serves the production build in dist/ the way Vercel does (see vercel.json),
- * so browser tests exercise the real prerendered pages, app shell and
- * service worker:
- * - trailingSlash: false  → /grammar/ redirects to /grammar
- * - cleanUrls: true       → /grammar/articles serves grammar/articles.html
- * - rewrites              → any other path serves app.html (status 200)
- * - headers               → copied from vercel.json
+ * Serves the production build in dist/ the way Vercel does, following the
+ * routing rules in vercel.json, so browser tests exercise the real
+ * prerendered pages, app shell and service worker:
+ * - trailingSlash: false  → /grammar/ redirects (308) to /grammar
+ * - cleanUrls: true       → /grammar/articles serves grammar/articles.html,
+ *                           and /x.html redirects (308) to /x
+ * - filesystem first, then rewrites. A rewrite destination is resolved by
+ *   the same rules, so with cleanUrls a destination like "/app.html" does
+ *   not resolve (Vercel answers 404 for it, as found on a real deployment)
+ * - nothing resolves      → 404
+ * - headers               → copied from vercel.json, on every response
  *
  * Usage: node tests/e2e/server.mjs [port]   (default 4173)
  * Or import { startServer } to start and stop an instance from a test.
@@ -36,19 +40,30 @@ const TYPES = {
 }
 
 /** vercel.json `source` patterns used here are literal paths with optional `(.*)` groups. */
-const headerRules = (vercel.headers ?? []).map((rule) => ({
-  test: new RegExp(`^${rule.source.split('(.*)').map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('.*')}$`),
-  headers: rule.headers,
-}))
+const pattern = (source) =>
+  new RegExp(`^${source.split('(.*)').map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('.*')}$`)
+const headerRules = (vercel.headers ?? []).map((rule) => ({ test: pattern(rule.source), headers: rule.headers }))
+const rewrites = (vercel.rewrites ?? []).map((rule) => ({ test: pattern(rule.source), destination: rule.destination }))
+const cleanUrls = vercel.cleanUrls === true
 
+/** Resolves a path to a file in dist/, as Vercel's filesystem step does. */
 function fileFor(pathname) {
-  const candidates = pathname === '/' ? ['index.html'] : [pathname.slice(1), `${pathname.slice(1)}.html`]
+  // With cleanUrls, .html URLs are never served directly: they redirect to the clean URL.
+  if (cleanUrls && pathname.endsWith('.html')) return null
+  const candidates = pathname === '/' ? ['index.html'] : [pathname.slice(1), ...(cleanUrls ? [`${pathname.slice(1)}.html`] : [])]
   for (const rel of candidates) {
     const full = path.join(dist, rel)
     if (!full.startsWith(dist + path.sep)) return null
     if (fs.existsSync(full) && fs.statSync(full).isFile()) return full
   }
   return null
+}
+
+function resolve(pathname) {
+  const file = fileFor(pathname)
+  if (file) return file
+  const rewrite = rewrites.find((r) => r.test.test(pathname))
+  return rewrite ? fileFor(rewrite.destination) : null
 }
 
 function handle(req, res) {
@@ -59,16 +74,25 @@ function handle(req, res) {
     res.writeHead(400).end()
     return
   }
-  if (pathname.length > 1 && pathname.endsWith('/')) {
-    res.writeHead(308, { Location: pathname.replace(/\/+$/, '') }).end()
-    return
-  }
-  const file = fileFor(pathname) ?? path.join(dist, 'app.html')
-  const headers = { 'Content-Type': TYPES[path.extname(file)] ?? 'application/octet-stream' }
+  const headers = {}
   for (const rule of headerRules) {
     if (rule.test.test(pathname)) for (const h of rule.headers) headers[h.key] = h.value
   }
-  res.writeHead(200, headers)
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    res.writeHead(308, { ...headers, Location: pathname.replace(/\/+$/, '') }).end()
+    return
+  }
+  if (cleanUrls && pathname.endsWith('.html')) {
+    const clean = pathname.replace(/\.html$/, '')
+    res.writeHead(308, { ...headers, Location: clean === '/index' ? '/' : clean }).end()
+    return
+  }
+  const file = resolve(pathname)
+  if (!file) {
+    res.writeHead(404, { ...headers, 'Content-Type': 'text/plain; charset=utf-8' }).end('The page could not be found')
+    return
+  }
+  res.writeHead(200, { ...headers, 'Content-Type': TYPES[path.extname(file)] ?? 'application/octet-stream' })
   if (req.method === 'HEAD') res.end()
   else fs.createReadStream(file).pipe(res)
 }
