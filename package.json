@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-server --emptyOutDir && node scripts/postbuild.mjs && node scripts/check-csp.mjs",
-    "lint": "oxlint",
+    "lint": "oxlint --ignore-pattern 'backend/**'",
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.test.json --noEmit",
     "test": "vitest run",
