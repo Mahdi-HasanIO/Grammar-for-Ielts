@@ -50,6 +50,10 @@ test('GrammarIndex: stage filter, stage description and search', async ({ page, 
   await expect(articles).toContainText('Intermediate')
 
   await filters.getByRole('button', { name: 'All topics' }).click()
+  // Wait for the reset to land before typing, as a person would. (GrammarIndex builds each URL update from the
+  // params of the last render, so input in the same frame as the click would re-apply the old stage.)
+  await expect(page).toHaveURL('/grammar')
+  await expect(cards).toHaveCount(24)
   // Search covers names, descriptions, module titles and topic chips: "passive" is also a point in Information Structure.
   await page.getByPlaceholder('Search topics, e.g. passive').fill('passive')
   await expect(cards).toHaveCount(2)
