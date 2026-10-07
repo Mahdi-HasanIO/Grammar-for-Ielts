@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       # Use Playwright's own Chromium instead of an installed Google Chrome (see playwright.config.ts).
@@ -41,3 +41,26 @@ jobs:
           name: playwright-test-results
           path: test-results/
           retention-days: 7
+
+  # The API in backend/ (Node.js + Express + MongoDB): its own dependencies, checks and tests.
+  # Independent of the frontend job above, which is unchanged. Tests need no MongoDB.
+  backend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build

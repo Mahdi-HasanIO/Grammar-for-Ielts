@@ -763,24 +763,19 @@ No question data was changed.
 
 The project now has a substantial automated test suite.
 
-Latest confirmed status after the stable-slug work:
+Latest confirmed status (last green CI run on `main`, merge commit `84856be`):
 
 ```text
 Unit tests:
-1,585 passed
+1,614 passed
 
 Browser tests:
-67 passed
+135 passed
 ```
 
-Before the stable-slug work, the test suite had:
-
-```text
-1,567 unit tests
-59 browser tests
-```
-
-The stable-slug work added additional coverage.
+Earlier counts, for history: 1,567 unit / 59 browser tests before the stable-slug work, and
+1,585 unit / 67 browser tests after it. The final Phase 0 work added coverage for content access,
+security headers, bundle splitting, public pages and routing.
 
 The test suite covers areas including:
 
@@ -845,39 +840,23 @@ Do not casually rewrite this unless explicitly required.
 
 # 22. Phase 0 Current State
 
-Phase 0 is **not yet considered completely closed until the final remaining work has been verified and committed.**
+Phase 0 is **closed**.
 
-The stable slug work is complete and verified.
+- Tag: `phase-0-complete`
+- Merge commit on `main`: `84856be`
+- CI was green on `main` for that commit, and the Vercel deployment was checked for security headers,
+  CSP, direct loads of client routes and the offline download.
 
-The remaining Phase 0 work, based on the latest confirmed status, is:
+All Phase 0 work is complete, including the remaining direct content readers (PublicUi, Practice,
+GrammarIndex, Home, `seo/meta.ts` and others now read through `content/catalog`, `ContentService`
+and the path helpers), security headers, final verification and CI.
 
-```text
-1. Remaining direct content readers
-2. Security headers
-3. Final verification
-4. CI
-5. Final commit
-```
+**Hosting note:** on Vercel, unknown client routes rewrite to `/app` (not `/app.html`). With
+`cleanUrls` enabled, Vercel redirects `/app.html` to `/app` instead of serving it, which made every
+client-only route return 404 on direct load and broke the offline download. This was fixed in
+`2ab1c4f`.
 
-The remaining direct content readers were identified in areas such as:
-
-```text
-PublicUi
-Practice
-GrammarIndex
-Home
-seo/meta.ts
-```
-
-The goal is to move them onto:
-
-```text
-content/catalog
-ContentService
-path helpers
-```
-
-without changing behavior.
+The next phase is **Phase 1A** (MERN backend foundation).
 
 ---
 
@@ -886,21 +865,23 @@ without changing behavior.
 Phase 0 is complete only when:
 
 ```text
-[ ] All intended content consumers use the frontend abstractions
-[ ] Stable slugs are verified
-[ ] Progress migration is verified
-[ ] Import/export is verified
-[ ] Repository abstractions are verified
-[ ] Answer grading is verified
-[ ] SEO regression checks pass
-[ ] PWA/offline regression checks pass
-[ ] Security headers are implemented and verified
-[ ] `npm run test:all` passes
-[ ] CI is configured
-[ ] Final Phase 0 commit exists
-[ ] Working tree is clean
-[ ] Final checkpoint is pushed
+[x] All intended content consumers use the frontend abstractions
+[x] Stable slugs are verified
+[x] Progress migration is verified
+[x] Import/export is verified
+[x] Repository abstractions are verified
+[x] Answer grading is verified
+[x] SEO regression checks pass
+[x] PWA/offline regression checks pass
+[x] Security headers are implemented and verified
+[x] `npm run test:all` passes
+[x] CI is configured
+[x] Final Phase 0 commit exists
+[x] Working tree is clean
+[x] Final checkpoint is pushed
 ```
+
+All criteria were met when Phase 0 closed (tag `phase-0-complete`, merge commit `84856be`).
 
 Do not start the backend until this is complete.
 
@@ -1575,51 +1556,33 @@ IELTS skill expansion
 - SEO/prerender regression protection
 - PWA/offline regression coverage
 
-### Latest confirmed test counts after stable slug work
+- remaining direct content readers migrated
+- security headers (CSP, HSTS, nosniff, Referrer-Policy, Permissions-Policy, X-Frame-Options)
+- CI on GitHub Actions
+- Vercel SPA rewrite fixed (`/app`)
+
+### Latest confirmed test counts (last green CI on `main`, `84856be`)
 
 ```text
-Unit tests:      1,585 passed
-Browser tests:      67 passed
+Unit tests:      1,614 passed
+Browser tests:     135 passed
 Lint:               0 errors
 Type check:         pass
 Build:              pass
 ```
 
-### Important status caveat
+### Status
 
-The latest *confirmed* status provided in the project conversation was that stable-slug work was complete and ready for commit/review, with these remaining Phase 0 items:
-
-```text
-1. Remaining direct content readers
-2. Security headers
-3. Final verification
-4. CI
-5. Final Phase 0 commit/push
-```
-
-A later instruction was prepared to complete all of those in one prompt, but this document should **not assume that work completed successfully until a fresh status report confirms it**.
+Phase 0 is closed (tag `phase-0-complete`, merge commit `84856be`). The next phase is Phase 1A.
 
 ---
 
 # 41. Immediate Next Actions
 
-If Phase 0 has NOT yet been confirmed complete:
+Phase 0 has been confirmed complete (tag `phase-0-complete`).
 
 ```text
-1. Finish remaining direct content readers
-2. Implement security headers
-3. Run final full verification
-4. Add CI
-5. Commit final Phase 0
-6. Push final Phase 0 checkpoint
-```
-
-Then begin Phase 1.
-
-If Phase 0 HAS already been confirmed complete:
-
-```text
-START PHASE 1
+START PHASE 1A
 ```
 
 with:
