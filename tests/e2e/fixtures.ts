@@ -36,6 +36,10 @@ export function watchProblems(page: Page): PageProblems {
     // Requests to external hosts are aborted by isolateNetwork(); the browser logs each one.
     if (/net::ERR_BLOCKED_BY_CLIENT/.test(text)) return
     if (source && !isLocal(new URL(source)) && /Failed to load resource/.test(text)) return
+    // Chromium performance note, not an error: when the service worker claims the page mid-load
+    // (clients.claim() in sw-template.js), a modulepreload fetched before the claim is not reused by
+    // the module request after it, so the file is fetched once more. Seen rarely, on first visits only.
+    if (/^A preload for '.+' is found, but is not used because it is a cross-world service worker resource mismatch\.$/.test(text)) return
     problems.list.push(`[console.${msg.type()}] ${text}`)
   })
   page.on('pageerror', (error) => problems.list.push(`[pageerror] ${error.message}`))
@@ -83,6 +87,7 @@ export const STORAGE = {
   preferences: 'grammar-path:preferences',
   bookmarks: 'grammar-path:bookmarks',
   lessonLanguage: 'grammar-path:lessonLanguage',
+  geminiApiKey: 'grammar-path:geminiApiKey',
 } as const
 
 // Fixture callbacks are named `provide` (Playwright calls it `use`) so lint does not mistake them for React's use().

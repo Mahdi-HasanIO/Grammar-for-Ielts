@@ -2,7 +2,16 @@ import { use } from 'react'
 import { createStaticContentService } from './staticContentService'
 import type { ContentService } from './types'
 
-export type { BlogPost, ContentService } from './types'
+export type {
+  BlogBlock,
+  BlogCategory,
+  BlogPost,
+  BlogPostMeta,
+  ContentService,
+  GrammarModule,
+  GrammarTopic,
+  ModuleRef,
+} from './types'
 export { createStaticContentService } from './staticContentService'
 
 /** The app's content source. Today: the bundled TypeScript data files. */

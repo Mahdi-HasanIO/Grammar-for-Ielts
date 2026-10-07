@@ -7,6 +7,7 @@ import { PublicLayout } from '@/components/public/PublicLayout'
 import { Home } from '@/pages/public/Home'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { SeoManager } from '@/seo/SeoManager'
+import { LearnRedirect } from '@/app/LearnRedirect'
 
 /* The lesson and question banks are large, so the content-heavy routes load on demand. */
 const Dashboard = lazy(() => import('@/pages/Dashboard').then((m) => ({ default: m.Dashboard })))
@@ -82,6 +83,9 @@ function ThemedRoutes() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
         </Route>
+        {/* Slug lesson URLs redirect to the canonical /module/:id for now. */}
+        <Route path="/learn/:slug" element={<LearnRedirect />} />
+        <Route path="/learn/:slug/test" element={<LearnRedirect test />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

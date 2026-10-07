@@ -1,5 +1,5 @@
 import type { Badge, ProgressState } from '@/types'
-import { MODULES } from '@/data/modules'
+import { COURSE_MODULES as MODULES } from '@/content/catalog'
 import { completedCount, stageProgress } from '@/utils/progression'
 import { computeStreak } from '@/utils/streak'
 

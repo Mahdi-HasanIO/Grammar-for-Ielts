@@ -1,6 +1,8 @@
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL, absoluteUrl } from '@/config/site'
-import { GRAMMAR_TOPICS, topicBySlug } from '@/data/grammarTopics'
-import { BLOG_POSTS, postBySlug, postCover } from '@/data/blog/posts'
+import { BLOG_POST_INDEX, blogPostBySlug, GRAMMAR_TOPIC_MODULES, moduleByTopicSlug, resolveModule } from '@/content/catalog'
+import { postCover } from '@/content/blog'
+import { blogPostPath, grammarTopicPath } from '@/content/paths'
+import { modulePath, moduleTestPath } from '@/content/paths'
 
 /*
  * One source of truth for page metadata. The build-time prerenderer writes
@@ -86,7 +88,7 @@ export function getSeo(pathname: string): PageSeo {
   if (path === '/grammar') {
     return {
       title: `IELTS Grammar Topics: Rules, Common Mistakes & Practice | ${SITE_NAME}`,
-      description: `Browse ${GRAMMAR_TOPICS.length} IELTS writing grammar topics, from articles and tenses to conditionals and nominalization. Key rules, common mistakes and quick practice for each.`,
+      description: `Browse ${GRAMMAR_TOPIC_MODULES.length} IELTS writing grammar topics, from articles and tenses to conditionals and nominalization. Key rules, common mistakes and quick practice for each.`,
       path,
       jsonLd: [breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Grammar', path: '/grammar' }])],
     }
@@ -94,7 +96,7 @@ export function getSeo(pathname: string): PageSeo {
 
   const grammarMatch = path.match(/^\/grammar\/([^/]+)$/)
   if (grammarMatch) {
-    const topic = topicBySlug(grammarMatch[1])
+    const topic = moduleByTopicSlug(grammarMatch[1])?.topic
     if (topic) {
       return {
         title: `${topic.name} for IELTS Writing: Rules, Mistakes & Practice | ${SITE_NAME}`,
@@ -123,7 +125,7 @@ export function getSeo(pathname: string): PageSeo {
 
   const blogMatch = path.match(/^\/blog\/([^/]+)$/)
   if (blogMatch) {
-    const post = postBySlug(blogMatch[1])
+    const post = blogPostBySlug(blogMatch[1])
     if (post) {
       const cover = postCover(post)
       return {
@@ -177,11 +179,15 @@ export function getSeo(pathname: string): PageSeo {
     }
   }
 
-  if (/^\/module\/\d+(\/test)?$/.test(path)) {
+  // Course lessons are per-learner, so they stay out of search. /module/:id is the canonical URL;
+  // /module/:slug, /learn/:slug and their /test forms are aliases that redirect to it.
+  const lessonMatch = path.match(/^\/(?:module|learn)\/([^/]+)(\/test)?$/)
+  const lesson = lessonMatch ? resolveModule(lessonMatch[1]) : undefined
+  if (lessonMatch && lesson) {
     return {
       title: `Course lesson | ${SITE_NAME}`,
       description: SITE_DESCRIPTION,
-      path,
+      path: lessonMatch[2] ? moduleTestPath(lesson.legacyId) : modulePath(lesson.legacyId),
       noindex: true,
     }
   }
@@ -253,13 +259,13 @@ export function headTagsToHtml(tags: HeadTag[]): string {
 
 /** Public pages rendered to static HTML at build time, and listed in sitemap.xml. */
 export function indexableRoutes(): { path: string; lastmod?: string; priority: number; prerender: boolean }[] {
-  const latest = BLOG_POSTS[0]?.date
+  const latest = BLOG_POST_INDEX[0]?.date
   return [
     { path: '/', priority: 1, prerender: true, lastmod: latest },
     { path: '/grammar', priority: 0.9, prerender: true },
-    ...GRAMMAR_TOPICS.map((t) => ({ path: `/grammar/${t.slug}`, priority: 0.8, prerender: true })),
+    ...GRAMMAR_TOPIC_MODULES.map((m) => ({ path: grammarTopicPath(m.topic.slug), priority: 0.8, prerender: true })),
     { path: '/blog', priority: 0.8, prerender: true, lastmod: latest },
-    ...BLOG_POSTS.map((p) => ({ path: `/blog/${p.slug}`, priority: 0.7, prerender: true, lastmod: p.date })),
+    ...BLOG_POST_INDEX.map((p) => ({ path: blogPostPath(p.slug), priority: 0.7, prerender: true, lastmod: p.date })),
     { path: '/practice', priority: 0.6, prerender: true },
     // The course roadmap reads learner progress, so it is rendered in the browser only.
     { path: '/course', priority: 0.7, prerender: false },

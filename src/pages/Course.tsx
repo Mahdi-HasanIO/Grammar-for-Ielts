@@ -1,5 +1,5 @@
 import { CheckCircle2, Loader, Lock } from 'lucide-react'
-import { STAGES } from '@/data/modules'
+import { contentService, useContent } from '@/services/content'
 import { useProgress } from '@/hooks/useProgress'
 import {
   getModuleProgress,
@@ -18,6 +18,7 @@ import { useLessonLanguage } from '@/hooks/useLessonLanguage'
 import { LanguageChooser, LanguageToggle } from '@/components/lesson/LanguageSwitch'
 
 export function Course() {
+  const stages = useContent(contentService.getStages())
   const { state } = useProgress()
   const { language } = useLessonLanguage()
 
@@ -32,7 +33,7 @@ export function Course() {
       />
 
       <div className="relative space-y-12">
-        {STAGES.map((baseStage) => {
+        {stages.map((baseStage) => {
           const stage = localizeStage(baseStage, language)
           const modules = stageModules(stage.id)
           const { done, total, percentage, status } = stageProgress(state, stage.id)

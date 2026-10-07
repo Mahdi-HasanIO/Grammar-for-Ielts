@@ -9,7 +9,7 @@ import {
 import { MODULES } from '@/data/modules'
 import { GRAMMAR_TOPICS } from '@/data/grammarTopics'
 import { BLOG_POSTS } from '@/data/blog/posts'
-import { blogPostPath, grammarTopicPath, learnPath, modulePath, moduleTestPath } from '@/content/paths'
+import { blogPostPath, grammarTopicPath, learnPath, learnTestPath, modulePath, moduleTestPath } from '@/content/paths'
 import { contentService } from '@/services/content'
 
 /*
@@ -156,7 +156,9 @@ describe('URL builders', () => {
     expect(modulePath(3)).toBe('/module/3')
     expect(moduleTestPath(3)).toBe('/module/3/test')
     expect(learnPath('articles-and-determiners')).toBe('/learn/articles-and-determiners')
+    expect(learnTestPath('articles-and-determiners')).toBe('/learn/articles-and-determiners/test')
     expect(grammarTopicPath('articles')).toBe('/grammar/articles')
     expect(blogPostPath('hedging-in-ielts-task-2')).toBe('/blog/hedging-in-ielts-task-2')
   })
 })
+

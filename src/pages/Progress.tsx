@@ -1,5 +1,4 @@
 import { Award, BarChart3, Clock, Flame, Target, TrendingUp, Trophy } from 'lucide-react'
-import { MODULES } from '@/data/modules'
 import { useProgress } from '@/hooks/useProgress'
 import { useStreak } from '@/hooks/useStreak'
 import { formatMinutes, overviewStats } from '@/utils/stats'
@@ -73,7 +72,7 @@ export function ProgressPage() {
           className="animate-fade-up stagger"
           style={{ '--i': 0 } as React.CSSProperties}
           label="Modules completed"
-          value={`${stats.modulesCompleted}/${MODULES.length}`}
+          value={`${stats.modulesCompleted}/${stats.totalModules}`}
           icon={<Trophy size={15} />}
         />
         <StatTile

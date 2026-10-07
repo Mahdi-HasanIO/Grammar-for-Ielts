@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
-import { BLOG_CATEGORIES, BLOG_POSTS, featuredPost, type BlogCategory } from '@/data/blog/posts'
+import { contentService, useContent, type BlogCategory } from '@/services/content'
+import { featuredPost } from '@/content/blog'
 import { Reveal } from '@/components/ui/Reveal'
 import { Blob } from '@/components/public/motion'
 import { BlogCard, Breadcrumbs, Container, FeaturedPostCard, SectionHeading } from '@/components/public/PublicUi'
@@ -8,13 +9,15 @@ import { useHydrated } from '@/hooks/useHydrated'
 
 export function BlogIndex() {
   const [params, setParams] = useSearchParams()
+  const allPosts = useContent(contentService.getBlogPosts())
+  const categories = useContent(contentService.getBlogCategories())
   const hydrated = useHydrated()
   const raw = hydrated ? params.get('category') : null
-  const category = BLOG_CATEGORIES.find((c) => c === raw) as BlogCategory | undefined
-  const featured = featuredPost()
+  const category = categories.find((c) => c === raw)
+  const featured = featuredPost(allPosts)
   const posts = category
-    ? BLOG_POSTS.filter((p) => p.category === category)
-    : BLOG_POSTS.filter((p) => p.slug !== featured.slug)
+    ? allPosts.filter((p) => p.category === category)
+    : allPosts.filter((p) => p.slug !== featured.slug)
 
   const setCategory = (c?: BlogCategory) => {
     const p = new URLSearchParams(params)
@@ -24,7 +27,7 @@ export function BlogIndex() {
   }
 
   const counts = Object.fromEntries(
-    BLOG_CATEGORIES.map((c) => [c, BLOG_POSTS.filter((p) => p.category === c).length]),
+    categories.map((c) => [c, allPosts.filter((p) => p.category === c).length]),
   ) as Record<BlogCategory, number>
 
   return (
@@ -50,7 +53,7 @@ export function BlogIndex() {
           role="group"
           aria-label="Filter by category"
         >
-          {[undefined, ...BLOG_CATEGORIES].map((c) => {
+          {[undefined, ...categories].map((c) => {
             const active = category === c
             return (
               <button
@@ -72,7 +75,7 @@ export function BlogIndex() {
                     active ? 'bg-white/20' : 'bg-ink-100 text-ink-500 dark:bg-ink-800 dark:text-ink-400',
                   )}
                 >
-                  {c ? counts[c] : BLOG_POSTS.length}
+                  {c ? counts[c] : allPosts.length}
                 </span>
               </button>
             )

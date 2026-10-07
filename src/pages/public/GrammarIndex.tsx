@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { ArrowRight, Search, X } from 'lucide-react'
-import { GRAMMAR_TOPICS, topicModule } from '@/data/grammarTopics'
-import { STAGES } from '@/data/modules'
-import { STAGES_EN } from '@/data/modulesEn'
+import { contentService, useContent } from '@/services/content'
+import { localizeStage } from '@/utils/i18n'
 import { Reveal } from '@/components/ui/Reveal'
 import { buttonClasses } from '@/components/ui/Button'
 import { Blob } from '@/components/public/motion'
@@ -14,10 +13,14 @@ import { useHydrated } from '@/hooks/useHydrated'
 
 export function GrammarIndex() {
   const [params, setParams] = useSearchParams()
+  const allTopics = useContent(contentService.getGrammarTopics())
+  const stages = useContent(contentService.getStages())
   // Filters come from the URL; ignore them until hydration so the prerendered list matches.
   const hydrated = useHydrated()
   const stageParam = hydrated ? Number(params.get('stage')) : 0
-  const stage = STAGES.some((s) => s.id === stageParam) ? stageParam : 0
+  const stage = stages.some((s) => s.id === stageParam) ? stageParam : 0
+  const stageInfo = stages.find((s) => s.id === stage)
+  const stageText = stageInfo ? localizeStage(stageInfo, 'en') : undefined
   const query = hydrated ? (params.get('q') ?? '') : ''
   const cta = useCourseCta()
 
@@ -36,13 +39,12 @@ export function GrammarIndex() {
 
   const topics = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return GRAMMAR_TOPICS.filter((t) => {
-      const m = topicModule(t)
+    return allTopics.filter(({ topic: t, module: m }) => {
       if (stage && m.stage !== stage) return false
       if (!q) return true
       return [t.name, t.description, m.title, ...m.topics].some((s) => s.toLowerCase().includes(q))
     })
-  }, [stage, query])
+  }, [allTopics, stage, query])
 
   return (
     <div className="relative isolate">
@@ -58,14 +60,14 @@ export function GrammarIndex() {
             as="h1"
             eyebrow="Grammar"
             title="Grammar topics for IELTS writing"
-            description={`${GRAMMAR_TOPICS.length} topics, from sentence basics to academic style. Read the key rules, see the common mistakes and practise in minutes, without starting the course.`}
+            description={`${allTopics.length} topics, from sentence basics to academic style. Read the key rules, see the common mistakes and practise in minutes, without starting the course.`}
           />
         </div>
 
         {/* Filters */}
         <div className="mb-8 flex animate-fade-up flex-col gap-4 [animation-delay:80ms] lg:flex-row lg:items-center lg:justify-between">
           <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Filter by stage">
-            {[{ id: 0, name: 'All topics' }, ...STAGES].map((s) => (
+            {[{ id: 0, name: 'All topics' }, ...stages].map((s) => (
               <button
                 key={s.id}
                 type="button"
@@ -108,10 +110,10 @@ export function GrammarIndex() {
           </div>
         </div>
 
-        {stage ? (
+        {stageText ? (
           <p className="mb-6 max-w-2xl animate-fade-in text-[14.5px] leading-7 text-ink-600 dark:text-ink-400">
-            <span className="font-semibold text-ink-900 dark:text-ink-100">{STAGES_EN[stage as 1].tagline}.</span>{' '}
-            {STAGES_EN[stage as 1].description}
+            <span className="font-semibold text-ink-900 dark:text-ink-100">{stageText.tagline}.</span>{' '}
+            {stageText.description}
           </p>
         ) : null}
 
@@ -121,9 +123,9 @@ export function GrammarIndex() {
 
         {topics.length ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {topics.map((topic, i) => (
-              <Reveal key={topic.slug} delay={(i % 3) * 70} className="reveal-scale h-full">
-                <GrammarCard topic={topic} />
+            {topics.map((entry, i) => (
+              <Reveal key={entry.topic.slug} delay={(i % 3) * 70} className="reveal-scale h-full">
+                <GrammarCard entry={entry} />
               </Reveal>
             ))}
           </div>

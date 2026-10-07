@@ -1,92 +1,174 @@
-# Phase 0 — Frontend groundwork (in progress)
+# Phase 0 — Frontend groundwork (complete)
 
-_Last updated: 2026-10-06 · Base commit: `f8b17b9` · All work below is **uncommitted** in the working tree._
+_Completed: 2026-10-07 · Base commit: `f8b17b9` · Checkpoint commit: `5924811` · Branch: `phase0-slug-cleanup`_
 
-Phase 0 prepares the existing frontend-only app for a later backend without changing what users
-see. It adds no backend, auth, payments or CMS. The planned backend is **Django + Django REST
-Framework + PostgreSQL** (decided after `PLATFORM_AUDIT.md` was written; that document's
-stack table predates the decision).
+Phase 0 prepared the frontend-only app for a backend without changing what learners see. It adds
+no backend, authentication, payments, CMS or server-side AI.
 
-Status words used here:
+The planned backend is **MERN: MongoDB, Express.js and Node.js**, with the existing **React +
+TypeScript + Vite + PWA** frontend. This decision replaces the earlier Django/DRF/PostgreSQL plan
+and post-dates `PLATFORM_AUDIT.md`. The audit's stack table is out of date, but its analysis still
+applies. No backend code exists yet.
 
-- **Implemented**: code exists, type-checks, builds, and is wired into the app.
-- **Verified**: checked by an automated test or a command whose result is recorded below.
-- **Unverified**: implemented, but not yet exercised by tests or in a browser.
+Every result in this document comes from a command that was run. Anything not run is listed under
+[Known limitations](#known-limitations-outside-phase-0).
 
-> **Not committed and not deployed.** Loading the app migrates every learner's stored progress to
-> `schemaVersion: 1` and writes it back. That path is now covered by unit and browser tests (see
-> [Automated tests](#automated-tests)). The remaining Phase 0 items below are still open.
+## Summary
 
-## Status by item
+| Item | Result |
+| --- | --- |
+| A. Progress `schemaVersion` + migrations | Done, verified |
+| B. Import/export validation | Done, verified |
+| C. Automated tests | Done: 1,612 unit tests, 124 browser tests |
+| D. `ContentService` + bundle splitting | Done: every component, page and hook reads content through it |
+| E. `ProgressRepository` | Done, verified |
+| F. `BookmarkRepository` | Done, verified |
+| G. Stable module slugs | Done: `/learn/:slug` and `/module/<slug>` redirect to the canonical `/module/:id` |
+| H. Topic/module identity | Done: one `GrammarModule` catalogue; no reads of `src/data` outside the content layer |
+| I. Security headers | Done: CSP (hash-based scripts), HSTS, nosniff, Referrer-Policy, Permissions-Policy, X-Frame-Options |
+| J. CI | Done: GitHub Actions runs `npm run test:all` on every push and pull request |
+| K. Documentation | This file |
 
-| Item | State | Verified so far |
+Two bugs were found and fixed along the way (see [Bugs found and fixed](#bugs-found-and-fixed)).
+One of them, the punctuation grading bug, predates Phase 0.
+
+## Architecture after Phase 0
+
+### Content access
+
+```
+components / pages / hooks ──useContent()──▶ ContentService (interface, async)
+                                               └─ staticContentService (bundled TypeScript data)
+                                                    ├─ lessonPack   (lessons, code-split)
+                                                    └─ questionPack (questions, code-split)
+
+utils (progression, badges, stats, i18n), seo/meta.ts ──▶ src/content/catalog.ts (synchronous)
+
+src/data/** ◀── only src/content/** and src/services/content/**
+```
+
+- **`ContentService`** (`src/services/content/types.ts`) is the only way UI code reads content:
+  - Methods: `getStages`, `getModules`, `getModule`, `getLesson`, `getPracticeQuestions`,
+    `getTestQuestions`, `getGrammarTopics`, `getGrammarTopic`, `getFeaturedGrammarTopics`,
+    `getBlogPosts`, `getBlogPost`, `getBlogCategories`.
+  - It is async and backend-agnostic: no network, storage or framework code. An Express API
+    client can implement it later without changing pages.
+  - Content record types (`GrammarModule`, `BlogPostMeta`, `BlogBlock`, `BlogCategory`,
+    `GrammarTopic`) are re-exported from `@/services/content`, so UI code never imports
+    `src/data`, not even types.
+- **`staticContentService`** reads the bundled data and returns already-settled promises
+  (`status: 'fulfilled'`). React's `use()` (wrapped as `useContent`) reads them in the first
+  render, so prerendering and hydration are exactly as before. Results are memoised per argument.
+- **Content packs.** Lessons and questions (about 460 KB) are separate chunks that register
+  themselves when imported.
+  - Importers: `Module.tsx`, `GrammarTopic.tsx` and `Test.tsx`, plus `useAiPractice.ts` (used by
+    the lesson page).
+  - Any other caller still works: the pack is loaded on demand and the caller suspends.
+  - **Contract:** a prerendered page must import the pack it reads, or its HTML would contain a
+    loading fallback, which `postbuild.mjs` rejects.
+- **`src/content/catalog.ts`** joins course modules and grammar topics into one `GrammarModule`:
+  stable `slug`, numeric `legacyId`, `topic` view and stage.
+  - It also offers synchronous views (`COURSE_MODULES`, `COURSE_STAGES`, `GRAMMAR_TOPIC_MODULES`,
+    `FEATURED_TOPIC_MODULES`, English module and stage text, the blog index).
+  - These serve domain logic that cannot wait for a promise: unlocking, badges, stats,
+    localisation, and SEO metadata, which the build-time prerenderer and `<SeoManager>` read
+    synchronously.
+- **`src/content/blog.ts`** holds pure blog helpers moved out of the data file: `featuredPost`
+  and `relatedPosts` (now given the post list), `formatPostDate` and `postCover`.
+- **`src/content/paths.ts`** builds every in-app content URL: `modulePath`, `moduleTestPath`,
+  `learnPath`, `learnTestPath`, `grammarTopicPath` and `blogPostPath`.
+
+All of these rules are enforced by `tests/unit/architecture.test.ts`.
+
+**Migration of the remaining direct readers (final step).** These files used to import `src/data`
+directly and now go through the content layer:
+
+| Files | Now reads through |
+| --- | --- |
+| Home, GrammarIndex, Practice, BlogIndex, BlogPost, PublicUi (`GrammarCard`, blog cards), PublicLayout (footer categories) | `ContentService` |
+| Layout, Dashboard, Course, Review, StageTrack | `ContentService` |
+| Progress | its computed stats (`stats.totalModules`) |
+| `utils/progression`, `utils/badges`, `utils/stats`, `utils/i18n`, `seo/meta.ts` | the synchronous catalogue |
+
+`GrammarCard` now takes the unified `GrammarModule` entry instead of joining a topic to its module
+itself. Rendered output is unchanged: the prerendered HTML is identical to the original commit.
+
+### Learner data
+
+- **Progress** (`src/services/progress/`):
+  - `schemaVersion: 1` with an ordered migration chain. Unversioned saves are version 0.
+  - A validator with a strict mode (imports) and a repair mode (stored data: keeps every valid
+    field). Unknown fields are stripped and sizes are capped.
+  - Data from a newer app version keeps its unknown fields.
+  - The original string is copied once to `grammar-path:progress:before-v1` when it is migrated,
+    repaired or unreadable.
+- **Backups:**
+  - Format: `{ format, schemaVersion, exportedAt, state, preferences }`.
+  - Legacy `{ state, preferences }` files still import.
+  - A file is applied only if it is entirely valid.
+- **Repositories** (`src/repositories/`):
+  - `ProgressRepository` and `BookmarkRepository` interfaces with localStorage implementations
+    over an injectable `KeyValueStore`.
+  - Storage keys are **unchanged**.
+  - Reads are synchronous by design (local-first). Future sync will wrap the local repository.
+
+### Module URLs
+
+| URL | Behaviour |
+| --- | --- |
+| `/module/:id`, `/module/:id/test` | **Canonical**, unchanged. The numeric id is still the progress key. |
+| `/module/<module-slug or topic-slug>` (and `/test`) | Redirects to the numeric URL. |
+| `/learn/<module-slug, topic-slug or id>` (and `/test`) | Redirects to the numeric URL. |
+| Unknown reference under `/module/` or `/learn/` | Redirects to `/course`. |
+| `/grammar/:slug`, `/blog/:slug` | Unchanged; indexed. |
+
+Every form of a lesson URL is `noindex`, and its canonical points at `/module/:id`. No lesson URL is
+in the sitemap.
+
+### Security headers
+
+`vercel.json` sends these on every path (`/(.*)`); the existing caching and service-worker headers
+are unchanged:
+
+| Header | Value |
+| --- | --- |
+| `Content-Security-Policy` | see below |
+| `Strict-Transport-Security` | `max-age=63072000` (2 years) |
+| `X-Content-Type-Options` | `nosniff` |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` |
+| `Permissions-Policy` | `camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()` |
+| `X-Frame-Options` | `DENY` (legacy companion to `frame-ancestors 'none'`) |
+
+The CSP, directive by directive:
+
+| Directive | Value | Why |
 | --- | --- | --- |
-| A. Progress `schemaVersion` + migrations | Implemented, **verified** | Unit tests + browser test with real localStorage |
-| B. Import/export validation | Implemented, **verified** | Unit tests + browser tests through Settings |
-| C. Automated tests | Implemented, **verified** | 1,567 unit tests, 59 browser tests; no expected failures |
-| D. `ContentService` | Implemented for Module, Test, GrammarTopic, BlogPost, `useAiPractice`; other callers not migrated | Unit tests, bundle graph, prerender diff, hydration tests |
-| E. `ProgressRepository` | Implemented, **verified** | Unit tests (in-memory store) + browser tests |
-| F. `BookmarkRepository` | Implemented, **verified** | Unit tests + browser test |
-| G. Stable module slugs | **Partial**: catalogue + `/module/<slug>` → `/module/<id>` redirect; no `/learn/:slug` route yet | Identity pinned by unit tests; redirects tested in the browser |
-| H. Topic/module identity | **Partial**: `GrammarModule` catalogue; 5 files still read `grammarTopics.ts` directly | Unit tests |
-| I. Security headers | **Not started** | — |
-| J. Documentation | This file | — |
+| `default-src` | `'self'` | |
+| `script-src` | `'self' 'sha256-xUchrIZ6…'` | The theme script in `index.html` is the only executable inline script; it is allowed by hash. No `'unsafe-inline'` and no `'unsafe-eval'` (the bundles use neither). JSON-LD blocks are data, not scripts, so CSP does not apply to them. |
+| `style-src-elem` | `'self' https://fonts.googleapis.com` | Inline `<style>` elements are blocked (the app has none). |
+| `style-src-attr` | `'unsafe-inline'` | Required: prerendered pages contain 875 `style=""` attributes (React style props such as the `--i` stagger index), and React sets inline styles at runtime. |
+| `style-src` | `'self' 'unsafe-inline' https://fonts.googleapis.com` | Fallback for browsers without CSP Level 3 `-elem`/`-attr` support. |
+| `font-src` | `https://fonts.gstatic.com` | |
+| `img-src` | `'self'` | All images are same-origin; there are no `data:` images. |
+| `connect-src` | `'self'` + `generativelanguage.googleapis.com` (AI practice), `abacus.jasoncameron.dev` (visitor counter), `fonts.googleapis.com` + `fonts.gstatic.com` (Offline Mode caches fonts) | |
+| `worker-src`, `manifest-src` | `'self'` | |
+| `object-src`, `base-uri`, `frame-ancestors` | `'none'` | |
+| `form-action` | `'self'` | The app has no forms. |
 
-## What exists
+Notes on the other headers:
 
-### Content (`src/content/`, `src/services/content/`)
+- **`Permissions-Policy`** disables only features the app never uses. The dashboard share card
+  needs `clipboard-write` and `web-share`, so those are left enabled.
+- **`Strict-Transport-Security`** has no `includeSubDomains` and no `preload`. Add them only after
+  checking every subdomain of a future custom domain.
 
-- `content/catalog.ts`: `GrammarModule` joins a course module (`data/modules.ts`) and its public
-  grammar topic (`data/grammarTopics.ts`). It has a stable `slug`, a numeric `legacyId` and a
-  `topic` view. `resolveModule(ref)` accepts a legacy id, a module slug or a topic slug.
-- `content/paths.ts`: URL builders (`modulePath`, `moduleTestPath`, `learnPath`, ...). Only the
-  migrated pages use them so far.
-- `services/content/types.ts`: the async `ContentService` interface (`getModules`, `getModule`,
-  `getLesson`, `getPracticeQuestions`, `getTestQuestions`, `getGrammarTopics`, `getGrammarTopic`,
-  `getBlogPosts`, `getBlogPost`, `getStages`).
-- `services/content/staticContentService.ts`: the only implementation. It reads the bundled
-  TypeScript data and returns **already-settled promises** (`status: 'fulfilled'`), so React's
-  `use()` (wrapped as `useContent`) reads them in the first render. Prerendered HTML and hydration
-  are therefore unchanged. Results are memoised per argument.
-- **Content packs** (`packs.ts`, `lessonPack.ts`, `questionPack.ts`): lessons and questions are
-  most of the bundle, so the service does not import them. A route that shows them imports the
-  pack (`import '@/services/content/lessonPack'`), which registers it before the first render.
-  If a caller asks for a pack that its route did not import, the service loads it on demand and
-  returns a pending promise. That caller then suspends under its route's `<Suspense>`.
-  - `Module.tsx` imports `lessonPack`; `useAiPractice.ts` and `Test.tsx` import `questionPack`;
-    `GrammarTopic.tsx` imports both.
+**Build check.** `scripts/check-csp.mjs` runs at the end of `npm run build`. It fails the build if:
+- any executable inline script in `index.html` or `dist/**/*.html` is not allowed by a hash;
+- an allowed hash matches no script (a stale hash);
+- `script-src` contains `'unsafe-inline'` or `'unsafe-eval'`.
 
-**Contract for future callers:** on a prerendered public page, import the pack you read from.
-Otherwise the page renders a loading fallback at build time, which `postbuild.mjs` rejects.
-
-### Progress (`src/services/progress/`)
-
-- `state.ts`: `PROGRESS_SCHEMA_VERSION = 1`, `createInitialState`, `DEFAULT_PREFERENCES`.
-- `schema.ts`: a hand-written validator with two modes:
-  - **strict** (`validateProgressState`, `validatePreferences`) rejects bad input; used for imports;
-  - **repair** (`repairProgressState`, `repairPreferences`) keeps valid fields and replaces or drops
-    invalid ones; used for data already in the browser.
-
-  It also enforces size limits and strips unknown fields.
-- `migrations.ts`: an ordered migration chain. Unversioned data is version 0; `v0 → v1` adds
-  `schemaVersion` and fills fields that early saves may lack. `loadStoredProgress()` never throws
-  and never resets valid data. Data written by a newer app version keeps its unknown fields.
-- `backup.ts`: the export format is `{ format, schemaVersion, exportedAt, state, preferences }`.
-  `parseBackup()` accepts legacy `{ state, preferences }` files, migrates them, validates them
-  strictly, and applies nothing unless the whole file is valid.
-
-### Learner-data repositories (`src/repositories/`)
-
-- `ProgressRepository` and `BookmarkRepository` interfaces. Reads are synchronous on purpose: the
-  app is local-first, and later sync will wrap the local repository rather than replace it.
-- localStorage implementations use the **same keys as before** (`grammar-path:progress`,
-  `grammar-path:preferences`, `grammar-path:bookmarks`). They run over an injectable
-  `KeyValueStore` (`utils/storage.ts`), and `createMemoryStore()` exists for tests.
-- On first migration or repair, or when the stored string is not valid JSON, the original progress
-  string is copied once to `grammar-path:progress:before-v1`.
-- `ProgressProvider` takes an optional `repository` prop. `useBookmarks` is built from
-  `createBookmarkStore(repository)`. `hooks/useLocalStorage.ts` was removed because it had no
-  remaining callers.
+The failure message prints the hash to use. It was checked both ways: it passes on the real build
+and fails when the theme script is edited.
 
 ## Automated tests
 
@@ -94,150 +176,181 @@ Otherwise the page renders a loading fallback at build time, which `postbuild.mj
 
 | File | Purpose |
 | --- | --- |
-| `vitest.config.ts` | Unit tests: `tests/unit/**/*.test.ts`, Node environment, `@` alias to `src/` |
-| `playwright.config.ts` | Browser tests: `tests/e2e`, installed Google Chrome (`channel: 'chrome'`; set `PW_BUNDLED_CHROMIUM=1` to use Playwright's Chromium), 4 workers |
-| `tests/e2e/server.mjs` | Serves `dist/` the way Vercel does: clean URLs, trailing-slash redirect, `app.html` fallback, headers copied from `vercel.json` |
-| `tests/e2e/fixtures.ts` | Network isolation, console/page-error capture, localStorage helpers |
-| `tests/fixtures/legacy-progress.json` | A realistic progress save from before versioning, shared by unit and browser tests |
-| `tsconfig.test.json` | Type-checks `src`, `tests` and both configs |
+| `vitest.config.ts` | Unit tests in `tests/unit`, Node environment, `@` alias |
+| `playwright.config.ts` | Browser tests in `tests/e2e`. Uses installed Google Chrome by default; `PW_BUNDLED_CHROMIUM=1` uses Playwright's Chromium (as CI does). 4 workers locally, 2 in CI. |
+| `tests/e2e/server.mjs` | Serves `dist/` like Vercel (clean URLs, trailing-slash redirect, `app.html` fallback) **with the headers from `vercel.json`**, so every browser test runs under the production CSP |
+| `tests/e2e/fixtures.ts` | Network isolation, console and page-error capture, storage helpers |
+| `tests/fixtures/legacy-progress.json` | A realistic pre-versioning progress save |
+| `tsconfig.test.json` | Type-checks `src`, `tests` and the configs |
+| `scripts/check-csp.mjs` | CSP hash check, part of `npm run build` |
 
-Scripts:
-
-| Command | What it runs |
+| Command | Runs |
 | --- | --- |
-| `npm test` | Vitest, once |
-| `npm run test:watch` | Vitest in watch mode |
-| `npm run test:e2e` | Playwright. **Needs a current build**: run `npm run build` first |
-| `npm run typecheck` | `tsc` for app code and for tests |
-| `npm run test:all` | typecheck → lint → unit → build → browser tests |
+| `npm test` | Vitest |
+| `npm run test:e2e` | Playwright (needs a fresh `npm run build`) |
+| `npm run typecheck` | `tsc` for app and tests |
+| `npm run test:all` | typecheck → lint → unit → build (includes the CSP check) → browser tests |
 
-**Isolation.** Every browser test runs in a fresh browser context, with its own localStorage,
-Cache Storage and service worker. Every request to a host other than the local test server is
-aborted (Google Fonts, the production visitor counter at Abacus, Gemini), so the tests never
-read or write production data. No test uses a real account or API key.
+**Isolation.**
+- Every browser test uses a fresh browser context, with its own storage, caches and service
+  worker.
+- Requests to any host other than the local server are aborted.
+- Tests that need Gemini, the visitor counter or Google Fonts answer those hosts with local mocks.
+- Nothing reaches a production service, and no real key or account is used.
+- **One Chromium diagnostic is ignored**, the "preload … not used because it is a cross-world
+  service worker resource mismatch" warning:
+  - It appears rarely, on a first visit, when the service worker claims the page mid-load.
+  - The file is simply fetched again.
+  - It was seen once in a CI-mode run and not in 15 targeted repeats.
+  - All errors, page exceptions, hydration recoveries and other warnings still fail the tests.
 
-### Unit tests (Vitest): 9 files, 1,567 tests
+### Unit tests (Vitest): 11 files, 1,612 tests
 
-| File | Tests | What it verifies |
+| File | Tests | Verifies |
 | --- | --- | --- |
-| `progress-migration.test.ts` | 51 | v0 → v1 keeps every value exactly; sparse early saves get defaults; v1 data is unchanged and migration is idempotent; malformed input never throws; one bad field is repaired without losing the rest; newer-version data keeps unknown fields; strict validation rejects 13 kinds of damage; repair mode strips unknown fields, de-duplicates and caps history; preferences; the localStorage repository migrates in place, keeps the original once, ignores removals and syncs tabs |
-| `progress-backup.test.ts` | 34 | Export format and round trip; legacy `{ state, preferences }` import; malformed JSON, non-objects, wrong format, oversized input, newer or unreadable versions, damaged state, invalid preferences; a file is never half-applied; unknown fields are not imported |
-| `bookmarks.test.ts` | 6 | Same storage key as before; malformed, duplicate and off-site entries are dropped; cross-tab updates; toggle/remove through the store the hook uses |
-| `lesson-parity.test.ts` | 148 | 24 modules each have a Bangla and an English lesson; same rule ids in the same order; same structure (structure steps, notes, table shape, example and mistake counts, takeaways); identical English example sentences; Bangla text only in the Bangla version; every lesson has practice and test questions |
-| `question-integrity.test.ts` | 1,080 | 4 practice + 10 test questions per module (336); unique ids; valid module references and types; non-empty text, answers and explanations; option questions have exactly distinct options containing the answer, with exactly one graded correct; typed answers and their alternatives are accepted |
-| `seo.test.ts` | 158 | The 36 sitemap routes; 35 prerendered; indexable robots tag, title, description length, canonical and Open Graph URL for each; unique titles and descriptions; JSON-LD (WebSite, BreadcrumbList, Article) where expected; JSON-LD `<` escaping; private, module and unknown pages are `noindex` |
-| `slugs.test.ts` | 46 | The id → module slug → topic slug table and blog slugs are pinned; slugs are kebab-case, unique and never numeric; no module slug equals another module's topic slug; related-topic and blog topic links resolve; `resolveModule()` by number, digit string, module slug and topic slug; URL builders |
-| `content-service.test.ts` | 5 | Already-fulfilled promises once a pack is registered; on-demand pack loading otherwise; the same promise for the same request; empty results for unknown ids |
-| `grading.test.ts` | 39 | Option questions compare exactly: punctuation-only differences are not equivalent, the correct option is accepted, and case or spacing variants are not. All 8 affected questions accept only their answer. Module tests lose a mark for a comma splice. Typed answers still ignore case, punctuation and spacing and accept alternatives, except that a punctuation-only answer (`:` or `;`) keeps its punctuation. |
+| `progress-migration.test.ts` | 51 | v0 → v1 keeps every value; defaults for sparse saves; idempotent; malformed input never throws; field-level repair; newer-version data kept; 13 kinds of strict-validation failure; repository migrates in place, keeps the original (including unreadable JSON), syncs tabs |
+| `progress-backup.test.ts` | 34 | Export format and round trip; legacy import; malformed, oversized, foreign, newer-version and damaged files rejected; never half-applied |
+| `bookmarks.test.ts` | 6 | Same key as before; damaged and off-site entries dropped; cross-tab updates; store toggle/remove |
+| `lesson-parity.test.ts` | 148 | 24 modules × English/Bangla: same rule ids, structure and counts; identical English example sentences |
+| `question-integrity.test.ts` | 1,080 | 336 questions: counts per module, unique ids, valid types and references, options and answers, exactly one correct option |
+| `grading.test.ts` | 39 | Option questions compare exactly; typed answers stay forgiving; punctuation-only answers keep punctuation; regressions for the 11 affected questions |
+| `seo.test.ts` | 175 | 36 sitemap routes; per-page robots, title, description, canonical, Open Graph; unique titles and descriptions; JSON-LD; `noindex` for private pages; every lesson URL form canonicalises to `/module/:id` |
+| `slugs.test.ts` | 46 | Pinned id/slug/topic-slug table and blog slugs; slug rules; no cross-collisions; `resolveModule()`; URL builders |
+| `content-service.test.ts` | 15 | Settled promises; on-demand pack loading; memoisation; featured topics, categories, modules, topics, stages, posts; blog helpers (featured and related posts pinned, dates, covers); localisation |
+| `architecture.test.ts` | 6 | No `src/data` imports outside the content layer; UI does not read the catalogue directly; packs imported only by the four routes; no network or storage code in the content service; no hand-built content URLs |
+| `security-headers.test.ts` | 12 | Every header and value; CSP hash equals the theme script's hash; no unsafe script sources; exact external origins; caching headers unchanged |
 
-There are no expected failures. All 1,567 tests run as normal tests.
+### Browser tests (Playwright): 6 files, 124 tests
 
-### Browser tests (Playwright + Chrome): 3 files, 59 tests
-
-| File | Tests | What it verifies |
+| File | Tests | Verifies |
 | --- | --- | --- |
-| `hydration.spec.ts` | 43 | All 35 prerendered pages from the built `sitemap.xml` hydrate with no console errors, no page errors and no React "hydration recovered" log, and the server-rendered `<h1>` node is kept. The same checks run on 6 pages for a returning learner with saved progress, Bangla and dark theme. A control test serves a tampered page and confirms the checks catch it. |
-| `learner-flows.spec.ts` | 14 | Choosing Bangla, switching to English, persistence after reload; a public grammar page switching language; legacy progress migrated in real localStorage (values kept, original kept, module 4 open and 5 locked); passing module 4's test on migrated progress (module 5 unlocks, earlier data intact); export → clear → import round trip; legacy-file import with preferences; five malformed or invalid files rejected with storage byte-for-byte unchanged; `/module/<slug>` and `/module/<topic-slug>` redirects; unknown module → `/course`; bookmarks persist and can be removed |
-| `offline.spec.ts` | 2 | Download for Offline, then **stop the server** and set the browser offline: grammar lesson in English and Bangla, practice answer checking, course lesson in Bangla, passing a module test (saved locally), blog article with cover image, dashboard, newly unlocked module. A control test confirms that without the download an unvisited page shows the "You are offline" page (HTTP 503), so the origin really is unreachable. |
+| `hydration.spec.ts` | 43 | All 35 prerendered pages hydrate with no errors, warnings or React hydration recoveries, and keep the server-rendered `<h1>` node; 6 pages for a returning learner (saved progress, Bangla, dark theme); a control proves a tampered page is caught |
+| `learner-flows.spec.ts` | 22 | English/Bangla choice, switching and persistence; legacy progress migrated in real localStorage; passing a test on migrated progress; export/import round trip; legacy import; 5 malformed files rejected with storage unchanged; `/module/<slug>` and `/learn/...` redirects; canonical tag after a redirect; course links; bookmarks |
+| `offline.spec.ts` | 2 | Download for Offline, then stop the server and go offline: grammar lesson (English and Bangla), practice, course lesson, passing a test, blog article with cover, dashboard; a control proves the origin is really unreachable |
+| `public-pages.spec.ts` | 5 | Home (featured topics, ticker, stage overview, latest posts), GrammarIndex (stage filter, stage text, search, filtered URL), Practice (24 topics by stage), BlogIndex (category filter and counts), BlogPost (topic chips, related posts, footer categories) |
+| `bundle.spec.ts` | 48 | Lesson and question packs are separate chunks, absent from the entry, BlogPost, BlogIndex, GrammarIndex, Practice, Dashboard, Course, Settings and Bookmarks, and present where needed; sitemap and robots.txt valid; each of the 35 public pages prerendered with an `<h1>`, canonical, robots tag and no loading fallback |
+| `security.spec.ts` | 4 | Security headers on HTML, app shell, service worker, manifest and assets; no CSP violations across 7 pages including Settings; CSP allows Google Fonts, the visitor counter and Gemini (local mocks) |
 
-The full browser suite passed three consecutive runs (59/59 each, about 1.4 minutes).
+## CI
 
-### Bugs found by the tests
+`.github/workflows/ci.yml` runs on every push and pull request:
 
-1. **Fixed (Phase 0 code):** the local progress repository did not keep unreadable stored
-   progress. If the stored string was not valid JSON, for example after a truncated write, the app
-   started fresh and the next save overwrote the original with no copy. The repository now copies
-   it to `grammar-path:progress:before-v1` first (`src/repositories/localProgressRepository.ts`).
-   The old app also lost such data, so this is a gap in the new safeguard, not a regression.
-2. **Fixed (pre-existing bug, present since before Phase 0 at `f8b17b9`; fixed while continuing
-   Phase 0):** `isCorrect()` in `src/utils/answers.ts` stripped punctuation before comparing
-   every answer.
+1. `ubuntu-latest`, **Node 22** with an npm cache, then `npm ci`.
+2. `npx playwright install --with-deps chromium`.
+3. `npm run test:all`. Any type error, lint error, failed unit test, failed build (including the
+   CSP check) or failed browser test fails the job.
+4. Playwright traces are uploaded on failure.
+
+There is no deployment step; Vercel deploys separately.
+
+**Node version.** The repository pins no Node version. CI uses Node 22, the current LTS line,
+because Node 20 reached end of life in April 2026. Local development used Node 20.19.
+
+**Verified locally, not yet on GitHub:**
+- The workflow YAML parses.
+- A clean `npm ci` with npm 10 (the version Node 22 ships) installs every tool.
+- `CI=1 PW_BUNDLED_CHROMIUM=1 npm run test:all` was run with Playwright's Chromium.
+
+The first real run happens on the next push.
+
+## Bugs found and fixed
+
+1. **Unreadable stored progress was overwritten with no copy** (gap in a new Phase 0 safeguard).
+   It is now copied to `grammar-path:progress:before-v1` first.
+2. **Punctuation grading** (pre-existing since before `f8b17b9`; fixed during Phase 0).
+   `isCorrect()` stripped punctuation from every answer.
    - **Choice questions.** In 8 questions whose options differ only in punctuation, every option
-     was graded correct. Across them, 17 wrong options were accepted.
-     - Practice: `m5-p1`, `m13-p3`, `m24-p2`.
-     - Test: `m5-t2`, `m5-t10`, `m12-t10`, `m13-t2`, `m24-t6`. These affect pass/fail and
-       unlocking.
-   - **Typed questions whose answer is punctuation.** The answer was reduced to an empty string,
-     so any punctuation typed was accepted:
-     - `m5-p4` accepted `;` for a colon question;
-     - `m24-p3` accepted `,` for `;`;
-     - the test question `m5-t3` accepted a bare `,`, a comma splice.
-   - **Fix.**
-     - Questions answered by picking an option (multiple-choice, choose-correct-sentence,
-       error-correction) now compare the picked option with the answer exactly.
-     - Typed questions (fill-blank, rewrite) keep the forgiving comparison: case, punctuation
-       and spacing are ignored and `acceptable` alternatives are allowed. The exception is an
-       accepted answer made only of punctuation, which is compared with its punctuation (spaces
-       ignored).
-     - `isTypedQuestion()` is the single rule for which questions are typed, used by the grader
-       and by `QuestionCard`.
-     - No question text or answer data changed. AI-generated questions already set `answer` to
-       the exact option string, so they grade the same way.
-   - **Checked against the old grader.** Run on the `f8b17b9` version of `answers.ts`, the
-     regression cases fail: 17 wrong options accepted, plus the 3 typed cases. On the fixed
-     version all pass.
+     was graded correct: 17 wrong options were accepted, 5 of them in module tests (`m5-p1`,
+     `m13-p3`, `m24-p2`, `m5-t2`, `m5-t10`, `m12-t10`, `m13-t2`, `m24-t6`).
+   - **Typed questions.** In 3 questions whose answer is punctuation (`m5-p4`, `m24-p3`, test
+     `m5-t3`), any punctuation was accepted.
+   - **Fix.** Option questions now compare exactly. Typed answers keep the forgiving comparison,
+     except that punctuation-only answers keep their punctuation. No question data changed.
 
-## Verification record (2026-10-06)
+## Verification record (2026-10-07, final)
 
-Commands run against the working tree. The "baseline" is a build of untouched `f8b17b9`, captured
-before any Phase 0 change.
+All runs below started from a clean tree (`dist/`, `dist-server/`, `test-results/` deleted). The
+baseline is a build of untouched `f8b17b9`.
 
 | Check | Result |
 | --- | --- |
-| `tsc -p tsconfig.app.json --noEmit` | 0 errors |
-| `npm run typecheck` (app + tests) | 0 errors |
-| `npm run lint` (oxlint) | 0 errors, 25 warnings. The baseline had 26; no warning is new, including in test code. |
-| `npm test` (Vitest) | 9 files: 1,567 passed, 0 failed, 0 expected failures |
-| `npm run test:e2e` (Playwright) | 59 passed, 0 failed (three runs in a row before the grading fix; one full run after it) |
-| `npm run build` | Passes. 35 pages prerendered, sitemap with 36 URLs, offline manifest with 100 files. |
-| Prerendered HTML vs baseline (36 files, asset references removed) | **0 content differences** (titles, meta, canonical, JSON-LD, body) |
-| `sitemap.xml` vs baseline | Identical except build-date `<lastmod>` values |
-| `robots.txt` vs baseline | Identical |
-| Offline manifest | 96 → 100 files: adds `lessonPack`, `questionPack`, `grammarTopics`, `paths` and `preload-helper` chunks; `lightbulb` was merged away. Every entry exists in `dist/`. `sw.js` placeholders are filled. |
-| Blog bundle regression | **Fixed.** Static import graph per route: BlogPost 463 KB (baseline 453 KB) and loads neither `lessonPack` nor `questionPack`. Before this fix it pulled in a 473 KB lesson+question chunk. Home, BlogIndex, GrammarIndex and Practice also load neither pack. GrammarTopic, Module and Test load the same data as at baseline. |
-| Content service (scratch script via Vite SSR loader) | All 24 modules have EN and BN lessons; 336 practice+test questions; reads are synchronous once a pack is registered; the on-demand pack load works when it is not; same promise for the same arguments. |
-| SSR render of `/grammar/*`, `/blog/*`, `/module/1/test`, `/module/24` | Rendered inline with an `<h1>`. |
+| `npm run typecheck` | 0 errors |
+| `npm run lint` | 0 errors; 25 warnings, none new compared with `f8b17b9` (which had 26) |
+| `npm test` | 11 files, 1,612 passed, 0 failed |
+| `npm run build` | Passes: 35 pages prerendered, sitemap with 36 URLs, offline manifest with 100 files, CSP check passed (37 HTML files, 1 inline script hash) |
+| `npm run test:e2e` (Google Chrome) | 124 passed, 0 failed |
+| `npm run test:all` (Google Chrome) | Passed |
+| `CI=1 PW_BUNDLED_CHROMIUM=1 npm run test:all` | Passed |
+| Prerendered HTML vs baseline (36 files, asset names ignored) | **0 content differences**: titles, meta, canonical, JSON-LD and body |
+| Canonical URLs vs baseline | Identical on all 35 pages that have one |
+| `sitemap.xml` / `robots.txt` vs baseline | Identical, except build-date `<lastmod>` |
+| Bundle per route (static imports) | Home 455 KB, BlogPost 465 KB, BlogIndex 457 KB, GrammarIndex 460 KB, Practice 461 KB (none load the packs); GrammarTopic 944 KB, Module 976 KB (both packs); Test 604 KB (questions only). Baseline: BlogPost 453 KB, GrammarTopic 932 KB. |
 
-Known pre-existing issue (not caused by Phase 0): `/module/:id` cannot be server-rendered because
-`LanguageChooser` reads `document` during render. Module pages are client-only, so this does not
-affect the build.
+## Known limitations (outside Phase 0)
 
-Each route's JavaScript grew by about 9–11 KB (catalogue, content service and progress validation).
+- **No real deployment was tested.**
+  - Headers, CSP, `cleanUrls` and the service-worker shell were tested on a local server that
+    reproduces `vercel.json`.
+  - Check them on a Vercel preview deployment before production. The browser's DevTools console
+    shows any CSP violation.
+- **CI has not run on GitHub yet.** See [CI](#ci).
+- **Browsers:** Chrome and Chromium only; not tested in Firefox or Safari/iOS.
+- **Not exercised:**
+  - Offline font caching (fonts are blocked in tests).
+  - Real Gemini generation: only the first request is checked against the CSP, and it gets a
+    mocked error.
+  - Cross-tab sync between two real tabs.
+  - Service-worker updates after a new deploy.
+- **Styles:** inline style attributes need `'unsafe-inline'` in `style-src-attr` (875 attributes in
+  prerendered HTML). Removing it would mean replacing React style props with classes.
+- **Synchronous catalogue.** Progression, badges, stats, localisation and SEO metadata read
+  `src/content/catalog.ts` synchronously. When content moves to an Express API, the catalogue must
+  be populated from a content snapshot before the app starts, and at build time for prerendering.
+- **Pre-existing, unchanged:**
+  - Answer keys ship in the bundle and grading is client-side.
+  - The learner's Gemini key is in localStorage.
+  - The visitor counter is a third-party service.
+  - `/module/:id` cannot be server-rendered: `LanguageChooser` reads `document` during render,
+    which doesn't matter while lesson pages are client-only.
+  - All of these are tracked in `PLATFORM_AUDIT.md`.
 
-### Not verified yet
+## Phase 0 completion criteria
 
-- **Cross-tab sync in a real browser.** The repository's subscription is unit-tested with an
-  in-memory store; two real tabs are not tested.
-- **Real Vercel hosting.** Tests run against a local server that reproduces `vercel.json` routing.
-  `cleanUrls`, the rewrite and the service-worker shell fetch have not been checked on a Vercel
-  preview deployment.
-- **Service-worker update after a new deploy** while Offline Mode is on (the re-download on
-  install), and the reload-on-chunk-error path.
-- **Google Fonts offline.** Fonts are blocked in tests, so offline font caching is not exercised.
-- **AI practice with a real Gemini key.** Not exercised; external calls are blocked by design.
-- **Browsers other than Chrome** (Firefox, Safari/iOS).
-- **The production build itself.** It is not exercised by unit tests: the browser tests need a
-  fresh `npm run build`, and a stale `dist/` tests old code.
+- [x] **Progress has a schema version and migrations.** Unit tests (51), plus a real-browser test
+  with legacy data where values are preserved and the original is kept.
+- [x] **Imports are validated and exports versioned; legacy backups still import.** Unit tests
+  (34), plus browser tests for round trip, legacy file and 5 rejected files with storage unchanged.
+- [x] **UI depends on repository interfaces, not localStorage.** `ProgressRepository` and
+  `BookmarkRepository` with the same keys; unit and browser tests.
+- [x] **Content is read through a backend-agnostic `ContentService` with a static adapter.** The
+  architecture test shows no `src/data` imports outside the content layer and no network code in
+  the service.
+- [x] **Bundle splitting is healthy.** The browser bundle test shows lesson and question data only
+  on the routes that use them.
+- [x] **Modules have stable slugs, with legacy ids and URLs preserved.** The pinned identity table,
+  `/learn/:slug` and `/module/<slug>` redirects, and canonical `/module/:id` are covered by unit
+  and browser tests.
+- [x] **Grammar topics and course modules are one entity.** `GrammarModule` in
+  `src/content/catalog.ts`; unit tests.
+- [x] **Security headers are set, with a CSP hash check.** Header tests; build check; 0 CSP
+  violations; Gemini, the visitor counter and fonts allowed.
+- [x] **Automated tests cover the critical behaviour.** 1,612 unit and 124 browser tests passing.
+- [x] **CI runs the full verification.** Workflow added and its steps verified locally; first
+  GitHub run pending.
+- [x] **No SEO, prerender, PWA, English/Bangla or URL regressions.** Prerendered HTML, canonicals,
+  sitemap and robots.txt are identical to the baseline; the offline and language browser tests
+  pass.
+- [x] **Documentation.** This file.
 
-## Remaining Phase 0 work (priority order)
+## Do not change without the tests
 
-1. **Stable slugs**:
-   - `/learn/:slug` redirect route;
-   - make the `seo/meta.ts` module pattern accept slugs;
-   - replace the remaining hand-built `/module/` URLs (ModuleCard, useCourseCta, Dashboard,
-     Review, Practice).
-2. **Remaining callers**: move PublicUi, Practice, GrammarIndex, Home and `seo/meta.ts` off direct
-   `grammarTopics.ts` and `data/*` imports, onto the catalogue or `ContentService`.
-3. **Security headers** in `vercel.json` (CSP with a hash of the inline theme script, HSTS,
-   nosniff, Referrer-Policy, Permissions-Policy), plus a build check that the hash matches.
-4. Final verification pass and commit. Add CI that runs `npm run test:all`.
-
-## Do not change yet
-
-- localStorage key names: the inline theme script in `index.html` reads `grammar-path:preferences`
-  before React loads.
-- Numeric module ids as progress keys, and `/module/:id` as the canonical lesson URL.
-- `/grammar/:slug` and `/blog/:slug` URLs: these pages are indexed by search engines.
-- `scripts/postbuild.mjs`, `scripts/sw-template.js` and the offline manifest logic, without
-  running `offline.spec.ts` against a fresh build.
-- Lesson and question data files.
+- **localStorage key names.** The inline theme script reads `grammar-path:preferences` before
+  React loads.
+- **The inline theme script.** Any change needs a new CSP hash in `vercel.json`; the build fails
+  and prints the hash.
+- **Module identity.** Numeric module ids are the progress keys and `/module/:id` is the canonical
+  lesson URL. Slugs are pinned in `tests/unit/slugs.test.ts`.
+- **Indexed URLs.** `/grammar/:slug` and `/blog/:slug` are indexed by search engines.
+- **Offline and service-worker code.** Run `offline.spec.ts` on a fresh build after changing
+  `scripts/postbuild.mjs`, `scripts/sw-template.js` or the offline manifest logic.
+- **Lesson and question data.** Covered by the parity, integrity and grading tests.

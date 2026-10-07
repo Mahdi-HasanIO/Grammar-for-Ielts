@@ -1,5 +1,5 @@
 import type { ProgressState } from '@/types'
-import { MODULES } from '@/data/modules'
+import { COURSE_MODULES as MODULES } from '@/content/catalog'
 import { completedCount, moduleById } from '@/utils/progression'
 import { PASS_THRESHOLD } from '@/utils/progression'
 

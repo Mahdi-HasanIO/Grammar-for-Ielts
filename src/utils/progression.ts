@@ -1,5 +1,4 @@
-import { MODULES, STAGES } from '@/data/modules'
-import { moduleByLegacyId, resolveModule } from '@/content/catalog'
+import { COURSE_MODULES as MODULES, COURSE_STAGES as STAGES, moduleByLegacyId, resolveModule } from '@/content/catalog'
 import type { ModuleMeta, ModuleProgress, ProgressState, StageId } from '@/types'
 
 export const PASS_THRESHOLD = 80

@@ -1,6 +1,15 @@
-import { GRAMMAR_MODULES, catalogStages, moduleByTopicSlug, resolveModule, type ModuleRef } from '@/content/catalog'
-import { GRAMMAR_TOPICS } from '@/data/grammarTopics'
-import { BLOG_POSTS, postBySlug } from '@/data/blog/posts'
+import {
+  BLOG_CATEGORY_LIST,
+  BLOG_POST_INDEX,
+  blogPostBySlug,
+  catalogStages,
+  FEATURED_TOPIC_MODULES,
+  GRAMMAR_MODULES,
+  GRAMMAR_TOPIC_MODULES,
+  moduleByTopicSlug,
+  resolveModule,
+  type ModuleRef,
+} from '@/content/catalog'
 import { ARTICLES } from '@/data/blog/articles'
 import type { LessonLanguage } from '@/types'
 import { loadLessonPack, loadQuestionPack, packs } from './packs'
@@ -57,7 +66,6 @@ export function createStaticContentService(): ContentService {
   }
 
   const legacyId = (ref: ModuleRef) => resolveModule(ref)?.legacyId
-  const topicOrder = GRAMMAR_TOPICS.flatMap((t) => GRAMMAR_MODULES.find((m) => m.legacyId === t.moduleId) ?? [])
 
   return {
     getStages: () => memo('stages', () => catalogStages()),
@@ -81,13 +89,15 @@ export function createStaticContentService(): ContentService {
         if (id === undefined) return []
         return fromPack(packs.questions, loadQuestionPack, (pack) => pack.getTestQuestions(id))
       }),
-    getGrammarTopics: () => memo('topics', () => topicOrder),
+    getGrammarTopics: () => memo('topics', () => GRAMMAR_TOPIC_MODULES),
     getGrammarTopic: (topicSlug) => memo(`topic:${topicSlug}`, () => moduleByTopicSlug(topicSlug)),
-    getBlogPosts: () => memo('posts', () => BLOG_POSTS),
+    getFeaturedGrammarTopics: () => memo('featured-topics', () => FEATURED_TOPIC_MODULES),
+    getBlogPosts: () => memo('posts', () => BLOG_POST_INDEX),
     getBlogPost: (slug) =>
       memo(`post:${slug}`, (): BlogPost | undefined => {
-        const meta = postBySlug(slug)
+        const meta = blogPostBySlug(slug)
         return meta ? { meta, blocks: ARTICLES[meta.slug] ?? [] } : undefined
       }),
+    getBlogCategories: () => memo('categories', () => BLOG_CATEGORY_LIST),
   }
 }

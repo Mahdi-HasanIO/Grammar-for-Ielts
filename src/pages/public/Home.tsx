@@ -18,10 +18,10 @@ import {
   Wand2,
   X,
 } from 'lucide-react'
-import { MODULES, STAGES } from '@/data/modules'
-import { STAGES_EN } from '@/data/modulesEn'
-import { FEATURED_TOPIC_SLUGS, GRAMMAR_TOPICS, topicBySlug } from '@/data/grammarTopics'
-import { BLOG_POSTS, featuredPost } from '@/data/blog/posts'
+import { contentService, useContent } from '@/services/content'
+import { featuredPost } from '@/content/blog'
+import { grammarTopicPath } from '@/content/paths'
+import { localizeStage } from '@/utils/i18n'
 import { buttonClasses } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Reveal } from '@/components/ui/Reveal'
@@ -40,7 +40,7 @@ import { cn } from '@/utils/cn'
 import { OfflineDownload } from '@/components/OfflineDownload'
 
 /** Every module has 4 practice questions and a 10-question test. */
-const QUESTION_COUNT = MODULES.length * 14
+const QUESTIONS_PER_MODULE = 14
 
 const stagger = (i: number) => ({ '--i': i }) as CSSProperties
 
@@ -112,15 +112,16 @@ function HeroVisual() {
 }
 
 function TopicTicker() {
-  const names = GRAMMAR_TOPICS.map((t) => t.name)
+  const topics = useContent(contentService.getGrammarTopics())
+  const names = topics.map((t) => t.topic.name)
   const row = (copy: boolean) => (
     <div className="flex shrink-0 gap-2.5 pr-2.5" {...(copy ? { 'data-copy': '', 'aria-hidden': true } : {})}>
       {names.map((name, i) => {
-        const topic = GRAMMAR_TOPICS[i]
+        const topic = topics[i].topic
         return (
           <Link
             key={name}
-            to={`/grammar/${topic.slug}`}
+            to={grammarTopicPath(topic.slug)}
             tabIndex={copy ? -1 : undefined}
             className="whitespace-nowrap rounded-full border border-ink-200/80 bg-white/70 px-3.5 py-1.5 text-[13px] font-medium text-ink-600 backdrop-blur transition-colors hover:border-brand-300 hover:text-brand-700 focus-ring dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300 dark:hover:border-brand-700 dark:hover:text-brand-200"
           >
@@ -229,10 +230,12 @@ function Hero() {
 /* ------------------------------ Stats -------------------------------- */
 
 function Stats() {
+  const modules = useContent(contentService.getModules())
+  const stages = useContent(contentService.getStages())
   const stats = [
-    { value: MODULES.length, suffix: '', label: 'Structured modules' },
-    { value: STAGES.length, suffix: '', label: 'Learning stages' },
-    { value: QUESTION_COUNT, suffix: '+', label: 'Practice & test questions' },
+    { value: modules.length, suffix: '', label: 'Structured modules' },
+    { value: stages.length, suffix: '', label: 'Learning stages' },
+    { value: modules.length * QUESTIONS_PER_MODULE, suffix: '+', label: 'Practice & test questions' },
     { value: 2, suffix: '', label: 'Languages per lesson' },
   ]
   return (
@@ -260,6 +263,8 @@ function Stats() {
 /* -------------------------- Course overview -------------------------- */
 
 function CourseOverview() {
+  const stages = useContent(contentService.getStages())
+  const allModules = useContent(contentService.getModules())
   const cta = useCourseCta()
   return (
     <section className="py-20 sm:py-24">
@@ -280,8 +285,8 @@ function CourseOverview() {
             className="pointer-events-none absolute left-[22px] top-6 hidden h-0.5 w-[calc(100%-44px)] bg-gradient-to-r from-brand-200 via-accent-200 to-brand-200 md:block dark:from-brand-900 dark:via-accent-600/30 dark:to-brand-900"
             aria-hidden
           />
-          {STAGES.map((stage, i) => {
-            const modules = MODULES.filter((m) => m.stage === stage.id)
+          {stages.map((stage, i) => {
+            const modules = allModules.filter((m) => m.stage === stage.id).map((m) => m.module)
             return (
               <Reveal as="li" key={stage.id} delay={i * 90} className="relative">
                 <div className="glow-card group flex h-full items-start gap-4 rounded-2xl border border-ink-200/80 bg-white p-4 shadow-card transition-[transform,box-shadow] duration-300 ease-spring hover:-translate-y-1 hover:shadow-lift sm:p-5 md:block dark:border-ink-800 dark:bg-ink-900">
@@ -290,7 +295,7 @@ function CourseOverview() {
                   </span>
                   <div className="min-w-0">
                     <h3 className="text-[16px] font-bold tracking-tight text-ink-900 md:mt-4 dark:text-ink-50">{stage.name}</h3>
-                    <p className="mt-1 text-[13.5px] leading-6 text-ink-600 md:mt-1.5 dark:text-ink-400">{STAGES_EN[stage.id].tagline}</p>
+                    <p className="mt-1 text-[13.5px] leading-6 text-ink-600 md:mt-1.5 dark:text-ink-400">{localizeStage(stage, 'en').tagline}</p>
                     <p className="mt-2 text-[12px] font-semibold text-brand-600 md:mt-3 dark:text-brand-300">
                       Modules {modules[0].id}-{modules[modules.length - 1].id} · {modules.length} lessons
                     </p>
@@ -308,7 +313,7 @@ function CourseOverview() {
 /* -------------------------- Featured grammar ------------------------- */
 
 function FeaturedGrammar() {
-  const topics = FEATURED_TOPIC_SLUGS.map((s) => topicBySlug(s)).filter((t) => t !== undefined)
+  const topics = useContent(contentService.getFeaturedGrammarTopics())
   return (
     <section className="relative isolate py-20 sm:py-24">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-brand-50/60 to-transparent dark:via-brand-950/20" />
@@ -325,9 +330,9 @@ function FeaturedGrammar() {
           }
         />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {topics.map((topic, i) => (
-            <Reveal key={topic.slug} delay={(i % 3) * 90} className="reveal-scale h-full">
-              <GrammarCard topic={topic} />
+          {topics.map((entry, i) => (
+            <Reveal key={entry.topic.slug} delay={(i % 3) * 90} className="reveal-scale h-full">
+              <GrammarCard entry={entry} />
             </Reveal>
           ))}
         </div>
@@ -616,8 +621,9 @@ function Why() {
 /* ------------------------------- Blog -------------------------------- */
 
 function LatestPosts() {
-  const featured = featuredPost()
-  const latest = BLOG_POSTS.filter((p) => p.slug !== featured.slug).slice(0, 3)
+  const posts = useContent(contentService.getBlogPosts())
+  const featured = featuredPost(posts)
+  const latest = posts.filter((p) => p.slug !== featured.slug).slice(0, 3)
   return (
     <section className="py-20 sm:py-24">
       <Container>
