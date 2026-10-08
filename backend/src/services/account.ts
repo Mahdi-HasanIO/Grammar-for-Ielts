@@ -2,6 +2,7 @@ import type { Logger } from '../config/logger.js'
 import type { AccountTokenType, Repositories, UserRecord } from '../repositories/types.js'
 import { AppError } from '../utils/AppError.js'
 import { generateToken, hashToken, isTokenFormat, type Authenticated } from './auth.js'
+import { createMemoryCooldown, type Cooldown } from './cooldown.js'
 import type { Mailer } from './mailer.js'
 import type { PasswordHasher } from './password.js'
 
@@ -22,7 +23,7 @@ const LINK_PATH: Record<AccountTokenType, string> = {
 export interface AccountService {
   /** Sends a verification link. Rejects if the token cannot be stored or the email cannot be sent. */
   sendVerificationEmail(user: UserRecord): Promise<void>
-  /** For POST /request-verification: 409 if already verified, 502 if the email could not be sent. */
+  /** For POST /request-verification: 409 if already verified, 429 within a minute of the last email, 502 if it could not be sent. */
   requestVerification(user: UserRecord): Promise<void>
   verifyEmail(token: string): Promise<void>
   /**
@@ -45,6 +46,8 @@ export interface AccountServiceOptions {
   /** Frontend origin (and optional base path) for links in emails. */
   appBaseUrl: string
   now?: () => Date
+  /** One email of each kind per address per minute. Defaults to an in-memory cooldown. */
+  cooldown?: Cooldown
 }
 
 const invalidToken = () => new AppError(400, 'invalid_token', 'This link is invalid or has expired')
@@ -56,6 +59,7 @@ export function createAccountService({
   logger,
   appBaseUrl,
   now = () => new Date(),
+  cooldown = createMemoryCooldown({ now }),
 }: AccountServiceOptions): AccountService {
   /** Creates a token (replacing any older one of this type) and returns the link for the email. */
   async function issueLink(userId: string, type: AccountTokenType): Promise<string> {
@@ -73,6 +77,8 @@ export function createAccountService({
   }
 
   async function sendVerificationEmail(user: UserRecord): Promise<void> {
+    // Register's automatic email counts too, so an immediate "resend" waits for the cooldown.
+    cooldown.tryStart(`email_verification:${user.email}`)
     const link = await issueLink(user.id, 'email_verification')
     await mailer.send({
       to: user.email,
@@ -86,6 +92,9 @@ export function createAccountService({
 
     async requestVerification(user) {
       if (user.emailVerifiedAt) throw new AppError(409, 'already_verified', 'This email address is already verified')
+      if (!cooldown.tryStart(`email_verification:${user.email}`)) {
+        throw new AppError(429, 'email_cooldown', 'An email was sent recently. Please wait a minute before asking again')
+      }
       try {
         await sendVerificationEmail(user)
       } catch (error) {
@@ -102,6 +111,9 @@ export function createAccountService({
     },
 
     async requestPasswordReset(email) {
+      // Checked before the lookup and applied to every address, registered or not, so it reveals nothing.
+      // Within the cooldown the request is silently dropped: the caller has already answered 202.
+      if (!cooldown.tryStart(`password_reset:${email}`)) return
       try {
         const user = await users.findByEmail(email)
         if (!user) return

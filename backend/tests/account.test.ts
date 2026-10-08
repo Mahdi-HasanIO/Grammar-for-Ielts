@@ -3,6 +3,7 @@ import request from 'supertest'
 import { describe, expect, it, vi } from 'vitest'
 import { FORGOT_PASSWORD_RESPONSE, VERIFICATION_SENT_RESPONSE } from '../src/controllers/auth.js'
 import { EMAIL_VERIFICATION_TTL_MS, PASSWORD_RESET_TTL_MS } from '../src/services/account.js'
+import { EMAIL_COOLDOWN_MS } from '../src/services/cooldown.js'
 import { createLogMailer, type Mailer } from '../src/services/mailer.js'
 import {
   ALLOWED_ORIGIN,
@@ -94,9 +95,10 @@ describe('email verification', () => {
   })
 
   it('a new request invalidates the previous link', async () => {
-    const { app, sent } = setup()
+    const { app, sent, advance } = setup()
     const session = await signUp(app)
     const first = await mailToken(sent, '/verify-email')
+    advance(EMAIL_COOLDOWN_MS)
     const res = await post(app, '/api/auth/request-verification', {}, session)
     expect(res.status).toBe(202)
     expect(res.body).toEqual(VERIFICATION_SENT_RESPONSE)
@@ -144,9 +146,10 @@ describe('email verification', () => {
   it('request-verification is 502 when the email cannot be sent', async () => {
     let fail = false
     const mailer: Mailer = { send: async () => (fail ? Promise.reject(new Error('provider down')) : undefined) }
-    const { app } = setup({ mailer })
+    const { app, advance } = setup({ mailer })
     const session = await signUp(app)
     fail = true
+    advance(EMAIL_COOLDOWN_MS)
     const res = await post(app, '/api/auth/request-verification', {}, session)
     expect(res.status).toBe(502)
     expect(res.body).toEqual({ error: { code: 'email_failed', message: 'The email could not be sent. Please try again later' } })
@@ -278,6 +281,7 @@ describe('reset-password', () => {
     const ctx = setup()
     await signUp(ctx.app)
     const first = await requestReset(ctx)
+    ctx.advance(EMAIL_COOLDOWN_MS)
     const second = await requestReset(ctx)
     expect((await post(ctx.app, '/api/auth/reset-password', { token: first, password: NEW_PASSWORD })).body).toEqual(INVALID_TOKEN)
     expect((await post(ctx.app, '/api/auth/reset-password', { token: second, password: NEW_PASSWORD })).status).toBe(204)
@@ -461,5 +465,72 @@ describe('Origin, content type and rate limit on the new routes', () => {
     for (const res of [await post(app, '/api/auth/forgot-password', { email: EMAIL }), await get(app, '/api/profile')]) {
       expect(res.status).toBe(503)
     }
+  })
+})
+
+describe('per-email cooldown (one email of each kind per address per minute)', () => {
+  it('forgot-password sends at most one reset email per minute, and answers identically either way', async () => {
+    const ctx = setup()
+    await signUp(ctx.app)
+    await waitForMail(ctx.sent, 1)
+    const responses = [await post(ctx.app, '/api/auth/forgot-password', { email: EMAIL })]
+    await waitForMail(ctx.sent, 2)
+    responses.push(await post(ctx.app, '/api/auth/forgot-password', { email: EMAIL }))
+    responses.push(await post(ctx.app, '/api/auth/forgot-password', { email: ' Learner@Example.com' }))
+    for (const res of responses) {
+      expect(res.status).toBe(202)
+      expect(res.body).toEqual(FORGOT_PASSWORD_RESPONSE)
+    }
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    expect(ctx.sent).toHaveLength(2)
+
+    ctx.advance(EMAIL_COOLDOWN_MS)
+    await post(ctx.app, '/api/auth/forgot-password', { email: EMAIL })
+    await waitForMail(ctx.sent, 3)
+  })
+
+  it('applies to unknown addresses the same way, so it cannot reveal accounts', async () => {
+    const ctx = setup()
+    const statuses: number[] = []
+    for (let i = 0; i < 2; i++) {
+      const res = await post(ctx.app, '/api/auth/forgot-password', { email: 'nobody@example.com' })
+      statuses.push(res.status)
+      expect(res.body).toEqual(FORGOT_PASSWORD_RESPONSE)
+    }
+    expect(statuses).toEqual([202, 202])
+  })
+
+  it('is per address: another account is not affected', async () => {
+    const ctx = setup()
+    await signUp(ctx.app, 'a@example.com')
+    await signUp(ctx.app, 'b@example.com')
+    await waitForMail(ctx.sent, 2)
+    await post(ctx.app, '/api/auth/forgot-password', { email: 'a@example.com' })
+    await post(ctx.app, '/api/auth/forgot-password', { email: 'b@example.com' })
+    await waitForMail(ctx.sent, 4)
+    expect(ctx.sent.slice(2).map((m) => m.to).sort()).toEqual(['a@example.com', 'b@example.com'])
+  })
+
+  it('request-verification within a minute of the last verification email is 429, then works again', async () => {
+    const ctx = setup()
+    const session = await signUp(ctx.app)
+    await waitForMail(ctx.sent, 1)
+    const early = await post(ctx.app, '/api/auth/request-verification', {}, session)
+    expect(early.status).toBe(429)
+    expect(early.body).toEqual({ error: { code: 'email_cooldown', message: 'An email was sent recently. Please wait a minute before asking again' } })
+    ctx.advance(EMAIL_COOLDOWN_MS - 1)
+    expect((await post(ctx.app, '/api/auth/request-verification', {}, session)).status).toBe(429)
+    ctx.advance(1)
+    expect((await post(ctx.app, '/api/auth/request-verification', {}, session)).status).toBe(202)
+    expect((await post(ctx.app, '/api/auth/request-verification', {}, session)).status).toBe(429)
+    expect(ctx.sent).toHaveLength(2)
+  })
+
+  it('the reset and verification cooldowns are independent', async () => {
+    const ctx = setup()
+    await signUp(ctx.app)
+    await waitForMail(ctx.sent, 1)
+    await post(ctx.app, '/api/auth/forgot-password', { email: EMAIL })
+    await waitForMail(ctx.sent, 2)
   })
 })

@@ -141,6 +141,9 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
   - One-time links (`src/services/account.ts`): a random 32-byte token in the URL fragment (never
     sent to a server), stored only as its SHA-256 in `account_tokens` with a TTL index. One per
     user and type, so a new request invalidates the previous link; each works once.
+  - At most one email of each kind per address per minute: a repeated forgot-password is answered
+    202 as usual but sends nothing (for registered and unknown addresses alike); a repeated
+    request-verification is `429 email_cooldown`. In memory, so per instance (TODO: shared store).
   - Register and forgot-password send email in the background, so a slow or failing provider
     neither delays nor fails them, and forgot-password's timing does not reveal accounts.
   - `requireAuth` (`src/middleware/requireAuth.ts`) protects later routes; handlers read the user
