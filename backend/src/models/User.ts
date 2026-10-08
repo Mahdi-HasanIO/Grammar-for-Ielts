@@ -14,6 +14,9 @@ const userSchema = new Schema(
     emailVerifiedAt: { type: Date },
     // Granted only by the grant-admin script; never set through the API.
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    // Set by an admin (PUT /api/admin/users/:id/plan) or, later, a verified payment webhook; never by the user.
+    plan: { type: String, enum: ['free', 'premium'], default: 'free' },
+    planExpiresAt: { type: Date },
     // Profile (all optional; validated by validators/profile.ts before they get here).
     displayName: { type: String, maxlength: 50 },
     targetBand: { type: Number, min: 4, max: 9 },

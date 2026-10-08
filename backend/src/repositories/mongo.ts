@@ -15,6 +15,7 @@ import {
   type ContentRepositories,
   type ContentStore,
   type AuditEntry,
+  type Plan,
   type Role,
   PROFILE_FIELDS,
   type AccountTokenRecord,
@@ -35,6 +36,8 @@ type UserLean = {
   passwordHash: string
   emailVerifiedAt?: Date | null
   role?: Role
+  plan?: Plan
+  planExpiresAt?: Date | null
   createdAt: Date
 } & { [K in keyof ProfileFields]?: ProfileFields[K] | null }
 
@@ -65,6 +68,8 @@ function toUser(doc: UserLean): UserRecord {
     passwordHash: doc.passwordHash,
     emailVerifiedAt: doc.emailVerifiedAt ?? null,
     role: doc.role ?? 'user',
+    plan: doc.plan ?? 'free',
+    planExpiresAt: doc.planExpiresAt ?? null,
     profile: profile as ProfileFields,
     createdAt: doc.createdAt,
   }
@@ -261,6 +266,9 @@ export function createMongoRepositories(connection: Connection): Repositories {
         if (changes.passwordHash !== undefined) set.passwordHash = changes.passwordHash
         if (changes.emailVerifiedAt !== undefined) set.emailVerifiedAt = changes.emailVerifiedAt
         if (changes.role !== undefined) set.role = changes.role
+        if (changes.plan !== undefined) set.plan = changes.plan
+        if (changes.planExpiresAt === null) unset.planExpiresAt = ''
+        else if (changes.planExpiresAt !== undefined) set.planExpiresAt = changes.planExpiresAt
         for (const [key, value] of Object.entries(changes.profile ?? {})) {
           if (value === null) unset[key] = ''
           else if (value !== undefined) set[key] = value

@@ -54,7 +54,8 @@ describe('register', () => {
   it('creates the account, returns the public user and sets the session cookie', async () => {
     const res = await register(testApp())
     expect(res.status).toBe(201)
-    expect(Object.keys(res.body.user).sort()).toEqual(['createdAt', 'email', 'emailVerifiedAt', 'id', 'role'])
+    expect(Object.keys(res.body.user).sort()).toEqual(['createdAt', 'email', 'emailVerifiedAt', 'id', 'plan', 'role'])
+    expect(res.body.user.plan).toBe('free')
     expect(res.body.user.role).toBe('user')
     expect(res.body.user.emailVerifiedAt).toBeNull()
     expect(res.body.user.email).toBe(EMAIL)

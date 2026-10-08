@@ -18,6 +18,7 @@ import { createContentService } from '../src/services/content.js'
 import { createAdminContentService } from '../src/services/adminContent.js'
 import type { AiProvider } from '../src/services/ai/provider.js'
 import { createAiService } from '../src/services/ai/service.js'
+import { createEntitlementsService } from '../src/services/entitlements.js'
 import { bookmarkList, progressState } from '../src/validators/progress.js'
 
 export const ALLOWED_ORIGIN = 'https://app.example.com'
@@ -73,7 +74,9 @@ export interface TestServiceOptions {
   adminEmails?: string[]
   /** Null (the default) means AI is not configured. */
   aiProvider?: AiProvider | null
+  /** Daily AI requests on the free plan (default 20) and on premium (default 200). */
   aiDailyQuota?: number
+  aiDailyQuotaPremium?: number
 }
 
 /** Auth, account and profile services over one set of in-memory repositories. */
@@ -86,8 +89,16 @@ export function testServices({
   adminEmails,
   aiProvider = null,
   aiDailyQuota = 20,
+  aiDailyQuotaPremium = 200,
 }: TestServiceOptions = {}) {
   const content = createContentService(repositories.content)
+  const entitlements = createEntitlementsService({
+    limits: { free: { aiDailyRequests: aiDailyQuota }, premium: { aiDailyRequests: aiDailyQuotaPremium } },
+    usage: repositories.usage,
+    users: repositories.users,
+    audit: repositories.audit,
+    now,
+  })
   return {
     repositories,
     mailer,
@@ -102,13 +113,14 @@ export function testServices({
     },
     content,
     admin: createAdminContentService({ content: repositories.content, audit: repositories.audit, now }),
-    ai: createAiService({ provider: aiProvider, usage: repositories.usage, content, dailyQuota: () => aiDailyQuota, logger, now }),
+    ai: createAiService({ provider: aiProvider, usage: repositories.usage, content, dailyQuota: (user) => entitlements.limitsFor(user).aiDailyRequests, logger, now }),
+    entitlements,
   }
 }
 
 /** Builds the real app with test dependencies. */
 export function testApp(overrides: Partial<AppDependencies> = {}) {
-  const { auth, account, profile, sync, content, admin, ai } = testServices()
+  const { auth, account, profile, sync, content, admin, ai, entitlements } = testServices()
   return createApp({
     env: TEST_ENV,
     db: fakeDb(),
@@ -119,6 +131,7 @@ export function testApp(overrides: Partial<AppDependencies> = {}) {
     content,
     admin,
     ai,
+    entitlements,
     logger: silentLogger(),
     ...overrides,
   })

@@ -25,6 +25,9 @@ export interface ProfileFields {
 
 export const PROFILE_FIELDS = ['displayName', 'targetBand', 'examDate', 'timezone', 'dailyGoalMinutes', 'language'] as const satisfies readonly (keyof ProfileFields)[]
 
+export const PLANS = ['free', 'premium'] as const
+export type Plan = (typeof PLANS)[number]
+
 export const ROLES = ['user', 'admin'] as const
 export type Role = (typeof ROLES)[number]
 
@@ -36,6 +39,10 @@ export interface UserRecord {
   emailVerifiedAt: Date | null
   /** Stored role. The effective role can also be admin through ADMIN_EMAILS (see services/auth.ts). */
   role: Role
+  /** Stored plan; the effective plan is free again once planExpiresAt has passed (services/entitlements.ts). */
+  plan: Plan
+  /** When a granted premium plan ends; null for no end. */
+  planExpiresAt: Date | null
   profile: ProfileFields
   createdAt: Date
 }
@@ -44,6 +51,9 @@ export interface UserRecord {
 export interface UserChanges {
   passwordHash?: string
   role?: Role
+  plan?: Plan
+  /** null removes the end date. */
+  planExpiresAt?: Date | null
   emailVerifiedAt?: Date
   profile?: { [K in keyof ProfileFields]?: ProfileFields[K] | null }
 }

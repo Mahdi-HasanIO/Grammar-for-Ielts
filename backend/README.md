@@ -37,7 +37,8 @@ cp .env.example .env   # then edit .env
 | `GEMINI_API_KEY` | for AI | — | Server-held Gemini key. Without it `/api/ai/*` answers `503 ai_not_configured`. Secret |
 | `GEMINI_MODEL` | no | `gemini-3.5-flash-lite` | Model ID from https://ai.google.dev/gemini-api/docs/models (`gemini-flash-latest` follows the newest Flash) |
 | `GEMINI_TIMEOUT_MS` | no | `30000` | Per AI request |
-| `AI_RATE_LIMIT_PER_MINUTE` / `AI_DAILY_QUOTA` | no | `10` / `20` | Per user: AI requests per minute, and per UTC day |
+| `AI_RATE_LIMIT_PER_MINUTE` | no | `10` | Per user: AI requests per minute |
+| `AI_DAILY_QUOTA` / `AI_DAILY_QUOTA_PREMIUM` | no | `20` / `200` | AI requests per UTC day on the free and premium plans |
 | `APP_BASE_URL` | in production | `http://localhost:5173` | Frontend URL that links in emails point to (`/verify-email#token=…`, `/reset-password#token=…`) |
 | `MAIL_TRANSPORT` | no | `log` | `log` writes emails to the log (the body, with its link, only outside production); `resend` sends through the Resend API |
 | `MAIL_FROM` | with `resend` | — | Sender, e.g. `Grammar for IELTS <no-reply@your-domain>` (the domain must be verified in Resend) |
@@ -131,7 +132,11 @@ Logs are JSON lines. For readable local output: `npm run dev | npx pino-pretty`.
 | `POST /api/ai/check-sentence` | Signed in. Body `{"sentence"` (≤ 500 chars), `"language"` (`en`/`bn`)`}`. `{"result":{"isCorrect","corrected","explanation","mistakes"},"quota"}`. |
 | `POST /api/ai/practice` | Signed in. Body `{"module"` (id or slug), `"count"` (1–10), `"language"`, `"avoid"` (≤ 30 earlier questions)`}`. `{"questions","quota"}`: app-shaped questions marked `source: "ai"`. |
 
-`user` is `{"id","email","emailVerifiedAt","role","createdAt"}`. `profile` is `{"email","emailVerifiedAt"}` plus
+| `GET /api/entitlements` | Signed in. `{"plan","planExpiresAt","limits","usage"}`. |
+| `GET /api/admin/users?email=` | Admin. Finds an account (to grant a plan). |
+| `PUT /api/admin/users/:id/plan` | Admin. Body `{"plan": "free"\|"premium", "expiresAt"?}`. Audited. |
+
+`user` is `{"id","email","emailVerifiedAt","role","plan","createdAt"}`; `plan` is the effective plan. `profile` is `{"email","emailVerifiedAt"}` plus
 the six profile fields (`null` when unset). Emails are trimmed and lowercased; passwords must be
 10–128 characters. Invalid input returns `400 validation_error`.
 
@@ -222,6 +227,14 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
     only the failure kind, provider status and model.
   - Generated practice questions that the app could not grade (answer not among distinct options, a
     blank without ___) are dropped.
+- **Plans** (`src/config/plans.ts`, `src/services/entitlements.ts`):
+  - `plan` is `free` or `premium`, with an optional `planExpiresAt`; past that date the user is on
+    free again. Only an admin (or, later, a verified payment webhook) sets it.
+  - Limits per plan come from env (`AI_DAILY_QUOTA*`); daily usage is counted in `usage_counters`.
+  - `requirePlan('premium')` guards a feature on the server (`403 plan_required`), from the stored
+    plan only.
+  - Payments: `src/services/payments.ts` is only the provider interface and a stub that answers
+    `503 payments_not_configured`; no provider and no routes yet.
 - **Logging:** one line per request (id, method, URL, status, duration) with an `X-Request-Id`
   response header; every other line logged during the request carries the same id as `reqId`. Headers and bodies are never logged. Connection strings are redacted from
   database errors.

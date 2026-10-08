@@ -18,6 +18,8 @@ import type { AdminContentService } from '../services/adminContent.js'
 import { createAdminRouter } from './admin.js'
 import { createAiRouter } from './ai.js'
 import type { AiService } from '../services/ai/service.js'
+import type { EntitlementsService } from '../services/entitlements.js'
+import { getAuth } from '../middleware/requireAuth.js'
 import type { SyncService } from '../services/sync.js'
 import { putBookmarksBody, putProgressBody, type Bookmark, type ProgressState } from '../validators/progress.js'
 
@@ -31,6 +33,7 @@ export interface ApiRouterOptions {
   admin: AdminContentService
   ai: AiService
   aiRateLimit?: RateLimitOptions
+  entitlements: EntitlementsService
   cookie: SessionCookieConfig
   allowedOrigins: readonly string[]
   authRateLimit?: RateLimitOptions
@@ -42,7 +45,7 @@ export interface SyncServices {
 }
 
 /** Everything under /api. Feature routers are added here as later phases introduce them. */
-export function createApiRouter({ db, auth, account, profile, sync, content, admin, ai, aiRateLimit, cookie, allowedOrigins, authRateLimit }: ApiRouterOptions): Router {
+export function createApiRouter({ db, auth, account, profile, sync, content, admin, ai, aiRateLimit, entitlements, cookie, allowedOrigins, authRateLimit }: ApiRouterOptions): Router {
   const guards: AccountRouteGuards = {
     limiter: authRateLimiter(authRateLimit),
     database: requireDatabase(db),
@@ -60,7 +63,11 @@ export function createApiRouter({ db, auth, account, profile, sync, content, adm
   router.use('/progress', createSyncRouter({ field: 'progress', service: sync.progress, body: putProgressBody, guards: syncGuards }))
   router.use('/bookmarks', createSyncRouter({ field: 'bookmarks', service: sync.bookmarks, body: putBookmarksBody, guards: syncGuards }))
   router.use('/content', createContentRouter({ content, database: guards.database }))
-  router.use('/admin', createAdminRouter({ admin, guards: syncGuards }))
+  router.use('/admin', createAdminRouter({ admin, entitlements, guards: syncGuards }))
+  // The signed-in user's plan, limits and today's usage.
+  router.get('/entitlements', guards.database, guards.signedIn, async (_req, res) => {
+    res.json(await entitlements.summary(getAuth(res).user))
+  })
   router.use('/ai', createAiRouter({ ai, guards: syncGuards, rateLimit: aiRateLimit }))
   return router
 }

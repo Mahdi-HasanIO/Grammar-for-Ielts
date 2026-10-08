@@ -145,7 +145,7 @@ export function createMemoryRepositories(): Repositories {
     users: {
       async create({ email, passwordHash }) {
         if ([...users.values()].some((user) => user.email === email)) throw new DuplicateEmailError()
-        const user: UserRecord = { id: randomUUID(), email, passwordHash, emailVerifiedAt: null, role: 'user', profile: {}, createdAt: new Date() }
+        const user: UserRecord = { id: randomUUID(), email, passwordHash, emailVerifiedAt: null, role: 'user', plan: 'free', planExpiresAt: null, profile: {}, createdAt: new Date() }
         users.set(user.id, user)
         return copyUser(user)
       },
@@ -163,6 +163,8 @@ export function createMemoryRepositories(): Repositories {
         if (changes.passwordHash !== undefined) user.passwordHash = changes.passwordHash
         if (changes.emailVerifiedAt !== undefined) user.emailVerifiedAt = changes.emailVerifiedAt
         if (changes.role !== undefined) user.role = changes.role
+        if (changes.plan !== undefined) user.plan = changes.plan
+        if (changes.planExpiresAt !== undefined) user.planExpiresAt = changes.planExpiresAt
         for (const [key, value] of Object.entries(changes.profile ?? {}) as [keyof ProfileFields, unknown][]) {
           if (value === null) delete user.profile[key]
           else if (value !== undefined) (user.profile as Record<string, unknown>)[key] = value

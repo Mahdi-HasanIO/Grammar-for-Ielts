@@ -1,6 +1,7 @@
 import { createHash, randomBytes } from 'node:crypto'
 import { DuplicateEmailError, type Repositories, type UserRecord } from '../repositories/types.js'
 import { AppError } from '../utils/AppError.js'
+import { effectivePlan } from './entitlements.js'
 import { dummyHash, type PasswordHasher } from './password.js'
 
 export const SESSION_TTL_MS = 14 * 24 * 60 * 60 * 1000
@@ -20,6 +21,8 @@ export interface PublicUser {
   email: string
   emailVerifiedAt: string | null
   role: UserRecord['role']
+  /** As resolved when the session was checked: an expired premium plan shows as free. */
+  plan: UserRecord['plan']
   createdAt: string
 }
 
@@ -28,6 +31,7 @@ export const toPublicUser = (user: UserRecord): PublicUser => ({
   email: user.email,
   emailVerifiedAt: user.emailVerifiedAt?.toISOString() ?? null,
   role: user.role,
+  plan: user.plan,
   createdAt: user.createdAt.toISOString(),
 })
 
@@ -39,6 +43,13 @@ export const toPublicUser = (user: UserRecord): PublicUser => ({
 export function effectiveRole(user: UserRecord, adminEmails: ReadonlySet<string>): UserRecord {
   if (user.role === 'admin' || !user.emailVerifiedAt || !adminEmails.has(user.email)) return user
   return { ...user, role: 'admin' }
+}
+
+/** The user as they act in this request: effective role, and the plan with an expired premium shown as free. */
+const effectiveUser = (user: UserRecord, adminEmails: ReadonlySet<string>, at: Date): UserRecord => {
+  const withRole = effectiveRole(user, adminEmails)
+  const plan = effectivePlan(user, at)
+  return plan === user.plan ? withRole : { ...withRole, plan, planExpiresAt: null }
 }
 
 export interface NewSession {
@@ -89,7 +100,7 @@ export function createAuthService({
     const token = generateToken()
     const expiresAt = new Date(now().getTime() + sessionTtlMs)
     await sessions.create({ tokenHash: hashToken(token), userId: user.id, expiresAt })
-    return { user: effectiveRole(user, admins), token, expiresAt }
+    return { user: effectiveUser(user, admins, now()), token, expiresAt }
   }
 
   return {
@@ -137,7 +148,7 @@ export function createAuthService({
         await sessions.deleteByTokenHash(tokenHash)
         return null
       }
-      return { user: effectiveRole(user, admins), tokenHash }
+      return { user: effectiveUser(user, admins, now()), tokenHash }
     },
   }
 }

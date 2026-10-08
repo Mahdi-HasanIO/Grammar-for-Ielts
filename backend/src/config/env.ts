@@ -111,7 +111,9 @@ const envSchema = z
   GEMINI_TIMEOUT_MS: z.coerce.number().int().min(1_000).max(120_000).default(30_000),
   // Per user: requests per minute, and the daily AI quota for each plan.
   AI_RATE_LIMIT_PER_MINUTE: z.coerce.number().int().min(1).max(600).default(10),
+  // Daily AI requests per plan (see config/plans.ts).
   AI_DAILY_QUOTA: z.coerce.number().int().min(0).max(100_000).default(20),
+  AI_DAILY_QUOTA_PREMIUM: z.coerce.number().int().min(0).max(100_000).default(200),
   // log: write emails to the log (content only outside production). resend: send through the Resend API.
   MAIL_TRANSPORT: z.enum(MAIL_TRANSPORTS).default('log'),
   MAIL_FROM: z.string().trim().min(3).optional(),
