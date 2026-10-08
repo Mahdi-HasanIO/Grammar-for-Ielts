@@ -107,6 +107,9 @@ Logs are JSON lines. For readable local output: `npm run dev | npx pino-pretty`.
 | `GET /api/profile` | Signed in. `200 {"profile"}`. |
 | `PATCH /api/profile` | Signed in. Any of `displayName` (1–50), `targetBand` (4.0–9.0 in 0.5 steps), `examDate` (`YYYY-MM-DD`), `timezone` (IANA name), `dailyGoalMinutes` (1–600), `language` (`en`/`bn`); `null` clears a field; other fields are rejected. `200 {"profile"}`. |
 
+| `GET /api/progress` / `GET /api/bookmarks` | Signed in. `200 {"progress" or "bookmarks", "version", "updatedAt"}`; `null` and version `0` before the first save. |
+| `PUT /api/progress` / `PUT /api/bookmarks` | Signed in. Body `{"baseVersion", "progress" or "bookmarks"}`. `200` with the saved data, the new `version` and `merged`. See "Sync" below. |
+
 `user` is `{"id","email","emailVerifiedAt","createdAt"}`. `profile` is `{"email","emailVerifiedAt"}` plus
 the six profile fields (`null` when unset). Emails are trimmed and lowercased; passwords must be
 10–128 characters. Invalid input returns `400 validation_error`.
@@ -154,6 +157,18 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
     neither delays nor fails them, and forgot-password's timing does not reveal accounts.
   - `requireAuth` (`src/middleware/requireAuth.ts`) protects later routes; handlers read the user
     with `getAuth(res)`.
+- **Sync** (`/api/progress`, `/api/bookmarks`; `src/services/sync.ts`, `src/services/merge.ts`):
+  - One document per user per kind, in the frontend's version-1 shapes, validated by
+    `src/validators/progress.ts` (a copy of the frontend's rules and caps; unknown fields are dropped).
+  - `version` grows by one per write. A `PUT` whose `baseVersion` equals the stored version replaces
+    the data. Otherwise another device wrote in between, and the two are merged: progress only moves
+    forward (completion and views kept, higher scores and counts, attempts and badges united,
+    per-day activity takes the larger figure), bookmarks are united by path (later `savedAt` wins).
+    Nothing is dropped; a bookmark deleted on a stale device comes back. If the merge would exceed
+    the caps, `422 sync_limit_exceeded` and nothing changes.
+  - Writes are compare-and-set on `{userId, version}`, retried on a race, `409 sync_conflict` after
+    five losses.
+  - Request bodies up to 5 MB on these two routes (100 kB elsewhere).
 - **Logging:** one line per request (id, method, URL, status, duration) with an `X-Request-Id`
   response header; every other line logged during the request carries the same id as `reqId`. Headers and bodies are never logged. Connection strings are redacted from
   database errors.
@@ -169,9 +184,9 @@ src/
   config/            env (Zod), logger (pino)
   controllers/       request handlers (health, auth, profile)
   middleware/        cors, csrf, rate limits, request logger, validate, requireAuth, requireDatabase, error handler
-  models/            Mongoose schemas (User, Session, AccountToken)
+  models/            Mongoose schemas (User, Session, AccountToken, progress and bookmarks)
   repositories/      persistence interfaces, MongoDB implementation, in-memory implementation for tests
-  routes/            /api router, /api/auth, /api/profile
+  routes/            /api router, /api/auth, /api/profile, /api/progress and /api/bookmarks
   services/          database connection, auth, account (verification, reset, password change),
                      profile, mailer (log, Resend), password hashing
   validators/        reusable Zod schemas

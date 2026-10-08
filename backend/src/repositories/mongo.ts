@@ -1,6 +1,8 @@
-import { isValidObjectId, mongo, type Connection } from 'mongoose'
+import { isValidObjectId, mongo, type Connection, type Model } from 'mongoose'
 import { accountTokenModel } from '../models/AccountToken.js'
 import { sessionModel } from '../models/Session.js'
+import { bookmarksModel, progressModel } from '../models/SyncDocument.js'
+import type { Bookmark, ProgressState } from '../validators/progress.js'
 import { userModel } from '../models/User.js'
 import {
   DuplicateEmailError,
@@ -10,6 +12,8 @@ import {
   type ProfileFields,
   type Repositories,
   type SessionRecord,
+  type SyncRecord,
+  type SyncRepository,
   type UserRecord,
 } from './types.js'
 
@@ -69,6 +73,51 @@ const toAccountToken = (doc: AccountTokenLean): AccountTokenRecord => ({
   createdAt: doc.createdAt,
 })
 
+interface SyncLean {
+  userId: { toString(): string }
+  version: number
+  data: unknown
+  updatedAt: Date
+}
+
+const toSync = <T>(doc: SyncLean): SyncRecord<T> => ({
+  userId: doc.userId.toString(),
+  version: doc.version,
+  data: doc.data as T,
+  updatedAt: doc.updatedAt,
+})
+
+/** Compare-and-set on { userId, version } for one per-user document. */
+function syncRepository<T>(model: Model<never>): SyncRepository<T> {
+  const Sync = model as unknown as Model<SyncLean>
+  return {
+    async get(userId) {
+      if (!isValidObjectId(userId)) return null
+      const doc = await Sync.findOne({ userId }).lean<SyncLean>()
+      return doc ? toSync<T>(doc) : null
+    },
+    async put(userId, expectedVersion, data) {
+      const updatedAt = new Date()
+      if (expectedVersion === 0) {
+        try {
+          const doc = await Sync.create({ userId, version: 1, data, updatedAt })
+          return toSync<T>(doc.toObject() as SyncLean)
+        } catch (error) {
+          // Another first write won the race (unique userId).
+          if (error instanceof mongo.MongoServerError && error.code === DUPLICATE_KEY) return null
+          throw error
+        }
+      }
+      const doc = await Sync.findOneAndUpdate(
+        { userId, version: expectedVersion },
+        { $set: { data, updatedAt }, $inc: { version: 1 } },
+        { returnDocument: 'after' },
+      ).lean<SyncLean>()
+      return doc ? toSync<T>(doc) : null
+    },
+  }
+}
+
 /**
  * MongoDB repositories on the given connection. Indexes (unique email, unique
  * token hashes, one account token per user and type, TTLs) are built by
@@ -78,6 +127,8 @@ export function createMongoRepositories(connection: Connection): Repositories {
   const User = userModel(connection)
   const Session = sessionModel(connection)
   const AccountToken = accountTokenModel(connection)
+  const progress = syncRepository<ProgressState>(progressModel(connection) as never)
+  const bookmarks = syncRepository<Bookmark[]>(bookmarksModel(connection) as never)
 
   return {
     users: {
@@ -152,5 +203,7 @@ export function createMongoRepositories(connection: Connection): Repositories {
         await AccountToken.deleteMany({ userId, type })
       },
     },
+    progress,
+    bookmarks,
   }
 }

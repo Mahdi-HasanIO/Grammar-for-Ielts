@@ -4,6 +4,8 @@
  * a database. repositories/mongo.ts is the MongoDB implementation.
  */
 
+import type { Bookmark, ProgressState } from '../validators/progress.js'
+
 export const LANGUAGES = ['en', 'bn'] as const
 export type Language = (typeof LANGUAGES)[number]
 
@@ -98,8 +100,28 @@ export interface AccountTokenRepository {
   deleteForUser(userId: string, type: AccountTokenType): Promise<void>
 }
 
+/** A per-user synced document (progress, bookmarks): the data plus a version that grows by one per write. */
+export interface SyncRecord<T> {
+  userId: string
+  version: number
+  data: T
+  updatedAt: Date
+}
+
+export interface SyncRepository<T> {
+  get(userId: string): Promise<SyncRecord<T> | null>
+  /**
+   * Compare-and-set: writes `data` only if the stored version is still
+   * `expectedVersion` (0 = no document yet), and returns the new record with
+   * version + 1. Returns null if another write got there first.
+   */
+  put(userId: string, expectedVersion: number, data: T): Promise<SyncRecord<T> | null>
+}
+
 export interface Repositories {
   users: UserRepository
   sessions: SessionRepository
   accountTokens: AccountTokenRepository
+  progress: SyncRepository<ProgressState>
+  bookmarks: SyncRepository<Bookmark[]>
 }

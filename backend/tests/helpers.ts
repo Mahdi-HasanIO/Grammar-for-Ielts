@@ -10,7 +10,10 @@ import { createAuthService, type AuthServiceOptions } from '../src/services/auth
 import type { DatabaseState } from '../src/services/database.js'
 import type { EmailMessage, Mailer } from '../src/services/mailer.js'
 import { createArgon2Hasher, type PasswordHasher } from '../src/services/password.js'
+import { mergeBookmarks, mergeProgress } from '../src/services/merge.js'
 import { createProfileService } from '../src/services/profile.js'
+import { createSyncService } from '../src/services/sync.js'
+import { bookmarkList, progressState } from '../src/validators/progress.js'
 
 export const ALLOWED_ORIGIN = 'https://app.example.com'
 
@@ -80,18 +83,23 @@ export function testServices({
     auth: createAuthService({ repositories, hasher, now }),
     account: createAccountService({ repositories, hasher, mailer, logger, appBaseUrl: APP_BASE_URL, now }),
     profile: createProfileService(repositories),
+    sync: {
+      progress: createSyncService({ repository: repositories.progress, merge: mergeProgress, schema: progressState }),
+      bookmarks: createSyncService({ repository: repositories.bookmarks, merge: mergeBookmarks, schema: bookmarkList }),
+    },
   }
 }
 
 /** Builds the real app with test dependencies. */
 export function testApp(overrides: Partial<AppDependencies> = {}) {
-  const { auth, account, profile } = testServices()
+  const { auth, account, profile, sync } = testServices()
   return createApp({
     env: TEST_ENV,
     db: fakeDb(),
     auth,
     account,
     profile,
+    sync,
     logger: silentLogger(),
     ...overrides,
   })

@@ -40,6 +40,8 @@ function failingRepositories(makeError: () => Error): Repositories {
     users: { create: fail, findByEmail: fail, findById: fail, update: fail },
     sessions: { create: fail, findByTokenHash: fail, deleteByTokenHash: fail, deleteAllForUser: fail },
     accountTokens: { replace: fail, consume: fail, deleteForUser: fail },
+    progress: { get: fail, put: fail },
+    bookmarks: { get: fail, put: fail },
   }
 }
 

@@ -5,8 +5,29 @@ import {
   type ProfileFields,
   type Repositories,
   type SessionRecord,
+  type SyncRecord,
+  type SyncRepository,
   type UserRecord,
 } from './types.js'
+
+/** Deep copy through JSON: synced data is plain JSON, and callers must not share stored objects. */
+const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T
+
+function memorySync<T>(): SyncRepository<T> {
+  const records = new Map<string, SyncRecord<T>>()
+  return {
+    async get(userId) {
+      const record = records.get(userId)
+      return record ? { ...record, data: clone(record.data) } : null
+    },
+    async put(userId, expectedVersion, data) {
+      if ((records.get(userId)?.version ?? 0) !== expectedVersion) return null
+      const record: SyncRecord<T> = { userId, version: expectedVersion + 1, data: clone(data), updatedAt: new Date() }
+      records.set(userId, record)
+      return { ...record, data: clone(record.data) }
+    },
+  }
+}
 
 const copyUser = (user: UserRecord): UserRecord => ({ ...user, profile: { ...user.profile } })
 
@@ -87,5 +108,7 @@ export function createMemoryRepositories(): Repositories {
         accountTokens.delete(`${userId}:${type}`)
       },
     },
+    progress: memorySync(),
+    bookmarks: memorySync(),
   }
 }

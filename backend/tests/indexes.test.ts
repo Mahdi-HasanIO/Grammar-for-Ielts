@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import { describe, expect, it } from 'vitest'
 import { accountTokenModel } from '../src/models/AccountToken.js'
 import { sessionModel } from '../src/models/Session.js'
+import { bookmarksModel, progressModel } from '../src/models/SyncDocument.js'
 import { userModel } from '../src/models/User.js'
 
 /**
@@ -30,5 +31,11 @@ describe('schema indexes match the documented review', () => {
       [{ expiresAt: 1 }, { expireAfterSeconds: 0 }],
       [{ userId: 1, type: 1 }, { unique: true }],
     ])
+  })
+
+  it('progress and bookmarks', () => {
+    for (const model of [progressModel(connection), bookmarksModel(connection)]) {
+      expect(model.schema.indexes()).toEqual([[{ userId: 1 }, { unique: true }]])
+    }
   })
 })

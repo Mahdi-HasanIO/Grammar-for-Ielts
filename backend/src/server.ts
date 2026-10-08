@@ -8,7 +8,10 @@ import { createAuthService } from './services/auth.js'
 import { createDatabase } from './services/database.js'
 import { createMailer } from './services/mailer.js'
 import { createArgon2Hasher } from './services/password.js'
+import { mergeBookmarks, mergeProgress } from './services/merge.js'
 import { createProfileService } from './services/profile.js'
+import { createSyncService } from './services/sync.js'
+import { bookmarkList, progressState } from './validators/progress.js'
 
 const SHUTDOWN_TIMEOUT_MS = 10_000
 
@@ -52,7 +55,11 @@ async function main(): Promise<void> {
   const auth = createAuthService({ repositories, hasher })
   const account = createAccountService({ repositories, hasher, mailer: createMailer(env, logger), logger, appBaseUrl: env.APP_BASE_URL })
   const profile = createProfileService(repositories)
-  const app = createApp({ env, db, auth, account, profile, logger })
+  const sync = {
+    progress: createSyncService({ repository: repositories.progress, merge: mergeProgress, schema: progressState }),
+    bookmarks: createSyncService({ repository: repositories.bookmarks, merge: mergeBookmarks, schema: bookmarkList }),
+  }
+  const app = createApp({ env, db, auth, account, profile, sync, logger })
   logger.info({ mailTransport: env.MAIL_TRANSPORT }, 'Mail transport selected')
 
   const server: Server = app.listen(env.PORT, (error?: Error) => {
