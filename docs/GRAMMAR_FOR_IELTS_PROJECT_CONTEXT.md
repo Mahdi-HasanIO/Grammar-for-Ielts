@@ -898,18 +898,23 @@ Phase 0    Frontend groundwork                                       done
 Phase 1A   Node + Express + MongoDB foundation           (section 25) done
 Phase 1B   Authentication                                (section 26)
   1B-1     Auth core: register, login, logout, me, sessions          done
-  1B-2     Email verification and password reset (needs an email provider)
-Phase 1C   User profiles                                 (section 27)
-Phase 1D   Cloud progress                                (section 28)
-Phase 1E   Content API / CMS                             (section 29; localization model: section 30)
-Phase 1F   Admin / CMS                                   (section 31)
-Phase 1G   Server-side AI                                (section 32)
-Phase 1H   Premium system                                (section 33; payments: section 34)
+  1B-2     Email verification and password reset                     backend built
+Phase 1C   User profiles                                 (section 27) backend built
+Phase 1D   Cloud progress                                (section 28) backend built
+Phase 1E   Content API / CMS                             (section 29) backend built (localization model: section 30)
+Phase 1F   Admin / CMS                                   (section 31) backend built
+Phase 1G   Server-side AI                                (section 32) backend built
+Phase 1H   Premium system                                (section 33) backend built, no payment provider (section 34)
 Later      IELTS skill expansion                         (section 35)
 ```
 
 **Status:** Phase 1A done (tag `phase-1a-complete`). Phase 1B-1 done (tag `phase-1b1-complete`).
-Next: Phase 1B-2.
+The backend for 1B-2 and 1C–1H is built on branch `phase1-backend-complete` (not merged): unit tests
+and CI pass, but real-database checks for these slices, the email provider, the Gemini call against
+the live service and deployment are pending. The React app does not call the backend yet.
+
+"Backend built" means: in `backend/`, tested with in-memory fakes and mocked providers. A phase is
+"done" only after real-database verification, deployment and the frontend wiring.
 
 ## Starting the backend
 
@@ -1575,13 +1580,16 @@ status line in section 24.
 
 # 41. Immediate Next Actions
 
-Phase 0, Phase 1A and Phase 1B-1 are complete (see the status line in section 24).
+Phase 0, Phase 1A and Phase 1B-1 are complete; the backend for 1B-2 and 1C–1H is built but not
+verified against a real database or deployed (see the status line in section 24).
 
 ```text
-NEXT: PHASE 1B-2 (email verification and password reset)
+NEXT: real-database and deployment checks for the backend slices,
+      then the frontend wiring (React calling the API)
 ```
 
-It needs an email provider to be chosen first.
+Decisions needed first: hosting for the Express API, the Vercel /api proxy, the email provider and
+sending domain, and the payment provider (for 1H).
 
 ---
 
