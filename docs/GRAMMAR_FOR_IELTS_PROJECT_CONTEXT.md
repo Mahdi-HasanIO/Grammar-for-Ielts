@@ -856,7 +856,7 @@ and the path helpers), security headers, final verification and CI.
 client-only route return 404 on direct load and broke the offline download. This was fixed in
 `2ab1c4f`.
 
-The next phase is **Phase 1A** (MERN backend foundation).
+For the current phase, see the status line in section 24.
 
 ---
 
@@ -888,6 +888,30 @@ Do not start the backend until this is complete.
 ---
 
 # 24. Phase 1 — MERN Backend
+
+## Phase map (canonical)
+
+This is the only phase list. Older roadmaps that numbered phases 2–8 are replaced by it.
+
+```text
+Phase 0    Frontend groundwork                                       done
+Phase 1A   Node + Express + MongoDB foundation           (section 25) done
+Phase 1B   Authentication                                (section 26)
+  1B-1     Auth core: register, login, logout, me, sessions          done
+  1B-2     Email verification and password reset (needs an email provider)
+Phase 1C   User profiles                                 (section 27)
+Phase 1D   Cloud progress                                (section 28)
+Phase 1E   Content API / CMS                             (section 29; localization model: section 30)
+Phase 1F   Admin / CMS                                   (section 31)
+Phase 1G   Server-side AI                                (section 32)
+Phase 1H   Premium system                                (section 33; payments: section 34)
+Later      IELTS skill expansion                         (section 35)
+```
+
+**Status:** Phase 1A done (tag `phase-1a-complete`). Phase 1B-1 done (tag `phase-1b1-complete`).
+Next: Phase 1B-2.
+
+## Starting the backend
 
 After Phase 0 is officially finished, start the backend.
 
@@ -1505,36 +1529,7 @@ Do not simultaneously implement:
 - analytics
 - notifications
 
-Instead:
-
-```text
-Phase 0
-Frontend groundwork
-
-Phase 1
-MERN foundation
-
-Phase 2
-Auth + profiles
-
-Phase 3
-Progress sync
-
-Phase 4
-Content API + CMS
-
-Phase 5
-Admin
-
-Phase 6
-AI
-
-Phase 7
-Premium/payment
-
-Phase 8
-IELTS skill expansion
-```
+Instead, build one phase at a time in the order of the phase map in section 24.
 
 ---
 
@@ -1573,26 +1568,20 @@ Build:              pass
 
 ### Status
 
-Phase 0 is closed (tag `phase-0-complete`, merge commit `84856be`). The next phase is Phase 1A.
+Phase 0 is closed (tag `phase-0-complete`, merge commit `84856be`). For the backend phases, see the
+status line in section 24.
 
 ---
 
 # 41. Immediate Next Actions
 
-Phase 0 has been confirmed complete (tag `phase-0-complete`).
+Phase 0, Phase 1A and Phase 1B-1 are complete (see the status line in section 24).
 
 ```text
-START PHASE 1A
+NEXT: PHASE 1B-2 (email verification and password reset)
 ```
 
-with:
-
-```text
-Node.js
-Express.js
-MongoDB
-REST API
-```
+It needs an email provider to be chosen first.
 
 ---
 
@@ -1726,45 +1715,13 @@ The project is **not being rebuilt from scratch**.
 The strategy is:
 
 ```text
-CURRENT
 React + static content + localStorage + PWA + SEO
         │
         ▼
-PHASE 0
-Architecture safety + repositories + services + tests
-        │
-        ▼
-PHASE 1
-Node + Express + MongoDB
-        │
-        ▼
-PHASE 2
-Accounts + profiles
-        │
-        ▼
-PHASE 3
-Cloud sync
-        │
-        ▼
-PHASE 4
-Database content + CMS
-        │
-        ▼
-PHASE 5
-Admin
-        │
-        ▼
-PHASE 6
-AI backend
-        │
-        ▼
-PHASE 7
-Premium + payments
-        │
-        ▼
-PHASE 8
-Full IELTS skill expansion
+Phase 0 → Phase 1A → 1B → 1C → 1D → 1E → 1F → 1G → 1H → IELTS skill expansion
 ```
+
+The phases are defined in the phase map in section 24.
 
 The core principle is:
 
