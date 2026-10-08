@@ -37,8 +37,9 @@ function failingRepositories(makeError: () => Error): Repositories {
     throw makeError()
   }
   return {
-    users: { create: fail, findByEmail: fail, findById: fail },
-    sessions: { create: fail, findByTokenHash: fail, deleteByTokenHash: fail },
+    users: { create: fail, findByEmail: fail, findById: fail, update: fail },
+    sessions: { create: fail, findByTokenHash: fail, deleteByTokenHash: fail, deleteAllForUser: fail },
+    accountTokens: { replace: fail, consume: fail, deleteForUser: fail },
   }
 }
 

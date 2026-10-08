@@ -1,11 +1,16 @@
 import { Writable } from 'node:stream'
 import { createApp, type AppDependencies } from '../src/app.js'
 import argon2 from 'argon2'
+import { vi } from 'vitest'
 import { createLogger } from '../src/config/logger.js'
 import { createMemoryRepositories } from '../src/repositories/memory.js'
+import type { Repositories } from '../src/repositories/types.js'
+import { createAccountService } from '../src/services/account.js'
 import { createAuthService, type AuthServiceOptions } from '../src/services/auth.js'
 import type { DatabaseState } from '../src/services/database.js'
-import { createArgon2Hasher } from '../src/services/password.js'
+import type { EmailMessage, Mailer } from '../src/services/mailer.js'
+import { createArgon2Hasher, type PasswordHasher } from '../src/services/password.js'
+import { createProfileService } from '../src/services/profile.js'
 
 export const ALLOWED_ORIGIN = 'https://app.example.com'
 
@@ -25,12 +30,68 @@ export function testAuth(overrides: Partial<AuthServiceOptions> = {}) {
 
 export const TEST_ENV: AppDependencies['env'] = { NODE_ENV: 'test', CORS_ORIGINS: [ALLOWED_ORIGIN], SESSION_COOKIE_NAME: 'gfi_session' }
 
+export const APP_BASE_URL = 'https://app.example.com'
+
+/** A mailer that keeps every message, so tests can read the links. */
+export function recordingMailer(): Mailer & { sent: EmailMessage[] } {
+  const sent: EmailMessage[] = []
+  return {
+    sent,
+    async send(message) {
+      sent.push(message)
+    },
+  }
+}
+
+/** The token from the most recent email whose link goes to `path` (e.g. /reset-password). */
+export function tokenFromMail(sent: readonly EmailMessage[], path: '/reset-password' | '/verify-email'): string {
+  const pattern = new RegExp(`${APP_BASE_URL}${path}#token=([A-Za-z0-9_-]+)`)
+  for (const message of [...sent].reverse()) {
+    const match = pattern.exec(message.text)
+    if (match?.[1]) return match[1]
+  }
+  throw new Error(`no ${path} email was sent`)
+}
+
+/** Like tokenFromMail, but waits for the email: register and forgot-password send in the background. */
+export const mailToken = (sent: readonly EmailMessage[], path: '/reset-password' | '/verify-email') => vi.waitFor(() => tokenFromMail(sent, path))
+
+export interface TestServiceOptions {
+  repositories?: Repositories
+  hasher?: PasswordHasher
+  mailer?: Mailer
+  now?: () => Date
+  logger?: ReturnType<typeof silentLogger>
+}
+
+/** Auth, account and profile services over one set of in-memory repositories. */
+export function testServices({
+  repositories = createMemoryRepositories(),
+  hasher = fastHasher(),
+  mailer = recordingMailer(),
+  now,
+  logger = silentLogger(),
+}: TestServiceOptions = {}) {
+  return {
+    repositories,
+    mailer,
+    /** Emails sent, when the mailer is a recordingMailer(). */
+    sent: 'sent' in mailer ? (mailer as ReturnType<typeof recordingMailer>).sent : [],
+    auth: createAuthService({ repositories, hasher, now }),
+    account: createAccountService({ repositories, hasher, mailer, logger, appBaseUrl: APP_BASE_URL, now }),
+    profile: createProfileService(repositories),
+  }
+}
+
 /** Builds the real app with test dependencies. */
 export function testApp(overrides: Partial<AppDependencies> = {}) {
+  const { auth, account, profile } = testServices()
   return createApp({
     env: TEST_ENV,
     db: fakeDb(),
-    auth: testAuth().auth,
+    auth,
+    account,
+    profile,
     logger: silentLogger(),
     ...overrides,
   })
