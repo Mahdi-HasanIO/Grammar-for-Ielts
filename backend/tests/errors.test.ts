@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { JSON_BODY_LIMIT } from '../src/app.js'
 import { createErrorHandler, notFound, toAppError } from '../src/middleware/errorHandler.js'
 import { AppError } from '../src/utils/AppError.js'
-import { silentLogger, testApp } from './helpers.js'
+import { silentLogger, TEST_ENV, testApp } from './helpers.js'
 
 describe('not found', () => {
   it('returns the JSON 404 shape for an unknown route', async () => {
@@ -58,7 +58,7 @@ describe('error responses', () => {
   })
 
   it('the real app is configured to hide stacks outside development', async () => {
-    const res = await request(testApp({ env: { NODE_ENV: 'production', CORS_ORIGINS: [] } })).get('/missing')
+    const res = await request(testApp({ env: { ...TEST_ENV, NODE_ENV: 'production' } })).get('/missing')
     expect(Object.keys(res.body.error).sort()).toEqual(['code', 'message'])
   })
 

@@ -7,8 +7,17 @@ export interface RateLimitOptions {
   limit: number
 }
 
-/** 300 requests per IP per 15 minutes across the API. Feature routes can add stricter limits later. */
+/** 300 requests per IP per 15 minutes across the API. */
 export const DEFAULT_RATE_LIMIT: RateLimitOptions = { windowMs: 15 * 60 * 1000, limit: 300 }
+
+/**
+ * 50 requests per IP per 15 minutes on /api/auth/*, on top of the global limit:
+ * slows password guessing and email probing. GET /api/auth/me counts too, so
+ * the frontend should call it once per page load, not poll it.
+ */
+export const AUTH_RATE_LIMIT: RateLimitOptions = { windowMs: 15 * 60 * 1000, limit: 50 }
+
+const HEALTH_PATHS = new Set(['/api/health', '/api/health/ready'])
 
 /**
  * Global per-IP rate limit (in-memory: fine for a single instance; a shared
@@ -27,7 +36,19 @@ export function rateLimiter({ windowMs, limit }: RateLimitOptions = DEFAULT_RATE
     limit,
     standardHeaders: 'draft-8',
     legacyHeaders: false,
-    skip: (req) => req.path === '/api/health' || req.path === '/api/health/ready',
+    skip: (req) => HEALTH_PATHS.has(req.path),
+    handler: (_req, _res, next) => next(new AppError(429, 'rate_limited', 'Too many requests, please try again later')),
+  })
+}
+
+/** The stricter per-IP limit for the auth router. A separate counter from the global one. */
+export function authRateLimiter({ windowMs, limit }: RateLimitOptions = AUTH_RATE_LIMIT): RequestHandler {
+  return rateLimit({
+    windowMs,
+    limit,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    identifier: 'auth',
     handler: (_req, _res, next) => next(new AppError(429, 'rate_limited', 'Too many requests, please try again later')),
   })
 }

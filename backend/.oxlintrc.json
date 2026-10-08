@@ -1,9 +1,27 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "oxc", "node", "import"],
+  "plugins": [
+    "typescript",
+    "oxc",
+    "node",
+    "import"
+  ],
   "categories": {
     "correctness": "error",
     "suspicious": "warn"
   },
-  "ignorePatterns": ["dist/**", "coverage/**"]
+  "rules": {
+    "no-underscore-dangle": [
+      "warn",
+      {
+        "allow": [
+          "_id"
+        ]
+      }
+    ]
+  },
+  "ignorePatterns": [
+    "dist/**",
+    "coverage/**"
+  ]
 }

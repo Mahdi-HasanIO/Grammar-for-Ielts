@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import request from 'supertest'
 import { afterAll, describe, expect, it } from 'vitest'
 import { createDatabase } from '../src/services/database.js'
-import { capturingLogger, testApp } from './helpers.js'
+import { capturingLogger, testApp, withDatabaseName } from './helpers.js'
 
 /**
  * Opt-in: runs only when MONGODB_URI_TEST is set (never in CI). The URI's
@@ -13,13 +13,6 @@ import { capturingLogger, testApp } from './helpers.js'
  *   MONGODB_URI_TEST='mongodb+srv://…' npm test
  */
 const baseUri = process.env.MONGODB_URI_TEST
-
-/** Swaps the database name in a MongoDB URI, keeping hosts and query options. */
-function withDatabaseName(uri: string, name: string): string {
-  const match = /^(mongodb(?:\+srv)?:\/\/[^/?]+)(?:\/[^?]*)?(\?.*)?$/.exec(uri)
-  if (!match) throw new Error('MONGODB_URI_TEST is not a mongodb:// or mongodb+srv:// URI')
-  return `${match[1]}/${name}${match[2] ?? ''}`
-}
 
 describe.skipIf(!baseUri)('MongoDB integration (MONGODB_URI_TEST)', () => {
   // The body is still collected when skipped, so only build the URI when one was given.

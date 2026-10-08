@@ -1,17 +1,18 @@
 import request from 'supertest'
 import { describe, expect, it } from 'vitest'
-import { ALLOWED_ORIGIN, capturingLogger, testApp } from './helpers.js'
+import { ALLOWED_ORIGIN, capturingLogger, fakeDb, testApp } from './helpers.js'
 
 describe('CORS', () => {
-  it('sets Access-Control-Allow-Origin for an allowed origin', async () => {
+  it('sets Access-Control-Allow-Origin and allows credentials for an allowed origin', async () => {
     const res = await request(testApp()).get('/api/health').set('Origin', ALLOWED_ORIGIN)
     expect(res.headers['access-control-allow-origin']).toBe(ALLOWED_ORIGIN)
-    expect(res.headers['access-control-allow-credentials']).toBeUndefined()
+    expect(res.headers['access-control-allow-credentials']).toBe('true')
   })
 
-  it('sets no CORS headers for a disallowed origin', async () => {
+  it('sets no CORS headers, credentials included, for a disallowed origin', async () => {
     const res = await request(testApp()).get('/api/health').set('Origin', 'https://evil.example.com')
     expect(res.headers['access-control-allow-origin']).toBeUndefined()
+    expect(res.headers['access-control-allow-credentials']).toBeUndefined()
   })
 
   it('sets no CORS headers when there is no Origin (curl, server to server)', async () => {
@@ -85,7 +86,7 @@ describe('request logging', () => {
 describe('health checks are not request-logged', () => {
   it('skips /api/health and a 503 from /api/health/ready, so probes cannot flood the logs', async () => {
     const { logger, lines } = capturingLogger()
-    const app = testApp({ logger })
+    const app = testApp({ logger, db: fakeDb('disconnected') })
     expect((await request(app).get('/api/health')).status).toBe(200)
     expect((await request(app).get('/api/health/ready')).status).toBe(503)
     expect((await request(app).get('/api/other')).status).toBe(404)

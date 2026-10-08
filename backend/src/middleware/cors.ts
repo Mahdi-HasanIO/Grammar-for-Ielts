@@ -10,12 +10,11 @@ import type { RequestHandler } from 'express'
  *   cross-origin reads; the request itself is not rejected, because CORS is
  *   enforced by the browser, not the server.
  *
- * Credentials: `credentials` is false because there is no authentication yet.
- * Decide when authentication is designed (Phase 1B):
- * - cookie sessions → credentials: true, exact origins only (never "*"),
- *   cookies with Secure + HttpOnly + SameSite, and CSRF protection;
- * - bearer tokens in the Authorization header → credentials can stay false,
- *   but "Authorization" must be added to allowedHeaders.
+ * Credentials: authentication uses a session cookie, so allowed origins also
+ * get Access-Control-Allow-Credentials: true (the browser then sends the
+ * cookie with fetch(..., { credentials: 'include' })). Other origins get no
+ * CORS headers at all, credentials included. Never combine credentials with
+ * "*": the origin is always echoed exactly. CSRF checks are in csrf.ts.
  */
 export function corsOptions(allowedOrigins: readonly string[]): CorsOptions {
   const allowed = new Set(allowedOrigins)
@@ -23,7 +22,7 @@ export function corsOptions(allowedOrigins: readonly string[]): CorsOptions {
     origin: (origin, callback) => callback(null, origin !== undefined && allowed.has(origin)),
     methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type'],
-    credentials: false,
+    credentials: true,
     maxAge: 600,
   }
 }

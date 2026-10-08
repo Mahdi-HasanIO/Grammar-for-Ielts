@@ -21,6 +21,7 @@ describe('loadEnv', () => {
       MONGODB_URI: VALID.MONGODB_URI,
       CORS_ORIGINS: [...DEFAULT_CORS_ORIGINS],
       LOG_LEVEL: 'info',
+      SESSION_COOKIE_NAME: 'gfi_session',
     })
   })
 
@@ -36,6 +37,7 @@ describe('loadEnv', () => {
         MONGODB_URI: 'mongodb+srv://user:pass@cluster0.example.mongodb.net/app',
         CORS_ORIGINS: 'https://grammar-for-ielts.vercel.app, http://localhost:5173',
         LOG_LEVEL: 'warn',
+        SESSION_COOKIE_NAME: '__Host-gfi_session',
       }),
     ).toEqual({
       NODE_ENV: 'production',
@@ -43,6 +45,7 @@ describe('loadEnv', () => {
       MONGODB_URI: 'mongodb+srv://user:pass@cluster0.example.mongodb.net/app',
       CORS_ORIGINS: ['https://grammar-for-ielts.vercel.app', 'http://localhost:5173'],
       LOG_LEVEL: 'warn',
+      SESSION_COOKIE_NAME: '__Host-gfi_session',
     })
   })
 
@@ -58,6 +61,8 @@ describe('loadEnv', () => {
     [{ ...VALID, PORT: '70000' }, 'PORT'],
     [{ ...VALID, PORT: '80.5' }, 'PORT'],
     [{ ...VALID, NODE_ENV: 'staging' }, 'NODE_ENV'],
+    [{ ...VALID, SESSION_COOKIE_NAME: 'my session' }, 'SESSION_COOKIE_NAME'],
+    [{ ...VALID, SESSION_COOKIE_NAME: 'a=b;' }, 'SESSION_COOKIE_NAME'],
     [{ ...VALID, LOG_LEVEL: 'verbose' }, 'LOG_LEVEL'],
     [{ ...VALID, CORS_ORIGINS: '*' }, 'CORS_ORIGINS'],
     [{ ...VALID, CORS_ORIGINS: 'https://ok.example.com,https://bad.example.com/path' }, 'CORS_ORIGINS'],
