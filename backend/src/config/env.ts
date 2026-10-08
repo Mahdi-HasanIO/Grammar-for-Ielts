@@ -74,6 +74,16 @@ const envSchema = z
       ),
     ),
   LOG_LEVEL: z.enum(LOG_LEVELS).default('info'),
+  // Number of reverse proxies in front of the API (0 = none, the default). Set it to the real count on
+  // the host (often 1) so req.ip, and so the per-IP rate limits, use X-Forwarded-For. Too high lets
+  // clients spoof their IP; never "true".
+  TRUST_PROXY: z.coerce.number().int().min(0).max(10).default(0),
+  // MongoDB driver pool and timeouts (milliseconds).
+  MONGODB_MAX_POOL_SIZE: z.coerce.number().int().min(1).max(500).default(10),
+  MONGODB_MIN_POOL_SIZE: z.coerce.number().int().min(0).max(500).default(0),
+  MONGODB_SERVER_SELECTION_TIMEOUT_MS: z.coerce.number().int().min(500).max(120_000).default(5_000),
+  MONGODB_CONNECT_TIMEOUT_MS: z.coerce.number().int().min(500).max(120_000).default(10_000),
+  MONGODB_SOCKET_TIMEOUT_MS: z.coerce.number().int().min(0).max(600_000).default(45_000),
   // In production over HTTPS, a `__Host-` prefix (e.g. __Host-gfi_session) makes browsers enforce Secure, path=/ and no Domain.
   SESSION_COOKIE_NAME: z.string().trim().regex(COOKIE_NAME, 'must be a cookie name (letters, digits and !#$%&\'*+-.^_`|~)').default('gfi_session'),
   // Where the frontend lives: links in emails point here. Required in production.
@@ -89,6 +99,9 @@ const envSchema = z
   RESEND_API_KEY: z.string().trim().min(1).optional(),
 })
   .superRefine((env, ctx) => {
+    if (env.MONGODB_MIN_POOL_SIZE > env.MONGODB_MAX_POOL_SIZE) {
+      ctx.addIssue({ code: 'custom', path: ['MONGODB_MIN_POOL_SIZE'], message: 'MONGODB_MIN_POOL_SIZE must not exceed MONGODB_MAX_POOL_SIZE' })
+    }
     if (env.NODE_ENV === 'production' && !env.APP_BASE_URL) {
       ctx.addIssue({ code: 'custom', path: ['APP_BASE_URL'], message: 'APP_BASE_URL is required when NODE_ENV=production' })
     }

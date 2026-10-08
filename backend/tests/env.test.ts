@@ -13,6 +13,15 @@ function problemsFor(source: Record<string, string | undefined>): string[] {
   throw new Error('expected loadEnv to throw')
 }
 
+const MONGO_AND_PROXY_DEFAULTS = {
+  TRUST_PROXY: 0,
+  MONGODB_MAX_POOL_SIZE: 10,
+  MONGODB_MIN_POOL_SIZE: 0,
+  MONGODB_SERVER_SELECTION_TIMEOUT_MS: 5000,
+  MONGODB_CONNECT_TIMEOUT_MS: 10000,
+  MONGODB_SOCKET_TIMEOUT_MS: 45000,
+}
+
 describe('loadEnv', () => {
   it('applies defaults when only MONGODB_URI is set', () => {
     expect(loadEnv(VALID)).toEqual({
@@ -24,6 +33,7 @@ describe('loadEnv', () => {
       SESSION_COOKIE_NAME: 'gfi_session',
       APP_BASE_URL: 'http://localhost:5173',
       MAIL_TRANSPORT: 'log',
+      ...MONGO_AND_PROXY_DEFAULTS,
     })
   })
 
@@ -44,6 +54,12 @@ describe('loadEnv', () => {
         MAIL_TRANSPORT: 'resend',
         MAIL_FROM: 'Grammar for IELTS <no-reply@example.com>',
         RESEND_API_KEY: 're_test_key',
+        TRUST_PROXY: '1',
+        MONGODB_MAX_POOL_SIZE: '20',
+        MONGODB_MIN_POOL_SIZE: '2',
+        MONGODB_SERVER_SELECTION_TIMEOUT_MS: '3000',
+        MONGODB_CONNECT_TIMEOUT_MS: '8000',
+        MONGODB_SOCKET_TIMEOUT_MS: '0',
       }),
     ).toEqual({
       NODE_ENV: 'production',
@@ -56,6 +72,12 @@ describe('loadEnv', () => {
       MAIL_TRANSPORT: 'resend',
       MAIL_FROM: 'Grammar for IELTS <no-reply@example.com>',
       RESEND_API_KEY: 're_test_key',
+      TRUST_PROXY: 1,
+      MONGODB_MAX_POOL_SIZE: 20,
+      MONGODB_MIN_POOL_SIZE: 2,
+      MONGODB_SERVER_SELECTION_TIMEOUT_MS: 3000,
+      MONGODB_CONNECT_TIMEOUT_MS: 8000,
+      MONGODB_SOCKET_TIMEOUT_MS: 0,
     })
   })
 
@@ -76,6 +98,11 @@ describe('loadEnv', () => {
     [{ ...VALID, APP_BASE_URL: 'https://example.com/?x=1' }, 'APP_BASE_URL'],
     [{ ...VALID, NODE_ENV: 'production' }, 'APP_BASE_URL is required when NODE_ENV=production'],
     [{ ...VALID, MAIL_TRANSPORT: 'smtp' }, 'MAIL_TRANSPORT'],
+    [{ ...VALID, TRUST_PROXY: 'true' }, 'TRUST_PROXY'],
+    [{ ...VALID, TRUST_PROXY: '11' }, 'TRUST_PROXY'],
+    [{ ...VALID, MONGODB_MAX_POOL_SIZE: '0' }, 'MONGODB_MAX_POOL_SIZE'],
+    [{ ...VALID, MONGODB_MIN_POOL_SIZE: '5', MONGODB_MAX_POOL_SIZE: '4' }, 'MONGODB_MIN_POOL_SIZE must not exceed MONGODB_MAX_POOL_SIZE'],
+    [{ ...VALID, MONGODB_SERVER_SELECTION_TIMEOUT_MS: '10' }, 'MONGODB_SERVER_SELECTION_TIMEOUT_MS'],
     [{ ...VALID, MAIL_TRANSPORT: 'resend', MAIL_FROM: 'a@b.co' }, 'RESEND_API_KEY is required when MAIL_TRANSPORT=resend'],
     [{ ...VALID, MAIL_TRANSPORT: 'resend', RESEND_API_KEY: 'k' }, 'MAIL_FROM is required when MAIL_TRANSPORT=resend'],
     [{ ...VALID, SESSION_COOKIE_NAME: 'a=b;' }, 'SESSION_COOKIE_NAME'],

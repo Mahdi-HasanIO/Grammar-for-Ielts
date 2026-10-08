@@ -9,11 +9,14 @@ const isHealthCheck = (url: string | undefined) => url === '/api/health' || url?
 /**
  * One log line per request: id, method, URL, status and duration. Headers
  * (including Authorization and cookies) and bodies are never logged.
- * Each response carries the id in X-Request-Id for support and debugging.
+ * Each response carries the id in X-Request-Id for support and debugging,
+ * and every line logged through req.log carries it as `reqId`.
  */
 export function requestLogger(logger: Logger): RequestHandler {
   return pinoHttp({
     logger,
+    // req.log lines carry just { reqId }; the full (serialized) request is only on the completion line.
+    quietReqLogger: true,
     autoLogging: { ignore: (req) => isHealthCheck(req.url) },
     genReqId: (_req, res) => {
       const id = randomUUID()

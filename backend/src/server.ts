@@ -38,7 +38,15 @@ async function main(): Promise<void> {
   loadDotEnv()
   const env = readConfig()
   const logger = createLogger(env)
-  const db = createDatabase({ uri: env.MONGODB_URI, logger })
+  const db = createDatabase({
+    uri: env.MONGODB_URI,
+    logger,
+    maxPoolSize: env.MONGODB_MAX_POOL_SIZE,
+    minPoolSize: env.MONGODB_MIN_POOL_SIZE,
+    serverSelectionTimeoutMS: env.MONGODB_SERVER_SELECTION_TIMEOUT_MS,
+    connectTimeoutMS: env.MONGODB_CONNECT_TIMEOUT_MS,
+    socketTimeoutMS: env.MONGODB_SOCKET_TIMEOUT_MS,
+  })
   const repositories = createMongoRepositories(db.connection)
   const hasher = createArgon2Hasher()
   const auth = createAuthService({ repositories, hasher })

@@ -1,5 +1,13 @@
 import { Schema, type Connection, type InferSchemaType } from 'mongoose'
 
+/*
+ * Indexes (account_tokens), checked by tests/indexes.test.ts:
+ * - _id (default): unused by queries.
+ * - { tokenHash: 1 } unique: consuming a token from a link (findOneAndDelete).
+ * - { userId: 1, type: 1 } unique: one live token per user and type; the upsert that replaces it, and
+ *   deleting a user's reset tokens on password change. Also serves queries on userId alone.
+ * - { expiresAt: 1 } TTL (expireAfterSeconds 0): MongoDB deletes expired tokens.
+ */
 const accountTokenSchema = new Schema(
   {
     // SHA-256 of the one-time token. The token itself only exists in the email that was sent.

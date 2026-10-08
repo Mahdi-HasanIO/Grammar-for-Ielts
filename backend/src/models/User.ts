@@ -1,5 +1,11 @@
 import { Schema, type Connection, type InferSchemaType } from 'mongoose'
 
+/*
+ * Indexes (users), checked by tests/indexes.test.ts:
+ * - _id (default): findById for sessions, account tokens and profile updates.
+ * - { email: 1 } unique: login and forgot-password lookups, and the race-safe duplicate check on register.
+ * No others: profile fields are only ever read by _id.
+ */
 const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true, lowercase: true, trim: true, maxlength: 254 },

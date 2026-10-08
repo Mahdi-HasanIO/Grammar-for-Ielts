@@ -92,7 +92,7 @@ describe('register', () => {
     expect((await register(app)).status).toBe(201)
     const res = await register(app, 'LEARNER@example.com', 'another password')
     expect(res.status).toBe(409)
-    expect(res.body).toEqual({ error: { code: 'email_taken', message: 'An account with this email already exists' } })
+    expect(res.body).toEqual({ error: { code: 'email_taken', message: 'An account with this email already exists', requestId: expect.any(String) } })
     expect(setCookie(res)).toBeUndefined()
   })
 
@@ -161,7 +161,7 @@ describe('login', () => {
     const unknownEmail = await login(app, 'nobody@example.com', PASSWORD)
     for (const res of [wrongPassword, unknownEmail]) {
       expect(res.status).toBe(401)
-      expect(res.body).toEqual({ error: { code: 'invalid_credentials', message: 'Invalid email or password' } })
+      expect(res.body).toEqual({ error: { code: 'invalid_credentials', message: 'Invalid email or password', requestId: expect.any(String) } })
       expect(setCookie(res)).toBeUndefined()
     }
   })
@@ -193,7 +193,7 @@ describe('me and logout', () => {
 
     const after = await me(app, token)
     expect(after.status).toBe(401)
-    expect(after.body).toEqual({ error: { code: 'unauthenticated', message: 'Authentication required' } })
+    expect(after.body).toEqual({ error: { code: 'unauthenticated', message: 'Authentication required', requestId: expect.any(String) } })
   })
 
   it('returns 401 without a cookie, and sets no cookie', async () => {
@@ -272,7 +272,7 @@ describe('CSRF protection on state-changing auth routes', () => {
   it.each(['/api/auth/register', '/api/auth/login', '/api/auth/logout'])('%s rejects a disallowed Origin with 403', async (path) => {
     const res = await post(testApp(), path, { email: EMAIL, password: PASSWORD }).set('Origin', 'https://evil.example.com')
     expect(res.status).toBe(403)
-    expect(res.body).toEqual({ error: { code: 'origin_not_allowed', message: 'Request origin is not allowed' } })
+    expect(res.body).toEqual({ error: { code: 'origin_not_allowed', message: 'Request origin is not allowed', requestId: expect.any(String) } })
   })
 
   it('rejects "Origin: null" (sandboxed frames, some redirects)', async () => {
@@ -343,7 +343,7 @@ describe('auth rate limit', () => {
 
     const limited = await login(app)
     expect(limited.status).toBe(429)
-    expect(limited.body).toEqual({ error: { code: 'rate_limited', message: 'Too many requests, please try again later' } })
+    expect(limited.body).toEqual({ error: { code: 'rate_limited', message: 'Too many requests, please try again later', requestId: expect.any(String) } })
     expect(limited.headers['ratelimit-policy']).toMatch(/"auth"; q=3; w=60/)
     expect((await me(app)).status).toBe(429)
 

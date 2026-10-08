@@ -8,7 +8,7 @@ import { isDatabaseUnavailableError, type DatabaseState } from '../src/services/
 import { capturingLogger, fakeDb, testApp, testAuth } from './helpers.js'
 
 const SERVICE_UNAVAILABLE = {
-  error: { code: 'service_unavailable', message: 'Service temporarily unavailable, please try again shortly' },
+  error: { code: 'service_unavailable', message: 'Service temporarily unavailable, please try again shortly', requestId: expect.any(String) },
 }
 const CREDENTIALS = { email: 'learner@example.com', password: 'correct horse battery' }
 

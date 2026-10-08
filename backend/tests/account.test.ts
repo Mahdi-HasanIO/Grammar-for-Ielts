@@ -19,7 +19,7 @@ import {
 } from './helpers.js'
 import { EMAIL, get, isSignedIn, NEW_PASSWORD, PASSWORD, post, sessionToken, setCookie, signIn, signUp } from './http.js'
 
-const INVALID_TOKEN = { error: { code: 'invalid_token', message: 'This link is invalid or has expired' } }
+const INVALID_TOKEN = { error: { code: 'invalid_token', message: 'This link is invalid or has expired', requestId: expect.any(String) } }
 const sha256 = (value: string) => createHash('sha256').update(value).digest('hex')
 
 /** An app plus its services, recorded emails and a controllable clock. */
@@ -152,7 +152,7 @@ describe('email verification', () => {
     advance(EMAIL_COOLDOWN_MS)
     const res = await post(app, '/api/auth/request-verification', {}, session)
     expect(res.status).toBe(502)
-    expect(res.body).toEqual({ error: { code: 'email_failed', message: 'The email could not be sent. Please try again later' } })
+    expect(res.body).toEqual({ error: { code: 'email_failed', message: 'The email could not be sent. Please try again later', requestId: expect.any(String) } })
   })
 
   it('a password reset token cannot verify an email', async () => {
@@ -355,7 +355,7 @@ describe('change-password', () => {
     const other = await signIn(ctx.app)
     const res = await post(ctx.app, '/api/auth/change-password', { currentPassword: 'not my password', newPassword: NEW_PASSWORD }, current)
     expect(res.status).toBe(400)
-    expect(res.body).toEqual({ error: { code: 'invalid_current_password', message: 'The current password is not correct' } })
+    expect(res.body).toEqual({ error: { code: 'invalid_current_password', message: 'The current password is not correct', requestId: expect.any(String) } })
     expect(await isSignedIn(ctx.app, other)).toBe(true)
     expect((await post(ctx.app, '/api/auth/login', { email: EMAIL, password: PASSWORD })).status).toBe(200)
   })
@@ -517,7 +517,7 @@ describe('per-email cooldown (one email of each kind per address per minute)', (
     await waitForMail(ctx.sent, 1)
     const early = await post(ctx.app, '/api/auth/request-verification', {}, session)
     expect(early.status).toBe(429)
-    expect(early.body).toEqual({ error: { code: 'email_cooldown', message: 'An email was sent recently. Please wait a minute before asking again' } })
+    expect(early.body).toEqual({ error: { code: 'email_cooldown', message: 'An email was sent recently. Please wait a minute before asking again', requestId: expect.any(String) } })
     ctx.advance(EMAIL_COOLDOWN_MS - 1)
     expect((await post(ctx.app, '/api/auth/request-verification', {}, session)).status).toBe(429)
     ctx.advance(1)

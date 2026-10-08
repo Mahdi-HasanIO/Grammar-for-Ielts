@@ -1,5 +1,12 @@
 import { Schema, type Connection, type InferSchemaType } from 'mongoose'
 
+/*
+ * Indexes (sessions), checked by tests/indexes.test.ts:
+ * - _id (default): unused by queries.
+ * - { tokenHash: 1 } unique: the lookup on every authenticated request, and logout.
+ * - { userId: 1 }: "end all sessions of this user" on password reset and change.
+ * - { expiresAt: 1 } TTL (expireAfterSeconds 0): MongoDB deletes expired sessions.
+ */
 const sessionSchema = new Schema(
   {
     // SHA-256 of the session token. The token itself only ever exists in the user's cookie.

@@ -4,9 +4,13 @@ import type { Logger } from '../config/logger.js'
 import { isDatabaseUnavailableError } from '../services/database.js'
 import { AppError } from '../utils/AppError.js'
 
-/** Every error response has this shape. `details` only for client errors; `stack` only for unexpected errors in development. */
+/**
+ * Every error response has this shape. `requestId` matches the X-Request-Id
+ * header and the reqId in the logs, so a user can quote it to support.
+ * `details` only for client errors; `stack` only for unexpected errors in development.
+ */
 export interface ErrorBody {
-  error: { code: string; message: string; details?: unknown; stack?: string }
+  error: { code: string; message: string; requestId?: string; details?: unknown; stack?: string }
 }
 
 /** Errors raised by express.json() (body-parser) carry a `type` and an HTTP `status`. */
@@ -53,6 +57,7 @@ export function createErrorHandler({ logger, exposeStack }: { logger: Logger; ex
     if (appError.status >= 500) log.error({ err: error }, 'Request failed')
 
     const body: ErrorBody = { error: { code: appError.code, message: appError.message } }
+    if (typeof req.id === 'string') body.error.requestId = req.id
     if (appError.details !== undefined && appError.status < 500) body.error.details = appError.details
     if (exposeStack && appError.status === 500 && error instanceof Error && error.stack) body.error.stack = error.stack
     res.status(appError.status).json(body)

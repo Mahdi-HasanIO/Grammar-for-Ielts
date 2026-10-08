@@ -1,3 +1,4 @@
+import compression from 'compression'
 import express, { type Express } from 'express'
 import helmet from 'helmet'
 import type { Env } from './config/env.js'
@@ -16,7 +17,7 @@ import type { ProfileService } from './services/profile.js'
 export const JSON_BODY_LIMIT = '100kb'
 
 export interface AppDependencies {
-  env: Pick<Env, 'NODE_ENV' | 'CORS_ORIGINS' | 'SESSION_COOKIE_NAME'>
+  env: Pick<Env, 'NODE_ENV' | 'CORS_ORIGINS' | 'SESSION_COOKIE_NAME'> & Partial<Pick<Env, 'TRUST_PROXY'>>
   db: DatabaseStatus
   auth: AuthService
   account: AccountService
@@ -33,11 +34,13 @@ export interface AppDependencies {
 export function createApp({ env, db, auth, account, profile, logger, rateLimit, authRateLimit }: AppDependencies): Express {
   const app = express()
   app.disable('x-powered-by')
-  // `trust proxy` stays off until the hosting provider is known: set it to the
-  // number of proxies in front of the app so req.ip (and the rate limiter) use
-  // the real client IP from X-Forwarded-For.
+  // TRUST_PROXY = number of reverse proxies in front of the app (0, the default, trusts none). With
+  // the right count, req.ip (and so the per-IP rate limits) is the client from X-Forwarded-For.
+  if (env.TRUST_PROXY) app.set('trust proxy', env.TRUST_PROXY)
 
   app.use(requestLogger(logger))
+  // gzip/deflate/brotli for responses over 1 kB when the client accepts it (lesson and content lists).
+  app.use(compression())
   app.use(helmet())
   // CORS before the rate limiter, so 429 responses are still readable by allowed browser origins.
   app.use(corsMiddleware(env.CORS_ORIGINS))

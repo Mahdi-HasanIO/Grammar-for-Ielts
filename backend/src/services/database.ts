@@ -21,8 +21,14 @@ export interface Database extends DatabaseStatus {
 export interface DatabaseOptions {
   uri: string
   logger: Logger
-  /** How long one attempt waits for a server before failing. */
+  /** How long one attempt (and each later operation) waits to find a usable server. */
   serverSelectionTimeoutMS?: number
+  /** Connection pool bounds and socket timeouts, passed to the driver. */
+  maxPoolSize?: number
+  minPoolSize?: number
+  connectTimeoutMS?: number
+  /** 0 means no timeout. */
+  socketTimeoutMS?: number
   /** Delay before the first retry; doubles up to maxRetryDelayMs. */
   retryDelayMs?: number
   maxRetryDelayMs?: number
@@ -55,6 +61,10 @@ export function createDatabase({
   uri,
   logger,
   serverSelectionTimeoutMS = 5_000,
+  maxPoolSize = 10,
+  minPoolSize = 0,
+  connectTimeoutMS = 10_000,
+  socketTimeoutMS = 45_000,
   retryDelayMs = 2_000,
   maxRetryDelayMs = 30_000,
 }: DatabaseOptions): Database {
@@ -73,6 +83,10 @@ export function createDatabase({
     try {
       await connection.openUri(uri, {
         serverSelectionTimeoutMS,
+        maxPoolSize,
+        minPoolSize,
+        connectTimeoutMS,
+        socketTimeoutMS,
         // Fail queries immediately while disconnected instead of queueing them until a timeout.
         bufferCommands: false,
       })

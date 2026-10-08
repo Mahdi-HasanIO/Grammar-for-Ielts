@@ -55,7 +55,7 @@ describe('rate limiting', () => {
     expect((await request(app).get('/api/anything')).status).toBe(404)
     const limited = await request(app).get('/api/anything')
     expect(limited.status).toBe(429)
-    expect(limited.body).toEqual({ error: { code: 'rate_limited', message: 'Too many requests, please try again later' } })
+    expect(limited.body).toEqual({ error: { code: 'rate_limited', message: 'Too many requests, please try again later', requestId: expect.any(String) } })
     expect(limited.headers['ratelimit-policy']).toBeDefined()
   })
 

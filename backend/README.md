@@ -29,6 +29,10 @@ cp .env.example .env   # then edit .env
 | `NODE_ENV` | no | `development` | `development`, `test` or `production` |
 | `CORS_ORIGINS` | no | local Vite origins (`http://localhost:5173`, `:4173`, and the `127.0.0.1` forms) | Comma-separated exact origins; no paths, no `*` |
 | `LOG_LEVEL` | no | `info` | `fatal`, `error`, `warn`, `info`, `debug`, `trace`, `silent` |
+| `TRUST_PROXY` | no | `0` | Number of reverse proxies in front of the API (0–10). Set to the host's real count (often 1) so per-IP rate limits see the client IP; too high lets clients spoof it |
+| `MONGODB_MAX_POOL_SIZE` / `MONGODB_MIN_POOL_SIZE` | no | `10` / `0` | Driver connection pool bounds |
+| `MONGODB_SERVER_SELECTION_TIMEOUT_MS` | no | `5000` | How long an operation waits for a usable server |
+| `MONGODB_CONNECT_TIMEOUT_MS` / `MONGODB_SOCKET_TIMEOUT_MS` | no | `10000` / `45000` | Connection and socket timeouts (`0` = no socket timeout) |
 | `APP_BASE_URL` | in production | `http://localhost:5173` | Frontend URL that links in emails point to (`/verify-email#token=…`, `/reset-password#token=…`) |
 | `MAIL_TRANSPORT` | no | `log` | `log` writes emails to the log (the body, with its link, only outside production); `resend` sends through the Resend API |
 | `MAIL_FROM` | with `resend` | — | Sender, e.g. `Grammar for IELTS <no-reply@your-domain>` (the domain must be verified in Resend) |
@@ -115,8 +119,9 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
   in the background, retrying with backoff (2 s doubling to 30 s). `/api/health` works throughout;
   `/api/health/ready` returns 503 until the connection is up. Only invalid configuration stops the
   server.
-- **Errors** all have the shape `{"error":{"code","message"}}`, plus `details` for validation
-  errors. Malformed JSON → 400 `invalid_json`. Bodies over 100 kB → 413 `payload_too_large`.
+- **Errors** all have the shape `{"error":{"code","message","requestId"}}`, plus `details` for
+  validation errors. `requestId` equals the `X-Request-Id` response header and the `reqId` on the
+  matching log lines. Malformed JSON → 400 `invalid_json`. Bodies over 100 kB → 413 `payload_too_large`.
   While MongoDB is unreachable, routes that need it (all of `/api/auth/*`) return 503
   `service_unavailable`. Unexpected errors → 500 `internal_error` with a generic message; the stack
   is included only for those, and only when `NODE_ENV=development`.
@@ -124,6 +129,7 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
   `validation_error` with the problem list. `src/validators/pagination.ts` is the example schema.
 - **Security:**
   - Helmet headers and no `X-Powered-By`.
+  - Responses over 1 kB are compressed (gzip, deflate or brotli) when the client accepts it.
   - A JSON body limit.
   - A global rate limit of 300 requests per IP per 15 minutes, in memory; health checks are exempt.
   - CORS allowlist from `CORS_ORIGINS`, with credentials allowed for those origins only.
@@ -149,7 +155,7 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
   - `requireAuth` (`src/middleware/requireAuth.ts`) protects later routes; handlers read the user
     with `getAuth(res)`.
 - **Logging:** one line per request (id, method, URL, status, duration) with an `X-Request-Id`
-  response header. Headers and bodies are never logged. Connection strings are redacted from
+  response header; every other line logged during the request carries the same id as `reqId`. Headers and bodies are never logged. Connection strings are redacted from
   database errors.
 - **Shutdown:** on SIGTERM or SIGINT the server stops accepting connections, finishes in-flight
   requests, then closes the database connection. It exits after 10 s at most.
@@ -172,3 +178,6 @@ src/
   utils/             AppError, redaction, session cookie
 tests/               Vitest + supertest (*.integration.test.ts need MONGODB_URI_TEST)
 ```
+
+Every MongoDB index is listed, with the query it serves, in a comment above its schema in
+`src/models/`; `tests/indexes.test.ts` fails if a schema and its list drift apart.
