@@ -27,6 +27,9 @@ function isOrigin(value: string): boolean {
   }
 }
 
+/** Characters allowed in a cookie name (an RFC 6265 token). */
+const COOKIE_NAME = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/
+
 const required = (name: string) => ({
   error: (issue: { input: unknown }) => (issue.input === undefined ? `${name} is required` : `${name} must be a string`),
 })
@@ -55,6 +58,8 @@ const envSchema = z.object({
       ),
     ),
   LOG_LEVEL: z.enum(LOG_LEVELS).default('info'),
+  // In production over HTTPS, a `__Host-` prefix (e.g. __Host-gfi_session) makes browsers enforce Secure, path=/ and no Domain.
+  SESSION_COOKIE_NAME: z.string().trim().regex(COOKIE_NAME, 'must be a cookie name (letters, digits and !#$%&\'*+-.^_`|~)').default('gfi_session'),
 })
 
 export type Env = z.infer<typeof envSchema>

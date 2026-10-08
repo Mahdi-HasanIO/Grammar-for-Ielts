@@ -2,7 +2,10 @@ import type { Server } from 'node:http'
 import { createApp } from './app.js'
 import { EnvError, loadEnv, type Env } from './config/env.js'
 import { createLogger } from './config/logger.js'
+import { createMongoRepositories } from './repositories/mongo.js'
+import { createAuthService } from './services/auth.js'
 import { createDatabase } from './services/database.js'
+import { createArgon2Hasher } from './services/password.js'
 
 const SHUTDOWN_TIMEOUT_MS = 10_000
 
@@ -33,7 +36,8 @@ async function main(): Promise<void> {
   const env = readConfig()
   const logger = createLogger(env)
   const db = createDatabase({ uri: env.MONGODB_URI, logger })
-  const app = createApp({ env, db, logger })
+  const auth = createAuthService({ repositories: createMongoRepositories(db.connection), hasher: createArgon2Hasher() })
+  const app = createApp({ env, db, auth, logger })
 
   const server: Server = app.listen(env.PORT, (error?: Error) => {
     if (error) {

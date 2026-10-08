@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { type Connection } from 'mongoose'
 import type { Logger } from '../config/logger.js'
 import { redactConnectionStrings } from '../utils/redact.js'
 
@@ -10,6 +10,8 @@ export interface DatabaseStatus {
 }
 
 export interface Database extends DatabaseStatus {
+  /** The underlying connection, for registering models. Queries fail fast (no buffering) while disconnected. */
+  readonly connection: Connection
   /** Starts connecting. Resolves after the first attempt; on failure it keeps retrying in the background. */
   connect(): Promise<void>
   /** Stops retrying and closes the connection. */
@@ -73,6 +75,7 @@ export function createDatabase({
   }
 
   return {
+    connection,
     state: () => STATES[connection.readyState] ?? 'disconnected',
     connect: attempt,
     async disconnect() {
