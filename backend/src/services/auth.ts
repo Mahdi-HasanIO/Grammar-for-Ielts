@@ -8,16 +8,24 @@ const TOKEN_BYTES = 32
 /** 32 bytes as base64url: 43 characters. Anything else is rejected before touching the database. */
 const TOKEN_FORMAT = /^[A-Za-z0-9_-]{43}$/
 
+/** A new random token (session or one-time link): 32 bytes, base64url. */
+export const generateToken = () => randomBytes(TOKEN_BYTES).toString('base64url')
+
+/** True if the value could be a token from generateToken(); cheap check before hashing and querying. */
+export const isTokenFormat = (value: string | undefined): value is string => value !== undefined && TOKEN_FORMAT.test(value)
+
 /** What the API returns for a user. Never includes the password hash. */
 export interface PublicUser {
   id: string
   email: string
+  emailVerifiedAt: string | null
   createdAt: string
 }
 
 export const toPublicUser = (user: UserRecord): PublicUser => ({
   id: user.id,
   email: user.email,
+  emailVerifiedAt: user.emailVerifiedAt?.toISOString() ?? null,
   createdAt: user.createdAt.toISOString(),
 })
 
@@ -62,7 +70,7 @@ export function createAuthService({
   const getDummyHash = dummyHash(hasher)
 
   async function startSession(user: UserRecord): Promise<NewSession> {
-    const token = randomBytes(TOKEN_BYTES).toString('base64url')
+    const token = generateToken()
     const expiresAt = new Date(now().getTime() + sessionTtlMs)
     await sessions.create({ tokenHash: hashToken(token), userId: user.id, expiresAt })
     return { user, token, expiresAt }
@@ -96,11 +104,11 @@ export function createAuthService({
     },
 
     async logout(token) {
-      if (token && TOKEN_FORMAT.test(token)) await sessions.deleteByTokenHash(hashToken(token))
+      if (isTokenFormat(token)) await sessions.deleteByTokenHash(hashToken(token))
     },
 
     async authenticate(token) {
-      if (!token || !TOKEN_FORMAT.test(token)) return null
+      if (!isTokenFormat(token)) return null
       const tokenHash = hashToken(token)
       const session = await sessions.findByTokenHash(tokenHash)
       if (!session) return null

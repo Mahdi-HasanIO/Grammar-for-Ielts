@@ -29,6 +29,10 @@ cp .env.example .env   # then edit .env
 | `NODE_ENV` | no | `development` | `development`, `test` or `production` |
 | `CORS_ORIGINS` | no | local Vite origins (`http://localhost:5173`, `:4173`, and the `127.0.0.1` forms) | Comma-separated exact origins; no paths, no `*` |
 | `LOG_LEVEL` | no | `info` | `fatal`, `error`, `warn`, `info`, `debug`, `trace`, `silent` |
+| `APP_BASE_URL` | in production | `http://localhost:5173` | Frontend URL that links in emails point to (`/verify-email#token=…`, `/reset-password#token=…`) |
+| `MAIL_TRANSPORT` | no | `log` | `log` writes emails to the log (the body, with its link, only outside production); `resend` sends through the Resend API |
+| `MAIL_FROM` | with `resend` | — | Sender, e.g. `Grammar for IELTS <no-reply@your-domain>` (the domain must be verified in Resend) |
+| `RESEND_API_KEY` | with `resend` | — | Resend API key. Secret: only in `.env` or the host's settings |
 | `SESSION_COOKIE_NAME` | no | `gfi_session` | Name of the session cookie. In production over HTTPS, `__Host-gfi_session` makes browsers enforce Secure, `Path=/` and no `Domain` |
 
 The server validates these at startup. Missing or invalid values stop it with a list of problems
@@ -91,9 +95,17 @@ Logs are JSON lines. For readable local output: `npm run dev | npx pino-pretty`.
 | `POST /api/auth/login` | Body `{"email","password"}`. `200 {"user"}` and sets the session cookie. `401 invalid_credentials` for a wrong password or unknown email (same response). |
 | `POST /api/auth/logout` | Ends the session and clears the cookie. Always `204`. |
 | `GET /api/auth/me` | `200 {"user"}` for a valid session, otherwise `401 unauthenticated`. |
+| `POST /api/auth/forgot-password` | Body `{"email"}`. Always `202` with the same message; a reset link (30 minutes) is emailed only if the account exists. |
+| `POST /api/auth/reset-password` | Body `{"token","password"}`. `204`; sets the password and ends every session. `400 invalid_token` if the link is wrong, used or expired. |
+| `POST /api/auth/request-verification` | Signed in. `202`; emails a new verification link (24 hours). `409 already_verified`, `502 email_failed`. |
+| `POST /api/auth/verify-email` | Body `{"token"}`. `204`; sets `emailVerifiedAt`. `400 invalid_token`. |
+| `POST /api/auth/change-password` | Signed in. Body `{"currentPassword","newPassword"}`. `204`; ends every other session. `400 invalid_current_password`. |
+| `GET /api/profile` | Signed in. `200 {"profile"}`. |
+| `PATCH /api/profile` | Signed in. Any of `displayName` (1–50), `targetBand` (4.0–9.0 in 0.5 steps), `examDate` (`YYYY-MM-DD`), `timezone` (IANA name), `dailyGoalMinutes` (1–600), `language` (`en`/`bn`); `null` clears a field; other fields are rejected. `200 {"profile"}`. |
 
-`user` is `{"id","email","createdAt"}`. Emails are trimmed and lowercased; passwords must be 10–128
-characters. Invalid input returns `400 validation_error`.
+`user` is `{"id","email","emailVerifiedAt","createdAt"}`. `profile` is `{"email","emailVerifiedAt"}` plus
+the six profile fields (`null` when unset). Emails are trimmed and lowercased; passwords must be
+10–128 characters. Invalid input returns `400 validation_error`.
 
 Any other path returns `404 {"error":{"code":"not_found","message":"Route not found"}}`.
 
@@ -124,8 +136,13 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
     does not reveal which emails are registered.
   - CSRF: `register`, `login` and `logout` require `Content-Type: application/json` (415 otherwise)
     and reject an `Origin` header that is not in `CORS_ORIGINS` (403).
-  - `/api/auth/*` has its own rate limit of 50 requests per IP per 15 minutes, on top of the global
-    one.
+  - `/api/auth/*` and `/api/profile` share a rate limit of 50 requests per IP per 15 minutes, on
+    top of the global one.
+  - One-time links (`src/services/account.ts`): a random 32-byte token in the URL fragment (never
+    sent to a server), stored only as its SHA-256 in `account_tokens` with a TTL index. One per
+    user and type, so a new request invalidates the previous link; each works once.
+  - Register and forgot-password send email in the background, so a slow or failing provider
+    neither delays nor fails them, and forgot-password's timing does not reveal accounts.
   - `requireAuth` (`src/middleware/requireAuth.ts`) protects later routes; handlers read the user
     with `getAuth(res)`.
 - **Logging:** one line per request (id, method, URL, status, duration) with an `X-Request-Id`
@@ -141,12 +158,13 @@ src/
   server.ts          listen, background DB connect, graceful shutdown
   app.ts             createApp(deps): middleware and routes, no listen (used by tests)
   config/            env (Zod), logger (pino)
-  controllers/       request handlers (health, auth)
+  controllers/       request handlers (health, auth, profile)
   middleware/        cors, csrf, rate limits, request logger, validate, requireAuth, requireDatabase, error handler
-  models/            Mongoose schemas (User, Session)
+  models/            Mongoose schemas (User, Session, AccountToken)
   repositories/      persistence interfaces, MongoDB implementation, in-memory implementation for tests
-  routes/            /api router, /api/auth router
-  services/          database connection, auth, password hashing
+  routes/            /api router, /api/auth, /api/profile
+  services/          database connection, auth, account (verification, reset, password change),
+                     profile, mailer (log, Resend), password hashing
   validators/        reusable Zod schemas
   utils/             AppError, redaction, session cookie
 tests/               Vitest + supertest (*.integration.test.ts need MONGODB_URI_TEST)
