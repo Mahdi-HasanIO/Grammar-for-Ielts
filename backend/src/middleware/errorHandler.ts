@@ -1,9 +1,10 @@
 import { STATUS_CODES } from 'node:http'
 import type { ErrorRequestHandler, RequestHandler } from 'express'
 import type { Logger } from '../config/logger.js'
+import { isDatabaseUnavailableError } from '../services/database.js'
 import { AppError } from '../utils/AppError.js'
 
-/** Every error response has this shape. `details` only for client errors; `stack` only in development. */
+/** Every error response has this shape. `details` only for client errors; `stack` only for unexpected errors in development. */
 export interface ErrorBody {
   error: { code: string; message: string; details?: unknown; stack?: string }
 }
@@ -22,9 +23,14 @@ const BODY_ERRORS: Record<string, { status: number; code: string; message: strin
   'charset.unsupported': { status: 415, code: 'unsupported_charset', message: 'Unsupported charset' },
 }
 
+export const serviceUnavailable = (cause?: unknown) =>
+  new AppError(503, 'service_unavailable', 'Service temporarily unavailable, please try again shortly', { cause })
+
 /** Maps anything thrown into an AppError. Unknown errors become a generic 500 with no internal details. */
 export function toAppError(error: unknown): AppError {
   if (error instanceof AppError) return error
+  // The connection dropped mid-request (requireDatabase catches the "not connected" case up front).
+  if (isDatabaseUnavailableError(error)) return serviceUnavailable(error)
   const http = (typeof error === 'object' && error !== null ? error : {}) as HttpLikeError
   const known = http.type ? BODY_ERRORS[http.type] : undefined
   if (known) return new AppError(known.status, known.code, known.message, { cause: error })
@@ -48,7 +54,7 @@ export function createErrorHandler({ logger, exposeStack }: { logger: Logger; ex
 
     const body: ErrorBody = { error: { code: appError.code, message: appError.message } }
     if (appError.details !== undefined && appError.status < 500) body.error.details = appError.details
-    if (exposeStack && appError.status >= 500 && error instanceof Error && error.stack) body.error.stack = error.stack
+    if (exposeStack && appError.status === 500 && error instanceof Error && error.stack) body.error.stack = error.stack
     res.status(appError.status).json(body)
   }
 }

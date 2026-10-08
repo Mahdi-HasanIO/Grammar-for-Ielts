@@ -105,8 +105,9 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
   server.
 - **Errors** all have the shape `{"error":{"code","message"}}`, plus `details` for validation
   errors. Malformed JSON → 400 `invalid_json`. Bodies over 100 kB → 413 `payload_too_large`.
-  Unexpected errors → 500 `internal_error` with a generic message; the stack is included only when
-  `NODE_ENV=development`.
+  While MongoDB is unreachable, routes that need it (all of `/api/auth/*`) return 503
+  `service_unavailable`. Unexpected errors → 500 `internal_error` with a generic message; the stack
+  is included only for those, and only when `NODE_ENV=development`.
 - **Validation:** `validate({ params, query, body })` with Zod schemas. On failure it returns 400
   `validation_error` with the problem list. `src/validators/pagination.ts` is the example schema.
 - **Security:**
@@ -141,7 +142,7 @@ src/
   app.ts             createApp(deps): middleware and routes, no listen (used by tests)
   config/            env (Zod), logger (pino)
   controllers/       request handlers (health, auth)
-  middleware/        cors, csrf, rate limits, request logger, validate, requireAuth, error handler
+  middleware/        cors, csrf, rate limits, request logger, validate, requireAuth, requireDatabase, error handler
   models/            Mongoose schemas (User, Session)
   repositories/      persistence interfaces, MongoDB implementation, in-memory implementation for tests
   routes/            /api router, /api/auth router

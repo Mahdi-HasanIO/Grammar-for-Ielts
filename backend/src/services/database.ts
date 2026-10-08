@@ -1,4 +1,4 @@
-import mongoose, { type Connection } from 'mongoose'
+import mongoose, { mongo, type Connection } from 'mongoose'
 import type { Logger } from '../config/logger.js'
 import { redactConnectionStrings } from '../utils/redact.js'
 
@@ -26,6 +26,20 @@ export interface DatabaseOptions {
   /** Delay before the first retry; doubles up to maxRetryDelayMs. */
   retryDelayMs?: number
   maxRetryDelayMs?: number
+}
+
+/**
+ * True for errors meaning "the database cannot be reached right now" (as
+ * opposed to a bug or a bad query), so the API can answer 503 instead of 500.
+ */
+export function isDatabaseUnavailableError(error: unknown): boolean {
+  return (
+    error instanceof mongoose.Error.MongooseServerSelectionError ||
+    error instanceof mongo.MongoServerSelectionError ||
+    error instanceof mongo.MongoNetworkError ||
+    error instanceof mongo.MongoNotConnectedError ||
+    error instanceof mongo.MongoTopologyClosedError
+  )
 }
 
 // Mongoose readyState values: 0 disconnected, 1 connected, 2 connecting, 3 disconnecting (99 uninitialised).

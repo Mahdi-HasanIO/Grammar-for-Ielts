@@ -10,7 +10,7 @@ import { createArgon2Hasher } from '../src/services/password.js'
 export const ALLOWED_ORIGIN = 'https://app.example.com'
 
 /** A database stub with a fixed state: no MongoDB needed. */
-export const fakeDb = (state: DatabaseState = 'disconnected') => ({ state: () => state })
+export const fakeDb = (state: DatabaseState = 'connected') => ({ state: () => state })
 
 export const silentLogger = () => createLogger({ LOG_LEVEL: 'silent' })
 

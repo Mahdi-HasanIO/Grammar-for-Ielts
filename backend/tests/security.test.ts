@@ -1,6 +1,6 @@
 import request from 'supertest'
 import { describe, expect, it } from 'vitest'
-import { ALLOWED_ORIGIN, capturingLogger, testApp } from './helpers.js'
+import { ALLOWED_ORIGIN, capturingLogger, fakeDb, testApp } from './helpers.js'
 
 describe('CORS', () => {
   it('sets Access-Control-Allow-Origin and allows credentials for an allowed origin', async () => {
@@ -86,7 +86,7 @@ describe('request logging', () => {
 describe('health checks are not request-logged', () => {
   it('skips /api/health and a 503 from /api/health/ready, so probes cannot flood the logs', async () => {
     const { logger, lines } = capturingLogger()
-    const app = testApp({ logger })
+    const app = testApp({ logger, db: fakeDb('disconnected') })
     expect((await request(app).get('/api/health')).status).toBe(200)
     expect((await request(app).get('/api/health/ready')).status).toBe(503)
     expect((await request(app).get('/api/other')).status).toBe(404)

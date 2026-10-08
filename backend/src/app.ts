@@ -46,6 +46,7 @@ export function createApp({ env, db, auth, logger, rateLimit, authRateLimit }: A
       db,
       auth: {
         auth,
+        db,
         cookie: { name: env.SESSION_COOKIE_NAME, secure: env.NODE_ENV === 'production' },
         allowedOrigins: env.CORS_ORIGINS,
         rateLimit: authRateLimit,
