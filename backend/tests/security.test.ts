@@ -3,15 +3,16 @@ import { describe, expect, it } from 'vitest'
 import { ALLOWED_ORIGIN, capturingLogger, testApp } from './helpers.js'
 
 describe('CORS', () => {
-  it('sets Access-Control-Allow-Origin for an allowed origin', async () => {
+  it('sets Access-Control-Allow-Origin and allows credentials for an allowed origin', async () => {
     const res = await request(testApp()).get('/api/health').set('Origin', ALLOWED_ORIGIN)
     expect(res.headers['access-control-allow-origin']).toBe(ALLOWED_ORIGIN)
-    expect(res.headers['access-control-allow-credentials']).toBeUndefined()
+    expect(res.headers['access-control-allow-credentials']).toBe('true')
   })
 
-  it('sets no CORS headers for a disallowed origin', async () => {
+  it('sets no CORS headers, credentials included, for a disallowed origin', async () => {
     const res = await request(testApp()).get('/api/health').set('Origin', 'https://evil.example.com')
     expect(res.headers['access-control-allow-origin']).toBeUndefined()
+    expect(res.headers['access-control-allow-credentials']).toBeUndefined()
   })
 
   it('sets no CORS headers when there is no Origin (curl, server to server)', async () => {
