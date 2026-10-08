@@ -1,16 +1,27 @@
 import { isValidObjectId, mongo, type Connection } from 'mongoose'
+import { accountTokenModel } from '../models/AccountToken.js'
 import { sessionModel } from '../models/Session.js'
 import { userModel } from '../models/User.js'
-import { DuplicateEmailError, type Repositories, type SessionRecord, type UserRecord } from './types.js'
+import {
+  DuplicateEmailError,
+  PROFILE_FIELDS,
+  type AccountTokenRecord,
+  type AccountTokenType,
+  type ProfileFields,
+  type Repositories,
+  type SessionRecord,
+  type UserRecord,
+} from './types.js'
 
 const DUPLICATE_KEY = 11000
 
-interface UserLean {
+type UserLean = {
   _id: { toString(): string }
   email: string
   passwordHash: string
+  emailVerifiedAt?: Date | null
   createdAt: Date
-}
+} & { [K in keyof ProfileFields]?: ProfileFields[K] | null }
 
 interface SessionLean {
   tokenHash: string
@@ -19,12 +30,29 @@ interface SessionLean {
   createdAt: Date
 }
 
-const toUser = (doc: UserLean): UserRecord => ({
-  id: doc._id.toString(),
-  email: doc.email,
-  passwordHash: doc.passwordHash,
-  createdAt: doc.createdAt,
-})
+interface AccountTokenLean {
+  tokenHash: string
+  userId: { toString(): string }
+  type: AccountTokenType
+  expiresAt: Date
+  createdAt: Date
+}
+
+function toUser(doc: UserLean): UserRecord {
+  const profile: Record<string, unknown> = {}
+  for (const field of PROFILE_FIELDS) {
+    const value = doc[field]
+    if (value !== undefined && value !== null) profile[field] = value
+  }
+  return {
+    id: doc._id.toString(),
+    email: doc.email,
+    passwordHash: doc.passwordHash,
+    emailVerifiedAt: doc.emailVerifiedAt ?? null,
+    profile: profile as ProfileFields,
+    createdAt: doc.createdAt,
+  }
+}
 
 const toSession = (doc: SessionLean): SessionRecord => ({
   tokenHash: doc.tokenHash,
@@ -33,10 +61,23 @@ const toSession = (doc: SessionLean): SessionRecord => ({
   createdAt: doc.createdAt,
 })
 
-/** MongoDB repositories on the given connection. Indexes (unique email, unique tokenHash, TTL) are built by Mongoose on connect. */
+const toAccountToken = (doc: AccountTokenLean): AccountTokenRecord => ({
+  tokenHash: doc.tokenHash,
+  userId: doc.userId.toString(),
+  type: doc.type,
+  expiresAt: doc.expiresAt,
+  createdAt: doc.createdAt,
+})
+
+/**
+ * MongoDB repositories on the given connection. Indexes (unique email, unique
+ * token hashes, one account token per user and type, TTLs) are built by
+ * Mongoose on connect.
+ */
 export function createMongoRepositories(connection: Connection): Repositories {
   const User = userModel(connection)
   const Session = sessionModel(connection)
+  const AccountToken = accountTokenModel(connection)
 
   return {
     users: {
@@ -58,6 +99,22 @@ export function createMongoRepositories(connection: Connection): Repositories {
         const doc = await User.findById(id).lean<UserLean>()
         return doc ? toUser(doc) : null
       },
+      async update(id, changes) {
+        if (!isValidObjectId(id)) return null
+        const set: Record<string, unknown> = {}
+        const unset: Record<string, ''> = {}
+        if (changes.passwordHash !== undefined) set.passwordHash = changes.passwordHash
+        if (changes.emailVerifiedAt !== undefined) set.emailVerifiedAt = changes.emailVerifiedAt
+        for (const [key, value] of Object.entries(changes.profile ?? {})) {
+          if (value === null) unset[key] = ''
+          else if (value !== undefined) set[key] = value
+        }
+        const update: Record<string, unknown> = {}
+        if (Object.keys(set).length) update.$set = set
+        if (Object.keys(unset).length) update.$unset = unset
+        const doc = await User.findByIdAndUpdate(id, update, { returnDocument: 'after', runValidators: true }).lean<UserLean>()
+        return doc ? toUser(doc) : null
+      },
     },
     sessions: {
       async create({ tokenHash, userId, expiresAt }) {
@@ -70,6 +127,29 @@ export function createMongoRepositories(connection: Connection): Repositories {
       },
       async deleteByTokenHash(tokenHash) {
         await Session.deleteOne({ tokenHash })
+      },
+      async deleteAllForUser(userId, keepTokenHash) {
+        if (!isValidObjectId(userId)) return
+        await Session.deleteMany(keepTokenHash === undefined ? { userId } : { userId, tokenHash: { $ne: keepTokenHash } })
+      },
+    },
+    accountTokens: {
+      async replace({ tokenHash, userId, type, expiresAt }) {
+        // One atomic upsert on the unique (userId, type) index: the previous token's hash is overwritten.
+        await AccountToken.findOneAndUpdate(
+          { userId, type },
+          { $set: { tokenHash, expiresAt, createdAt: new Date() } },
+          { upsert: true, runValidators: true },
+        )
+      },
+      async consume(tokenHash, type) {
+        // findOneAndDelete is atomic: two concurrent uses of the same token cannot both succeed.
+        const doc = await AccountToken.findOneAndDelete({ tokenHash, type }).lean<AccountTokenLean>()
+        return doc ? toAccountToken(doc) : null
+      },
+      async deleteForUser(userId, type) {
+        if (!isValidObjectId(userId)) return
+        await AccountToken.deleteMany({ userId, type })
       },
     },
   }

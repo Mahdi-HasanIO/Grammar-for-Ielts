@@ -22,6 +22,8 @@ describe('loadEnv', () => {
       CORS_ORIGINS: [...DEFAULT_CORS_ORIGINS],
       LOG_LEVEL: 'info',
       SESSION_COOKIE_NAME: 'gfi_session',
+      APP_BASE_URL: 'http://localhost:5173',
+      MAIL_TRANSPORT: 'log',
     })
   })
 
@@ -38,6 +40,10 @@ describe('loadEnv', () => {
         CORS_ORIGINS: 'https://grammar-for-ielts.vercel.app, http://localhost:5173',
         LOG_LEVEL: 'warn',
         SESSION_COOKIE_NAME: '__Host-gfi_session',
+        APP_BASE_URL: 'https://grammar-for-ielts.vercel.app/',
+        MAIL_TRANSPORT: 'resend',
+        MAIL_FROM: 'Grammar for IELTS <no-reply@example.com>',
+        RESEND_API_KEY: 're_test_key',
       }),
     ).toEqual({
       NODE_ENV: 'production',
@@ -46,6 +52,10 @@ describe('loadEnv', () => {
       CORS_ORIGINS: ['https://grammar-for-ielts.vercel.app', 'http://localhost:5173'],
       LOG_LEVEL: 'warn',
       SESSION_COOKIE_NAME: '__Host-gfi_session',
+      APP_BASE_URL: 'https://grammar-for-ielts.vercel.app',
+      MAIL_TRANSPORT: 'resend',
+      MAIL_FROM: 'Grammar for IELTS <no-reply@example.com>',
+      RESEND_API_KEY: 're_test_key',
     })
   })
 
@@ -62,6 +72,12 @@ describe('loadEnv', () => {
     [{ ...VALID, PORT: '80.5' }, 'PORT'],
     [{ ...VALID, NODE_ENV: 'staging' }, 'NODE_ENV'],
     [{ ...VALID, SESSION_COOKIE_NAME: 'my session' }, 'SESSION_COOKIE_NAME'],
+    [{ ...VALID, APP_BASE_URL: 'ftp://example.com' }, 'APP_BASE_URL'],
+    [{ ...VALID, APP_BASE_URL: 'https://example.com/?x=1' }, 'APP_BASE_URL'],
+    [{ ...VALID, NODE_ENV: 'production' }, 'APP_BASE_URL is required when NODE_ENV=production'],
+    [{ ...VALID, MAIL_TRANSPORT: 'smtp' }, 'MAIL_TRANSPORT'],
+    [{ ...VALID, MAIL_TRANSPORT: 'resend', MAIL_FROM: 'a@b.co' }, 'RESEND_API_KEY is required when MAIL_TRANSPORT=resend'],
+    [{ ...VALID, MAIL_TRANSPORT: 'resend', RESEND_API_KEY: 'k' }, 'MAIL_FROM is required when MAIL_TRANSPORT=resend'],
     [{ ...VALID, SESSION_COOKIE_NAME: 'a=b;' }, 'SESSION_COOKIE_NAME'],
     [{ ...VALID, LOG_LEVEL: 'verbose' }, 'LOG_LEVEL'],
     [{ ...VALID, CORS_ORIGINS: '*' }, 'CORS_ORIGINS'],

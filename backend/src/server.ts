@@ -3,9 +3,12 @@ import { createApp } from './app.js'
 import { EnvError, loadEnv, type Env } from './config/env.js'
 import { createLogger } from './config/logger.js'
 import { createMongoRepositories } from './repositories/mongo.js'
+import { createAccountService } from './services/account.js'
 import { createAuthService } from './services/auth.js'
 import { createDatabase } from './services/database.js'
+import { createMailer } from './services/mailer.js'
 import { createArgon2Hasher } from './services/password.js'
+import { createProfileService } from './services/profile.js'
 
 const SHUTDOWN_TIMEOUT_MS = 10_000
 
@@ -36,8 +39,13 @@ async function main(): Promise<void> {
   const env = readConfig()
   const logger = createLogger(env)
   const db = createDatabase({ uri: env.MONGODB_URI, logger })
-  const auth = createAuthService({ repositories: createMongoRepositories(db.connection), hasher: createArgon2Hasher() })
-  const app = createApp({ env, db, auth, logger })
+  const repositories = createMongoRepositories(db.connection)
+  const hasher = createArgon2Hasher()
+  const auth = createAuthService({ repositories, hasher })
+  const account = createAccountService({ repositories, hasher, mailer: createMailer(env, logger), logger, appBaseUrl: env.APP_BASE_URL })
+  const profile = createProfileService(repositories)
+  const app = createApp({ env, db, auth, account, profile, logger })
+  logger.info({ mailTransport: env.MAIL_TRANSPORT }, 'Mail transport selected')
 
   const server: Server = app.listen(env.PORT, (error?: Error) => {
     if (error) {

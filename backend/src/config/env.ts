@@ -30,11 +30,27 @@ function isOrigin(value: string): boolean {
 /** Characters allowed in a cookie name (an RFC 6265 token). */
 const COOKIE_NAME = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/
 
+/** An http(s) URL without query or fragment, e.g. https://grammar-for-ielts.vercel.app. A trailing slash is dropped. */
+function isBaseUrl(value: string): boolean {
+  try {
+    const url = new URL(value)
+    return (url.protocol === 'http:' || url.protocol === 'https:') && !url.search && !url.hash && !url.username && !url.password
+  } catch {
+    return false
+  }
+}
+
+export const MAIL_TRANSPORTS = ['log', 'resend'] as const
+
+/** Links in emails point at the Vite dev server unless APP_BASE_URL is set. */
+export const DEFAULT_APP_BASE_URL = 'http://localhost:5173'
+
 const required = (name: string) => ({
   error: (issue: { input: unknown }) => (issue.input === undefined ? `${name} is required` : `${name} must be a string`),
 })
 
-const envSchema = z.object({
+const envSchema = z
+  .object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().min(1).max(65535).default(4000),
   MONGODB_URI: z
@@ -60,7 +76,28 @@ const envSchema = z.object({
   LOG_LEVEL: z.enum(LOG_LEVELS).default('info'),
   // In production over HTTPS, a `__Host-` prefix (e.g. __Host-gfi_session) makes browsers enforce Secure, path=/ and no Domain.
   SESSION_COOKIE_NAME: z.string().trim().regex(COOKIE_NAME, 'must be a cookie name (letters, digits and !#$%&\'*+-.^_`|~)').default('gfi_session'),
+  // Where the frontend lives: links in emails point here. Required in production.
+  APP_BASE_URL: z
+    .string()
+    .trim()
+    .refine(isBaseUrl, 'must be an http(s) URL without query or fragment, like https://example.com')
+    .transform((value) => value.replace(/\/+$/, ''))
+    .optional(),
+  // log: write emails to the log (content only outside production). resend: send through the Resend API.
+  MAIL_TRANSPORT: z.enum(MAIL_TRANSPORTS).default('log'),
+  MAIL_FROM: z.string().trim().min(3).optional(),
+  RESEND_API_KEY: z.string().trim().min(1).optional(),
 })
+  .superRefine((env, ctx) => {
+    if (env.NODE_ENV === 'production' && !env.APP_BASE_URL) {
+      ctx.addIssue({ code: 'custom', path: ['APP_BASE_URL'], message: 'APP_BASE_URL is required when NODE_ENV=production' })
+    }
+    if (env.MAIL_TRANSPORT === 'resend') {
+      if (!env.RESEND_API_KEY) ctx.addIssue({ code: 'custom', path: ['RESEND_API_KEY'], message: 'RESEND_API_KEY is required when MAIL_TRANSPORT=resend' })
+      if (!env.MAIL_FROM) ctx.addIssue({ code: 'custom', path: ['MAIL_FROM'], message: 'MAIL_FROM is required when MAIL_TRANSPORT=resend' })
+    }
+  })
+  .transform((env) => ({ ...env, APP_BASE_URL: env.APP_BASE_URL ?? DEFAULT_APP_BASE_URL }))
 
 export type Env = z.infer<typeof envSchema>
 
