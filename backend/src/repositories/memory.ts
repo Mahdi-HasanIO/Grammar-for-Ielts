@@ -89,6 +89,26 @@ const memoryContent = (): ContentRepositories => ({
   posts: memoryContentStore(CONTENT_COLLECTIONS.posts),
 })
 
+function memoryUsage() {
+  const counts = new Map<string, number>()
+  const key = (userId: string, metric: string, day: string) => `${userId}|${metric}|${day}`
+  return {
+    async consume(userId: string, metric: string, day: string, limit: number) {
+      const current = counts.get(key(userId, metric, day)) ?? 0
+      if (current >= limit) return null
+      counts.set(key(userId, metric, day), current + 1)
+      return current + 1
+    },
+    async release(userId: string, metric: string, day: string) {
+      const current = counts.get(key(userId, metric, day)) ?? 0
+      if (current > 0) counts.set(key(userId, metric, day), current - 1)
+    },
+    async get(userId: string, metric: string, day: string) {
+      return counts.get(key(userId, metric, day)) ?? 0
+    },
+  }
+}
+
 function memoryAudit() {
   const entries: AuditEntry[] = []
   return {
@@ -191,5 +211,6 @@ export function createMemoryRepositories(): Repositories {
     bookmarks: memorySync(),
     content: memoryContent(),
     audit: memoryAudit(),
+    usage: memoryUsage(),
   }
 }

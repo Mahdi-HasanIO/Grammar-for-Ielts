@@ -192,6 +192,18 @@ export interface AuditLogRepository {
   list(options: { limit: number; before?: Date }): Promise<AuditEntry[]>
 }
 
+/** Per-user counters for one UTC day, e.g. AI requests. Days are 'YYYY-MM-DD'. */
+export interface UsageRepository {
+  /**
+   * Atomically adds one if the day's count is below `limit` and returns the
+   * new count, or null when the limit is already reached (nothing changes).
+   */
+  consume(userId: string, metric: string, day: string, limit: number): Promise<number | null>
+  /** Gives one back, e.g. when the provider failed and the user got nothing. Never goes below 0. */
+  release(userId: string, metric: string, day: string): Promise<void>
+  get(userId: string, metric: string, day: string): Promise<number>
+}
+
 export interface Repositories {
   users: UserRepository
   sessions: SessionRepository
@@ -200,4 +212,5 @@ export interface Repositories {
   bookmarks: SyncRepository<Bookmark[]>
   content: ContentRepositories
   audit: AuditLogRepository
+  usage: UsageRepository
 }

@@ -104,6 +104,14 @@ const envSchema = z
         .filter(Boolean),
     )
     .pipe(z.array(z.email('must be a comma-separated list of email addresses'))),
+  // Server-side AI (Gemini). Without a key the /api/ai routes answer 503.
+  GEMINI_API_KEY: z.string().trim().min(1).optional(),
+  // A model ID from https://ai.google.dev/gemini-api/docs/models. Default: the stable, cost-efficient Flash-Lite.
+  GEMINI_MODEL: z.string().trim().regex(/^[a-z0-9][a-z0-9.-]{1,80}$/, 'must be a Gemini model ID like gemini-3.5-flash-lite').default('gemini-3.5-flash-lite'),
+  GEMINI_TIMEOUT_MS: z.coerce.number().int().min(1_000).max(120_000).default(30_000),
+  // Per user: requests per minute, and the daily AI quota for each plan.
+  AI_RATE_LIMIT_PER_MINUTE: z.coerce.number().int().min(1).max(600).default(10),
+  AI_DAILY_QUOTA: z.coerce.number().int().min(0).max(100_000).default(20),
   // log: write emails to the log (content only outside production). resend: send through the Resend API.
   MAIL_TRANSPORT: z.enum(MAIL_TRANSPORTS).default('log'),
   MAIL_FROM: z.string().trim().min(3).optional(),

@@ -13,6 +13,8 @@ import { createProfileService } from './services/profile.js'
 import { createSyncService } from './services/sync.js'
 import { createContentService } from './services/content.js'
 import { createAdminContentService } from './services/adminContent.js'
+import { createGeminiProvider } from './services/ai/gemini.js'
+import { createAiService } from './services/ai/service.js'
 import { bookmarkList, progressState } from './validators/progress.js'
 
 const SHUTDOWN_TIMEOUT_MS = 10_000
@@ -63,7 +65,10 @@ async function main(): Promise<void> {
   }
   const content = createContentService(repositories.content)
   const admin = createAdminContentService({ content: repositories.content, audit: repositories.audit })
-  const app = createApp({ env, db, auth, account, profile, sync, content, admin, logger })
+  const provider = env.GEMINI_API_KEY ? createGeminiProvider({ apiKey: env.GEMINI_API_KEY, model: env.GEMINI_MODEL, timeoutMs: env.GEMINI_TIMEOUT_MS }) : null
+  const ai = createAiService({ provider, usage: repositories.usage, content, dailyQuota: () => env.AI_DAILY_QUOTA, logger })
+  logger.info({ ai: provider ? { model: env.GEMINI_MODEL } : 'not configured' }, 'AI provider')
+  const app = createApp({ env, db, auth, account, profile, sync, content, admin, ai, logger, aiRateLimit: { windowMs: 60_000, limit: env.AI_RATE_LIMIT_PER_MINUTE } })
   logger.info({ mailTransport: env.MAIL_TRANSPORT }, 'Mail transport selected')
 
   const server: Server = app.listen(env.PORT, (error?: Error) => {

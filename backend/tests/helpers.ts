@@ -16,6 +16,8 @@ import { createProfileService } from '../src/services/profile.js'
 import { createSyncService } from '../src/services/sync.js'
 import { createContentService } from '../src/services/content.js'
 import { createAdminContentService } from '../src/services/adminContent.js'
+import type { AiProvider } from '../src/services/ai/provider.js'
+import { createAiService } from '../src/services/ai/service.js'
 import { bookmarkList, progressState } from '../src/validators/progress.js'
 
 export const ALLOWED_ORIGIN = 'https://app.example.com'
@@ -69,6 +71,9 @@ export interface TestServiceOptions {
   now?: () => Date
   logger?: ReturnType<typeof silentLogger>
   adminEmails?: string[]
+  /** Null (the default) means AI is not configured. */
+  aiProvider?: AiProvider | null
+  aiDailyQuota?: number
 }
 
 /** Auth, account and profile services over one set of in-memory repositories. */
@@ -79,7 +84,10 @@ export function testServices({
   now,
   logger = silentLogger(),
   adminEmails,
+  aiProvider = null,
+  aiDailyQuota = 20,
 }: TestServiceOptions = {}) {
+  const content = createContentService(repositories.content)
   return {
     repositories,
     mailer,
@@ -92,14 +100,15 @@ export function testServices({
       progress: createSyncService({ repository: repositories.progress, merge: mergeProgress, schema: progressState }),
       bookmarks: createSyncService({ repository: repositories.bookmarks, merge: mergeBookmarks, schema: bookmarkList }),
     },
-    content: createContentService(repositories.content),
+    content,
     admin: createAdminContentService({ content: repositories.content, audit: repositories.audit, now }),
+    ai: createAiService({ provider: aiProvider, usage: repositories.usage, content, dailyQuota: () => aiDailyQuota, logger, now }),
   }
 }
 
 /** Builds the real app with test dependencies. */
 export function testApp(overrides: Partial<AppDependencies> = {}) {
-  const { auth, account, profile, sync, content, admin } = testServices()
+  const { auth, account, profile, sync, content, admin, ai } = testServices()
   return createApp({
     env: TEST_ENV,
     db: fakeDb(),
@@ -109,6 +118,7 @@ export function testApp(overrides: Partial<AppDependencies> = {}) {
     sync,
     content,
     admin,
+    ai,
     logger: silentLogger(),
     ...overrides,
   })

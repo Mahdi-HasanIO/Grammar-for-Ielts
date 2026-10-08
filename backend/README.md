@@ -34,6 +34,10 @@ cp .env.example .env   # then edit .env
 | `MONGODB_SERVER_SELECTION_TIMEOUT_MS` | no | `5000` | How long an operation waits for a usable server |
 | `MONGODB_CONNECT_TIMEOUT_MS` / `MONGODB_SOCKET_TIMEOUT_MS` | no | `10000` / `45000` | Connection and socket timeouts (`0` = no socket timeout) |
 | `ADMIN_EMAILS` | no | — | Comma-separated addresses that act as admins once their email is verified |
+| `GEMINI_API_KEY` | for AI | — | Server-held Gemini key. Without it `/api/ai/*` answers `503 ai_not_configured`. Secret |
+| `GEMINI_MODEL` | no | `gemini-3.5-flash-lite` | Model ID from https://ai.google.dev/gemini-api/docs/models (`gemini-flash-latest` follows the newest Flash) |
+| `GEMINI_TIMEOUT_MS` | no | `30000` | Per AI request |
+| `AI_RATE_LIMIT_PER_MINUTE` / `AI_DAILY_QUOTA` | no | `10` / `20` | Per user: AI requests per minute, and per UTC day |
 | `APP_BASE_URL` | in production | `http://localhost:5173` | Frontend URL that links in emails point to (`/verify-email#token=…`, `/reset-password#token=…`) |
 | `MAIL_TRANSPORT` | no | `log` | `log` writes emails to the log (the body, with its link, only outside production); `resend` sends through the Resend API |
 | `MAIL_FROM` | with `resend` | — | Sender, e.g. `Grammar for IELTS <no-reply@your-domain>` (the domain must be verified in Resend) |
@@ -123,6 +127,10 @@ Logs are JSON lines. For readable local output: `npm run dev | npx pino-pretty`.
 | `GET/PUT/DELETE /api/admin/content/:collection/:key` | Admin. `:key` is the stage id, module legacy id, `<moduleId>-<language>` for lessons, question id or post slug. PUT takes the whole document: `201` created or `200`; `400` invalid, `422` bad references or a slug change, `409` duplicate slug. DELETE: `204`, or `409 in_use` while other content points at it. |
 | `GET /api/admin/audit?limit=&before=` | Admin. Audit entries, newest first. |
 
+| `GET /api/ai/quota` | Signed in. `{"configured","quota":{"used","limit","resetsAt"}}`. |
+| `POST /api/ai/check-sentence` | Signed in. Body `{"sentence"` (≤ 500 chars), `"language"` (`en`/`bn`)`}`. `{"result":{"isCorrect","corrected","explanation","mistakes"},"quota"}`. |
+| `POST /api/ai/practice` | Signed in. Body `{"module"` (id or slug), `"count"` (1–10), `"language"`, `"avoid"` (≤ 30 earlier questions)`}`. `{"questions","quota"}`: app-shaped questions marked `source: "ai"`. |
+
 `user` is `{"id","email","emailVerifiedAt","role","createdAt"}`. `profile` is `{"email","emailVerifiedAt"}` plus
 the six profile fields (`null` when unset). Emails are trimmed and lowercased; passwords must be
 10–128 characters. Invalid input returns `400 validation_error`.
@@ -202,6 +210,18 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
     related topics exist, rule ids belong to the module, slugs never change).
   - Every change (and every role grant) is appended to `audit_log` with the actor and the document
     before and after.
+- **AI** (`/api/ai/*`; `src/services/ai/`):
+  - Gemini through its REST API (`generateContent`, key in the `x-goog-api-key` header, never in a
+    URL), with the server's key: learners no longer need their own.
+  - Per user: a rate limit (default 10 per minute) and a daily quota (default 20, reset 00:00 UTC),
+    counted atomically in `usage_counters`. A failed provider call gives the unit back.
+  - Input caps (sentence 500 characters, 10 questions, 30 earlier questions to avoid); user text is
+    wrapped in tags the instructions say to treat as data.
+  - Clients never see provider messages, model names or keys: `503 ai_unavailable` (busy or timed
+    out), `422 ai_blocked`, `502 ai_bad_response` / `ai_failed`, `429 ai_quota_exceeded`. The log keeps
+    only the failure kind, provider status and model.
+  - Generated practice questions that the app could not grade (answer not among distinct options, a
+    blank without ___) are dropped.
 - **Logging:** one line per request (id, method, URL, status, duration) with an `X-Request-Id`
   response header; every other line logged during the request carries the same id as `reqId`. Headers and bodies are never logged. Connection strings are redacted from
   database errors.

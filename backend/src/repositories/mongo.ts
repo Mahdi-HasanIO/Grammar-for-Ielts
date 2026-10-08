@@ -1,6 +1,7 @@
 import { isValidObjectId, mongo, type Connection, type Model } from 'mongoose'
 import { accountTokenModel } from '../models/AccountToken.js'
 import { auditModel } from '../models/AuditLog.js'
+import { usageModel, USAGE_RETENTION_DAYS } from '../models/UsageCounter.js'
 import { contentModels } from '../models/Content.js'
 import { sessionModel } from '../models/Session.js'
 import { bookmarksModel, progressModel } from '../models/SyncDocument.js'
@@ -165,6 +166,35 @@ function mongoContentStore<T>(model: Model<never>, { key, sort }: ContentCollect
   }
 }
 
+function mongoUsage(connection: Connection) {
+  const Usage = usageModel(connection)
+  return {
+    async consume(userId: string, metric: string, day: string, limit: number) {
+      if (limit <= 0) return null
+      const expiresAt = new Date(Date.parse(`${day}T00:00:00Z`) + USAGE_RETENTION_DAYS * 86_400_000)
+      try {
+        // Matches only while below the limit. At the limit the filter misses, the upsert tries to insert a
+        // second { userId, metric, day } and the unique index refuses it: that is "limit reached".
+        const doc = await Usage.findOneAndUpdate(
+          { userId, metric, day, count: { $lt: limit } },
+          { $inc: { count: 1 }, $setOnInsert: { expiresAt } },
+          { upsert: true, returnDocument: 'after' },
+        ).lean<{ count: number }>()
+        return doc?.count ?? null
+      } catch (error) {
+        if (error instanceof mongo.MongoServerError && error.code === DUPLICATE_KEY) return null
+        throw error
+      }
+    },
+    async release(userId: string, metric: string, day: string) {
+      await Usage.updateOne({ userId, metric, day, count: { $gt: 0 } }, { $inc: { count: -1 } })
+    },
+    async get(userId: string, metric: string, day: string) {
+      return (await Usage.findOne({ userId, metric, day }).lean<{ count: number }>())?.count ?? 0
+    },
+  }
+}
+
 function mongoAudit(connection: Connection) {
   const Audit = auditModel(connection)
   type AuditLean = Omit<AuditEntry, 'id'> & { _id: { toString(): string } }
@@ -282,5 +312,6 @@ export function createMongoRepositories(connection: Connection): Repositories {
     bookmarks,
     content: mongoContent(connection),
     audit: mongoAudit(connection),
+    usage: mongoUsage(connection),
   }
 }
