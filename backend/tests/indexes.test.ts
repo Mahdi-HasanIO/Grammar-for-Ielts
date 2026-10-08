@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import { describe, expect, it } from 'vitest'
 import { accountTokenModel } from '../src/models/AccountToken.js'
+import { contentModels } from '../src/models/Content.js'
 import { sessionModel } from '../src/models/Session.js'
 import { bookmarksModel, progressModel } from '../src/models/SyncDocument.js'
 import { userModel } from '../src/models/User.js'
@@ -37,5 +38,24 @@ describe('schema indexes match the documented review', () => {
     for (const model of [progressModel(connection), bookmarksModel(connection)]) {
       expect(model.schema.indexes()).toEqual([[{ userId: 1 }, { unique: true }]])
     }
+  })
+
+  it('content collections', () => {
+    const models = contentModels(connection)
+    expect(models.stages.schema.indexes()).toEqual([[{ id: 1 }, { unique: true }]])
+    expect(models.modules.schema.indexes()).toEqual([
+      [{ legacyId: 1 }, { unique: true }],
+      [{ slug: 1 }, { unique: true }],
+      [{ 'topic.slug': 1 }, { unique: true }],
+    ])
+    expect(models.lessons.schema.indexes()).toEqual([[{ moduleId: 1, language: 1 }, { unique: true }]])
+    expect(models.questions.schema.indexes()).toEqual([
+      [{ id: 1 }, { unique: true }],
+      [{ moduleId: 1, set: 1, position: 1 }, {}],
+    ])
+    expect(models.posts.schema.indexes()).toEqual([
+      [{ slug: 1 }, { unique: true }],
+      [{ date: -1 }, {}],
+    ])
   })
 })

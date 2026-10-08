@@ -1,0 +1,953 @@
+{
+  "stages": [
+    {
+      "id": 1,
+      "name": "Foundation",
+      "tagline": "ভুলমুক্ত বাক্য গড়ে তুলুন",
+      "description": "সাধারণ বাক্য নির্ভুলভাবে লেখার দক্ষতা। Band কমে যাওয়ার বেশিরভাগ ভুল আসলে এখানেই হয়, কঠিন grammar-এ নয়।"
+    },
+    {
+      "id": 2,
+      "name": "Core Grammar",
+      "tagline": "Verb, Voice আর বাক্যের গঠন",
+      "description": "যে grammar প্রায় প্রতিটি paragraph-এ লাগে: Tense, Modal, Voice, আর কোন Verb বা Preposition-এর পরে কোন গঠন বসে।"
+    },
+    {
+      "id": 3,
+      "name": "Complex Sentence Control",
+      "tagline": "আইডিয়াগুলো নির্ভুলভাবে জুড়ুন",
+      "description": "ভুল না করে একাধিক Clause জোড়া লাগানো। এখানে বাক্যে বৈচিত্র্যও আনতে হবে, আবার নির্ভুলও থাকতে হবে।"
+    },
+    {
+      "id": 4,
+      "name": "Advanced Grammar",
+      "tagline": "Academic স্টাইলে লিখুন",
+      "description": "কম শব্দে বেশি কথা বলা, দাবি মেপে করা আর লেখার স্বাভাবিক flow। এই গঠনগুলোই মোটামুটি ভালো একটা লেখাকে সত্যিকারের শক্তিশালী লেখায় পরিণত করে।"
+    },
+    {
+      "id": 5,
+      "name": "Professional Writing",
+      "tagline": "স্পষ্টতা আর tone ঠিক করতে editing",
+      "description": "নির্ভুল grammar-কে এমন পরিষ্কার, গোছানো লেখায় রূপ দেওয়া, যা পরীক্ষায় আর কাজের জায়গায় দুই জায়গাতেই চলে।"
+    }
+  ],
+  "stagesEn": {
+    "1": {
+      "tagline": "Build error-free sentences",
+      "description": "The ability to write simple sentences accurately. Most of the errors that pull a band score down happen here, not in advanced grammar."
+    },
+    "2": {
+      "tagline": "Verbs, voice and sentence patterns",
+      "description": "The grammar you need in almost every paragraph: tense, modals, voice, and which structure follows which verb or preposition."
+    },
+    "3": {
+      "tagline": "Connect ideas accurately",
+      "description": "Joining several clauses without making errors. Here your sentences need to be varied and accurate at the same time."
+    },
+    "4": {
+      "tagline": "Write in an academic style",
+      "description": "Saying more in fewer words, making measured claims and creating natural flow. These structures turn reasonably good writing into genuinely strong writing."
+    },
+    "5": {
+      "tagline": "Editing for clarity and tone",
+      "description": "Turning accurate grammar into clear, well-organised writing that works both in the exam and at work."
+    }
+  },
+  "modules": [
+    {
+      "id": 1,
+      "slug": "clause-anatomy-and-word-order",
+      "title": "Clause Anatomy & Word Order",
+      "stage": 1,
+      "difficulty": "Elementary",
+      "summary": "প্রতিটি Clause-এ Subject আর Verb থাকতেই হবে, তাও সঠিক ক্রমে।",
+      "estimatedMinutes": 12,
+      "topics": [
+        "Subject",
+        "Verb",
+        "Object",
+        "Complement",
+        "Adverbial",
+        "SVO order",
+        "Dummy it"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "Subject বাদ পড়লে বা দুইবার বসলে examiner সেটাকে একেবারে basic ভুল হিসেবে ধরেন। Band 8 পেতে হলে বেশিরভাগ বাক্য ভুলমুক্ত হতে হয়, তাই সবার আগে এই জায়গাটা পাকা করে নিন।"
+      }
+    },
+    {
+      "id": 2,
+      "slug": "subject-verb-agreement",
+      "title": "Subject-Verb Agreement & Noun Number",
+      "stage": 1,
+      "difficulty": "Elementary",
+      "summary": "Subject যত লম্বাই হোক, Verb মিলবে আসল Subject-এর সঙ্গেই।",
+      "estimatedMinutes": 14,
+      "topics": [
+        "Singular/plural",
+        "Long subjects",
+        "There is/are",
+        "Uncountable nouns",
+        "Collective nouns",
+        "A number of"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "Task 2 essay-তে সবচেয়ে বেশি যে ভুলটা হয়, সেটা Agreement-এর ভুল। পুরো লেখায় বারবার হয় বলে examiner এটাকে হঠাৎ হয়ে যাওয়া ভুল না ভেবে একটা স্থায়ী দুর্বলতা হিসেবেই দেখেন।"
+      }
+    },
+    {
+      "id": 3,
+      "slug": "articles-and-determiners",
+      "title": "Articles & Determiners",
+      "stage": 1,
+      "difficulty": "Intermediate",
+      "summary": "কখন a বসবে, কখন the, আর কখন কোনোটাই বসবে না।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "a / an",
+        "the",
+        "Zero article",
+        "Countable vs uncountable",
+        "Generic reference",
+        "Quantifiers"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "একটা Article-এর ভুলে খুব বেশি ক্ষতি হয় না, কিন্তু এই ভুল বারবার হয়। এক লেখায় ডজনখানেক এমন ভুল থাকলে আর বলা যায় না যে বেশিরভাগ বাক্য ভুলমুক্ত, অথচ Band 8-এর জন্য ঠিক সেটাই দরকার।"
+      }
+    },
+    {
+      "id": 4,
+      "slug": "pronoun-reference",
+      "title": "Pronoun Reference",
+      "stage": 1,
+      "difficulty": "Intermediate",
+      "summary": "প্রতিটি Pronoun কাকে বোঝাচ্ছে, সেটা যেন পরিষ্কার থাকে।",
+      "estimatedMinutes": 12,
+      "topics": [
+        "Agreement",
+        "Antecedents",
+        "it / they / this",
+        "Dummy it",
+        "Existential there",
+        "Ambiguity"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "Essential for Band 8",
+        "note": "অস্পষ্ট Pronoun-এর কারণে দুই জায়গায় নম্বর কাটা যায়: Grammar-এ আর Coherence-এ। কারণ পাঠককে থেমে ভাবতে হয়, they আসলে কাদের কথা বলছে।"
+      }
+    },
+    {
+      "id": 5,
+      "slug": "sentence-boundaries",
+      "title": "Sentence Boundaries & Punctuation",
+      "stage": 1,
+      "difficulty": "Intermediate",
+      "summary": "একটা বাক্য ঠিক কোথায় শুরু আর কোথায় শেষ, সেটা বুঝে নিন।",
+      "estimatedMinutes": 16,
+      "topics": [
+        "Independent clauses",
+        "Fragments",
+        "Run-ons",
+        "Comma splices",
+        "Semicolons",
+        "however / therefore"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "however বা therefore-এর আগে শুধু কমা দিয়ে দুটো বাক্য জোড়া (comma splice) খুব কমন ভুল, আর ঠিক করাও সহজ। বাক্য কোথায় শেষ হচ্ছে সেটা পরিষ্কার থাকলে পুরো লেখাটাই অনেক গোছানো লাগে।"
+      }
+    },
+    {
+      "id": 6,
+      "slug": "tense-and-aspect",
+      "title": "Tense & Aspect",
+      "stage": 2,
+      "difficulty": "Intermediate",
+      "summary": "একটা Tense বেছে নিন, তারপর সেটাতেই থাকুন।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "Present simple",
+        "Past simple",
+        "Present perfect",
+        "Past perfect",
+        "Future forms",
+        "Consistency"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "Task 1-এ চার্টের title দেখে সময়টা কখনকার, সেটা বোঝাই আসল কাজ। Task 2 মূলত Present simple-এ লেখা হয়। একই paragraph-এ কারণ ছাড়া Tense বদলালে সেটা সহজেই চোখে পড়ে।"
+      }
+    },
+    {
+      "id": 7,
+      "slug": "modal-verbs",
+      "title": "Modal Verbs",
+      "stage": 2,
+      "difficulty": "Intermediate",
+      "summary": "কতটা নিশ্চিত, কতটা সম্ভব আর কতটা জরুরি, সেটা ঠিকঠাক বোঝান।",
+      "estimatedMinutes": 14,
+      "topics": [
+        "can / could",
+        "may / might",
+        "should",
+        "must",
+        "would",
+        "Epistemic vs deontic"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "Essential for Band 8",
+        "note": "Task 2-তে পরামর্শ দেওয়া বা ভবিষ্যতের কথা বলা পুরোটাই Modal দিয়ে হয়। Modal থাকলে বাড়িয়ে না বলেও জোরালো যুক্তি দেওয়া যায়, আর এটাই Module 19-এর hedging-এর ভিত্তি।"
+      }
+    },
+    {
+      "id": 8,
+      "slug": "passive-voice",
+      "title": "Passive Voice",
+      "stage": 2,
+      "difficulty": "Intermediate",
+      "summary": "কে কাজটা করেছে তা অজানা বা অদরকারি হলে ফোকাস বদলে দিন।",
+      "estimatedMinutes": 16,
+      "topics": [
+        "Basic passive",
+        "Passive across tenses",
+        "Modal + passive",
+        "Agent omission",
+        "It is argued that"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "High-value enhancement",
+        "note": "Task 1-এর process diagram আর Task 2-এর নৈর্ব্যক্তিক (impersonal) বক্তব্যে এটা খুব কাজে লাগে। Passive হলো ফোকাস বদলানোর একটা কৌশল, ভারী শোনানোর উপায় নয়; বেশি passive দিলে লেখা উল্টো অস্পষ্ট হয়ে যায়।"
+      }
+    },
+    {
+      "id": 9,
+      "slug": "verb-complementation",
+      "title": "Verb Complementation",
+      "stage": 2,
+      "difficulty": "Upper-Intermediate",
+      "summary": "কোন Verb-এর পরে কোন গঠন বসে, সেটা শিখে নিন।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "verb + gerund",
+        "verb + infinitive",
+        "verb + object + infinitive",
+        "that-clauses",
+        "preposition + gerund"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "suggest to do বা allow to access-এর মতো ভুল vocabulary-র নয়, grammar-এর ভুল হিসেবেই ধরা হয়। আর essay-তে সবচেয়ে বেশি ব্যবহৃত Verb-গুলোতেই এই ভুল বারবার হয়।"
+      }
+    },
+    {
+      "id": 10,
+      "slug": "prepositional-patterns",
+      "title": "Prepositional Patterns",
+      "stage": 2,
+      "difficulty": "Upper-Intermediate",
+      "summary": "Academic Noun আর Verb-এর সঙ্গে কোন Preposition বসে, সেটা ঠিক করে নিন।",
+      "estimatedMinutes": 15,
+      "topics": [
+        "increase in",
+        "impact on",
+        "access to",
+        "result in",
+        "rise by / to",
+        "peak at"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "Task 1-এর পুরো বর্ণনাটাই এই গঠনগুলোর উপর নির্ভর করে। rose by আর rose to গুলিয়ে ফেললে আপনি আসলে ভুল সংখ্যাই লিখে ফেলবেন।"
+      }
+    },
+    {
+      "id": 11,
+      "slug": "comparison-and-quantity",
+      "title": "Comparison & Quantity",
+      "stage": 2,
+      "difficulty": "Upper-Intermediate",
+      "summary": "সংখ্যা নির্ভুলভাবে তুলনা করুন, আর একই কথা নানাভাবে বলুন।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "Comparatives",
+        "Superlatives",
+        "as...as",
+        "twice as many",
+        "Percentages",
+        "Fractions",
+        "sharp / slight"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "Academic Task 1 প্রায় পুরোটাই তুলনা। twice, three times বা half-এর মতো গুণ আর ভগ্নাংশ ঠিকঠাক লিখলে শুধু grammar নয়, Task Achievement-এর নম্বরও বাঁচে।"
+      }
+    },
+    {
+      "id": 12,
+      "slug": "coordination-and-subordination",
+      "title": "Coordination & Subordination",
+      "stage": 3,
+      "difficulty": "Upper-Intermediate",
+      "summary": "অর্থ বুঝে Clause জোড়া দিন, আর একসঙ্গে কখনো দুটো connector নয়।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "and / but / so",
+        "because",
+        "although",
+        "whereas",
+        "despite",
+        "therefore",
+        "however"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "Band 7 বা তার বেশি পেতে complex sentence লাগে, তবে সেগুলো নির্ভুল হতে হবে। Although... but... হলো সেই পরিচিত ভুল, যেটা ভালো একটা বাক্যকেও নষ্ট করে দেয়।"
+      }
+    },
+    {
+      "id": 13,
+      "slug": "relative-clauses",
+      "title": "Relative Clauses",
+      "stage": 3,
+      "difficulty": "Upper-Intermediate",
+      "summary": "নতুন বাক্য না লিখেই Noun সম্পর্কে বাড়তি তথ্য যোগ করুন।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "who / which / that",
+        "whose",
+        "where / when",
+        "Defining vs non-defining",
+        "preposition + which",
+        "Reduction"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "Essential for Band 8",
+        "note": "Complex গঠন দেখানোর সবচেয়ে নিরাপদ উপায় এটাই। মূল কাজ দুটো: Non-defining clause-এ কমা ঠিক রাখা, আর বাড়তি Pronoun না বসানো।"
+      }
+    },
+    {
+      "id": 14,
+      "slug": "noun-clauses-and-extraposition",
+      "title": "Noun Clauses & Extraposition",
+      "stage": 3,
+      "difficulty": "Upper-Intermediate",
+      "summary": "পুরো একটা Clause-কে Subject বা Object হিসেবে ব্যবহার করুন।",
+      "estimatedMinutes": 16,
+      "topics": [
+        "that-clauses",
+        "whether",
+        "wh-clauses",
+        "Embedded questions",
+        "It is clear that"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "Essential for Band 8",
+        "note": "যুক্তি দেওয়া আর মতামত জানানো, দুটোই এগুলোর উপর নির্ভর করে। Embedded question-এর word order-এ ভালো শিক্ষার্থীরাও প্রায়ই ভুল করেন।"
+      }
+    },
+    {
+      "id": 15,
+      "slug": "conditionals",
+      "title": "Conditionals",
+      "stage": 3,
+      "difficulty": "Upper-Intermediate",
+      "summary": "বাস্তব আর কাল্পনিক, দুই ধরনের ফলাফল নিয়েই যুক্তি দিন।",
+      "estimatedMinutes": 16,
+      "topics": [
+        "Zero conditional",
+        "First conditional",
+        "Second conditional",
+        "unless",
+        "provided that",
+        "as long as"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "High-value enhancement",
+        "note": "সমাধান নিয়ে লেখা paragraph মূলত Conditional দিয়েই চলে: If governments invested in..., congestion would fall. Mixed আর third conditional থাকলে ভালো, কিন্তু বাধ্যতামূলক নয়।"
+      }
+    },
+    {
+      "id": 16,
+      "slug": "parallelism",
+      "title": "Parallelism",
+      "stage": 3,
+      "difficulty": "Upper-Intermediate",
+      "summary": "তালিকার প্রতিটি অংশ একই grammatical গঠনে লিখুন।",
+      "estimatedMinutes": 12,
+      "topics": [
+        "Lists",
+        "not only...but also",
+        "Parallel comparisons",
+        "Matching forms"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "Essential for Band 8",
+        "note": "Task 2-তে কারণ বা সুবিধার তালিকা দিয়ে লম্বা বাক্য লেখা খুব সাধারণ। কিন্তু তালিকার গঠন মিল না থাকলে, ভালো করে লিখতে চাওয়া বাক্যটাই একটা স্পষ্ট grammar ভুলে পরিণত হয়।"
+      }
+    },
+    {
+      "id": 17,
+      "slug": "reduced-and-participle-clauses",
+      "title": "Reduced & Participle Clauses",
+      "stage": 3,
+      "difficulty": "Advanced",
+      "summary": "Clause ছোট করুন, তবে modifier যেন ঝুলে না থাকে।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "-ing clauses",
+        "-ed clauses",
+        "Reduced relatives",
+        "having + participle",
+        "Dangling modifiers"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "High-value enhancement",
+        "note": "ঠিকভাবে ব্যবহার করতে পারলে এটা ভাষার উপর সত্যিকারের দখলের প্রমাণ। ঝুঁকি হলো dangling modifier, যার ফলে বাক্যটা এমন অর্থ দেয় যা আপনি বলতেই চাননি।"
+      }
+    },
+    {
+      "id": 18,
+      "slug": "complex-noun-phrases",
+      "title": "Complex Noun Phrases & Nominalization",
+      "stage": 4,
+      "difficulty": "Advanced",
+      "summary": "অনেক তথ্য একটা Noun phrase-এ গুছিয়ে আনুন, তবে মাত্রা রেখে।",
+      "estimatedMinutes": 20,
+      "topics": [
+        "noun + noun",
+        "noun + of",
+        "Prepositional modifiers",
+        "Noun complement clauses",
+        "Apposition",
+        "Nominalization"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "High-value enhancement",
+        "note": "লেখাকে সত্যিকারের academic করে তোলে এটাই, inversion নয়। Academic writing নিয়ে গবেষণাও বলে, এ ধরনের লেখায় একের পর এক Clause-এর চেয়ে তথ্যবহুল Noun phrase-ই বেশি দেখা যায়।"
+      }
+    },
+    {
+      "id": 19,
+      "slug": "hedging-and-stance",
+      "title": "Hedging & Academic Stance",
+      "stage": 4,
+      "difficulty": "Advanced",
+      "summary": "এমন দাবি করুন, যেটার পক্ষে আপনি দাঁড়াতে পারবেন।",
+      "estimatedMinutes": 16,
+      "topics": [
+        "may / might / could",
+        "tend to",
+        "appear to",
+        "suggest / indicate",
+        "arguably",
+        "It is likely that"
+      ],
+      "ielts": {
+        "importance": "Very High",
+        "priority": "High-value enhancement",
+        "note": "বাড়িয়ে বলা দাবি যুক্তিকে দুর্বল করে আর লেখাকে অপেশাদার শোনায়। Hedging দিয়ে আপনি নিজের মত দিতে পারেন, আবার বাড়াবাড়িও এড়াতে পারেন। এতে grammar-এর পাশাপাশি উত্তরের মানও বাড়ে।"
+      }
+    },
+    {
+      "id": 20,
+      "slug": "information-packaging",
+      "title": "Information Packaging",
+      "stage": 4,
+      "difficulty": "Advanced",
+      "summary": "পাঠক যা জানে তা আগে, নতুন তথ্য পরে।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "Given to new",
+        "End-weight",
+        "Heavy subjects",
+        "Passive for focus",
+        "Existential there",
+        "This + summary noun"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "High-value enhancement",
+        "note": "Cohesion-এ বেশি নম্বর পায় সেই লেখা, যেটা প্রতিটি বাক্যে linker না বসিয়েও সাবলীলভাবে এগোয়। আর এর বেশিরভাগ কাজটাই করে বাক্যের ভেতরে তথ্য সাজানোর ক্রম।"
+      }
+    },
+    {
+      "id": 21,
+      "slug": "grammatical-cohesion",
+      "title": "Grammatical Cohesion",
+      "stage": 4,
+      "difficulty": "Advanced",
+      "summary": "শুধু connector দিয়ে নয়, reference দিয়েও বাক্য জুড়ুন।",
+      "estimatedMinutes": 16,
+      "topics": [
+        "Reference",
+        "Substitution",
+        "Ellipsis",
+        "this / such + noun",
+        "one / ones",
+        "do so"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "High-value enhancement",
+        "note": "Band descriptor-এ সরাসরি বলা আছে, cohesive device যান্ত্রিকভাবে বেশি বেশি ব্যবহার করা যাবে না। Reference আর substitution হলো সেই বিকল্প, যেটা শুনতে স্বাভাবিক লাগে।"
+      }
+    },
+    {
+      "id": 22,
+      "slug": "clefts-and-inversion",
+      "title": "Clefts & Limited Inversion",
+      "stage": 4,
+      "difficulty": "Proficient",
+      "summary": "জোর দেওয়ার ঐচ্ছিক গঠন, খুব হিসেব করে ব্যবহার করুন।",
+      "estimatedMinutes": 14,
+      "topics": [
+        "What matters is...",
+        "It was X that...",
+        "Not only does X...",
+        "Emphasis"
+      ],
+      "ielts": {
+        "importance": "Situational",
+        "priority": "Optional",
+        "note": "কোনো band-এর জন্যই এটা বাধ্যতামূলক নয়। IELTS নম্বর দেয় নির্ভুলতা আর সাবলীলতার জন্য, কোনো নির্দিষ্ট 'দেখানোর মতো' গঠনের জন্য নয়। জোর করে inversion লিখতে গেলে সাধারণত ঠিক সেখানেই ভুল হয়, যেখানে সাধারণ বাক্যটা নির্ভুল হতো।"
+      }
+    },
+    {
+      "id": 23,
+      "slug": "concision-and-ambiguity",
+      "title": "Concision & Ambiguity Control",
+      "stage": 5,
+      "difficulty": "Advanced",
+      "summary": "বাড়তি শব্দ কাটুন, modifier ঠিক জায়গায় বসান, Subject আর Verb কাছাকাছি রাখুন।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "Cutting deadwood",
+        "Sentence length",
+        "Misplaced modifiers",
+        "Weak nominalizations",
+        "Subject-verb distance"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "High-value enhancement",
+        "note": "সময়ের চাপে লম্বা বাক্যের চেয়ে ছোট, গোছানো বাক্যে ভুল কম হয়। এই module-টা আপনার নিজের লেখা edit করার checklist হিসেবেও কাজ করবে।"
+      }
+    },
+    {
+      "id": 24,
+      "slug": "register-and-sentence-variety",
+      "title": "Register, Punctuation & Sentence Variety",
+      "stage": 5,
+      "difficulty": "Proficient",
+      "summary": "লেখার ধরন বুঝে tone বাছুন, আর ভেবেচিন্তে বাক্যের দৈর্ঘ্যে বৈচিত্র্য আনুন।",
+      "estimatedMinutes": 18,
+      "topics": [
+        "Formal vs informal",
+        "Academic register",
+        "Contractions",
+        "Semicolons",
+        "Colons",
+        "Dashes",
+        "Sentence variety"
+      ],
+      "ielts": {
+        "importance": "High",
+        "priority": "Essential for Band 8",
+        "note": "Band 8-এর জন্য নানা ধরনের গঠন সাবলীলভাবে ব্যবহার করতে হয়। সাবলীলতা মানে প্রতিটি বাক্য লম্বা করা নয়, বরং যেখানে যেমন দরকার সেভাবে বাক্যের দৈর্ঘ্য বেছে নেওয়া।"
+      }
+    }
+  ],
+  "modulesEn": {
+    "1": {
+      "summary": "Every clause needs a subject and a verb, in the right order.",
+      "ieltsNote": "Examiners treat a missing or doubled subject as a very basic error. Band 8 requires most sentences to be error-free, so secure this area first."
+    },
+    "2": {
+      "summary": "However long the subject, the verb agrees with the real subject.",
+      "ieltsNote": "Agreement is the most frequent error in Task 2 essays. Because it repeats throughout a script, examiners see it as a persistent weakness rather than a slip."
+    },
+    "3": {
+      "summary": "When to use a, when to use the, and when to use neither.",
+      "ieltsNote": "A single article error costs little, but they recur. A dozen in one script means you can no longer say most sentences are error-free, which is exactly what Band 8 needs."
+    },
+    "4": {
+      "summary": "Make it clear what every pronoun refers to.",
+      "ieltsNote": "Ambiguous pronouns cost marks in two places: Grammar and Coherence, because the reader has to stop and work out who they refers to."
+    },
+    "5": {
+      "summary": "Know exactly where a sentence begins and ends.",
+      "ieltsNote": "Joining two sentences with only a comma before however or therefore (a comma splice) is very common and easy to fix. Clear sentence boundaries make the whole script look more organised."
+    },
+    "6": {
+      "summary": "Choose a tense, then stay in it.",
+      "ieltsNote": "In Task 1 the real work is reading the chart title to see which time period it covers. Task 2 is mostly written in the present simple. Changing tense within a paragraph for no reason stands out immediately."
+    },
+    "7": {
+      "summary": "Express how certain, how likely and how necessary something is.",
+      "ieltsNote": "Giving advice and talking about the future in Task 2 depend entirely on modals. They let you argue strongly without overstating, and they are the foundation of hedging in Module 19."
+    },
+    "8": {
+      "summary": "Shift the focus when the doer is unknown or unimportant.",
+      "ieltsNote": "Very useful for Task 1 process diagrams and impersonal statements in Task 2. The passive is a tool for shifting focus, not a way to sound weighty; too much of it makes writing unclear."
+    },
+    "9": {
+      "summary": "Learn which structure follows which verb.",
+      "ieltsNote": "Errors like suggest to do or allow to access are marked as grammar errors, not vocabulary errors, and they recur with the verbs essays use most."
+    },
+    "10": {
+      "summary": "Get the prepositions right after academic nouns and verbs.",
+      "ieltsNote": "Task 1 description depends entirely on these patterns. Confusing rose by and rose to means you actually report the wrong number."
+    },
+    "11": {
+      "summary": "Compare figures accurately and express the same idea in different ways.",
+      "ieltsNote": "Academic Task 1 is almost entirely comparison. Getting multiples and fractions such as twice, three times and half right protects your Task Achievement score as well as your grammar."
+    },
+    "12": {
+      "summary": "Join clauses by meaning, and never use two connectors at once.",
+      "ieltsNote": "Band 7 and above needs complex sentences, but they must be accurate. Although... but... is the familiar error that ruins an otherwise good sentence."
+    },
+    "13": {
+      "summary": "Add information about a noun without starting a new sentence.",
+      "ieltsNote": "This is the safest way to show complex structures. The two key tasks: getting commas right in non-defining clauses, and not adding an extra pronoun."
+    },
+    "14": {
+      "summary": "Use a whole clause as a subject or an object.",
+      "ieltsNote": "Presenting arguments and giving opinions both depend on these. Even strong candidates often get the word order of embedded questions wrong."
+    },
+    "15": {
+      "summary": "Argue about both real and hypothetical outcomes.",
+      "ieltsNote": "Solution paragraphs run on conditionals: If governments invested in..., congestion would fall. Mixed and third conditionals are good to have but not essential."
+    },
+    "16": {
+      "summary": "Write every item in a list in the same grammatical form.",
+      "ieltsNote": "Long sentences listing reasons or benefits are very common in Task 2. If the list is not parallel, the sentence you wanted to impress with becomes a clear grammar error."
+    },
+    "17": {
+      "summary": "Shorten clauses, but never leave a modifier dangling.",
+      "ieltsNote": "Used correctly, this is real evidence of control. The risk is a dangling modifier, which makes the sentence say something you never meant."
+    },
+    "18": {
+      "summary": "Pack information into a noun phrase, but in moderation.",
+      "ieltsNote": "This, not inversion, is what makes writing genuinely academic. Research on academic writing shows it relies more on information-rich noun phrases than on chains of clauses."
+    },
+    "19": {
+      "summary": "Make claims you can stand behind.",
+      "ieltsNote": "Overstated claims weaken an argument and sound unprofessional. Hedging lets you give your view without overreaching, which improves the quality of your answer as well as your grammar."
+    },
+    "20": {
+      "summary": "Known information first, new information last.",
+      "ieltsNote": "High Cohesion scores go to writing that flows without a linker in every sentence, and most of that work is done by the order of information inside each sentence."
+    },
+    "21": {
+      "summary": "Link sentences through reference, not just connectors.",
+      "ieltsNote": "The band descriptors explicitly penalise mechanical overuse of cohesive devices. Reference and substitution are the natural-sounding alternative."
+    },
+    "22": {
+      "summary": "Optional structures for emphasis; use them sparingly.",
+      "ieltsNote": "Not required for any band. IELTS rewards accuracy and flexibility, not particular 'impressive' structures. Forcing inversion usually creates errors exactly where a plain sentence would have been correct."
+    },
+    "23": {
+      "summary": "Cut extra words, place modifiers correctly, keep subject and verb close.",
+      "ieltsNote": "Under time pressure, short, organised sentences contain fewer errors than long ones. This module also works as a checklist for editing your own writing."
+    },
+    "24": {
+      "summary": "Choose a tone that fits the task, and vary sentence length deliberately.",
+      "ieltsNote": "Band 8 requires a range of structures used flexibly. Flexibility does not mean making every sentence long; it means choosing the right length for each job."
+    }
+  },
+  "topics": [
+    {
+      "slug": "sentence-structure",
+      "moduleId": 1,
+      "name": "Sentence Structure & Word Order",
+      "description": "Subjects, verbs, objects and complements: the five building blocks of every clause, and the word order that holds them together.",
+      "related": [
+        "subject-verb-agreement",
+        "sentence-boundaries",
+        "pronouns"
+      ]
+    },
+    {
+      "slug": "subject-verb-agreement",
+      "moduleId": 2,
+      "name": "Subject-Verb Agreement",
+      "description": "Match the verb to the real subject, even when the subject is long, uncountable or starts with there, each or a number of.",
+      "related": [
+        "sentence-structure",
+        "articles",
+        "parallelism"
+      ]
+    },
+    {
+      "slug": "articles",
+      "moduleId": 3,
+      "name": "Articles (a, an, the)",
+      "description": "A step-by-step way to choose a, an, the or no article at all, plus the quantifiers that go with countable and uncountable nouns.",
+      "related": [
+        "subject-verb-agreement",
+        "pronouns",
+        "nominalization"
+      ]
+    },
+    {
+      "slug": "pronouns",
+      "moduleId": 4,
+      "name": "Pronoun Reference",
+      "description": "Make every it, they and this point clearly to one noun, and use summary nouns so readers never have to guess.",
+      "related": [
+        "cohesion",
+        "articles",
+        "information-structure"
+      ]
+    },
+    {
+      "slug": "sentence-boundaries",
+      "moduleId": 5,
+      "name": "Sentence Boundaries & Punctuation",
+      "description": "Fix fragments, run-ons and comma splices, and learn the punctuation that goes with however and therefore.",
+      "related": [
+        "linking-clauses",
+        "sentence-structure",
+        "register-and-punctuation"
+      ]
+    },
+    {
+      "slug": "tenses",
+      "moduleId": 6,
+      "name": "Tenses",
+      "description": "The handful of tenses IELTS writing really needs, how to read the time frame of a Task 1 chart, and how to stay consistent.",
+      "related": [
+        "modal-verbs",
+        "passive-voice",
+        "conditionals"
+      ]
+    },
+    {
+      "slug": "modal-verbs",
+      "moduleId": 7,
+      "name": "Modal Verbs",
+      "description": "Use can, may, might, should and must to express certainty and obligation precisely, without overstating your argument.",
+      "related": [
+        "hedging",
+        "conditionals",
+        "tenses"
+      ]
+    },
+    {
+      "slug": "passive-voice",
+      "moduleId": 8,
+      "name": "Passive Voice",
+      "description": "Form the passive in every tense, use it for Task 1 processes and impersonal reporting, and know when the active is better.",
+      "related": [
+        "tenses",
+        "information-structure",
+        "participial-clauses"
+      ]
+    },
+    {
+      "slug": "verb-patterns",
+      "moduleId": 9,
+      "name": "Verb Patterns (Gerunds & Infinitives)",
+      "description": "Learn which verbs take -ing, which take to-infinitive and which need an object first: suggest doing, allow people to do.",
+      "related": [
+        "prepositions",
+        "modal-verbs",
+        "noun-clauses"
+      ]
+    },
+    {
+      "slug": "prepositions",
+      "moduleId": 10,
+      "name": "Prepositions & Collocations",
+      "description": "The fixed preposition pairs academic writing relies on (increase in, impact on) and the Task 1 patterns rose by, rose to and peaked at.",
+      "related": [
+        "comparisons",
+        "verb-patterns",
+        "nominalization"
+      ]
+    },
+    {
+      "slug": "comparisons",
+      "moduleId": 11,
+      "name": "Comparisons & Quantities",
+      "description": "Comparatives, superlatives, twice as many as, fractions and percentages: the language of every Academic Task 1 report.",
+      "related": [
+        "prepositions",
+        "parallelism",
+        "tenses"
+      ]
+    },
+    {
+      "slug": "linking-clauses",
+      "moduleId": 12,
+      "name": "Linking Clauses (Conjunctions)",
+      "description": "Coordinators, subordinators and linking adverbials: how to join ideas accurately, and why although... but is always wrong.",
+      "related": [
+        "sentence-boundaries",
+        "relative-clauses",
+        "cohesion"
+      ]
+    },
+    {
+      "slug": "relative-clauses",
+      "moduleId": 13,
+      "name": "Relative Clauses",
+      "description": "Who, which, that, whose and where; defining vs non-defining clauses; and the comma rules that change your meaning.",
+      "related": [
+        "participial-clauses",
+        "noun-clauses",
+        "linking-clauses"
+      ]
+    },
+    {
+      "slug": "noun-clauses",
+      "moduleId": 14,
+      "name": "Noun Clauses",
+      "description": "That-clauses, whether-clauses and embedded questions, plus It is clear that... for heavy subjects.",
+      "related": [
+        "relative-clauses",
+        "information-structure",
+        "verb-patterns"
+      ]
+    },
+    {
+      "slug": "conditionals",
+      "moduleId": 15,
+      "name": "Conditionals",
+      "description": "Zero, first and second conditionals, unless and provided that, and how to use conditionals to argue for solutions.",
+      "related": [
+        "modal-verbs",
+        "tenses",
+        "hedging"
+      ]
+    },
+    {
+      "slug": "parallelism",
+      "moduleId": 16,
+      "name": "Parallel Structure",
+      "description": "Keep lists, not only... but also pairs and comparisons in matching grammatical forms so long sentences stay correct.",
+      "related": [
+        "comparisons",
+        "linking-clauses",
+        "subject-verb-agreement"
+      ]
+    },
+    {
+      "slug": "participial-clauses",
+      "moduleId": 17,
+      "name": "Participle Clauses",
+      "description": "Shorten clauses with -ing and -ed forms, add result clauses in Task 1, and avoid the dangling-modifier trap.",
+      "related": [
+        "relative-clauses",
+        "passive-voice",
+        "concision"
+      ]
+    },
+    {
+      "slug": "nominalization",
+      "moduleId": 18,
+      "name": "Noun Phrases & Nominalization",
+      "description": "Turn verbs into nouns and build dense noun phrases, the real engine of academic style, and know when to stop.",
+      "related": [
+        "information-structure",
+        "concision",
+        "articles"
+      ]
+    },
+    {
+      "slug": "hedging",
+      "moduleId": 19,
+      "name": "Hedging & Academic Stance",
+      "description": "Soften claims with may, tend to and suggest so that every statement you make is one you can defend.",
+      "related": [
+        "modal-verbs",
+        "conditionals",
+        "register-and-punctuation"
+      ]
+    },
+    {
+      "slug": "information-structure",
+      "moduleId": 20,
+      "name": "Information Structure",
+      "description": "Given before new, end-weight and this + summary noun: the ordering habits that make writing flow without extra linkers.",
+      "related": [
+        "cohesion",
+        "nominalization",
+        "passive-voice"
+      ]
+    },
+    {
+      "slug": "cohesion",
+      "moduleId": 21,
+      "name": "Cohesion: Reference & Substitution",
+      "description": "Link sentences with reference, substitution and ellipsis instead of stacking moreover and furthermore.",
+      "related": [
+        "information-structure",
+        "pronouns",
+        "linking-clauses"
+      ]
+    },
+    {
+      "slug": "inversion",
+      "moduleId": 22,
+      "name": "Inversion & Cleft Sentences",
+      "description": "Not only does..., Rarely has... and What matters is...: optional emphatic structures, and when they are worth the risk.",
+      "related": [
+        "information-structure",
+        "register-and-punctuation",
+        "linking-clauses"
+      ]
+    },
+    {
+      "slug": "concision",
+      "moduleId": 23,
+      "name": "Concise Writing",
+      "description": "Cut deadwood, place modifiers correctly and keep subjects close to verbs: an editing checklist for every draft.",
+      "related": [
+        "nominalization",
+        "participial-clauses",
+        "register-and-punctuation"
+      ]
+    },
+    {
+      "slug": "register-and-punctuation",
+      "moduleId": 24,
+      "name": "Register, Punctuation & Variety",
+      "description": "Formal vs informal style, semicolons, colons and dashes, and how to vary sentences with purpose.",
+      "related": [
+        "concision",
+        "sentence-boundaries",
+        "hedging"
+      ]
+    }
+  ],
+  "featuredTopicSlugs": [
+    "articles",
+    "tenses",
+    "subject-verb-agreement",
+    "conditionals",
+    "relative-clauses",
+    "nominalization"
+  ]
+}

@@ -13,6 +13,7 @@ import type { AuthService } from './services/auth.js'
 import type { DatabaseStatus } from './services/database.js'
 import type { ProfileService } from './services/profile.js'
 import type { SyncServices } from './routes/index.js'
+import type { ContentService } from './services/content.js'
 
 /** JSON request bodies above this size get 413. Generous for API payloads, small enough to limit abuse. */
 export const JSON_BODY_LIMIT = '100kb'
@@ -32,6 +33,7 @@ export interface AppDependencies {
   account: AccountService
   profile: ProfileService
   sync: SyncServices
+  content: ContentService
   logger: Logger
   rateLimit?: RateLimitOptions
   authRateLimit?: RateLimitOptions
@@ -41,7 +43,7 @@ export interface AppDependencies {
  * Builds the Express app without listening, so tests can inject a fake
  * database, in-memory repositories and a silent logger. server.ts does the listening.
  */
-export function createApp({ env, db, auth, account, profile, sync, logger, rateLimit, authRateLimit }: AppDependencies): Express {
+export function createApp({ env, db, auth, account, profile, sync, content, logger, rateLimit, authRateLimit }: AppDependencies): Express {
   const app = express()
   app.disable('x-powered-by')
   // TRUST_PROXY = number of reverse proxies in front of the app (0, the default, trusts none). With
@@ -67,6 +69,7 @@ export function createApp({ env, db, auth, account, profile, sync, logger, rateL
       account,
       profile,
       sync,
+      content,
       cookie: { name: env.SESSION_COOKIE_NAME, secure: env.NODE_ENV === 'production' },
       allowedOrigins: env.CORS_ORIGINS,
       authRateLimit,

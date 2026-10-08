@@ -11,6 +11,7 @@ import { createArgon2Hasher } from './services/password.js'
 import { mergeBookmarks, mergeProgress } from './services/merge.js'
 import { createProfileService } from './services/profile.js'
 import { createSyncService } from './services/sync.js'
+import { createContentService } from './services/content.js'
 import { bookmarkList, progressState } from './validators/progress.js'
 
 const SHUTDOWN_TIMEOUT_MS = 10_000
@@ -59,7 +60,8 @@ async function main(): Promise<void> {
     progress: createSyncService({ repository: repositories.progress, merge: mergeProgress, schema: progressState }),
     bookmarks: createSyncService({ repository: repositories.bookmarks, merge: mergeBookmarks, schema: bookmarkList }),
   }
-  const app = createApp({ env, db, auth, account, profile, sync, logger })
+  const content = createContentService(repositories.content)
+  const app = createApp({ env, db, auth, account, profile, sync, content, logger })
   logger.info({ mailTransport: env.MAIL_TRANSPORT }, 'Mail transport selected')
 
   const server: Server = app.listen(env.PORT, (error?: Error) => {

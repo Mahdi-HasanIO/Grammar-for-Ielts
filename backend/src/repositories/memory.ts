@@ -1,6 +1,12 @@
 import { randomUUID } from 'node:crypto'
 import {
+  CONTENT_COLLECTIONS,
   DuplicateEmailError,
+  DuplicateKeyError,
+  type ContentCollectionConfig,
+  type ContentFilter,
+  type ContentRepositories,
+  type ContentStore,
   type AccountTokenRecord,
   type ProfileFields,
   type Repositories,
@@ -28,6 +34,59 @@ function memorySync<T>(): SyncRepository<T> {
     },
   }
 }
+
+const getPath = (doc: unknown, path: string): unknown =>
+  path.split('.').reduce<unknown>((value, key) => (typeof value === 'object' && value !== null ? (value as Record<string, unknown>)[key] : undefined), doc)
+
+/** Same behaviour as the MongoDB content store: key-based upsert, unique fields, display order. */
+function memoryContentStore<T>({ key, unique, sort }: ContentCollectionConfig): ContentStore<T> {
+  let docs: T[] = []
+  const matches = (doc: T, filter: ContentFilter) => Object.entries(filter).every(([path, value]) => getPath(doc, path) === value)
+  const keyFilter = (doc: T): ContentFilter => Object.fromEntries(key.map((path) => [path, getPath(doc, path) as string | number]))
+  const compare = (a: T, b: T) => {
+    for (const [path, direction] of sort) {
+      const [x, y] = [getPath(a, path) as string | number, getPath(b, path) as string | number]
+      if (x !== y) return (x < y ? -1 : 1) * direction
+    }
+    return 0
+  }
+  return {
+    async list(filter = {}) {
+      return docs.filter((doc) => matches(doc, filter)).sort(compare).map(clone)
+    },
+    async find(filter) {
+      const doc = docs.find((d) => matches(d, filter))
+      return doc ? clone(doc) : null
+    },
+    async upsert(doc) {
+      const filter = keyFilter(doc)
+      const index = docs.findIndex((d) => matches(d, filter))
+      for (const path of unique) {
+        if (docs.some((d, i) => i !== index && getPath(d, path) === getPath(doc, path))) throw new DuplicateKeyError(`Another document already has this ${path}`)
+      }
+      if (index === -1) {
+        docs.push(clone(doc))
+        return 'inserted'
+      }
+      if (JSON.stringify(docs[index]) === JSON.stringify(doc)) return 'unchanged'
+      docs[index] = clone(doc)
+      return 'updated'
+    },
+    async delete(filter) {
+      const before = docs.length
+      docs = docs.filter((doc) => !matches(doc, filter))
+      return before - docs.length
+    },
+  }
+}
+
+const memoryContent = (): ContentRepositories => ({
+  stages: memoryContentStore(CONTENT_COLLECTIONS.stages),
+  modules: memoryContentStore(CONTENT_COLLECTIONS.modules),
+  lessons: memoryContentStore(CONTENT_COLLECTIONS.lessons),
+  questions: memoryContentStore(CONTENT_COLLECTIONS.questions),
+  posts: memoryContentStore(CONTENT_COLLECTIONS.posts),
+})
 
 const copyUser = (user: UserRecord): UserRecord => ({ ...user, profile: { ...user.profile } })
 
@@ -110,5 +169,6 @@ export function createMemoryRepositories(): Repositories {
     },
     progress: memorySync(),
     bookmarks: memorySync(),
+    content: memoryContent(),
   }
 }

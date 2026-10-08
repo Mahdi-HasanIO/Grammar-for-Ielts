@@ -1,11 +1,17 @@
 import { isValidObjectId, mongo, type Connection, type Model } from 'mongoose'
 import { accountTokenModel } from '../models/AccountToken.js'
+import { contentModels } from '../models/Content.js'
 import { sessionModel } from '../models/Session.js'
 import { bookmarksModel, progressModel } from '../models/SyncDocument.js'
 import type { Bookmark, ProgressState } from '../validators/progress.js'
 import { userModel } from '../models/User.js'
 import {
+  CONTENT_COLLECTIONS,
   DuplicateEmailError,
+  DuplicateKeyError,
+  type ContentCollectionConfig,
+  type ContentRepositories,
+  type ContentStore,
   PROFILE_FIELDS,
   type AccountTokenRecord,
   type AccountTokenType,
@@ -118,6 +124,53 @@ function syncRepository<T>(model: Model<never>): SyncRepository<T> {
   }
 }
 
+const getPath = (doc: unknown, path: string): unknown =>
+  path.split('.').reduce<unknown>((value, key) => (typeof value === 'object' && value !== null ? (value as Record<string, unknown>)[key] : undefined), doc)
+
+/**
+ * A content collection through the native driver (model.collection), so
+ * documents are stored exactly as validated, without Mongoose casting. The
+ * Mongoose model is still what declares and builds the indexes.
+ */
+function mongoContentStore<T>(model: Model<never>, { key, sort }: ContentCollectionConfig): ContentStore<T> {
+  const collection = model.collection
+  const noId = { projection: { _id: 0 } }
+  return {
+    async list(filter = {}) {
+      return (await collection.find(filter, noId).sort(Object.fromEntries(sort)).toArray()) as T[]
+    },
+    async find(filter) {
+      return (await collection.findOne(filter, noId)) as T | null
+    },
+    async upsert(doc) {
+      const filter = Object.fromEntries(key.map((path) => [path, getPath(doc, path)]))
+      try {
+        // replaceOne reports modifiedCount 0 when the stored document is already identical.
+        const result = await collection.replaceOne(filter, doc as Record<string, unknown>, { upsert: true })
+        if (result.upsertedCount) return 'inserted'
+        return result.modifiedCount ? 'updated' : 'unchanged'
+      } catch (error) {
+        if (error instanceof mongo.MongoServerError && error.code === DUPLICATE_KEY) throw new DuplicateKeyError()
+        throw error
+      }
+    },
+    async delete(filter) {
+      return (await collection.deleteMany(filter)).deletedCount
+    },
+  }
+}
+
+function mongoContent(connection: Connection): ContentRepositories {
+  const models = contentModels(connection) as unknown as Record<keyof ContentRepositories, Model<never>>
+  return {
+    stages: mongoContentStore(models.stages, CONTENT_COLLECTIONS.stages),
+    modules: mongoContentStore(models.modules, CONTENT_COLLECTIONS.modules),
+    lessons: mongoContentStore(models.lessons, CONTENT_COLLECTIONS.lessons),
+    questions: mongoContentStore(models.questions, CONTENT_COLLECTIONS.questions),
+    posts: mongoContentStore(models.posts, CONTENT_COLLECTIONS.posts),
+  }
+}
+
 /**
  * MongoDB repositories on the given connection. Indexes (unique email, unique
  * token hashes, one account token per user and type, TTLs) are built by
@@ -205,5 +258,6 @@ export function createMongoRepositories(connection: Connection): Repositories {
     },
     progress,
     bookmarks,
+    content: mongoContent(connection),
   }
 }

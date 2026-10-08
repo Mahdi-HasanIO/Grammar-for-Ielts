@@ -4,6 +4,7 @@
  * a database. repositories/mongo.ts is the MongoDB implementation.
  */
 
+import type { BlogPostDoc, LessonDoc, ModuleDoc, QuestionDoc, StageDoc } from '../validators/content.js'
 import type { Bookmark, ProgressState } from '../validators/progress.js'
 
 export const LANGUAGES = ['en', 'bn'] as const
@@ -118,10 +119,60 @@ export interface SyncRepository<T> {
   put(userId: string, expectedVersion: number, data: T): Promise<SyncRecord<T> | null>
 }
 
+export type UpsertOutcome = 'inserted' | 'updated' | 'unchanged'
+
+/** Equality on top-level or dotted fields, e.g. { legacyId: 3 } or { 'topic.slug': 'articles' }. */
+export type ContentFilter = Record<string, string | number | boolean | null>
+
+/** A content collection whose documents are identified by a fixed set of key fields. */
+export interface ContentStore<T> {
+  /** Matching documents in the collection's display order. */
+  list(filter?: ContentFilter): Promise<T[]>
+  find(filter: ContentFilter): Promise<T | null>
+  /** Inserts the document, or replaces the one with the same key. */
+  upsert(doc: T): Promise<UpsertOutcome>
+  /** Removes the documents matching the filter; returns how many there were. */
+  delete(filter: ContentFilter): Promise<number>
+}
+
+export interface ContentRepositories {
+  stages: ContentStore<StageDoc>
+  modules: ContentStore<ModuleDoc>
+  lessons: ContentStore<LessonDoc>
+  questions: ContentStore<QuestionDoc>
+  posts: ContentStore<BlogPostDoc>
+}
+
+export interface ContentCollectionConfig {
+  /** Fields that identify a document; upsert replaces the document with the same values. */
+  key: readonly string[]
+  /** Other fields that must be unique on their own (unique indexes in MongoDB). */
+  unique: readonly string[]
+  sort: readonly (readonly [string, 1 | -1])[]
+}
+
+/** Key fields, unique fields and display order of each content collection (shared by both implementations). */
+export const CONTENT_COLLECTIONS: Record<keyof ContentRepositories, ContentCollectionConfig> = {
+  stages: { key: ['id'], unique: [], sort: [['id', 1]] },
+  modules: { key: ['legacyId'], unique: ['slug', 'topic.slug'], sort: [['legacyId', 1]] },
+  lessons: { key: ['moduleId', 'language'], unique: [], sort: [['moduleId', 1], ['language', 1]] },
+  questions: { key: ['id'], unique: [], sort: [['moduleId', 1], ['set', 1], ['position', 1], ['id', 1]] },
+  posts: { key: ['slug'], unique: [], sort: [['date', -1], ['slug', 1]] },
+}
+
+/** Thrown by ContentStore.upsert when another document already has a unique value (e.g. a module slug). */
+export class DuplicateKeyError extends Error {
+  constructor(message = 'Another document already uses this unique value') {
+    super(message)
+    this.name = 'DuplicateKeyError'
+  }
+}
+
 export interface Repositories {
   users: UserRepository
   sessions: SessionRepository
   accountTokens: AccountTokenRepository
   progress: SyncRepository<ProgressState>
   bookmarks: SyncRepository<Bookmark[]>
+  content: ContentRepositories
 }

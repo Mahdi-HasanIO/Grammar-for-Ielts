@@ -79,6 +79,7 @@ URL-encode special characters in the password.
 | `npm run typecheck` | Type-check source and tests |
 | `npm run lint` | oxlint (same linter as the frontend) |
 | `npm test` | Vitest + supertest. No MongoDB needed. |
+| `npm run seed:content` | Validate `seed/*.json` and upsert it into MongoDB (idempotent). `-- --check` validates only, without a database |
 
 Opt-in integration tests run against a real MongoDB when `MONGODB_URI_TEST` is set. They use a
 throwaway database (`grammar-ielts-it-<random>`) and drop it afterwards. CI never sets it.
@@ -109,6 +110,12 @@ Logs are JSON lines. For readable local output: `npm run dev | npx pino-pretty`.
 
 | `GET /api/progress` / `GET /api/bookmarks` | Signed in. `200 {"progress" or "bookmarks", "version", "updatedAt"}`; `null` and version `0` before the first save. |
 | `PUT /api/progress` / `PUT /api/bookmarks` | Signed in. Body `{"baseVersion", "progress" or "bookmarks"}`. `200` with the saved data, the new `version` and `merged`. See "Sync" below. |
+
+| `GET /api/content/modules` | Public. `{"stages","modules"}` in course order. |
+| `GET /api/content/modules/:ref` | Public. `:ref` is a legacy id (`3`), a module slug or a topic slug (`articles`). `{"module"}`, or 404. |
+| `GET /api/content/modules/:ref/lesson?language=bn\|en` | Public. `{"lesson"}` (Bangla by default). |
+| `GET /api/content/modules/:ref/questions?set=practice\|test` | Public. `{"questions"}` in order (both sets without `set`). |
+| `GET /api/content/blog` / `GET /api/content/blog/:slug` | Public. Posts newest first without bodies / one post with its body. |
 
 `user` is `{"id","email","emailVerifiedAt","createdAt"}`. `profile` is `{"email","emailVerifiedAt"}` plus
 the six profile fields (`null` when unset). Emails are trimmed and lowercased; passwords must be
@@ -169,6 +176,18 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
   - Writes are compare-and-set on `{userId, version}`, retried on a race, `409 sync_conflict` after
     five losses.
   - Request bodies up to 5 MB on these two routes (100 kB elsewhere).
+- **Content** (`/api/content/*`; `src/services/content.ts`, `src/services/contentSeed.ts`):
+  - The React app's static content stays the source for SEO and offline use. The content API
+    serves a copy from MongoDB, for later admin editing.
+  - `node scripts/export-content-snapshot.mjs` (repository root) reads the app's content through
+    Vite and writes `backend/seed/*.json`, which are committed; `--check` reports stale snapshots.
+    The backend reads only those files and never imports from `src/`
+    (`tests/importBoundary.test.ts` fails if it does).
+  - `npm run seed:content` validates the snapshots with rules mirroring the app's content tests
+    (unique ids and slugs, kebab-case slugs, references, answers among the options, Bangla/English
+    lesson parity, 4 practice and 10 test questions per module), refuses to change a stored module
+    slug, and upserts. Documents not in the snapshot are left alone.
+  - Responses carry `Cache-Control: public, max-age=300`.
 - **Logging:** one line per request (id, method, URL, status, duration) with an `X-Request-Id`
   response header; every other line logged during the request carries the same id as `reqId`. Headers and bodies are never logged. Connection strings are redacted from
   database errors.
@@ -191,6 +210,8 @@ src/
                      profile, mailer (log, Resend), password hashing
   validators/        reusable Zod schemas
   utils/             AppError, redaction, session cookie
+  scripts/           seed-content (CLI)
+seed/                content snapshots exported from the app (JSON, committed)
 tests/               Vitest + supertest (*.integration.test.ts need MONGODB_URI_TEST)
 ```
 

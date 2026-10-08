@@ -42,6 +42,7 @@ function failingRepositories(makeError: () => Error): Repositories {
     accountTokens: { replace: fail, consume: fail, deleteForUser: fail },
     progress: { get: fail, put: fail },
     bookmarks: { get: fail, put: fail },
+    content: createMemoryRepositories().content,
   }
 }
 

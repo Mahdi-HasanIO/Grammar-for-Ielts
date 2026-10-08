@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { Writable } from 'node:stream'
 import { createApp, type AppDependencies } from '../src/app.js'
 import argon2 from 'argon2'
@@ -13,6 +14,7 @@ import { createArgon2Hasher, type PasswordHasher } from '../src/services/passwor
 import { mergeBookmarks, mergeProgress } from '../src/services/merge.js'
 import { createProfileService } from '../src/services/profile.js'
 import { createSyncService } from '../src/services/sync.js'
+import { createContentService } from '../src/services/content.js'
 import { bookmarkList, progressState } from '../src/validators/progress.js'
 
 export const ALLOWED_ORIGIN = 'https://app.example.com'
@@ -87,12 +89,13 @@ export function testServices({
       progress: createSyncService({ repository: repositories.progress, merge: mergeProgress, schema: progressState }),
       bookmarks: createSyncService({ repository: repositories.bookmarks, merge: mergeBookmarks, schema: bookmarkList }),
     },
+    content: createContentService(repositories.content),
   }
 }
 
 /** Builds the real app with test dependencies. */
 export function testApp(overrides: Partial<AppDependencies> = {}) {
-  const { auth, account, profile, sync } = testServices()
+  const { auth, account, profile, sync, content } = testServices()
   return createApp({
     env: TEST_ENV,
     db: fakeDb(),
@@ -100,6 +103,7 @@ export function testApp(overrides: Partial<AppDependencies> = {}) {
     account,
     profile,
     sync,
+    content,
     logger: silentLogger(),
     ...overrides,
   })
@@ -122,4 +126,10 @@ export function withDatabaseName(uri: string, name: string): string {
   const match = /^(mongodb(?:\+srv)?:\/\/[^/?]+)(?:\/[^?]*)?(\?.*)?$/.exec(uri)
   if (!match) throw new Error('MONGODB_URI_TEST is not a mongodb:// or mongodb+srv:// URI')
   return `${match[1]}/${name}${match[2] ?? ''}`
+}
+
+/** The committed content snapshots (backend/seed/*.json), parsed fresh for each call so tests can mutate them. */
+export function readContentSnapshot() {
+  const read = (name: string) => JSON.parse(readFileSync(new URL(`../seed/${name}`, import.meta.url), 'utf8')) as Record<string, unknown>
+  return { catalog: read('catalog.json'), lessons: read('lessons.json'), questions: read('questions.json'), blog: read('blog.json') }
 }

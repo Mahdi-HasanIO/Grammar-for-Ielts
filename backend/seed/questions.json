@@ -1,0 +1,4388 @@
+{
+  "practice": [
+    {
+      "id": "m1-p1",
+      "moduleId": 1,
+      "type": "multiple-choice",
+      "question": "Which sentence has a complete subject and verb?",
+      "options": [
+        "In the graph shows a rise in sales.",
+        "The graph shows a rise in sales.",
+        "Shows a rise in sales in the graph.",
+        "In the graph showing a rise in sales."
+      ],
+      "answer": "The graph shows a rise in sales.",
+      "explanation": "এখানে The graph হলো Subject আর shows হলো Verb। in দিয়ে শুরু হওয়া phrase কখনো Subject হতে পারে না।"
+    },
+    {
+      "id": "m1-p2",
+      "moduleId": 1,
+      "type": "fill-blank",
+      "question": "___ is essential to reduce carbon emissions.",
+      "answer": "It",
+      "acceptable": [
+        "it"
+      ],
+      "explanation": "be + adjective + to-infinitive গঠনের আগে Subject-এর খালি জায়গাটা পূরণ করে dummy subject it।"
+    },
+    {
+      "id": "m1-p3",
+      "moduleId": 1,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The students | they often | struggle | with grammar.",
+      "options": [
+        "The students",
+        "they often",
+        "struggle",
+        "with grammar"
+      ],
+      "answer": "they often",
+      "explanation": "The students আগে থেকেই Subject, তাই they বসালে একই Clause-এ দুটো Subject হয়ে যায়।"
+    },
+    {
+      "id": "m1-p4",
+      "moduleId": 1,
+      "type": "rewrite",
+      "question": "Rewrite so the clause has a subject: \"Is important to invest in education.\"",
+      "answer": "It is important to invest in education.",
+      "acceptable": [
+        "it is important to invest in education"
+      ],
+      "explanation": "লিখিত ইংরেজিতে প্রতিটি Clause-এ একটা Subject লাগে, আর এখানে সেটা হলো dummy it।"
+    },
+    {
+      "id": "m2-p1",
+      "moduleId": 2,
+      "type": "multiple-choice",
+      "question": "The impact of social media on teenagers ___ widely debated.",
+      "options": [
+        "are",
+        "is",
+        "were",
+        "have been"
+      ],
+      "answer": "is",
+      "explanation": "Head noun হলো impact, যেটা একবচন; মাঝখানের বহুবচন Noun-গুলো শুধু বাড়তি বর্ণনা।"
+    },
+    {
+      "id": "m2-p2",
+      "moduleId": 2,
+      "type": "fill-blank",
+      "question": "There ___ several reasons for this decline. (is / are)",
+      "answer": "are",
+      "explanation": "Existential বাক্যে Verb মেলে পরের Noun-এর সঙ্গে, আর reasons বহুবচন।"
+    },
+    {
+      "id": "m2-p3",
+      "moduleId": 2,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Researches show that exercise improves memory.",
+        "Research show that exercise improves memory.",
+        "Research shows that exercise improves memory.",
+        "A research shows that exercise improves memory."
+      ],
+      "answer": "Research shows that exercise improves memory.",
+      "explanation": "Research uncountable: এতে -s বসে না, a বসে না, আর Verb একবচন হয়।"
+    },
+    {
+      "id": "m2-p4",
+      "moduleId": 2,
+      "type": "multiple-choice",
+      "question": "A number of studies ___ reached the same conclusion.",
+      "options": [
+        "has",
+        "have",
+        "is",
+        "was"
+      ],
+      "answer": "have",
+      "explanation": "A number of মানে কয়েকটা, তাই Verb বহুবচন। The number of হলে Verb একবচন হতো।"
+    },
+    {
+      "id": "m3-p1",
+      "moduleId": 3,
+      "type": "multiple-choice",
+      "question": "___ rapid growth of technology has changed the workplace.",
+      "options": [
+        "A",
+        "The",
+        "An",
+        "No article"
+      ],
+      "answer": "The",
+      "explanation": "of-phrase-টা বুঝিয়ে দিচ্ছে ঠিক কোন growth-এর কথা হচ্ছে, তাই এখানে the বসবে।"
+    },
+    {
+      "id": "m3-p2",
+      "moduleId": 3,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence generalises correctly?",
+      "options": [
+        "The cars are a major source of pollution.",
+        "Cars are a major source of pollution.",
+        "Car is a major source of pollution.",
+        "A cars are a major source of pollution."
+      ],
+      "answer": "Cars are a major source of pollution.",
+      "explanation": "পুরো একটা শ্রেণি নিয়ে সাধারণ কথা বলতে article ছাড়া বহুবচন Noun বসে।"
+    },
+    {
+      "id": "m3-p3",
+      "moduleId": 3,
+      "type": "fill-blank",
+      "question": "There are ___ advantages to this approach. (much / many)",
+      "answer": "many",
+      "explanation": "Advantages একটা countable বহুবচন Noun, তাই এর সঙ্গে many বসে।"
+    },
+    {
+      "id": "m3-p4",
+      "moduleId": 3,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Most of people | believe | that education | is important.",
+      "options": [
+        "Most of people",
+        "believe",
+        "that education",
+        "is important"
+      ],
+      "answer": "Most of people",
+      "explanation": "সাধারণ অর্থে most + বহুবচন Noun বসে। Most of ব্যবহার করলে পরে determiner লাগে: most of the people।"
+    },
+    {
+      "id": "m4-p1",
+      "moduleId": 4,
+      "type": "multiple-choice",
+      "question": "Every company must protect ___ data.",
+      "options": [
+        "their",
+        "its",
+        "our",
+        "them"
+      ],
+      "answer": "its",
+      "explanation": "Every থাকলে Antecedent একবচন হয়, তাই possessive Pronoun হবে its।"
+    },
+    {
+      "id": "m4-p2",
+      "moduleId": 4,
+      "type": "fill-blank",
+      "question": "___ is clear that the policy has failed. (It / There)",
+      "answer": "It",
+      "acceptable": [
+        "it"
+      ],
+      "explanation": "Adjective আর that-clause-এর আগে মতামত বোঝাতে it বসে; there বসে কোনো কিছু আছে বোঝাতে।"
+    },
+    {
+      "id": "m4-p3",
+      "moduleId": 4,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence has a clear pronoun reference?",
+      "options": [
+        "Governments fund charities, but they waste money.",
+        "Governments fund charities, but the charities waste money.",
+        "Governments fund charities, but it wastes money.",
+        "Governments fund charities, but them waste money."
+      ],
+      "answer": "Governments fund charities, but the charities waste money.",
+      "explanation": "দুটো বহুবচন Noun থাকায় they কাকে বোঝাচ্ছে বোঝা যায় না; Noun-টা আবার লিখলে অর্থ পরিষ্কার হয়।"
+    },
+    {
+      "id": "m4-p4",
+      "moduleId": 4,
+      "type": "rewrite",
+      "question": "Make the reference specific by adding a summary noun: \"Cities are expanding rapidly. This causes problems.\"",
+      "answer": "This expansion causes problems.",
+      "acceptable": [
+        "this expansion causes problems",
+        "this growth causes problems"
+      ],
+      "explanation": "This + summary noun বসালে this কীসের কথা বলছে, তা পরিষ্কার হয়ে যায়।"
+    },
+    {
+      "id": "m5-p1",
+      "moduleId": 5,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is punctuated correctly?",
+      "options": [
+        "Many cities face congestion, however few have solved it.",
+        "Many cities face congestion; however, few have solved it.",
+        "Many cities face congestion however, few have solved it.",
+        "Many cities face congestion, however; few have solved it."
+      ],
+      "answer": "Many cities face congestion; however, few have solved it.",
+      "explanation": "However একটা linking adverbial, তাই এর আগে semicolon বা full stop আর পরে কমা লাগে।"
+    },
+    {
+      "id": "m5-p2",
+      "moduleId": 5,
+      "type": "multiple-choice",
+      "question": "Which option correctly fixes the comma splice in \"The policy was expensive, it reduced emissions.\"?",
+      "options": [
+        "The policy was expensive, but it reduced emissions.",
+        "The policy was expensive, however it reduced emissions.",
+        "The policy was expensive it reduced emissions.",
+        "The policy was expensive, moreover it reduced emissions."
+      ],
+      "answer": "The policy was expensive, but it reduced emissions.",
+      "explanation": "কমার পরে একটা coordinator বসালে দুটো Independent Clause ঠিকভাবে জোড়া লাগে।"
+    },
+    {
+      "id": "m5-p3",
+      "moduleId": 5,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Although the scheme | was popular, | but it | was cancelled.",
+      "options": [
+        "Although the scheme",
+        "was popular,",
+        "but it",
+        "was cancelled"
+      ],
+      "answer": "but it",
+      "explanation": "Although আগেই বৈপরীত্য বুঝিয়ে দিয়েছে, তাই but বসালে একই কাজে দুটো connector হয়ে যায়।"
+    },
+    {
+      "id": "m5-p4",
+      "moduleId": 5,
+      "type": "fill-blank",
+      "question": "The city has three main problems___ traffic, pollution and housing. (colon or semicolon?)",
+      "answer": ":",
+      "acceptable": [
+        "colon",
+        ":"
+      ],
+      "explanation": "Colon দিয়ে তালিকা শুরু হয়। Semicolon বসাতে হলে দুই পাশেই পূর্ণ বাক্য লাগত।"
+    },
+    {
+      "id": "m6-p1",
+      "moduleId": 6,
+      "type": "multiple-choice",
+      "question": "The population ___ dramatically in 1990.",
+      "options": [
+        "has increased",
+        "increased",
+        "had increased",
+        "increases"
+      ],
+      "answer": "increased",
+      "explanation": "নির্দিষ্ট ও শেষ হয়ে যাওয়া অতীত সময় উল্লেখ থাকলে Past simple লাগে।"
+    },
+    {
+      "id": "m6-p2",
+      "moduleId": 6,
+      "type": "fill-blank",
+      "question": "Since 2010, the city ___ invested heavily in cycling. (has / had)",
+      "answer": "has",
+      "explanation": "Since বলছে সময়টা এখনো চলছে, আর তখন Present perfect বসে।"
+    },
+    {
+      "id": "m6-p3",
+      "moduleId": 6,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct for a process diagram?",
+      "options": [
+        "Firstly, the beans are harvested. Then workers dried them.",
+        "Firstly, the beans are harvested. They are then dried.",
+        "Firstly, the beans harvested. Then they dry.",
+        "Firstly, the beans were harvested. They are then dried."
+      ],
+      "answer": "Firstly, the beans are harvested. They are then dried.",
+      "explanation": "Process বর্ণনা করার সময় শুরু থেকে শেষ পর্যন্ত একই Tense আর একই Voice রাখতে হয়।"
+    },
+    {
+      "id": "m6-p4",
+      "moduleId": 6,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Nowadays, | people spent | more time online | than before.",
+      "options": [
+        "Nowadays,",
+        "people spent",
+        "more time online",
+        "than before"
+      ],
+      "answer": "people spent",
+      "explanation": "Nowadays বর্তমান সময় বোঝায়, তাই Verb হবে spend।"
+    },
+    {
+      "id": "m7-p1",
+      "moduleId": 7,
+      "type": "multiple-choice",
+      "question": "Governments ___ reduce emissions more quickly.",
+      "options": [
+        "should to",
+        "should",
+        "shoulds",
+        "should be"
+      ],
+      "answer": "should",
+      "explanation": "Modal-এর পরে bare infinitive বসে; কোনো to নয়, কোনো -s নয়।"
+    },
+    {
+      "id": "m7-p2",
+      "moduleId": 7,
+      "type": "multiple-choice",
+      "question": "Which modal expresses the strongest certainty about a conclusion?",
+      "options": [
+        "might",
+        "could",
+        "must",
+        "may"
+      ],
+      "answer": "must",
+      "explanation": "Must দিয়ে প্রমাণ থেকে পাওয়া দৃঢ় সিদ্ধান্ত বোঝানো হয়।"
+    },
+    {
+      "id": "m7-p3",
+      "moduleId": 7,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "The rise might caused by population growth.",
+        "The rise might have been caused by population growth.",
+        "The rise might be caused by population growth happened.",
+        "The rise might has been caused by population growth."
+      ],
+      "answer": "The rise might have been caused by population growth.",
+      "explanation": "অতীতের সম্ভাবনা passive-এ বোঝাতে might have been + past participle বসে।"
+    },
+    {
+      "id": "m7-p4",
+      "moduleId": 7,
+      "type": "fill-blank",
+      "question": "Employees ___ have to work overtime if they do not want to. (must not / do not)",
+      "answer": "do not",
+      "explanation": "Do not have to মানে করার দরকার নেই, আর must not মানে করা নিষেধ।"
+    },
+    {
+      "id": "m8-p1",
+      "moduleId": 8,
+      "type": "multiple-choice",
+      "question": "The new policy will ___ next year.",
+      "options": [
+        "be introduce",
+        "be introduced",
+        "introduced",
+        "being introduced"
+      ],
+      "answer": "be introduced",
+      "explanation": "Modal passive-এর গঠন হলো modal + be + past participle।"
+    },
+    {
+      "id": "m8-p2",
+      "moduleId": 8,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Many changes | have been occurred | in the city | since 2010.",
+      "options": [
+        "Many changes",
+        "have been occurred",
+        "in the city",
+        "since 2010"
+      ],
+      "answer": "have been occurred",
+      "explanation": "Occur-এর কোনো Object হয় না, তাই এটা passive হতে পারে না: have occurred হবে।"
+    },
+    {
+      "id": "m8-p3",
+      "moduleId": 8,
+      "type": "choose-correct-sentence",
+      "question": "Which impersonal reporting structure is correct?",
+      "options": [
+        "It is said that the policy to be effective.",
+        "The policy is said to be effective.",
+        "The policy is said that it effective.",
+        "It is said the policy to be effective."
+      ],
+      "answer": "The policy is said to be effective.",
+      "explanation": "Subject + passive reporting verb + to-infinitive একটা সম্পূর্ণ গঠন।"
+    },
+    {
+      "id": "m8-p4",
+      "moduleId": 8,
+      "type": "rewrite",
+      "question": "Rewrite in the active voice: \"It was decided by the committee that the project would be cancelled.\"",
+      "answer": "The committee cancelled the project.",
+      "acceptable": [
+        "the committee cancelled the project",
+        "the committee decided to cancel the project"
+      ],
+      "explanation": "Active রূপে কে কাজটা করছে সেটা সরাসরি বলা যায়, আর ছয়টা বাড়তি শব্দও কমে।"
+    },
+    {
+      "id": "m9-p1",
+      "moduleId": 9,
+      "type": "multiple-choice",
+      "question": "The report suggests ___ the budget.",
+      "options": [
+        "to increase",
+        "increasing",
+        "increase",
+        "to increasing"
+      ],
+      "answer": "increasing",
+      "explanation": "Suggest-এর পরে gerund বা that-clause বসে, কখনো to-infinitive নয়।"
+    },
+    {
+      "id": "m9-p2",
+      "moduleId": 9,
+      "type": "fill-blank",
+      "question": "The law prevents companies ___ polluting rivers. (from / to)",
+      "answer": "from",
+      "explanation": "Prevent-এর গঠন হলো prevent someone from doing something।"
+    },
+    {
+      "id": "m9-p3",
+      "moduleId": 9,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "This policy allows to reduce traffic.",
+        "This policy allows cities to reduce traffic.",
+        "This policy allows reducing traffic to cities.",
+        "This policy allows cities reducing traffic."
+      ],
+      "answer": "This policy allows cities to reduce traffic.",
+      "explanation": "Allow-এর পরে to-infinitive-এর আগে একটা Object বসাতেই হবে।"
+    },
+    {
+      "id": "m9-p4",
+      "moduleId": 9,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The government | should focus | to improve | healthcare.",
+      "options": [
+        "The government",
+        "should focus",
+        "to improve",
+        "healthcare"
+      ],
+      "answer": "to improve",
+      "explanation": "Focus-এর সঙ্গে on বসে, আর Preposition-এর পরে Verb -ing রূপ নেয়: on improving।"
+    },
+    {
+      "id": "m10-p1",
+      "moduleId": 10,
+      "type": "multiple-choice",
+      "question": "There was a sharp increase ___ the number of tourists.",
+      "options": [
+        "of",
+        "in",
+        "on",
+        "to"
+      ],
+      "answer": "in",
+      "explanation": "Noun হিসেবে increase, rise, fall আর decline-এর পরে in বসে, যা বোঝায় কী বদলেছে।"
+    },
+    {
+      "id": "m10-p2",
+      "moduleId": 10,
+      "type": "fill-blank",
+      "question": "Social media has a huge impact ___ young people.",
+      "answer": "on",
+      "explanation": "impact, effect আর influence - তিনটার সঙ্গেই on বসে।"
+    },
+    {
+      "id": "m10-p3",
+      "moduleId": 10,
+      "type": "multiple-choice",
+      "question": "Sales rose ___ 80 million units in 2020.",
+      "options": [
+        "by",
+        "to",
+        "at",
+        "from"
+      ],
+      "answer": "to",
+      "explanation": "To দিয়ে বোঝায় শেষে কত হয়েছে; by দিয়ে বোঝাত কতটা বদলেছে।"
+    },
+    {
+      "id": "m10-p4",
+      "moduleId": 10,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The essay | discusses about | three possible | solutions.",
+      "options": [
+        "The essay",
+        "discusses about",
+        "three possible",
+        "solutions"
+      ],
+      "answer": "discusses about",
+      "explanation": "Discuss সরাসরি Object নেয়, এর সঙ্গে কোনো Preposition বসে না।"
+    },
+    {
+      "id": "m11-p1",
+      "moduleId": 11,
+      "type": "multiple-choice",
+      "question": "The second city is ___ than the first.",
+      "options": [
+        "more bigger",
+        "much bigger",
+        "most big",
+        "more big"
+      ],
+      "answer": "much bigger",
+      "explanation": "একটা comparative চিহ্নই যথেষ্ট, আর much দিয়ে বোঝানো হয় পার্থক্যটা কত বড়।"
+    },
+    {
+      "id": "m11-p2",
+      "moduleId": 11,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence states the multiple correctly?",
+      "options": [
+        "There were twice more visitors in July than in January.",
+        "There were twice as many visitors in July as in January.",
+        "There were two times visitors in July than January.",
+        "There were twice as much visitors in July as in January."
+      ],
+      "answer": "There were twice as many visitors in July as in January.",
+      "explanation": "কয় গুণ, তা বোঝাতে as...as গঠন লাগে, আর visitors countable বলে many বসে।"
+    },
+    {
+      "id": "m11-p3",
+      "moduleId": 11,
+      "type": "fill-blank",
+      "question": "Sales increased ___ between 2010 and 2015. (sharp / sharply)",
+      "answer": "sharply",
+      "explanation": "Verb-কে বর্ণনা করে Adverb; Noun হলে Adjective sharp বসত।"
+    },
+    {
+      "id": "m11-p4",
+      "moduleId": 11,
+      "type": "rewrite",
+      "question": "Rewrite using a verb and adverb: \"There was a sharp rise in sales.\"",
+      "answer": "Sales rose sharply.",
+      "acceptable": [
+        "sales rose sharply",
+        "sales increased sharply"
+      ],
+      "explanation": "একই তথ্য Noun phrase দিয়েও বলা যায়, আবার Verb phrase দিয়েও।"
+    },
+    {
+      "id": "m12-p1",
+      "moduleId": 12,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Although it is expensive, but it is effective.",
+        "Although it is expensive, it is effective.",
+        "Although it is expensive, however it is effective.",
+        "Although it is expensive, so it is effective."
+      ],
+      "answer": "Although it is expensive, it is effective.",
+      "explanation": "Although আগেই বৈপরীত্য বুঝিয়ে দিয়েছে, তাই দ্বিতীয় কোনো connector লাগে না।"
+    },
+    {
+      "id": "m12-p2",
+      "moduleId": 12,
+      "type": "fill-blank",
+      "question": "___ the high cost, the scheme was approved. (Despite / Although)",
+      "answer": "Despite",
+      "explanation": "The high cost একটা Noun phrase, তাই Preposition despite এখানে ঠিক।"
+    },
+    {
+      "id": "m12-p3",
+      "moduleId": 12,
+      "type": "multiple-choice",
+      "question": "Which word expresses a straight contrast between two facts?",
+      "options": [
+        "although",
+        "whereas",
+        "because",
+        "so that"
+      ],
+      "answer": "whereas",
+      "explanation": "Whereas দুটো তথ্যের সরাসরি পার্থক্য বোঝায়, আর although বোঝায় ফলটা প্রত্যাশার উল্টো।"
+    },
+    {
+      "id": "m12-p4",
+      "moduleId": 12,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Because the roads | are congested, | therefore commuting | takes longer.",
+      "options": [
+        "Because the roads",
+        "are congested,",
+        "therefore commuting",
+        "takes longer"
+      ],
+      "answer": "therefore commuting",
+      "explanation": "Because আর therefore দুটোই কারণ-ফলাফল বোঝায়, তাই একসঙ্গে বসালে একই কাজে দুটো connector হয়ে যায়।"
+    },
+    {
+      "id": "m13-p1",
+      "moduleId": 13,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The policy | which it was | introduced in 2015 | reduced pollution.",
+      "options": [
+        "The policy",
+        "which it was",
+        "introduced in 2015",
+        "reduced pollution"
+      ],
+      "answer": "which it was",
+      "explanation": "Which নিজেই Relative Clause-টার Subject, তাই it বসালে দুটো Subject হয়ে যায়।"
+    },
+    {
+      "id": "m13-p2",
+      "moduleId": 13,
+      "type": "multiple-choice",
+      "question": "The researcher ___ study was published won an award.",
+      "options": [
+        "who",
+        "which",
+        "whose",
+        "whom"
+      ],
+      "answer": "whose",
+      "explanation": "Whose দিয়ে কার জিনিস তা বোঝায়: study-টা researcher-এর।"
+    },
+    {
+      "id": "m13-p3",
+      "moduleId": 13,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence punctuates a non-defining clause correctly?",
+      "options": [
+        "My hometown which is in the north has grown rapidly.",
+        "My hometown, which is in the north, has grown rapidly.",
+        "My hometown, that is in the north, has grown rapidly.",
+        "My hometown which is in the north, has grown rapidly."
+      ],
+      "answer": "My hometown, which is in the north, has grown rapidly.",
+      "explanation": "একটাই আছে এমন Noun সম্পর্কে বাড়তি তথ্য দিলে দুই পাশে কমা বসে, আর which ব্যবহার হয়।"
+    },
+    {
+      "id": "m13-p4",
+      "moduleId": 13,
+      "type": "rewrite",
+      "question": "Reduce the relative clause: \"The report which was published in 2020 criticises the plan.\"",
+      "answer": "The report published in 2020 criticises the plan.",
+      "acceptable": [
+        "the report published in 2020 criticises the plan"
+      ],
+      "explanation": "which was বাদ দিলে শুধু past participle থাকে, যেটা Noun-টাকে বর্ণনা করে।"
+    },
+    {
+      "id": "m14-p1",
+      "moduleId": 14,
+      "type": "choose-correct-sentence",
+      "question": "Which embedded question is correct?",
+      "options": [
+        "I wonder why do people move to cities.",
+        "I wonder why people move to cities.",
+        "I wonder why people do move to cities?",
+        "I wonder that why people move to cities."
+      ],
+      "answer": "I wonder why people move to cities.",
+      "explanation": "Embedded question-এ statement-এর word order থাকে, আর auxiliary do বাদ যায়।"
+    },
+    {
+      "id": "m14-p2",
+      "moduleId": 14,
+      "type": "fill-blank",
+      "question": "It is unclear ___ the scheme will succeed. (if / whether)",
+      "answer": "whether",
+      "explanation": "Formal লেখায় হ্যাঁ-না বিকল্প বোঝাতে whether বেশি মানানসই।"
+    },
+    {
+      "id": "m14-p3",
+      "moduleId": 14,
+      "type": "rewrite",
+      "question": "Use extraposition: \"That the climate is changing is now undisputed.\"",
+      "answer": "It is now undisputed that the climate is changing.",
+      "acceptable": [
+        "it is now undisputed that the climate is changing"
+      ],
+      "explanation": "ভারী Clause-টাকে শেষে পাঠালে end-weight নিয়ম (ভারী অংশ শেষে) মানা হয়।"
+    },
+    {
+      "id": "m14-p4",
+      "moduleId": 14,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The study | examines how | does air pollution | affect health.",
+      "options": [
+        "The study",
+        "examines how",
+        "does air pollution",
+        "affect health"
+      ],
+      "answer": "does air pollution",
+      "explanation": "does বাদ দিয়ে statement-এর word order-এ লিখুন: how air pollution affects health।"
+    },
+    {
+      "id": "m15-p1",
+      "moduleId": 15,
+      "type": "multiple-choice",
+      "question": "If the government ___ more, the problem will be solved.",
+      "options": [
+        "will invest",
+        "invests",
+        "invested",
+        "would invest"
+      ],
+      "answer": "invests",
+      "explanation": "First conditional-এর if-clause-এ Present simple বসে।"
+    },
+    {
+      "id": "m15-p2",
+      "moduleId": 15,
+      "type": "choose-correct-sentence",
+      "question": "Which second conditional is correct?",
+      "options": [
+        "If people would recycle more, less waste would go to landfill.",
+        "If people recycled more, less waste would go to landfill.",
+        "If people recycle more, less waste would go to landfill.",
+        "If people will recycle more, less waste would go to landfill."
+      ],
+      "answer": "If people recycled more, less waste would go to landfill.",
+      "explanation": "Second conditional-এ if-clause-এ Past simple আর ফলাফলে would + base form বসে।"
+    },
+    {
+      "id": "m15-p3",
+      "moduleId": 15,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Unless | we do not act now, | the situation | will worsen.",
+      "options": [
+        "Unless",
+        "we do not act now,",
+        "the situation",
+        "will worsen"
+      ],
+      "answer": "we do not act now,",
+      "explanation": "Unless-এর অর্থই if not, তাই আরেকটা not বসালে অর্থ উল্টে যায়।"
+    },
+    {
+      "id": "m15-p4",
+      "moduleId": 15,
+      "type": "fill-blank",
+      "question": "If I ___ the minister, I would increase funding. (was / were)",
+      "answer": "were",
+      "explanation": "Formal লেখায় কাল্পনিক অর্থে were ব্যবহার হয়।"
+    },
+    {
+      "id": "m16-p1",
+      "moduleId": 16,
+      "type": "choose-correct-sentence",
+      "question": "Which list is parallel?",
+      "options": [
+        "The policy reduces pollution, saving money and to improve health.",
+        "The policy reduces pollution, saves money and improves health.",
+        "The policy reduces pollution, money saving and health improvement.",
+        "The policy reduces pollution, to save money and improving health."
+      ],
+      "answer": "The policy reduces pollution, saves money and improves health.",
+      "explanation": "তিনটা আইটেমই এখন একই Subject-এর finite verb।"
+    },
+    {
+      "id": "m16-p2",
+      "moduleId": 16,
+      "type": "multiple-choice",
+      "question": "The city is not only crowded but also ___.",
+      "options": [
+        "it is expensive",
+        "expensive",
+        "expensively",
+        "has expense"
+      ],
+      "answer": "expensive",
+      "explanation": "not only-এর পরে যা বসে, but also-এর পরেও তাই বসবে: Adjective-এর সঙ্গে Adjective।"
+    },
+    {
+      "id": "m16-p3",
+      "moduleId": 16,
+      "type": "fill-blank",
+      "question": "The climate of Spain is warmer than ___ of Norway. (that / those)",
+      "answer": "that",
+      "explanation": "That of দিয়ে একবচন Noun climate বোঝানো হচ্ছে, তাই তুলনার দুই পাশে একই জিনিস থাকে।"
+    },
+    {
+      "id": "m16-p4",
+      "moduleId": 16,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "She enjoys | reading, | to travel | and cooking.",
+      "options": [
+        "She enjoys",
+        "reading,",
+        "to travel",
+        "and cooking"
+      ],
+      "answer": "to travel",
+      "explanation": "Enjoy-এর পরে -ing বসে, তাই তালিকার প্রতিটি আইটেম -ing রূপে হতে হবে।"
+    },
+    {
+      "id": "m17-p1",
+      "moduleId": 17,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence has no dangling modifier?",
+      "options": [
+        "Walking to school, the rain started.",
+        "Walking to school, I was caught in the rain.",
+        "Walking to school, it rained heavily.",
+        "Walking to school, the weather turned bad."
+      ],
+      "answer": "Walking to school, I was caught in the rain.",
+      "explanation": "হাঁটার কাজটা মূল Clause-এর Subject-কেই করতে হবে।"
+    },
+    {
+      "id": "m17-p2",
+      "moduleId": 17,
+      "type": "fill-blank",
+      "question": "The report ___ in 2020 criticises the plan. (publishing / published)",
+      "answer": "published",
+      "explanation": "Report-টা প্রকাশ করা হয়েছিল, তাই ছোট রূপে past participle বসে।"
+    },
+    {
+      "id": "m17-p3",
+      "moduleId": 17,
+      "type": "multiple-choice",
+      "question": "The figure rose steadily, ___ a peak in 2010.",
+      "options": [
+        "reached",
+        "reaching",
+        "to reaching",
+        "reaches"
+      ],
+      "answer": "reaching",
+      "explanation": "বাক্যের শেষে ফলাফল বোঝানো Clause -ing রূপ নেয়।"
+    },
+    {
+      "id": "m17-p4",
+      "moduleId": 17,
+      "type": "rewrite",
+      "question": "Fix the dangling modifier: \"Having finished the report, the deadline was met.\"",
+      "answer": "Having finished the report, the team met the deadline.",
+      "acceptable": [
+        "having finished the report, the team met the deadline",
+        "having finished the report, we met the deadline"
+      ],
+      "explanation": "মূল Clause-এ এমন একটা Subject থাকতে হবে, যে আসলে report-টা শেষ করেছে।"
+    },
+    {
+      "id": "m18-p1",
+      "moduleId": 18,
+      "type": "rewrite",
+      "question": "Nominalize the clause: \"Because prices rose rapidly, demand fell.\"  Start with \"The rapid...\"",
+      "answer": "The rapid rise in prices reduced demand.",
+      "acceptable": [
+        "the rapid rise in prices reduced demand",
+        "the rapid rise in prices caused demand to fall"
+      ],
+      "explanation": "Adverb-টা Adjective হয়ে যায়, আর Verb-টা নিজের Preposition সহ Noun হয়ে যায়।"
+    },
+    {
+      "id": "m18-p2",
+      "moduleId": 18,
+      "type": "multiple-choice",
+      "question": "Which noun modifier is correct?",
+      "options": [
+        "a five-years plan",
+        "a five-year plan",
+        "a five years plan",
+        "a five year plans"
+      ],
+      "answer": "a five-year plan",
+      "explanation": "Modifier হিসেবে বসা Noun একবচনে থাকে, আর সংখ্যার সঙ্গে hyphen দিয়ে জোড়া লাগে।"
+    },
+    {
+      "id": "m18-p3",
+      "moduleId": 18,
+      "type": "fill-blank",
+      "question": "The fact ___ the policy failed is undeniable. (that / which)",
+      "answer": "that",
+      "explanation": "Noun complement clause-এ Relative Pronoun নয়, that বসে।"
+    },
+    {
+      "id": "m18-p4",
+      "moduleId": 18,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The analyse | of the data | shows | a clear pattern.",
+      "options": [
+        "The analyse",
+        "of the data",
+        "shows",
+        "a clear pattern"
+      ],
+      "answer": "The analyse",
+      "explanation": "Analyse হলো Verb, আর এর Noun রূপ হলো analysis।"
+    },
+    {
+      "id": "m19-p1",
+      "moduleId": 19,
+      "type": "choose-correct-sentence",
+      "question": "Which claim is best supported by a single study?",
+      "options": [
+        "This study proves that exercise prevents depression.",
+        "This study indicates that exercise may help prevent depression.",
+        "This study shows exercise always prevents depression.",
+        "Everyone knows exercise prevents depression."
+      ],
+      "answer": "This study indicates that exercise may help prevent depression.",
+      "explanation": "Indicates আর may দাবির জোরকে প্রমাণের সঙ্গে মিলিয়ে দেয়।"
+    },
+    {
+      "id": "m19-p2",
+      "moduleId": 19,
+      "type": "multiple-choice",
+      "question": "Which revision of \"Technology always improves education\" is strongest?",
+      "options": [
+        "Technology maybe improves education.",
+        "Technology can improve educational outcomes when it is implemented effectively.",
+        "Technology possibly might improve education sometimes.",
+        "Technology improves education, I think."
+      ],
+      "answer": "Technology can improve educational outcomes when it is implemented effectively.",
+      "explanation": "একটা শর্ত যোগ করায় দাবিটা শুধু নরম নয়, নির্ভুলও হয়েছে।"
+    },
+    {
+      "id": "m19-p3",
+      "moduleId": 19,
+      "type": "fill-blank",
+      "question": "Young people ___ to spend more time online than older groups. (tend / tends)",
+      "answer": "tend",
+      "explanation": "Tend to একটা hedge; এটা বোঝায় সাধারণত এমন হয়, তবে ব্যতিক্রমও আছে।"
+    },
+    {
+      "id": "m19-p4",
+      "moduleId": 19,
+      "type": "rewrite",
+      "question": "Remove the excess hedging: \"It is possible that it might perhaps be true that costs may rise.\"",
+      "answer": "Costs are likely to rise.",
+      "acceptable": [
+        "costs are likely to rise",
+        "costs may rise"
+      ],
+      "explanation": "প্রতিটি দাবিতে একটা hedge-ই যথেষ্ট; একের পর এক বসালে বাক্যটা শেষে কিছুই বলে না।"
+    },
+    {
+      "id": "m20-p1",
+      "moduleId": 20,
+      "type": "choose-correct-sentence",
+      "question": "Which version respects end-weight?",
+      "options": [
+        "To find a solution that satisfies all stakeholders is difficult.",
+        "It is difficult to find a solution that satisfies all stakeholders.",
+        "Difficult it is to find a solution for all stakeholders.",
+        "A solution that satisfies all stakeholders to find is difficult."
+      ],
+      "answer": "It is difficult to find a solution that satisfies all stakeholders.",
+      "explanation": "লম্বা infinitive clause-টা বাক্যের শেষে বসাই উচিত।"
+    },
+    {
+      "id": "m20-p2",
+      "moduleId": 20,
+      "type": "multiple-choice",
+      "question": "Which opening carries given information forward best?",
+      "options": [
+        "This.",
+        "This thing.",
+        "This expansion",
+        "That one"
+      ],
+      "answer": "This expansion",
+      "explanation": "This + summary noun পরিষ্কারভাবে আগের বাক্যটাকে বোঝায়, আর বাক্যটা জানা তথ্য দিয়ে শুরু হয়।"
+    },
+    {
+      "id": "m20-p3",
+      "moduleId": 20,
+      "type": "fill-blank",
+      "question": "___ was a sharp fall in rainfall, which affected three regions. (There / It)",
+      "answer": "There",
+      "explanation": "Existential there নতুন তথ্য আনে, আর ভারী Clause-টাকে শেষে রাখে।"
+    },
+    {
+      "id": "m20-p4",
+      "moduleId": 20,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Moreover, | in addition, | furthermore, | the cost should also be considered.",
+      "options": [
+        "Moreover,",
+        "in addition,",
+        "furthermore,",
+        "the cost should also be considered"
+      ],
+      "answer": "in addition,",
+      "explanation": "তিনটা connector একই কাজ করছে (আরও কিছু যোগ করা); একটা রেখে বাকিগুলো বাদ দিন।"
+    },
+    {
+      "id": "m21-p1",
+      "moduleId": 21,
+      "type": "multiple-choice",
+      "question": "People who volunteer usually ___ for personal reasons.",
+      "options": [
+        "do it",
+        "do so",
+        "make so",
+        "does so"
+      ],
+      "answer": "do so",
+      "explanation": "একই Verb phrase আবার না লিখে formal লেখায় do so বসানো হয়।"
+    },
+    {
+      "id": "m21-p2",
+      "moduleId": 21,
+      "type": "fill-blank",
+      "question": "The old system was slow; the new ___ is faster. (one / ones)",
+      "answer": "one",
+      "explanation": "One আগে বলা একবচন countable Noun-এর জায়গা নেয়।"
+    },
+    {
+      "id": "m21-p3",
+      "moduleId": 21,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence uses such correctly?",
+      "options": [
+        "Such problem is difficult to solve.",
+        "Such problems are difficult to solve.",
+        "Such a problems are difficult to solve.",
+        "Such of problems are difficult to solve."
+      ],
+      "answer": "Such problems are difficult to solve.",
+      "explanation": "Such-এর পরে বহুবচন বা uncountable Noun বসে; একবচন countable Noun হলে such a লাগত।"
+    },
+    {
+      "id": "m21-p4",
+      "moduleId": 21,
+      "type": "rewrite",
+      "question": "Use ellipsis: \"Some countries invest in rail. Other countries invest in roads.\"",
+      "answer": "Some countries invest in rail; others, in roads.",
+      "acceptable": [
+        "some countries invest in rail; others, in roads",
+        "some countries invest in rail, others in roads"
+      ],
+      "explanation": "দ্বিতীয়বারের Verb-টা পাঠক নিজেই বুঝে নিতে পারেন, তাই সেটা বাদ দেওয়া যায়।"
+    },
+    {
+      "id": "m22-p1",
+      "moduleId": 22,
+      "type": "multiple-choice",
+      "question": "What ___ is long-term planning.",
+      "options": [
+        "governments needs",
+        "governments need",
+        "do governments need",
+        "governments needing"
+      ],
+      "answer": "governments need",
+      "explanation": "What-clause-এর ভেতরে Verb মেলে governments-এর সঙ্গে।"
+    },
+    {
+      "id": "m22-p2",
+      "moduleId": 22,
+      "type": "choose-correct-sentence",
+      "question": "Which inversion is correct?",
+      "options": [
+        "Not only the scheme reduces costs, but also improves safety.",
+        "Not only does the scheme reduce costs, but it also improves safety.",
+        "Not only reduces the scheme costs, but it also improves safety.",
+        "Not only the scheme does reduce costs, but also it improves safety."
+      ],
+      "answer": "Not only does the scheme reduce costs, but it also improves safety.",
+      "explanation": "না-বোধক শব্দ সামনে বসলে do-support লাগে, আর দ্বিতীয় Clause-এ নিজস্ব Subject থাকে।"
+    },
+    {
+      "id": "m22-p3",
+      "moduleId": 22,
+      "type": "fill-blank",
+      "question": "Rarely ___ a policy attracted so much criticism. (has / have)",
+      "answer": "has",
+      "explanation": "শুরুতে rarely বসলে inversion হয়, আর Subject a policy একবচন।"
+    },
+    {
+      "id": "m22-p4",
+      "moduleId": 22,
+      "type": "multiple-choice",
+      "question": "How important are clefts and inversion for IELTS Band 8?",
+      "options": [
+        "Required in every essay",
+        "Required in Task 2 only",
+        "Not required at any band",
+        "Required for Task 1 descriptions"
+      ],
+      "answer": "Not required at any band",
+      "explanation": "IELTS নম্বর দেয় নির্ভুলতা আর সাবলীলতার জন্য, কোনো নির্দিষ্ট 'দেখানোর মতো' গঠনের জন্য নয়।"
+    },
+    {
+      "id": "m23-p1",
+      "moduleId": 23,
+      "type": "multiple-choice",
+      "question": "Which is the concise equivalent of \"due to the fact that\"?",
+      "options": [
+        "because",
+        "therefore",
+        "although",
+        "despite"
+      ],
+      "answer": "because",
+      "explanation": "অর্থ একটুও না হারিয়ে পাঁচটা শব্দ কমে একটা শব্দ হয়ে যায়।"
+    },
+    {
+      "id": "m23-p2",
+      "moduleId": 23,
+      "type": "choose-correct-sentence",
+      "question": "Where should only go?",
+      "options": [
+        "He almost drove his children to school every day.",
+        "He drove his children to school almost every day.",
+        "He drove almost his children to school every day.",
+        "Almost he drove his children to school every day."
+      ],
+      "answer": "He drove his children to school almost every day.",
+      "explanation": "সীমা বোঝানো Adverb বসবে ঠিক সেই অংশের পাশে, যেটাকে এটা সীমিত করছে।"
+    },
+    {
+      "id": "m23-p3",
+      "moduleId": 23,
+      "type": "rewrite",
+      "question": "Make it concise: \"The committee made a decision to conduct an investigation into the matter.\"",
+      "answer": "The committee decided to investigate the matter.",
+      "acceptable": [
+        "the committee decided to investigate the matter"
+      ],
+      "explanation": "Noun-এর আড়ালে লুকিয়ে থাকা Verb-গুলো ফিরিয়ে আনলে ছয়টা শব্দ কমে যায়।"
+    },
+    {
+      "id": "m23-p4",
+      "moduleId": 23,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Walking through the park, | the statues | were impressive | that afternoon.",
+      "options": [
+        "Walking through the park,",
+        "the statues",
+        "were impressive",
+        "that afternoon"
+      ],
+      "answer": "the statues",
+      "explanation": "মূর্তি তো হাঁটতে পারে না, তাই মূল Clause-এ এমন একটা Subject দরকার, যে হাঁটতে পারে।"
+    },
+    {
+      "id": "m24-p1",
+      "moduleId": 24,
+      "type": "multiple-choice",
+      "question": "Which is the academic equivalent of \"a lot of people\"?",
+      "options": [
+        "loads of people",
+        "many people",
+        "tons of people",
+        "people a lot"
+      ],
+      "answer": "many people",
+      "explanation": "Many বা a significant proportion academic register-এর সঙ্গে মানানসই।"
+    },
+    {
+      "id": "m24-p2",
+      "moduleId": 24,
+      "type": "choose-correct-sentence",
+      "question": "Which uses a colon correctly?",
+      "options": [
+        "Three factors matter: are cost, time and access.",
+        "Three factors matter: cost, time and access.",
+        "The main issues are: cost, time and access.",
+        "Three factors: matter cost, time and access."
+      ],
+      "answer": "Three factors matter: cost, time and access.",
+      "explanation": "Colon বসে একটা পূর্ণ Clause-এর পরে, আর তালিকাটা আসে ঠিক তার পরেই।"
+    },
+    {
+      "id": "m24-p3",
+      "moduleId": 24,
+      "type": "fill-blank",
+      "question": "Costs rose___ demand fell. (comma or semicolon?) Write the mark only.",
+      "answer": ";",
+      "acceptable": [
+        ";",
+        "semicolon"
+      ],
+      "explanation": "Semicolon কাছাকাছি অর্থের দুটো পূর্ণ বাক্য জোড়া দেয়।"
+    },
+    {
+      "id": "m24-p4",
+      "moduleId": 24,
+      "type": "rewrite",
+      "question": "Raise the register: \"As you can see from the graph, sales went up.\"",
+      "answer": "As the graph shows, sales increased.",
+      "acceptable": [
+        "as the graph shows, sales increased",
+        "the graph shows that sales increased"
+      ],
+      "explanation": "পাঠককে সরাসরি সম্বোধন এড়ান, আর phrasal verb-এর বদলে এক শব্দের Verb বসান।"
+    }
+  ],
+  "test": [
+    {
+      "id": "m1-t1",
+      "moduleId": 1,
+      "type": "multiple-choice",
+      "question": "Which element is missing from \"In this chart illustrates the data.\"?",
+      "options": [
+        "The verb",
+        "The subject",
+        "The object",
+        "The adverbial"
+      ],
+      "answer": "The subject",
+      "explanation": "in this chart একটা Adverbial phrase, তাই Clause-টায় Verb আছে, কিন্তু কোনো Subject নেই।"
+    },
+    {
+      "id": "m1-t2",
+      "moduleId": 1,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Is necessary to reduce waste.",
+        "It is necessary to reduce waste.",
+        "There is necessary to reduce waste.",
+        "Necessary is to reduce waste."
+      ],
+      "answer": "It is necessary to reduce waste.",
+      "explanation": "be + adjective + to-infinitive গঠনের আগে dummy subject it বসাতেই হবে।"
+    },
+    {
+      "id": "m1-t3",
+      "moduleId": 1,
+      "type": "fill-blank",
+      "question": "___ are many reasons for this problem. (It / There)",
+      "answer": "There",
+      "acceptable": [
+        "there"
+      ],
+      "explanation": "Existential there দিয়ে বোঝানো হয় কোনো কিছু আছে, আর এর পরে একটা Noun phrase বসে।"
+    },
+    {
+      "id": "m1-t4",
+      "moduleId": 1,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The policy | reduced significantly | air pollution | last year.",
+      "options": [
+        "The policy",
+        "reduced significantly",
+        "air pollution",
+        "last year"
+      ],
+      "answer": "reduced significantly",
+      "explanation": "Adverb কখনো Verb আর তার Object-এর মাঝখানে বসে না: significantly reduced air pollution হওয়া উচিত।"
+    },
+    {
+      "id": "m1-t5",
+      "moduleId": 1,
+      "type": "multiple-choice",
+      "question": "In \"The results are significant\", what is the function of significant?",
+      "options": [
+        "Object",
+        "Complement",
+        "Adverbial",
+        "Subject"
+      ],
+      "answer": "Complement",
+      "explanation": "এটা be-এর পরে বসে Subject-কে বর্ণনা করছে, তাই এটা Subject Complement।"
+    },
+    {
+      "id": "m1-t6",
+      "moduleId": 1,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence has correct word order?",
+      "options": [
+        "Explains the author that technology has changed society.",
+        "The author explains that technology has changed society.",
+        "That technology has changed society the author explains.",
+        "The author that technology has changed society explains."
+      ],
+      "answer": "The author explains that technology has changed society.",
+      "explanation": "ইংরেজি statement-এ Subject সবসময় Verb-এর আগে থাকে; শুধু প্রশ্নে এই ক্রম উল্টে যায়।"
+    },
+    {
+      "id": "m1-t7",
+      "moduleId": 1,
+      "type": "multiple-choice",
+      "question": "Why is \"Nowadays, more and more people living in cities.\" incorrect?",
+      "options": [
+        "It has no subject.",
+        "It has no finite verb.",
+        "It has two objects.",
+        "The adverbial is misplaced."
+      ],
+      "answer": "It has no finite verb.",
+      "explanation": "শুধু -ing রূপ কোনো Clause-এর মূল Verb হতে পারে না; এখানে live বা are living দরকার।"
+    },
+    {
+      "id": "m1-t8",
+      "moduleId": 1,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "My country | it has | a growing | economy.",
+      "options": [
+        "My country",
+        "it has",
+        "a growing",
+        "economy"
+      ],
+      "answer": "it has",
+      "explanation": "My country আগে থেকেই Subject, তাই it বসালে একই Subject দুবার হয়ে যায়।"
+    },
+    {
+      "id": "m1-t9",
+      "moduleId": 1,
+      "type": "fill-blank",
+      "question": "Complete with one word: ___ is difficult to measure happiness accurately.",
+      "answer": "It",
+      "acceptable": [
+        "it"
+      ],
+      "explanation": "আসল Clause-টাকে শেষে পাঠানো হয়েছে, তাই Subject-এর জায়গা পূরণ করছে dummy it।"
+    },
+    {
+      "id": "m1-t10",
+      "moduleId": 1,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is grammatically complete?",
+      "options": [
+        "According to the report shows a decline.",
+        "According to the report, sales declined.",
+        "According to the report declining sales.",
+        "In according to the report, sales declined."
+      ],
+      "answer": "According to the report, sales declined.",
+      "explanation": "শুরুর phrase-এর পরে Clause-টায় নিজের Subject আর Verb দুটোই আছে।"
+    },
+    {
+      "id": "m2-t1",
+      "moduleId": 2,
+      "type": "multiple-choice",
+      "question": "The quality of the roads ___ improved considerably.",
+      "options": [
+        "have",
+        "has",
+        "are",
+        "were"
+      ],
+      "answer": "has",
+      "explanation": "Head noun হলো quality, যেটা একবচন; of the roads শুধু বাড়তি বর্ণনা।"
+    },
+    {
+      "id": "m2-t2",
+      "moduleId": 2,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "There is many factors behind this trend.",
+        "There are many factors behind this trend.",
+        "There have many factors behind this trend.",
+        "There has many factors behind this trend."
+      ],
+      "answer": "There are many factors behind this trend.",
+      "explanation": "Verb মেলে factors-এর সঙ্গে, অর্থাৎ there-এর পরের Noun-এর সঙ্গে।"
+    },
+    {
+      "id": "m2-t3",
+      "moduleId": 2,
+      "type": "fill-blank",
+      "question": "One of the main causes ___ poor planning. (is / are)",
+      "answer": "is",
+      "explanation": "Subject-এর head হলো one, তাই causes বহুবচন হলেও Verb একবচন।"
+    },
+    {
+      "id": "m2-t4",
+      "moduleId": 2,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The number | of cars | have increased | sharply.",
+      "options": [
+        "The number",
+        "of cars",
+        "have increased",
+        "sharply"
+      ],
+      "answer": "have increased",
+      "explanation": "The number of একটা নির্দিষ্ট সংখ্যা বোঝায়, তাই Verb হবে has increased।"
+    },
+    {
+      "id": "m2-t5",
+      "moduleId": 2,
+      "type": "multiple-choice",
+      "question": "Which noun is uncountable and never takes -s?",
+      "options": [
+        "solution",
+        "advice",
+        "factor",
+        "method"
+      ],
+      "answer": "advice",
+      "explanation": "Advice uncountable; গুনতে হলে a piece of advice বা suggestions ব্যবহার করুন।"
+    },
+    {
+      "id": "m2-t6",
+      "moduleId": 2,
+      "type": "multiple-choice",
+      "question": "Each of the participants ___ interviewed twice.",
+      "options": [
+        "were",
+        "was",
+        "have been",
+        "are"
+      ],
+      "answer": "was",
+      "explanation": "Each একবচন, আর এটাই Subject phrase-এর head।"
+    },
+    {
+      "id": "m2-t7",
+      "moduleId": 2,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence uses a collective noun correctly in academic English?",
+      "options": [
+        "The government are planning new rules.",
+        "The government is planning new rules.",
+        "The government have plan new rules.",
+        "The governments is planning new rules."
+      ],
+      "answer": "The government is planning new rules.",
+      "explanation": "Academic English-এ Collective Noun একবচন Verb নেয়।"
+    },
+    {
+      "id": "m2-t8",
+      "moduleId": 2,
+      "type": "fill-blank",
+      "question": "A number of solutions ___ been proposed. (has / have)",
+      "answer": "have",
+      "explanation": "A number of মানে কয়েকটি, তাই Verb বহুবচন হবে।"
+    },
+    {
+      "id": "m2-t9",
+      "moduleId": 2,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Modern technology | have changed | the way | we work.",
+      "options": [
+        "Modern technology",
+        "have changed",
+        "the way",
+        "we work"
+      ],
+      "answer": "have changed",
+      "explanation": "এখানে technology uncountable, তাই একবচন Verb নেয়: has changed।"
+    },
+    {
+      "id": "m2-t10",
+      "moduleId": 2,
+      "type": "multiple-choice",
+      "question": "Which sentence shows correct agreement with a long subject?",
+      "options": [
+        "The effects of the new policy on small businesses is unclear.",
+        "The effects of the new policy on small businesses are unclear.",
+        "The effect of the new policy on small businesses are unclear.",
+        "The effects of the new policy on small businesses was unclear."
+      ],
+      "answer": "The effects of the new policy on small businesses are unclear.",
+      "explanation": "Effects হলো বহুবচন head noun, তাই Verb-ও বহুবচন।"
+    },
+    {
+      "id": "m3-t1",
+      "moduleId": 3,
+      "type": "multiple-choice",
+      "question": "___ technology has transformed ___ education.",
+      "options": [
+        "The / the",
+        "A / the",
+        "No article / no article",
+        "The / a"
+      ],
+      "answer": "No article / no article",
+      "explanation": "দুটো Noun-ই এখানে সাধারণ অর্থে আর uncountable, তাই কোনোটাতেই article বসে না।"
+    },
+    {
+      "id": "m3-t2",
+      "moduleId": 3,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "He is engineer at a large firm.",
+        "He is an engineer at a large firm.",
+        "He is the engineer at large firm.",
+        "He is engineer at the large firm."
+      ],
+      "answer": "He is an engineer at a large firm.",
+      "explanation": "একবচন countable Noun-এর আগে সবসময় determiner লাগে, আর vowel sound-এর আগে an বসে।"
+    },
+    {
+      "id": "m3-t3",
+      "moduleId": 3,
+      "type": "fill-blank",
+      "question": "Complete with one word: ___ internet has changed how we communicate.",
+      "answer": "The",
+      "acceptable": [
+        "the"
+      ],
+      "explanation": "সবার চেনা আর একটাই আছে এমন জিনিসের আগে the বসে: the internet, the environment, the media।"
+    },
+    {
+      "id": "m3-t4",
+      "moduleId": 3,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "She carried out | a research | on renewable | energy.",
+      "options": [
+        "She carried out",
+        "a research",
+        "on renewable",
+        "energy"
+      ],
+      "answer": "a research",
+      "explanation": "Research uncountable, তাই এর আগে a বসতে পারে না। research বা a study লিখুন।"
+    },
+    {
+      "id": "m3-t5",
+      "moduleId": 3,
+      "type": "multiple-choice",
+      "question": "The city built a new railway. ___ railway has reduced congestion.",
+      "options": [
+        "A",
+        "The",
+        "An",
+        "No article"
+      ],
+      "answer": "The",
+      "explanation": "আগে বলা জিনিসের কথা আবার বললে the বসে।"
+    },
+    {
+      "id": "m3-t6",
+      "moduleId": 3,
+      "type": "multiple-choice",
+      "question": "Which quantifier fits? There is ___ evidence to support this claim.",
+      "options": [
+        "many",
+        "few",
+        "little",
+        "a number of"
+      ],
+      "answer": "little",
+      "explanation": "Evidence uncountable, তাই এর সঙ্গে few নয়, little বসে।"
+    },
+    {
+      "id": "m3-t7",
+      "moduleId": 3,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "This problems affect every city.",
+        "These problems affect every city.",
+        "These problem affects every cities.",
+        "This problems affects every cities."
+      ],
+      "answer": "These problems affect every city.",
+      "explanation": "These মেলে বহুবচন Noun-এর সঙ্গে, আর every-র পরে একবচন Noun বসে।"
+    },
+    {
+      "id": "m3-t8",
+      "moduleId": 3,
+      "type": "fill-blank",
+      "question": "It is ___ useful information for students. (a / an / no article)",
+      "answer": "no article",
+      "acceptable": [
+        "no article",
+        "none",
+        "-",
+        "zero"
+      ],
+      "explanation": "Information uncountable, তাই এর আগে a বসে না। গুনতে হলে a piece of যোগ করুন।"
+    },
+    {
+      "id": "m3-t9",
+      "moduleId": 3,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The children | in general | need more | outdoor activity.",
+      "options": [
+        "The children",
+        "in general",
+        "need more",
+        "outdoor activity"
+      ],
+      "answer": "The children",
+      "explanation": "পুরো শ্রেণি বোঝাতে article ছাড়া বহুবচন বসে; the বসালে নির্দিষ্ট একটা দলকে বোঝাত।"
+    },
+    {
+      "id": "m3-t10",
+      "moduleId": 3,
+      "type": "multiple-choice",
+      "question": "Which is correct for a general statement about a whole category?",
+      "options": [
+        "The pollution is a serious problem.",
+        "Pollution is a serious problem.",
+        "A pollution is a serious problem.",
+        "Pollutions are a serious problem."
+      ],
+      "answer": "Pollution is a serious problem.",
+      "explanation": "সাধারণ অর্থে uncountable Noun-এর আগে কোনো article বসে না, আর Verb একবচন হয়।"
+    },
+    {
+      "id": "m4-t1",
+      "moduleId": 4,
+      "type": "multiple-choice",
+      "question": "The committee announced ___ decision yesterday.",
+      "options": [
+        "their",
+        "its",
+        "it",
+        "theirs"
+      ],
+      "answer": "its",
+      "explanation": "Collective Noun-কে একবচন ধরলে possessive Pronoun-ও একবচন হবে: its।"
+    },
+    {
+      "id": "m4-t2",
+      "moduleId": 4,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence avoids an ambiguous pronoun?",
+      "options": [
+        "People prefer cars to buses because it is faster.",
+        "People prefer cars to buses because they are faster.",
+        "People prefer cars to buses because cars are faster.",
+        "People prefer cars to buses because them are faster."
+      ],
+      "answer": "People prefer cars to buses because cars are faster.",
+      "explanation": "They দিয়ে cars, buses বা people - যেকোনোটাই বোঝাতে পারত, তাই Noun-টা আবার লিখতে হবে।"
+    },
+    {
+      "id": "m4-t3",
+      "moduleId": 4,
+      "type": "fill-blank",
+      "question": "___ is a strong link between diet and health. (It / There)",
+      "answer": "There",
+      "acceptable": [
+        "there"
+      ],
+      "explanation": "There একটা Noun phrase-এর আগে বসে বোঝায় যে কোনো কিছু আছে।"
+    },
+    {
+      "id": "m4-t4",
+      "moduleId": 4,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Technology is | advancing quickly, | which they make | old skills obsolete.",
+      "options": [
+        "Technology is",
+        "advancing quickly,",
+        "which they make",
+        "old skills obsolete"
+      ],
+      "answer": "which they make",
+      "explanation": "Which নিজেই Clause-টার Subject, তাই they বসালে দুটো Subject হয়ে যায়।"
+    },
+    {
+      "id": "m4-t5",
+      "moduleId": 4,
+      "type": "multiple-choice",
+      "question": "The results were surprising. ___ suggest a new explanation.",
+      "options": [
+        "It",
+        "They",
+        "This",
+        "There"
+      ],
+      "answer": "They",
+      "explanation": "Antecedent results বহুবচন, তাই Pronoun হবে they।"
+    },
+    {
+      "id": "m4-t6",
+      "moduleId": 4,
+      "type": "multiple-choice",
+      "question": "Which phrase best replaces a vague \"This\" at the start of a sentence?",
+      "options": [
+        "This thing",
+        "This",
+        "This trend",
+        "That"
+      ],
+      "answer": "This trend",
+      "explanation": "This + summary noun বসালে this কীসের কথা বলছে তা পরিষ্কার হয়, আর cohesion-ও ভালো হয়।"
+    },
+    {
+      "id": "m4-t7",
+      "moduleId": 4,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "It has many museums in the city.",
+        "There are many museums in the city.",
+        "There has many museums in the city.",
+        "It are many museums in the city."
+      ],
+      "answer": "There are many museums in the city.",
+      "explanation": "কোনো কিছু আছে বোঝাতে there বসে, আর Verb মেলে museums-এর সঙ্গে।"
+    },
+    {
+      "id": "m4-t8",
+      "moduleId": 4,
+      "type": "fill-blank",
+      "question": "Students should bring ___ own laptops. (his or her / their)",
+      "answer": "their",
+      "explanation": "Antecedent students বহুবচন, তাই their-ই স্বাভাবিক পছন্দ।"
+    },
+    {
+      "id": "m4-t9",
+      "moduleId": 4,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Every company | must protect | their data | from attacks.",
+      "options": [
+        "Every company",
+        "must protect",
+        "their data",
+        "from attacks"
+      ],
+      "answer": "their data",
+      "explanation": "Every company একবচন, তাই possessive Pronoun হবে its।"
+    },
+    {
+      "id": "m4-t10",
+      "moduleId": 4,
+      "type": "multiple-choice",
+      "question": "Which sentence uses dummy it correctly?",
+      "options": [
+        "There is clear that the policy failed.",
+        "It is clear that the policy failed.",
+        "This is clear that the policy failed.",
+        "It is clear the policy failed that."
+      ],
+      "answer": "It is clear that the policy failed.",
+      "explanation": "Adjective আর শেষে পাঠানো that-clause-এর আগে it বসে।"
+    },
+    {
+      "id": "m5-t1",
+      "moduleId": 5,
+      "type": "multiple-choice",
+      "question": "What is the error in \"Technology is advancing rapidly, therefore many jobs will disappear.\"?",
+      "options": [
+        "Fragment",
+        "Comma splice",
+        "Missing subject",
+        "Subject-verb agreement"
+      ],
+      "answer": "Comma splice",
+      "explanation": "Therefore একটা linking adverbial, তাই শুধু কমা দিয়ে দুটো Clause জোড়া দেওয়া যায় না।"
+    },
+    {
+      "id": "m5-t2",
+      "moduleId": 5,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "The report was published last year. Which caused a debate.",
+        "The report was published last year, which caused a debate.",
+        "The report was published last year; which caused a debate.",
+        "The report was published last year which, caused a debate."
+      ],
+      "answer": "The report was published last year, which caused a debate.",
+      "explanation": "which দিয়ে শুরু হওয়া Clause নির্ভরশীল, তাই এটা একা একটা বাক্য হতে পারে না।"
+    },
+    {
+      "id": "m5-t3",
+      "moduleId": 5,
+      "type": "fill-blank",
+      "question": "Online learning is convenient___ it is also cheaper. (comma + and, or semicolon?) Write the punctuation plus any word.",
+      "answer": ", and",
+      "acceptable": [
+        ", and",
+        "and",
+        ";"
+      ],
+      "explanation": "দুটো Independent Clause জোড়া দিতে কমার পরে একটা coordinator লাগে, অথবা একটা semicolon।"
+    },
+    {
+      "id": "m5-t4",
+      "moduleId": 5,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "More people | are cycling, | this reduces | air pollution.",
+      "options": [
+        "More people",
+        "are cycling,",
+        "this reduces",
+        "air pollution"
+      ],
+      "answer": "this reduces",
+      "explanation": "This দিয়ে নতুন একটা Independent Clause শুরু হচ্ছে, তাই শুধু কমা দেওয়ায় comma splice হয়েছে; which reduces লিখুন।"
+    },
+    {
+      "id": "m5-t5",
+      "moduleId": 5,
+      "type": "multiple-choice",
+      "question": "Which word creates a dependent clause?",
+      "options": [
+        "however",
+        "therefore",
+        "although",
+        "moreover"
+      ],
+      "answer": "although",
+      "explanation": "Although একটা Subordinator, আর বাকি তিনটা linking adverbial।"
+    },
+    {
+      "id": "m5-t6",
+      "moduleId": 5,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence uses a semicolon correctly?",
+      "options": [
+        "Working from home is common; which reduces commuting.",
+        "Working from home is common; it reduces commuting.",
+        "Working from home is common; because it reduces commuting.",
+        "Working from home; is common and reduces commuting."
+      ],
+      "answer": "Working from home is common; it reduces commuting.",
+      "explanation": "Semicolon-এর দুই পাশেই একটা করে পূর্ণ বাক্য থাকতে হবে।"
+    },
+    {
+      "id": "m5-t7",
+      "moduleId": 5,
+      "type": "multiple-choice",
+      "question": "Which punctuation correctly introduces a list?",
+      "options": [
+        "semicolon",
+        "colon",
+        "comma splice",
+        "dash and comma"
+      ],
+      "answer": "colon",
+      "explanation": "একটা পূর্ণ Clause-এর পরে colon বসিয়ে তালিকা শুরু করা হয়।"
+    },
+    {
+      "id": "m5-t8",
+      "moduleId": 5,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Despite | the government | invested heavily, | the problem remained.",
+      "options": [
+        "Despite",
+        "the government",
+        "invested heavily,",
+        "the problem remained"
+      ],
+      "answer": "Despite",
+      "explanation": "Despite-এর পরে Noun বা -ing রূপ বসে; পূর্ণ Clause বসাতে হলে although লাগবে।"
+    },
+    {
+      "id": "m5-t9",
+      "moduleId": 5,
+      "type": "choose-correct-sentence",
+      "question": "Which is a complete sentence?",
+      "options": [
+        "Because the system is efficient.",
+        "Which saves a great deal of money.",
+        "The system is efficient, so it saves money.",
+        "Saving a great deal of money every year."
+      ],
+      "answer": "The system is efficient, so it saves money.",
+      "explanation": "শুধু এই option-টাতেই একটা Independent Clause আছে।"
+    },
+    {
+      "id": "m5-t10",
+      "moduleId": 5,
+      "type": "multiple-choice",
+      "question": "Which correctly joins \"The cost was high\" and \"The benefits were clear\"?",
+      "options": [
+        "The cost was high, however the benefits were clear.",
+        "The cost was high; however, the benefits were clear.",
+        "The cost was high however; the benefits were clear.",
+        "The cost was high, however; the benefits were clear."
+      ],
+      "answer": "The cost was high; however, the benefits were clear.",
+      "explanation": "However-এর আগে semicolon আর পরে কমা বসে।"
+    },
+    {
+      "id": "m6-t1",
+      "moduleId": 6,
+      "type": "multiple-choice",
+      "question": "In 2020 the figure ___ its highest point.",
+      "options": [
+        "has reached",
+        "reached",
+        "reaches",
+        "had been reaching"
+      ],
+      "answer": "reached",
+      "explanation": "Present perfect-এর সঙ্গে in 2020-এর মতো শেষ হওয়া সময় বসতে পারে না।"
+    },
+    {
+      "id": "m6-t2",
+      "moduleId": 6,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "If technology will improve, costs will fall.",
+        "If technology improves, costs will fall.",
+        "If technology improve, costs will fall.",
+        "If technology would improve, costs will fall."
+      ],
+      "answer": "If technology improves, costs will fall.",
+      "explanation": "অর্থ ভবিষ্যৎ হলেও if-clause-এ Present simple বসে।"
+    },
+    {
+      "id": "m6-t3",
+      "moduleId": 6,
+      "type": "fill-blank",
+      "question": "When the researchers arrived, the experiment ___ already finished. (has / had)",
+      "answer": "had",
+      "explanation": "অতীতের দুটো ঘটনার মধ্যে যেটা আগে ঘটেছে, সেটা বোঝাতে Past perfect বসে।"
+    },
+    {
+      "id": "m6-t4",
+      "moduleId": 6,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The graph | showed that | sales will rise | until 2030.",
+      "options": [
+        "The graph",
+        "showed that",
+        "sales will rise",
+        "until 2030"
+      ],
+      "answer": "showed that",
+      "explanation": "চার্টটা এখন আপনার সামনেই আছে, তাই এটা কী দেখাচ্ছে তা Present simple-এ লিখুন।"
+    },
+    {
+      "id": "m6-t5",
+      "moduleId": 6,
+      "type": "multiple-choice",
+      "question": "Which tense fits a Task 2 argument about the present state of the world?",
+      "options": [
+        "Past simple",
+        "Present simple",
+        "Past perfect",
+        "Future continuous"
+      ],
+      "answer": "Present simple",
+      "explanation": "সাধারণ পরিস্থিতি নিয়ে Task 2-এর যুক্তি মূলত Present simple-এ লেখা হয়।"
+    },
+    {
+      "id": "m6-t6",
+      "moduleId": 6,
+      "type": "multiple-choice",
+      "question": "Emissions ___ sharply since 2019.",
+      "options": [
+        "fell",
+        "have fallen",
+        "had fallen",
+        "fall"
+      ],
+      "answer": "have fallen",
+      "explanation": "Since বলছে সময়টা এখনো শেষ হয়নি, এখন পর্যন্ত চলছে।"
+    },
+    {
+      "id": "m6-t7",
+      "moduleId": 6,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence keeps a consistent time frame?",
+      "options": [
+        "The government introduced the scheme and spends millions on it.",
+        "The government introduced the scheme and spent millions on it.",
+        "The government introduces the scheme and spent millions on it.",
+        "The government has introduced the scheme in 2015 and spends millions."
+      ],
+      "answer": "The government introduced the scheme and spent millions on it.",
+      "explanation": "দুটো Verb-ই অতীতের একই শেষ হওয়া সময়ের কথা বলছে।"
+    },
+    {
+      "id": "m6-t8",
+      "moduleId": 6,
+      "type": "fill-blank",
+      "question": "Demand ___ expected to reach 40 million by 2035. (is / was)",
+      "answer": "is",
+      "explanation": "এখন থেকে ভবিষ্যতের অনুমান করলে is expected to বসে, কোনো অতীত রূপ নয়।"
+    },
+    {
+      "id": "m6-t9",
+      "moduleId": 6,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Since the last decade, | air quality | improved | considerably.",
+      "options": [
+        "Since the last decade,",
+        "air quality",
+        "improved",
+        "considerably"
+      ],
+      "answer": "Since the last decade,",
+      "explanation": "Since-এর পরে নির্দিষ্ট একটা সময় বসে; সময়ের দৈর্ঘ্য বোঝাতে over the last decade লাগবে।"
+    },
+    {
+      "id": "m6-t10",
+      "moduleId": 6,
+      "type": "multiple-choice",
+      "question": "Which form describes a process diagram with no dates?",
+      "options": [
+        "Past simple active",
+        "Present simple passive",
+        "Present perfect",
+        "Future passive"
+      ],
+      "answer": "Present simple passive",
+      "explanation": "Process সবসময় যেভাবে ঘটে সেভাবে Present-এ লেখা হয়: the glass is crushed and then melted।"
+    },
+    {
+      "id": "m7-t1",
+      "moduleId": 7,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The government | should to introduce | stricter laws | on emissions.",
+      "options": [
+        "The government",
+        "should to introduce",
+        "stricter laws",
+        "on emissions"
+      ],
+      "answer": "should to introduce",
+      "explanation": "Modal-এর পরে bare infinitive বসে, কখনো to বসে না।"
+    },
+    {
+      "id": "m7-t2",
+      "moduleId": 7,
+      "type": "multiple-choice",
+      "question": "It ___ solve the problem in the long term.",
+      "options": [
+        "will can",
+        "will be able to",
+        "can will",
+        "will could"
+      ],
+      "answer": "will be able to",
+      "explanation": "দুটো Modal পাশাপাশি বসে না; দ্বিতীয়টার জায়গায় be able to বসে।"
+    },
+    {
+      "id": "m7-t3",
+      "moduleId": 7,
+      "type": "multiple-choice",
+      "question": "Which sentence expresses obligation rather than likelihood?",
+      "options": [
+        "Costs must be rising, given the data.",
+        "Governments must act now.",
+        "The scheme must have failed.",
+        "Demand must be higher than expected."
+      ],
+      "answer": "Governments must act now.",
+      "explanation": "এখানে must দিয়ে বোঝানো হচ্ছে কাজটা করা জরুরি; বাকিগুলোতে must মানে প্রমাণ দেখে টানা সিদ্ধান্ত।"
+    },
+    {
+      "id": "m7-t4",
+      "moduleId": 7,
+      "type": "fill-blank",
+      "question": "Students should ___ encouraged to read widely. (be / to be)",
+      "answer": "be",
+      "explanation": "Modal passive-এর গঠন হলো modal + be + past participle।"
+    },
+    {
+      "id": "m7-t5",
+      "moduleId": 7,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Technology must improves education.",
+        "Technology must improve education.",
+        "Technology musts improve education.",
+        "Technology must to improve education."
+      ],
+      "answer": "Technology must improve education.",
+      "explanation": "Modal-এর পরের Verb-এ কখনো -s বসে না, to-ও বসে না।"
+    },
+    {
+      "id": "m7-t6",
+      "moduleId": 7,
+      "type": "multiple-choice",
+      "question": "Which modal is most appropriate for a recommendation in an essay?",
+      "options": [
+        "must",
+        "should",
+        "will",
+        "can"
+      ],
+      "answer": "should",
+      "explanation": "Should পরামর্শ দেয়, কিন্তু আইনের মতো শোনায় না, তাই essay-র সঙ্গে মানায়।"
+    },
+    {
+      "id": "m7-t7",
+      "moduleId": 7,
+      "type": "multiple-choice",
+      "question": "Which sentence makes the weakest claim?",
+      "options": [
+        "Automation will displace workers.",
+        "Automation must displace workers.",
+        "Automation may displace workers.",
+        "Automation should displace workers."
+      ],
+      "answer": "Automation may displace workers.",
+      "explanation": "May দিয়ে নিশ্চয়তা বা প্রত্যাশা নয়, শুধু সম্ভাবনা বোঝানো হয়।"
+    },
+    {
+      "id": "m7-t8",
+      "moduleId": 7,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence correctly removes an obligation?",
+      "options": [
+        "Employees must not work overtime if they prefer not to.",
+        "Employees do not have to work overtime if they prefer not to.",
+        "Employees should not to work overtime if they prefer not to.",
+        "Employees cannot work overtime if they prefer not to."
+      ],
+      "answer": "Employees do not have to work overtime if they prefer not to.",
+      "explanation": "Must not মানে নিষেধ, আর do not have to মানে কাজটা করা ঐচ্ছিক।"
+    },
+    {
+      "id": "m7-t9",
+      "moduleId": 7,
+      "type": "fill-blank",
+      "question": "The delay ___ have been caused by funding cuts. (might / might to)",
+      "answer": "might",
+      "explanation": "অতীতের সম্ভাবনায় might have + past participle বসে, কোনো to ছাড়াই।"
+    },
+    {
+      "id": "m7-t10",
+      "moduleId": 7,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Children | may to watch | television | after finishing homework.",
+      "options": [
+        "Children",
+        "may to watch",
+        "television",
+        "after finishing homework"
+      ],
+      "answer": "may to watch",
+      "explanation": "অনুমতি বোঝানোর সময়ও bare infinitive-এর নিয়ম একই: may watch।"
+    },
+    {
+      "id": "m8-t1",
+      "moduleId": 8,
+      "type": "multiple-choice",
+      "question": "The results were ___ in the second graph.",
+      "options": [
+        "showed",
+        "shown",
+        "showing",
+        "show"
+      ],
+      "answer": "shown",
+      "explanation": "Passive-এ past simple showed নয়, past participle shown বসে।"
+    },
+    {
+      "id": "m8-t2",
+      "moduleId": 8,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "The problem was happened last year.",
+        "The problem happened last year.",
+        "The problem was happen last year.",
+        "The problem is happened last year."
+      ],
+      "answer": "The problem happened last year.",
+      "explanation": "Happen একটা Intransitive Verb (Object হয় না), তাই এর কোনো passive রূপ নেই।"
+    },
+    {
+      "id": "m8-t3",
+      "moduleId": 8,
+      "type": "fill-blank",
+      "question": "Several studies have ___ conducted on this topic. (been / being)",
+      "answer": "been",
+      "explanation": "Present perfect passive-এর গঠন হলো have been + past participle।"
+    },
+    {
+      "id": "m8-t4",
+      "moduleId": 8,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The report | was wrote | by a team | of researchers.",
+      "options": [
+        "The report",
+        "was wrote",
+        "by a team",
+        "of researchers"
+      ],
+      "answer": "was wrote",
+      "explanation": "Passive-এ past participle written বসাতে হবে।"
+    },
+    {
+      "id": "m8-t5",
+      "moduleId": 8,
+      "type": "multiple-choice",
+      "question": "When should the by-phrase normally be omitted?",
+      "options": [
+        "When the agent is the main point",
+        "When the agent is unknown or obvious",
+        "Whenever the sentence is long",
+        "In every passive sentence"
+      ],
+      "answer": "When the agent is unknown or obvious",
+      "explanation": "Academic লেখায় বেশিরভাগ passive-এ by-phrase থাকে না, কারণ কর্তার নাম বললে নতুন কিছু জানা যায় না।"
+    },
+    {
+      "id": "m8-t6",
+      "moduleId": 8,
+      "type": "choose-correct-sentence",
+      "question": "Which version is clearer?",
+      "options": [
+        "It was decided by the committee that the project would be cancelled.",
+        "The committee cancelled the project.",
+        "The project was cancelled by a decision taken by the committee.",
+        "A cancellation of the project was decided upon by the committee."
+      ],
+      "answer": "The committee cancelled the project.",
+      "explanation": "কে কাজটা করছে তা জানা আর গুরুত্বপূর্ণ হলে Active voice ছোট আর পরিষ্কার হয়।"
+    },
+    {
+      "id": "m8-t7",
+      "moduleId": 8,
+      "type": "multiple-choice",
+      "question": "Which is the correct passive of \"They must review the policy\"?",
+      "options": [
+        "The policy must reviewed.",
+        "The policy must be reviewed.",
+        "The policy must been reviewed.",
+        "The policy must to be reviewed."
+      ],
+      "answer": "The policy must be reviewed.",
+      "explanation": "গঠনটা হলো modal + be + past participle।"
+    },
+    {
+      "id": "m8-t8",
+      "moduleId": 8,
+      "type": "fill-blank",
+      "question": "It is ___ that automation will reduce employment. (argued / arguing)",
+      "answer": "argued",
+      "explanation": "নাম না বলে মত জানানোর গঠনটা হলো it + passive + that-clause।"
+    },
+    {
+      "id": "m8-t9",
+      "moduleId": 8,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Air pollution | is effected | by traffic | volume.",
+      "options": [
+        "Air pollution",
+        "is effected",
+        "by traffic",
+        "volume"
+      ],
+      "answer": "is effected",
+      "explanation": "Affect হলো Verb আর effect হলো Noun: is affected হবে।"
+    },
+    {
+      "id": "m8-t10",
+      "moduleId": 8,
+      "type": "multiple-choice",
+      "question": "In a Task 1 process diagram, which form is standard?",
+      "options": [
+        "The workers crush the glass.",
+        "The glass is crushed.",
+        "The glass has been crushed.",
+        "The glass was crushing."
+      ],
+      "answer": "The glass is crushed.",
+      "explanation": "Process-এ Present simple passive বসে, কারণ এখানে কে কাজটা করছে তা জরুরি নয়।"
+    },
+    {
+      "id": "m9-t1",
+      "moduleId": 9,
+      "type": "multiple-choice",
+      "question": "I would recommend ___ abroad for a year.",
+      "options": [
+        "to study",
+        "studying",
+        "study",
+        "to studying"
+      ],
+      "answer": "studying",
+      "explanation": "Recommend-এর গঠন suggest-এর মতোই: gerund বা that-clause।"
+    },
+    {
+      "id": "m9-t2",
+      "moduleId": 9,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Technology enables to communicate instantly.",
+        "Technology enables people to communicate instantly.",
+        "Technology enables communicating people instantly.",
+        "Technology enables that people communicate instantly."
+      ],
+      "answer": "Technology enables people to communicate instantly.",
+      "explanation": "Enable-এর পরে to-infinitive-এর আগে একটা Object লাগে।"
+    },
+    {
+      "id": "m9-t3",
+      "moduleId": 9,
+      "type": "fill-blank",
+      "question": "She is looking forward to ___ from you. (hear / hearing)",
+      "answer": "hearing",
+      "explanation": "look forward to-এর to একটা Preposition, তাই এর পরে -ing বসে।"
+    },
+    {
+      "id": "m9-t4",
+      "moduleId": 9,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "They avoided | to answer | the question | about funding.",
+      "options": [
+        "They avoided",
+        "to answer",
+        "the question",
+        "about funding"
+      ],
+      "answer": "to answer",
+      "explanation": "Avoid-এর পরে সবসময় -ing রূপ বসে: avoided answering।"
+    },
+    {
+      "id": "m9-t5",
+      "moduleId": 9,
+      "type": "multiple-choice",
+      "question": "Which verb is followed by a to-infinitive?",
+      "options": [
+        "avoid",
+        "tend",
+        "involve",
+        "risk"
+      ],
+      "answer": "tend",
+      "explanation": "Tend-এর পরে to do বসে; বাকি তিনটা Verb-এর পরে -ing রূপ বসে।"
+    },
+    {
+      "id": "m9-t6",
+      "moduleId": 9,
+      "type": "multiple-choice",
+      "question": "Students are capable ___ complex problems.",
+      "options": [
+        "to solve",
+        "of solving",
+        "for solving",
+        "solving"
+      ],
+      "answer": "of solving",
+      "explanation": "Capable-এর সঙ্গে of বসে, আর Preposition-এর পরে Verb -ing রূপ নেয়।"
+    },
+    {
+      "id": "m9-t7",
+      "moduleId": 9,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "It is difficult measuring happiness objectively.",
+        "It is difficult to measure happiness objectively.",
+        "It is difficult measure happiness objectively.",
+        "It is difficult for measure happiness objectively."
+      ],
+      "answer": "It is difficult to measure happiness objectively.",
+      "explanation": "It is-এর পরে মতামত বোঝানো Adjective থাকলে to-infinitive বসে।"
+    },
+    {
+      "id": "m9-t8",
+      "moduleId": 9,
+      "type": "fill-blank",
+      "question": "The plan involves ___ three new schools. (build / building)",
+      "answer": "building",
+      "explanation": "Involve-এর পরে সবসময় -ing রূপ বসে।"
+    },
+    {
+      "id": "m9-t9",
+      "moduleId": 9,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The law | requires companies | publish | their emissions.",
+      "options": [
+        "The law",
+        "requires companies",
+        "publish",
+        "their emissions"
+      ],
+      "answer": "publish",
+      "explanation": "Require-এর পরে একটা Object, তারপর to-infinitive বসে: to publish।"
+    },
+    {
+      "id": "m9-t10",
+      "moduleId": 9,
+      "type": "multiple-choice",
+      "question": "Which is correct?",
+      "options": [
+        "He is used to work late.",
+        "He is used to working late.",
+        "He is used to works late.",
+        "He used to working late."
+      ],
+      "answer": "He is used to working late.",
+      "explanation": "Be used to মানে কোনো কিছুতে অভ্যস্ত হওয়া; এখানকার to একটা Preposition, তাই -ing বসে।"
+    },
+    {
+      "id": "m10-t1",
+      "moduleId": 10,
+      "type": "multiple-choice",
+      "question": "Unemployment is one of the main reasons ___ crime.",
+      "options": [
+        "of",
+        "for",
+        "to",
+        "in"
+      ],
+      "answer": "for",
+      "explanation": "Reason-এর সঙ্গে for বসে; the cause of লিখলেও চলত।"
+    },
+    {
+      "id": "m10-t2",
+      "moduleId": 10,
+      "type": "multiple-choice",
+      "question": "Consumption peaked ___ 90 million units.",
+      "options": [
+        "to",
+        "by",
+        "at",
+        "in"
+      ],
+      "answer": "at",
+      "explanation": "peak, stand আর remain - তিনটার পরেই নির্দিষ্ট মানের আগে at বসে।"
+    },
+    {
+      "id": "m10-t3",
+      "moduleId": 10,
+      "type": "fill-blank",
+      "question": "Many countries are suffering ___ water shortages.",
+      "answer": "from",
+      "explanation": "Suffer-এর সঙ্গে from বসে।"
+    },
+    {
+      "id": "m10-t4",
+      "moduleId": 10,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "This leads to | people become | unemployed | in large numbers.",
+      "options": [
+        "This leads to",
+        "people become",
+        "unemployed",
+        "in large numbers"
+      ],
+      "answer": "people become",
+      "explanation": "lead to-এর to একটা Preposition, তাই এর পরের Verb হবে becoming।"
+    },
+    {
+      "id": "m10-t5",
+      "moduleId": 10,
+      "type": "multiple-choice",
+      "question": "Sales fell ___ 15 per cent, from 100 to 85 million.",
+      "options": [
+        "to",
+        "by",
+        "at",
+        "on"
+      ],
+      "answer": "by",
+      "explanation": "By দিয়ে বোঝায় কতটা বদলেছে; to দিয়ে বোঝাত শেষে কত হয়েছে।"
+    },
+    {
+      "id": "m10-t6",
+      "moduleId": 10,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "The results are different than the 2019 figures.",
+        "The results are different from the 2019 figures.",
+        "The results are different to than the 2019 figures.",
+        "The results are different of the 2019 figures."
+      ],
+      "answer": "The results are different from the 2019 figures.",
+      "explanation": "Academic English-এ different from-ই স্বাভাবিক আর প্রচলিত।"
+    },
+    {
+      "id": "m10-t7",
+      "moduleId": 10,
+      "type": "multiple-choice",
+      "question": "Which pair is correct?",
+      "options": [
+        "Congestion results from pollution.",
+        "Pollution results in congestion.",
+        "Congestion results in pollution.",
+        "Pollution results to congestion."
+      ],
+      "answer": "Congestion results in pollution.",
+      "explanation": "Result in-এর পরে আসে ফলাফল, আর result from-এর পরে আসে কারণ।"
+    },
+    {
+      "id": "m10-t8",
+      "moduleId": 10,
+      "type": "fill-blank",
+      "question": "Students should concentrate ___ their studies.",
+      "answer": "on",
+      "explanation": "concentrate, focus, depend আর rely - সবগুলোর সঙ্গেই on বসে।"
+    },
+    {
+      "id": "m10-t9",
+      "moduleId": 10,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "There was | a sharp increase | of the number | of tourists.",
+      "options": [
+        "There was",
+        "a sharp increase",
+        "of the number",
+        "of tourists"
+      ],
+      "answer": "of the number",
+      "explanation": "Increase-এর পরে in বসে কী বেড়েছে তা বোঝাতে: an increase in the number of tourists।"
+    },
+    {
+      "id": "m10-t10",
+      "moduleId": 10,
+      "type": "multiple-choice",
+      "question": "Which verb takes no preposition?",
+      "options": [
+        "depend",
+        "discuss",
+        "rely",
+        "contribute"
+      ],
+      "answer": "discuss",
+      "explanation": "Discuss সরাসরি Object নেয়: discuss the issue, কখনো discuss about the issue নয়।"
+    },
+    {
+      "id": "m11-t1",
+      "moduleId": 11,
+      "type": "multiple-choice",
+      "question": "China has ___ population in the world.",
+      "options": [
+        "the larger",
+        "the largest",
+        "a larger",
+        "more large"
+      ],
+      "answer": "the largest",
+      "explanation": "সবার সঙ্গে তুলনা করতে হলে comparative নয়, the সহ superlative লাগে।"
+    },
+    {
+      "id": "m11-t2",
+      "moduleId": 11,
+      "type": "choose-correct-sentence",
+      "question": "Which comparison is complete?",
+      "options": [
+        "Car ownership is higher than 1990.",
+        "Car ownership is higher than it was in 1990.",
+        "Car ownership is more high than in 1990 year.",
+        "Car ownership is higher as in 1990."
+      ],
+      "answer": "Car ownership is higher than it was in 1990.",
+      "explanation": "একটা সংখ্যার সঙ্গে আরেকটা সংখ্যার তুলনা করুন, কোনো সালের সঙ্গে নয়।"
+    },
+    {
+      "id": "m11-t3",
+      "moduleId": 11,
+      "type": "fill-blank",
+      "question": "There was a ___ increase in unemployment. (slight / slightly)",
+      "answer": "slight",
+      "explanation": "Noun-এর আগে Adjective বসে; Verb হলে Adverb slightly বসত।"
+    },
+    {
+      "id": "m11-t4",
+      "moduleId": 11,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The figure | for Spain | was the most highest | of all countries.",
+      "options": [
+        "The figure",
+        "for Spain",
+        "was the most highest",
+        "of all countries"
+      ],
+      "answer": "was the most highest",
+      "explanation": "একটা superlative চিহ্নই যথেষ্ট: the highest।"
+    },
+    {
+      "id": "m11-t5",
+      "moduleId": 11,
+      "type": "multiple-choice",
+      "question": "Which phrase is unambiguous?",
+      "options": [
+        "three times more than Italy",
+        "three times as much as Italy",
+        "three times over Italy",
+        "three more times than Italy"
+      ],
+      "answer": "three times as much as Italy",
+      "explanation": "Three times more দিয়ে তিন গুণ নাকি চার গুণ বোঝাচ্ছে, তা পরিষ্কার নয়।"
+    },
+    {
+      "id": "m11-t6",
+      "moduleId": 11,
+      "type": "multiple-choice",
+      "question": "Three quarters of the energy ___ produced by coal.",
+      "options": [
+        "are",
+        "is",
+        "were",
+        "have been"
+      ],
+      "answer": "is",
+      "explanation": "Verb মেলে energy-র সঙ্গে, যেটা uncountable আর একবচন।"
+    },
+    {
+      "id": "m11-t7",
+      "moduleId": 11,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "The number of users was more high in urban areas.",
+        "The number of users was higher in urban areas.",
+        "The number of users was the higher in urban areas.",
+        "The number of users was more higher in urban areas."
+      ],
+      "answer": "The number of users was higher in urban areas.",
+      "explanation": "High একটা ছোট Adjective, তাই এর comparative হলো higher।"
+    },
+    {
+      "id": "m11-t8",
+      "moduleId": 11,
+      "type": "fill-blank",
+      "question": "The figure rose ___ between 2000 and 2010. (steady / steadily)",
+      "answer": "steadily",
+      "explanation": "এখানে Adverb দিয়ে Verb rose-কে বর্ণনা করা হচ্ছে।"
+    },
+    {
+      "id": "m11-t9",
+      "moduleId": 11,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "There were | twice as much | visitors in July | as in January.",
+      "options": [
+        "There were",
+        "twice as much",
+        "visitors in July",
+        "as in January"
+      ],
+      "answer": "twice as much",
+      "explanation": "Visitors countable, তাই গঠনটি হবে twice as many।"
+    },
+    {
+      "id": "m11-t10",
+      "moduleId": 11,
+      "type": "multiple-choice",
+      "question": "Which adverb signals a large difference?",
+      "options": [
+        "slightly",
+        "marginally",
+        "considerably",
+        "somewhat"
+      ],
+      "answer": "considerably",
+      "explanation": "considerably, significantly আর substantially দিয়ে বোঝানো হয় পার্থক্যটা বেশ বড়।"
+    },
+    {
+      "id": "m12-t1",
+      "moduleId": 12,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Even though | renewable energy is clean, | but it remains | expensive.",
+      "options": [
+        "Even though",
+        "renewable energy is clean,",
+        "but it remains",
+        "expensive"
+      ],
+      "answer": "but it remains",
+      "explanation": "Even though একটা Subordinator, তাই এর সঙ্গে but বসতে পারে না।"
+    },
+    {
+      "id": "m12-t2",
+      "moduleId": 12,
+      "type": "multiple-choice",
+      "question": "___ the traffic was heavy, we arrived on time.",
+      "options": [
+        "Despite",
+        "In spite of",
+        "Although",
+        "Despite of"
+      ],
+      "answer": "Although",
+      "explanation": "পূর্ণ Clause বসাতে হলে although লাগে; despite আর in spite of-এর পরে Noun phrase বসে।"
+    },
+    {
+      "id": "m12-t3",
+      "moduleId": 12,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Despite of the cost, the project continued.",
+        "Despite the cost, the project continued.",
+        "Despite the cost was high, the project continued.",
+        "Despite that the cost, the project continued."
+      ],
+      "answer": "Despite the cost, the project continued.",
+      "explanation": "Despite-এর সঙ্গে কখনো of বসে না, আর এর পরে Clause-ও বসে না।"
+    },
+    {
+      "id": "m12-t4",
+      "moduleId": 12,
+      "type": "fill-blank",
+      "question": "Taxes were cut ___ that firms could invest. (so / such)",
+      "answer": "so",
+      "explanation": "So that দিয়ে উদ্দেশ্য বোঝানো Clause শুরু হয়।"
+    },
+    {
+      "id": "m12-t5",
+      "moduleId": 12,
+      "type": "multiple-choice",
+      "question": "Which connector marks concession?",
+      "options": [
+        "because",
+        "although",
+        "so that",
+        "when"
+      ],
+      "answer": "although",
+      "explanation": "Although বোঝায়, প্রথম Clause দেখে যা আশা করা যেত, ফলটা তার উল্টো।"
+    },
+    {
+      "id": "m12-t6",
+      "moduleId": 12,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is complete?",
+      "options": [
+        "Whereas some people prefer cities.",
+        "Whereas some people prefer cities, others prefer the countryside.",
+        "Whereas, some people prefer cities and countryside.",
+        "Some people prefer cities. Whereas the countryside."
+      ],
+      "answer": "Whereas some people prefer cities, others prefer the countryside.",
+      "explanation": "Whereas দিয়ে শুরু হওয়া Clause নির্ভরশীল, তাই এর সঙ্গে একটা main clause লাগে।"
+    },
+    {
+      "id": "m12-t7",
+      "moduleId": 12,
+      "type": "multiple-choice",
+      "question": "Which is correct after because?",
+      "options": [
+        "a noun phrase",
+        "an -ing form",
+        "a full clause",
+        "an adjective"
+      ],
+      "answer": "a full clause",
+      "explanation": "Because-এর পরে Clause বসে, আর because of-এর পরে Noun phrase।"
+    },
+    {
+      "id": "m12-t8",
+      "moduleId": 12,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The policy failed, | because of poor planning | and it was | underfunded.",
+      "options": [
+        "The policy failed,",
+        "because of poor planning",
+        "and it was",
+        "underfunded"
+      ],
+      "answer": "because of poor planning",
+      "explanation": "দ্বিতীয় অংশটা একটা Clause, তাই connector হবে because, because of নয়।"
+    },
+    {
+      "id": "m12-t9",
+      "moduleId": 12,
+      "type": "fill-blank",
+      "question": "Urban areas are growing, ___ rural areas are shrinking. (whereas / although)",
+      "answer": "whereas",
+      "explanation": "দুটো তথ্য শুধু আলাদা, অর্থাৎ এটা সাধারণ বৈপরীত্য, প্রত্যাশার উল্টো কোনো ফল নয়।"
+    },
+    {
+      "id": "m12-t10",
+      "moduleId": 12,
+      "type": "multiple-choice",
+      "question": "Which version is correctly punctuated?",
+      "options": [
+        "Costs rose, however demand fell.",
+        "Costs rose; however, demand fell.",
+        "Costs rose however; demand fell.",
+        "Costs rose, however; demand fell."
+      ],
+      "answer": "Costs rose; however, demand fell.",
+      "explanation": "However-এর আগে semicolon বা full stop আর পরে কমা বসে।"
+    },
+    {
+      "id": "m13-t1",
+      "moduleId": 13,
+      "type": "multiple-choice",
+      "question": "Students ___ study hard usually succeed.",
+      "options": [
+        "which",
+        "who",
+        "whose",
+        "where"
+      ],
+      "answer": "who",
+      "explanation": "Who বসে মানুষের জন্য; which বস্তুর জন্য।"
+    },
+    {
+      "id": "m13-t2",
+      "moduleId": 13,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "The report, that was released yesterday, criticises the plan.",
+        "The report, which was released yesterday, criticises the plan.",
+        "The report which, was released yesterday, criticises the plan.",
+        "The report that, was released yesterday criticises the plan."
+      ],
+      "answer": "The report, which was released yesterday, criticises the plan.",
+      "explanation": "Non-defining clause-এ that ব্যবহার করা যায় না।"
+    },
+    {
+      "id": "m13-t3",
+      "moduleId": 13,
+      "type": "fill-blank",
+      "question": "The company, ___ employs 2,000 people, is expanding. (who / which)",
+      "answer": "which",
+      "explanation": "প্রতিষ্ঠান কোনো মানুষ নয়, তাই এর সঙ্গে which বসে।"
+    },
+    {
+      "id": "m13-t4",
+      "moduleId": 13,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "This is | the village | where I grew up in | last year.",
+      "options": [
+        "This is",
+        "the village",
+        "where I grew up in",
+        "last year"
+      ],
+      "answer": "where I grew up in",
+      "explanation": "Where-এর ভেতরেই Preposition-টা আছে, তাই আলাদা করে in বসানো বাড়তি।"
+    },
+    {
+      "id": "m13-t5",
+      "moduleId": 13,
+      "type": "multiple-choice",
+      "question": "What does the comma change in \"Workers, who were unskilled, lost their jobs\"?",
+      "options": [
+        "Only the unskilled workers lost their jobs.",
+        "All the workers were unskilled and lost their jobs.",
+        "Nothing; the meaning is the same.",
+        "The sentence becomes a fragment."
+      ],
+      "answer": "All the workers were unskilled and lost their jobs.",
+      "explanation": "কমা বসালে Clause-টা non-defining হয়ে যায়, অর্থাৎ তখন এটা সবার সম্পর্কেই বলছে।"
+    },
+    {
+      "id": "m13-t6",
+      "moduleId": 13,
+      "type": "multiple-choice",
+      "question": "The period ___ the economy grew fastest was the 1990s.",
+      "options": [
+        "which",
+        "in which",
+        "that",
+        "what"
+      ],
+      "answer": "in which",
+      "explanation": "Clause-টাতে একটা Preposition দরকার, তাই in which বা সহজভাবে when বসবে।"
+    },
+    {
+      "id": "m13-t7",
+      "moduleId": 13,
+      "type": "choose-correct-sentence",
+      "question": "Which reduced clause is correct?",
+      "options": [
+        "People live in rural areas often lack healthcare.",
+        "People living in rural areas often lack healthcare.",
+        "People lived in rural areas often lack healthcare.",
+        "People who living in rural areas often lack healthcare."
+      ],
+      "answer": "People living in rural areas often lack healthcare.",
+      "explanation": "Active অর্থের Relative Clause ছোট করলে -ing রূপ নেয়।"
+    },
+    {
+      "id": "m13-t8",
+      "moduleId": 13,
+      "type": "fill-blank",
+      "question": "The rate ___ which temperatures are rising is alarming.",
+      "answer": "at",
+      "explanation": "নির্দিষ্ট গঠনটা হলো the rate at which।"
+    },
+    {
+      "id": "m13-t9",
+      "moduleId": 13,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The book | that I read it | last week | was useful.",
+      "options": [
+        "The book",
+        "that I read it",
+        "last week",
+        "was useful"
+      ],
+      "answer": "that I read it",
+      "explanation": "That আগে থেকেই read-এর Object, তাই it বসালে দুটো Object হয়ে যায়।"
+    },
+    {
+      "id": "m13-t10",
+      "moduleId": 13,
+      "type": "multiple-choice",
+      "question": "Which relative clause is defining?",
+      "options": [
+        "My brother, who lives in Paris, is an engineer.",
+        "Students who study abroad often become more independent.",
+        "The report, which runs to 300 pages, is controversial.",
+        "Jakarta, which is sinking, is the capital."
+      ],
+      "answer": "Students who study abroad often become more independent.",
+      "explanation": "এটা বুঝিয়ে দিচ্ছে কোন শিক্ষার্থীদের কথা হচ্ছে, তাই এতে কোনো কমা বসে না।"
+    },
+    {
+      "id": "m14-t1",
+      "moduleId": 14,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Nobody knows what will be the outcome.",
+        "Nobody knows what the outcome will be.",
+        "Nobody knows what does the outcome be.",
+        "Nobody knows that what the outcome will be."
+      ],
+      "answer": "Nobody knows what the outcome will be.",
+      "explanation": "Embedded clause-এ Subject আগে আর Verb পরে থাকে।"
+    },
+    {
+      "id": "m14-t2",
+      "moduleId": 14,
+      "type": "multiple-choice",
+      "question": "The question of ___ students should pay fees is controversial.",
+      "options": [
+        "if",
+        "whether",
+        "that",
+        "what"
+      ],
+      "answer": "whether",
+      "explanation": "Preposition-এর পরে শুধু whether বসতে পারে।"
+    },
+    {
+      "id": "m14-t3",
+      "moduleId": 14,
+      "type": "fill-blank",
+      "question": "It is argued ___ technology has reduced employment. (that / which)",
+      "answer": "that",
+      "explanation": "Reporting verb-এর পরে একটা that-clause বসে।"
+    },
+    {
+      "id": "m14-t4",
+      "moduleId": 14,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Researchers | want to know | that why | the figure fell.",
+      "options": [
+        "Researchers",
+        "want to know",
+        "that why",
+        "the figure fell"
+      ],
+      "answer": "that why",
+      "explanation": "wh-শব্দের সঙ্গে that বসে না; একটা connector-ই যথেষ্ট।"
+    },
+    {
+      "id": "m14-t5",
+      "moduleId": 14,
+      "type": "multiple-choice",
+      "question": "Which sentence uses extraposition?",
+      "options": [
+        "That the policy failed is undeniable.",
+        "It is undeniable that the policy failed.",
+        "The policy failed undeniably.",
+        "Undeniably the policy has failed."
+      ],
+      "answer": "It is undeniable that the policy failed.",
+      "explanation": "Clause-টা শেষে চলে গেছে, আর Subject-এর জায়গা পূরণ করছে it।"
+    },
+    {
+      "id": "m14-t6",
+      "moduleId": 14,
+      "type": "choose-correct-sentence",
+      "question": "Which embedded question is correct?",
+      "options": [
+        "The report explains how can governments reduce waste.",
+        "The report explains how governments can reduce waste.",
+        "The report explains how do governments reduce waste.",
+        "The report explains that how governments can reduce waste."
+      ],
+      "answer": "The report explains how governments can reduce waste.",
+      "explanation": "Embedded question-এর ভেতরে কোনো inversion হয় না।"
+    },
+    {
+      "id": "m14-t7",
+      "moduleId": 14,
+      "type": "multiple-choice",
+      "question": "Which reporting verb commits you most strongly to the finding?",
+      "options": [
+        "suggests",
+        "indicates",
+        "demonstrates",
+        "implies"
+      ],
+      "answer": "demonstrates",
+      "explanation": "Demonstrates বা shows লিখলে লেখক নিজেও ফলাফলটা মেনে নেন; suggests বা indicates-এ তা হয় না।"
+    },
+    {
+      "id": "m14-t8",
+      "moduleId": 14,
+      "type": "fill-blank",
+      "question": "They must decide ___ to expand or consolidate. (if / whether)",
+      "answer": "whether",
+      "explanation": "to-infinitive-এর আগে শুধু whether বসতে পারে।"
+    },
+    {
+      "id": "m14-t9",
+      "moduleId": 14,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "It is depends | on whether | funding | is available.",
+      "options": [
+        "It is depends",
+        "on whether",
+        "funding",
+        "is available"
+      ],
+      "answer": "It is depends",
+      "explanation": "এই it is-এর পরে Adjective বসে, কোনো পূর্ণ Verb নয়; তাই লিখুন It depends।"
+    },
+    {
+      "id": "m14-t10",
+      "moduleId": 14,
+      "type": "multiple-choice",
+      "question": "Convert to an embedded form: \"What does it cost?\"",
+      "options": [
+        "what does it cost",
+        "how much it costs",
+        "what costs it",
+        "how much does it cost"
+      ],
+      "answer": "how much it costs",
+      "explanation": "Auxiliary বাদ দিন, আর মূল Verb-কে তার স্বাভাবিক রূপে ফিরিয়ে আনুন।"
+    },
+    {
+      "id": "m15-t1",
+      "moduleId": 15,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is consistent?",
+      "options": [
+        "If companies would pay higher wages, employees will be more motivated.",
+        "If companies paid higher wages, employees would be more motivated.",
+        "If companies pay higher wages, employees would have been motivated.",
+        "If companies will pay higher wages, employees would be motivated."
+      ],
+      "answer": "If companies paid higher wages, employees would be more motivated.",
+      "explanation": "Second conditional-এ Past simple-এর সঙ্গে would + base form বসে।"
+    },
+    {
+      "id": "m15-t2",
+      "moduleId": 15,
+      "type": "multiple-choice",
+      "question": "When the government ___ the law, protests will begin.",
+      "options": [
+        "will introduce",
+        "introduces",
+        "introduced",
+        "would introduce"
+      ],
+      "answer": "introduces",
+      "explanation": "Time clause-এও if-clause-এর মতোই will বসে না।"
+    },
+    {
+      "id": "m15-t3",
+      "moduleId": 15,
+      "type": "fill-blank",
+      "question": "The plan will work provided that it ___ support. (receives / will receive)",
+      "answer": "receives",
+      "explanation": "Provided that-এর নিয়ম if-এর মতোই, তাই এর পরে Present tense বসে।"
+    },
+    {
+      "id": "m15-t4",
+      "moduleId": 15,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Unless if | the policy changes, | the issue | will remain.",
+      "options": [
+        "Unless if",
+        "the policy changes,",
+        "the issue",
+        "will remain"
+      ],
+      "answer": "Unless if",
+      "explanation": "Unless আর if একসঙ্গে বসে না; unless-এর অর্থই except if।"
+    },
+    {
+      "id": "m15-t5",
+      "moduleId": 15,
+      "type": "multiple-choice",
+      "question": "Which conditional states a general truth?",
+      "options": [
+        "If demand rises, prices increase.",
+        "If demand rises, prices will increase.",
+        "If demand rose, prices would increase.",
+        "If demand had risen, prices would have increased."
+      ],
+      "answer": "If demand rises, prices increase.",
+      "explanation": "Zero conditional-এ দুই Clause-এই Present simple বসে।"
+    },
+    {
+      "id": "m15-t6",
+      "moduleId": 15,
+      "type": "multiple-choice",
+      "question": "If education ___ free, more people could attend university.",
+      "options": [
+        "would be",
+        "were",
+        "will be",
+        "is being"
+      ],
+      "answer": "were",
+      "explanation": "Were দিয়ে কাল্পনিক শর্ত বোঝানো হয়, আর would বসে ফলাফলের Clause-এ।"
+    },
+    {
+      "id": "m15-t7",
+      "moduleId": 15,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence uses unless correctly?",
+      "options": [
+        "Unless action is not taken, emissions will rise.",
+        "Unless action is taken, emissions will rise.",
+        "Unless action will be taken, emissions will rise.",
+        "Unless if action is taken, emissions will rise."
+      ],
+      "answer": "Unless action is taken, emissions will rise.",
+      "explanation": "Unless-এর ভেতরেই না-বোধক অর্থ আছে, আর এর পরে Present tense বসে।"
+    },
+    {
+      "id": "m15-t8",
+      "moduleId": 15,
+      "type": "fill-blank",
+      "question": "Remote work is effective as long as teams ___ regularly. (communicate / will communicate)",
+      "answer": "communicate",
+      "explanation": "As long as একটা শর্ত বোঝায়, আর এর পরে Present simple বসে।"
+    },
+    {
+      "id": "m15-t9",
+      "moduleId": 15,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "If the government | will reduce taxes, | businesses | will invest more.",
+      "options": [
+        "If the government",
+        "will reduce taxes,",
+        "businesses",
+        "will invest more"
+      ],
+      "answer": "will reduce taxes,",
+      "explanation": "If-clause-এ Present simple বসে: reduces।"
+    },
+    {
+      "id": "m15-t10",
+      "moduleId": 15,
+      "type": "multiple-choice",
+      "question": "Which conditional presents a proposal as hypothetical rather than likely?",
+      "options": [
+        "If schools introduce financial education, students will manage money better.",
+        "If schools introduced financial education, students would manage money better.",
+        "If schools introduce financial education, students manage money better.",
+        "Unless schools introduce financial education, students will struggle."
+      ],
+      "answer": "If schools introduced financial education, students would manage money better.",
+      "explanation": "Second conditional বোঝায় যে আপনি ভবিষ্যদ্বাণী করছেন না, একটা কাল্পনিক অবস্থার কথা বলছেন।"
+    },
+    {
+      "id": "m16-t1",
+      "moduleId": 16,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is parallel?",
+      "options": [
+        "The course teaches students how to write reports, giving presentations and research skills.",
+        "The course teaches students how to write reports, give presentations and conduct research.",
+        "The course teaches students how to write reports, presentations and researching.",
+        "The course teaches students writing reports, to give presentations and research."
+      ],
+      "answer": "The course teaches students how to write reports, give presentations and conduct research.",
+      "explanation": "তিনটা আইটেমই এখন how to-এর পরে bare infinitive হিসেবে বসেছে।"
+    },
+    {
+      "id": "m16-t2",
+      "moduleId": 16,
+      "type": "multiple-choice",
+      "question": "He is responsible for planning events, ___ budgets and managing staff.",
+      "options": [
+        "to organise",
+        "organise",
+        "organising",
+        "organisation"
+      ],
+      "answer": "organising",
+      "explanation": "Preposition for-এর পরে প্রতিটি আইটেম -ing রূপে হবে।"
+    },
+    {
+      "id": "m16-t3",
+      "moduleId": 16,
+      "type": "fill-blank",
+      "question": "Wages in the north are lower than ___ in the south. (that / those)",
+      "answer": "those",
+      "explanation": "Those দিয়ে বহুবচন Noun wages বোঝানো হচ্ছে।"
+    },
+    {
+      "id": "m16-t4",
+      "moduleId": 16,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The report | is both detailed | and it is | well researched.",
+      "options": [
+        "The report",
+        "is both detailed",
+        "and it is",
+        "well researched"
+      ],
+      "answer": "and it is",
+      "explanation": "Both...and এখানে দুটো Adjective জোড়া দেয়, তাই একপাশে Clause বসালে parallelism ভেঙে যায়।"
+    },
+    {
+      "id": "m16-t5",
+      "moduleId": 16,
+      "type": "multiple-choice",
+      "question": "Neither the cost nor the benefits ___ clear.",
+      "options": [
+        "was",
+        "were",
+        "is",
+        "has been"
+      ],
+      "answer": "were",
+      "explanation": "neither...nor-এর ক্ষেত্রে Verb মেলে কাছের Subject benefits-এর সঙ্গে, যা বহুবচন।"
+    },
+    {
+      "id": "m16-t6",
+      "moduleId": 16,
+      "type": "choose-correct-sentence",
+      "question": "Which comparison is parallel?",
+      "options": [
+        "Reading is more useful than to watch television.",
+        "Reading is more useful than watching television.",
+        "Reading is more useful than television watch.",
+        "To read is more useful than watching television."
+      ],
+      "answer": "Reading is more useful than watching television.",
+      "explanation": "তুলনার দুই পাশেই এখন -ing রূপ আছে।"
+    },
+    {
+      "id": "m16-t7",
+      "moduleId": 16,
+      "type": "multiple-choice",
+      "question": "The city offers ___ good transport and affordable housing.",
+      "options": [
+        "both",
+        "either",
+        "neither",
+        "not only"
+      ],
+      "answer": "both",
+      "explanation": "Both...and একই ধরনের দুটো হ্যাঁ-বোধক আইটেম জোড়া দেয়।"
+    },
+    {
+      "id": "m16-t8",
+      "moduleId": 16,
+      "type": "multiple-choice",
+      "question": "Which completes the list in parallel? \"The aim is to reduce waste, cut costs and ___.\"",
+      "options": [
+        "raising awareness",
+        "raise awareness",
+        "to raising awareness",
+        "awareness is raised"
+      ],
+      "answer": "raise awareness",
+      "explanation": "তালিকার শুরুতে to থাকায় বাকি প্রতিটি আইটেম bare infinitive: reduce, cut, raise।"
+    },
+    {
+      "id": "m16-t9",
+      "moduleId": 16,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Governments should | invest in education, | improving healthcare | and build housing.",
+      "options": [
+        "Governments should",
+        "invest in education,",
+        "improving healthcare",
+        "and build housing"
+      ],
+      "answer": "improving healthcare",
+      "explanation": "Should-এর পরে প্রতিটি আইটেম bare infinitive হবে: improve healthcare।"
+    },
+    {
+      "id": "m16-t10",
+      "moduleId": 16,
+      "type": "multiple-choice",
+      "question": "Which phrase keeps a comparison balanced?",
+      "options": [
+        "The population of Japan is larger than Canada.",
+        "The population of Japan is larger than that of Canada.",
+        "The population of Japan is larger than those of Canada.",
+        "The population of Japan is larger as Canada."
+      ],
+      "answer": "The population of Japan is larger than that of Canada.",
+      "explanation": "That of দিয়ে একবচন head noun population আবার বোঝানো হচ্ছে।"
+    },
+    {
+      "id": "m17-t1",
+      "moduleId": 17,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence has no dangling modifier?",
+      "options": [
+        "After reviewing the evidence, the policy was changed.",
+        "After reviewing the evidence, the committee changed the policy.",
+        "After reviewing the evidence, changes were made.",
+        "After reviewing the evidence, it was decided to change."
+      ],
+      "answer": "After reviewing the evidence, the committee changed the policy.",
+      "explanation": "প্রমাণ পর্যালোচনার কাজটা মূল Clause-এর Subject-কেই করতে হবে।"
+    },
+    {
+      "id": "m17-t2",
+      "moduleId": 17,
+      "type": "multiple-choice",
+      "question": "___ in 2015, the scheme has reduced waiting times.",
+      "options": [
+        "Introducing",
+        "Introduced",
+        "To introduce",
+        "Introduce"
+      ],
+      "answer": "Introduced",
+      "explanation": "কাজটা Scheme-এর উপর হচ্ছে, তাই passive participle বসবে।"
+    },
+    {
+      "id": "m17-t3",
+      "moduleId": 17,
+      "type": "fill-blank",
+      "question": "___ completed the survey, the researchers analysed the data. (Having / Have)",
+      "answer": "Having",
+      "explanation": "Having + past participle বোঝায়, কাজটা মূল Verb-এর আগেই শেষ হয়ে গেছে।"
+    },
+    {
+      "id": "m17-t4",
+      "moduleId": 17,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The report | writing by the committee | was published | yesterday.",
+      "options": [
+        "The report",
+        "writing by the committee",
+        "was published",
+        "yesterday"
+      ],
+      "answer": "writing by the committee",
+      "explanation": "Report-টা লেখা হয়েছিল, তাই ছোট রূপে past participle written বসবে।"
+    },
+    {
+      "id": "m17-t5",
+      "moduleId": 17,
+      "type": "multiple-choice",
+      "question": "Which is the correct reduction of \"Factors which affect performance\"?",
+      "options": [
+        "Factors affected performance",
+        "Factors affecting performance",
+        "Factors to affect performance",
+        "Factors affect performance"
+      ],
+      "answer": "Factors affecting performance",
+      "explanation": "Active অর্থের Relative Clause ছোট করলে -ing রূপ নেয়।"
+    },
+    {
+      "id": "m17-t6",
+      "moduleId": 17,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "Living in a big city, the cost of housing is very high.",
+        "For those living in a big city, the cost of housing is very high.",
+        "Living in a big city, housing costs are a problem for it.",
+        "Live in a big city, the cost of housing is very high."
+      ],
+      "answer": "For those living in a big city, the cost of housing is very high.",
+      "explanation": "এখন participle-টা এমন একটা Noun-কে বর্ণনা করছে, যে সত্যিই কোথাও বাস করতে পারে।"
+    },
+    {
+      "id": "m17-t7",
+      "moduleId": 17,
+      "type": "multiple-choice",
+      "question": "The figure peaked in 2008, ___ 90 million.",
+      "options": [
+        "reached",
+        "reaching",
+        "reach",
+        "to reach"
+      ],
+      "answer": "reaching",
+      "explanation": "ফলাফল বোঝানো participle clause -ing রূপ নেয়, আর মূল Subject-এর সঙ্গেই জুড়ে থাকে।"
+    },
+    {
+      "id": "m17-t8",
+      "moduleId": 17,
+      "type": "fill-blank",
+      "question": "The issues ___ be addressed are listed below. (to / for)",
+      "answer": "to",
+      "explanation": "Noun-এর পরে বসা infinitive-এ to থাকে; এখানে passive রূপে: to be addressed।"
+    },
+    {
+      "id": "m17-t9",
+      "moduleId": 17,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The students | enrolling on the course | last year | have graduated.",
+      "options": [
+        "The students",
+        "enrolling on the course",
+        "last year",
+        "have graduated"
+      ],
+      "answer": "enrolling on the course",
+      "explanation": "শিক্ষার্থীদের ভর্তি করানো হয়েছিল, তাই passive participle enrolled সঠিক।"
+    },
+    {
+      "id": "m17-t10",
+      "moduleId": 17,
+      "type": "multiple-choice",
+      "question": "What is the quickest fix for a dangling modifier?",
+      "options": [
+        "Delete the main clause",
+        "Restore the full clause with a subordinator",
+        "Add a comma",
+        "Change the tense"
+      ],
+      "answer": "Restore the full clause with a subordinator",
+      "explanation": "While I was walking to school... লিখলে Subject স্পষ্ট হয়ে যায়।"
+    },
+    {
+      "id": "m18-t1",
+      "moduleId": 18,
+      "type": "multiple-choice",
+      "question": "Which is the noun form of the verb increase, used with its correct preposition?",
+      "options": [
+        "the increasing of prices",
+        "the increase in prices",
+        "the increase of price",
+        "the increased prices in"
+      ],
+      "answer": "the increase in prices",
+      "explanation": "প্রচলিত Noun রূপটা ব্যবহার করুন, আর increase-এর সঙ্গে in বসে।"
+    },
+    {
+      "id": "m18-t2",
+      "moduleId": 18,
+      "type": "choose-correct-sentence",
+      "question": "Which noun phrase is correctly formed?",
+      "options": [
+        "the governments policies on the environment",
+        "government environmental policy",
+        "the government environmental policies of",
+        "environmental the government policy"
+      ],
+      "answer": "government environmental policy",
+      "explanation": "Modifier হিসেবে বসা Noun একবচনে থাকে এবং এতে apostrophe লাগে না।"
+    },
+    {
+      "id": "m18-t3",
+      "moduleId": 18,
+      "type": "fill-blank",
+      "question": "There is a possibility ___ the scheme will fail. (that / of that)",
+      "answer": "that",
+      "explanation": "Noun complement clause সরাসরি Noun-এর পরে বসে; that-এর আগে কোনো Preposition বসে না।"
+    },
+    {
+      "id": "m18-t4",
+      "moduleId": 18,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The fact | which the policy failed | is undeniable | to most analysts.",
+      "options": [
+        "The fact",
+        "which the policy failed",
+        "is undeniable",
+        "to most analysts"
+      ],
+      "answer": "which the policy failed",
+      "explanation": "The fact-এর পরে that-clause বসে জানায় fact-টা কী; এটা Relative Clause নয়।"
+    },
+    {
+      "id": "m18-t5",
+      "moduleId": 18,
+      "type": "multiple-choice",
+      "question": "Which version is clearest?",
+      "options": [
+        "The implementation of the reduction of the utilisation of plastic",
+        "Reducing plastic use",
+        "The plastic utilisation reduction implementation",
+        "The reduction implementation of plastic utilisation"
+      ],
+      "answer": "Reducing plastic use",
+      "explanation": "একের পর এক abstract Noun একটা সহজ কাজকে ঢেকে রাখে; সেগুলো ভেঙে আবার Verb দিয়ে লিখুন।"
+    },
+    {
+      "id": "m18-t6",
+      "moduleId": 18,
+      "type": "multiple-choice",
+      "question": "Which sentence uses apposition?",
+      "options": [
+        "Jakarta is the capital and it is sinking.",
+        "Jakarta, the capital of Indonesia, is sinking.",
+        "Jakarta which is the capital is sinking.",
+        "The capital of Indonesia is Jakarta and sinking."
+      ],
+      "answer": "Jakarta, the capital of Indonesia, is sinking.",
+      "explanation": "দুটো Noun phrase পাশাপাশি বসেছে, আর দ্বিতীয়টা প্রথমটাকেই অন্যভাবে ব্যাখ্যা করছে।"
+    },
+    {
+      "id": "m18-t7",
+      "moduleId": 18,
+      "type": "choose-correct-sentence",
+      "question": "Which nominalization is correct?",
+      "options": [
+        "Temperatures increased sharply became the sharply increase.",
+        "The sharp increase in temperatures was recorded in July.",
+        "The sharply increase in temperatures was recorded in July.",
+        "The increase sharp of temperatures was recorded in July."
+      ],
+      "answer": "The sharp increase in temperatures was recorded in July.",
+      "explanation": "Noun phrase-এর ভেতরে Adverb বদলে Adjective হয়ে যায়।"
+    },
+    {
+      "id": "m18-t8",
+      "moduleId": 18,
+      "type": "fill-blank",
+      "question": "Rewrite the head noun: \"Cities are expanding\" becomes \"the ___ of cities\".",
+      "answer": "expansion",
+      "explanation": "Expand-এর Noun রূপ expansion, যেটা এরপর Subject হিসেবে বসতে পারে।"
+    },
+    {
+      "id": "m18-t9",
+      "moduleId": 18,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "A three-years | programme | was introduced | last year.",
+      "options": [
+        "A three-years",
+        "programme",
+        "was introduced",
+        "last year"
+      ],
+      "answer": "A three-years",
+      "explanation": "Compound modifier একবচনে থাকে: a three-year programme।"
+    },
+    {
+      "id": "m18-t10",
+      "moduleId": 18,
+      "type": "multiple-choice",
+      "question": "What is the clearest sign that you have nominalized too far?",
+      "options": [
+        "A sentence with two clauses",
+        "A chain of of-phrases",
+        "Using a passive verb",
+        "Using an adjective before a noun"
+      ],
+      "answer": "A chain of of-phrases",
+      "explanation": "পরপর অনেকগুলো of-phrase থাকলে পাঠককে বাক্যটা দুবার পড়ে বুঝতে হয়।"
+    },
+    {
+      "id": "m19-t1",
+      "moduleId": 19,
+      "type": "choose-correct-sentence",
+      "question": "Which claim is defensible?",
+      "options": [
+        "Pollution definitely causes all respiratory diseases.",
+        "Pollution contributes to a range of respiratory conditions.",
+        "Pollution never affects respiratory health.",
+        "Pollution proves respiratory disease."
+      ],
+      "answer": "Pollution contributes to a range of respiratory conditions.",
+      "explanation": "Contributes to একটা বাস্তবসম্মত সম্পর্ক বোঝায়, বাড়িয়ে না বলে।"
+    },
+    {
+      "id": "m19-t2",
+      "moduleId": 19,
+      "type": "multiple-choice",
+      "question": "The graph ___ that the policy had some effect.",
+      "options": [
+        "proves",
+        "suggests",
+        "guarantees",
+        "confirms absolutely"
+      ],
+      "answer": "suggests",
+      "explanation": "চার্ট একটা প্রবণতা দেখায়, কোনো কারণ প্রমাণ করতে পারে না।"
+    },
+    {
+      "id": "m19-t3",
+      "moduleId": 19,
+      "type": "fill-blank",
+      "question": "It is ___ that costs will rise next year. (likely / certainly)",
+      "answer": "likely",
+      "explanation": "It is likely that সম্ভাব্য ফলাফল বোঝানোর খুব প্রচলিত একটা hedging গঠন।"
+    },
+    {
+      "id": "m19-t4",
+      "moduleId": 19,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "It tends to be | that students | may possibly | perform better.",
+      "options": [
+        "It tends to be",
+        "that students",
+        "may possibly",
+        "perform better"
+      ],
+      "answer": "may possibly",
+      "explanation": "Tend to নিজেই একটা hedge, আর may possibly তার উপর আরও দুটো hedge চাপিয়ে দিচ্ছে।"
+    },
+    {
+      "id": "m19-t5",
+      "moduleId": 19,
+      "type": "multiple-choice",
+      "question": "Which reporting verb distances you from the claim?",
+      "options": [
+        "demonstrates",
+        "claims",
+        "establishes",
+        "confirms"
+      ],
+      "answer": "claims",
+      "explanation": "Claims লিখলে বোঝায় যে আপনি বক্তব্যটা পুরোপুরি মেনে নিচ্ছেন না।"
+    },
+    {
+      "id": "m19-t6",
+      "moduleId": 19,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence states a position clearly while hedging the evidence?",
+      "options": [
+        "In my opinion, I think that perhaps the government should maybe act.",
+        "The government should act, since the evidence suggests that delay is costly.",
+        "Possibly the government could potentially consider acting.",
+        "The government must act because everyone knows it is right."
+      ],
+      "answer": "The government should act, since the evidence suggests that delay is costly.",
+      "explanation": "এখানে মতটা দৃঢ়, আর hedge বসেছে প্রমাণ নিয়ে করা দাবিতে, যেখানে এটা থাকার কথা।"
+    },
+    {
+      "id": "m19-t7",
+      "moduleId": 19,
+      "type": "multiple-choice",
+      "question": "Which quantifier is safest in a general claim about young people?",
+      "options": [
+        "all",
+        "every single",
+        "many",
+        "without exception"
+      ],
+      "answer": "many",
+      "explanation": "Many ব্যতিক্রমের জায়গা রাখে, কিন্তু all-এর মতো চরম quantifier তা রাখে না।"
+    },
+    {
+      "id": "m19-t8",
+      "moduleId": 19,
+      "type": "fill-blank",
+      "question": "The findings ___ that a link exists, though more research is needed. (prove / indicate)",
+      "answer": "indicate",
+      "explanation": "প্রাথমিক একটা ফলাফলের জন্য indicate-এর জোরটাই মানানসই।"
+    },
+    {
+      "id": "m19-t9",
+      "moduleId": 19,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Research is proving | that this approach | is the only | solution available.",
+      "options": [
+        "Research is proving",
+        "that this approach",
+        "is the only",
+        "solution available"
+      ],
+      "answer": "is the only",
+      "explanation": "The only solution এমন একটা চরম দাবি, যেটা কোনো গবেষণাই সমর্থন করতে পারে না।"
+    },
+    {
+      "id": "m19-t10",
+      "moduleId": 19,
+      "type": "multiple-choice",
+      "question": "What should you never hedge away in an IELTS Task 2 essay?",
+      "options": [
+        "The strength of the evidence",
+        "Your own position on the question",
+        "A prediction about the future",
+        "A claim about causes"
+      ],
+      "answer": "Your own position on the question",
+      "explanation": "Hedging দাবিকে মেপে বলে, কিন্তু প্রশ্নের উত্তর না দেওয়ার অজুহাত হতে পারে না।"
+    },
+    {
+      "id": "m20-t1",
+      "moduleId": 20,
+      "type": "multiple-choice",
+      "question": "Where should new information normally appear in a sentence?",
+      "options": [
+        "At the start",
+        "At the end",
+        "In the middle",
+        "In a separate clause"
+      ],
+      "answer": "At the end",
+      "explanation": "জানা তথ্য আগে আসে, আর বাক্যের শেষ অংশেই থাকে মূল কথা।"
+    },
+    {
+      "id": "m20-t2",
+      "moduleId": 20,
+      "type": "choose-correct-sentence",
+      "question": "Which version flows better as a second sentence?",
+      "options": [
+        "Congestion fell by 20 per cent because of the tax introduced in 2015.",
+        "This measure cut congestion by 20 per cent.",
+        "By 20 per cent congestion fell because of this.",
+        "A 20 per cent fall in congestion by the tax was caused."
+      ],
+      "answer": "This measure cut congestion by 20 per cent.",
+      "explanation": "বাক্যটা জানা তথ্য দিয়ে শুরু হয়ে নতুন সংখ্যাটা দিয়ে শেষ হচ্ছে।"
+    },
+    {
+      "id": "m20-t3",
+      "moduleId": 20,
+      "type": "fill-blank",
+      "question": "___ is clear that governments must act. (It / There)",
+      "answer": "It",
+      "acceptable": [
+        "it"
+      ],
+      "explanation": "Extraposition-এ Clause শেষে চলে যায়, আর Subject-এর জায়গা পূরণ করে it।"
+    },
+    {
+      "id": "m20-t4",
+      "moduleId": 20,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "There is | the government | which should act | on this issue.",
+      "options": [
+        "There is",
+        "the government",
+        "which should act",
+        "on this issue"
+      ],
+      "answer": "There is",
+      "explanation": "Existential there দিয়ে নতুন আর অনির্দিষ্ট তথ্য আনা হয়, আগে থেকে জানা Subject নয়।"
+    },
+    {
+      "id": "m20-t5",
+      "moduleId": 20,
+      "type": "multiple-choice",
+      "question": "Which structure moves a long subject clause to the end?",
+      "options": [
+        "Passive voice",
+        "Extraposition",
+        "Coordination",
+        "Ellipsis"
+      ],
+      "answer": "Extraposition",
+      "explanation": "It is clear that... গঠনে Clause-টা মূল Verb-এর পরে চলে যায়।"
+    },
+    {
+      "id": "m20-t6",
+      "moduleId": 20,
+      "type": "choose-correct-sentence",
+      "question": "Which revision removes unnecessary connectors?",
+      "options": [
+        "Firstly, cities grew. Moreover, housing costs rose. Furthermore, commuting increased.",
+        "Cities grew rapidly. This growth pushed up housing costs and lengthened commutes.",
+        "Cities grew. Moreover, this. Furthermore, that.",
+        "In addition, moreover, cities grew and costs rose."
+      ],
+      "answer": "Cities grew rapidly. This growth pushed up housing costs and lengthened commutes.",
+      "explanation": "তথ্যের ক্রম বদলানোয় তিনটা linking adverbial-এর আর দরকারই থাকে না।"
+    },
+    {
+      "id": "m20-t7",
+      "moduleId": 20,
+      "type": "multiple-choice",
+      "question": "Why use the passive for information packaging?",
+      "options": [
+        "It sounds more academic",
+        "It puts the affected thing in the subject position",
+        "It shortens the sentence",
+        "It avoids using a verb"
+      ],
+      "answer": "It puts the affected thing in the subject position",
+      "explanation": "Passive ব্যবহার করলে জানা তথ্য দিয়ে বাক্য শুরু করা যায়।"
+    },
+    {
+      "id": "m20-t8",
+      "moduleId": 20,
+      "type": "fill-blank",
+      "question": "Many firms now allow remote work. This ___ has reduced office demand. (shift / thing)",
+      "answer": "shift",
+      "explanation": "Summary noun আগের বাক্যে যা বলা হয়েছে, সেটাকে এক শব্দে প্রকাশ করে।"
+    },
+    {
+      "id": "m20-t9",
+      "moduleId": 20,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "That the climate is changing rapidly | and that action is needed | urgently | is accepted.",
+      "options": [
+        "That the climate is changing rapidly",
+        "and that action is needed",
+        "urgently",
+        "is accepted"
+      ],
+      "answer": "That the climate is changing rapidly",
+      "explanation": "দুটো ভারী Subject Clause শেষে পাঠানো (extraposition) উচিত: It is accepted that..."
+    },
+    {
+      "id": "m20-t10",
+      "moduleId": 20,
+      "type": "multiple-choice",
+      "question": "Which sentence respects end-weight?",
+      "options": [
+        "A sharp fall in rainfall, which affected three regions and lasted two years, occurred.",
+        "There was a sharp fall in rainfall, which affected three regions and lasted two years.",
+        "Occurred a sharp fall in rainfall affecting three regions.",
+        "Rainfall, affecting three regions and lasting two years, a sharp fall occurred."
+      ],
+      "answer": "There was a sharp fall in rainfall, which affected three regions and lasted two years.",
+      "explanation": "ভারী বর্ণনার অংশটা এখন বাক্যের শেষে বসেছে।"
+    },
+    {
+      "id": "m21-t1",
+      "moduleId": 21,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence avoids repetition best?",
+      "options": [
+        "The new policy replaced the old policy because the old policy was ineffective.",
+        "The new policy replaced the old one, which had proved ineffective.",
+        "The new policy replaced it because it was ineffective policy.",
+        "The new policy replaced the old policy, it was ineffective."
+      ],
+      "answer": "The new policy replaced the old one, which had proved ineffective.",
+      "explanation": "One দিয়ে substitution আর একটা Relative Clause মিলে দুটো পুনরাবৃত্তি সরিয়ে দিয়েছে।"
+    },
+    {
+      "id": "m21-t2",
+      "moduleId": 21,
+      "type": "multiple-choice",
+      "question": "Which is the formal written substitute for a repeated verb phrase?",
+      "options": [
+        "do it",
+        "do so",
+        "make it",
+        "does that"
+      ],
+      "answer": "do so",
+      "explanation": "Academic লেখায় do so-ই প্রচলিত আর মানানসই রূপ।"
+    },
+    {
+      "id": "m21-t3",
+      "moduleId": 21,
+      "type": "fill-blank",
+      "question": "These ___ of problem require urgent action. (kind / kinds)",
+      "answer": "kinds",
+      "explanation": "These-এর সঙ্গে বহুবচন Noun মিলতে হবে।"
+    },
+    {
+      "id": "m21-t4",
+      "moduleId": 21,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The report | was long. | This made | difficult to read.",
+      "options": [
+        "The report",
+        "was long.",
+        "This made",
+        "difficult to read"
+      ],
+      "answer": "difficult to read",
+      "explanation": "Make-এর একটা Object লাগে: which made it difficult to read।"
+    },
+    {
+      "id": "m21-t5",
+      "moduleId": 21,
+      "type": "multiple-choice",
+      "question": "Which cohesive device leaves out recoverable words?",
+      "options": [
+        "Reference",
+        "Substitution",
+        "Ellipsis",
+        "Conjunction"
+      ],
+      "answer": "Ellipsis",
+      "explanation": "Ellipsis সেই শব্দগুলো বাদ দেয়, যা পাঠক আগের Clause থেকে বুঝে নিতে পারেন।"
+    },
+    {
+      "id": "m21-t6",
+      "moduleId": 21,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct?",
+      "options": [
+        "I prefer the first option than the second one.",
+        "I prefer the first option to the second.",
+        "I prefer the first option over than the second.",
+        "I prefer the first option as the second one."
+      ],
+      "answer": "I prefer the first option to the second.",
+      "explanation": "Prefer-এর সঙ্গে to বসে, আর ellipsis করে দ্বিতীয়বারের Noun-টা বাদ দেওয়া হয়।"
+    },
+    {
+      "id": "m21-t7",
+      "moduleId": 21,
+      "type": "multiple-choice",
+      "question": "What do the band descriptors warn against?",
+      "options": [
+        "Using any cohesive devices",
+        "Mechanical overuse of cohesive devices",
+        "Using pronouns for reference",
+        "Using substitution in formal writing"
+      ],
+      "answer": "Mechanical overuse of cohesive devices",
+      "explanation": "প্রতিটি বাক্যে connector থাকলে লেখা যান্ত্রিক শোনায়, আর এতে নম্বর কাটে।"
+    },
+    {
+      "id": "m21-t8",
+      "moduleId": 21,
+      "type": "fill-blank",
+      "question": "Students who study abroad often ___ so for career reasons. (do / make)",
+      "answer": "do",
+      "explanation": "Do so এখানে study abroad-এর জায়গা নিচ্ছে।"
+    },
+    {
+      "id": "m21-t9",
+      "moduleId": 21,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Such problem | is difficult | to solve | in the short term.",
+      "options": [
+        "Such problem",
+        "is difficult",
+        "to solve",
+        "in the short term"
+      ],
+      "answer": "Such problem",
+      "explanation": "Such-এর পরে বহুবচন বা uncountable Noun বসে; একবচন countable Noun হলে such a লাগে।"
+    },
+    {
+      "id": "m21-t10",
+      "moduleId": 21,
+      "type": "multiple-choice",
+      "question": "Which alternative replaces \"Therefore,\" at the start of a sentence?",
+      "options": [
+        "A result participle clause at the end of the previous sentence",
+        "Another linking adverbial",
+        "A semicolon plus moreover",
+        "A fragment"
+      ],
+      "answer": "A result participle clause at the end of the previous sentence",
+      "explanation": "..., reducing costs. লিখলে আরেকটা connector ছাড়াই ফলাফল বোঝানো যায়।"
+    },
+    {
+      "id": "m22-t1",
+      "moduleId": 22,
+      "type": "choose-correct-sentence",
+      "question": "Which inversion is correct?",
+      "options": [
+        "Never before people have had access to so much information.",
+        "Never before have people had access to so much information.",
+        "Never before people had access to so much information.",
+        "Never before did people have had access to so much information."
+      ],
+      "answer": "Never before have people had access to so much information.",
+      "explanation": "না-বোধক শব্দ সামনে বসায় Auxiliary Subject-এর আগে চলে এসেছে।"
+    },
+    {
+      "id": "m22-t2",
+      "moduleId": 22,
+      "type": "multiple-choice",
+      "question": "What ___ needed is stronger regulation.",
+      "options": [
+        "are",
+        "is",
+        "were",
+        "have"
+      ],
+      "answer": "is",
+      "explanation": "Subject হিসেবে কাজ করা what-clause একবচন Verb নেয়।"
+    },
+    {
+      "id": "m22-t3",
+      "moduleId": 22,
+      "type": "fill-blank",
+      "question": "It was poor planning ___ caused the delay. (that / what)",
+      "answer": "that",
+      "explanation": "It-cleft-এ what নয়, that বসে।"
+    },
+    {
+      "id": "m22-t4",
+      "moduleId": 22,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Under no circumstances | we should | ignore | this evidence.",
+      "options": [
+        "Under no circumstances",
+        "we should",
+        "ignore",
+        "this evidence"
+      ],
+      "answer": "we should",
+      "explanation": "শুরুতে সীমা বোঝানো phrase বসলে inversion লাগে: should we ignore।"
+    },
+    {
+      "id": "m22-t5",
+      "moduleId": 22,
+      "type": "multiple-choice",
+      "question": "Only after 2010 ___ the figure begin to fall.",
+      "options": [
+        "did",
+        "was",
+        "had",
+        "has"
+      ],
+      "answer": "did",
+      "explanation": "Only + adverbial-এর পরে do-support লাগে, আর মূল Verb base রূপে ফিরে যায়।"
+    },
+    {
+      "id": "m22-t6",
+      "moduleId": 22,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence is correct and simplest?",
+      "options": [
+        "Not only it is expensive but also ineffective.",
+        "It is not only expensive but also ineffective.",
+        "Not only is it expensive but also it ineffective.",
+        "Not only expensive it is but ineffective also."
+      ],
+      "answer": "It is not only expensive but also ineffective.",
+      "explanation": "শব্দটা সামনে না আনলে inversion-ও লাগে না; সাধারণ রূপটাই সঠিক।"
+    },
+    {
+      "id": "m22-t7",
+      "moduleId": 22,
+      "type": "multiple-choice",
+      "question": "Which structure emphasises an element by moving it after is?",
+      "options": [
+        "Passive voice",
+        "What-cleft",
+        "Relative clause",
+        "Ellipsis"
+      ],
+      "answer": "What-cleft",
+      "explanation": "What matters most is the cost গঠনে জোরটা পড়ে বাক্যের দ্বিতীয় অর্ধে।"
+    },
+    {
+      "id": "m22-t8",
+      "moduleId": 22,
+      "type": "fill-blank",
+      "question": "Rarely has a policy ___ so much criticism. (attracted / attract)",
+      "answer": "attracted",
+      "explanation": "Has-এর পরে মূল Verb past participle রূপ নেয়।"
+    },
+    {
+      "id": "m22-t9",
+      "moduleId": 22,
+      "type": "multiple-choice",
+      "question": "When should you avoid inversion in an exam?",
+      "options": [
+        "When the sentence is short",
+        "When you cannot produce the form automatically",
+        "When writing Task 1",
+        "When the topic is technology"
+      ],
+      "answer": "When you cannot produce the form automatically",
+      "explanation": "ভুলে ভরা একটা inverted বাক্য, নির্ভুল একটা সাধারণ বাক্যের চেয়ে অনেক বেশি ক্ষতি করে।"
+    },
+    {
+      "id": "m22-t10",
+      "moduleId": 22,
+      "type": "multiple-choice",
+      "question": "Where do advanced marks actually come from, according to this course?",
+      "options": [
+        "Clefts and inversion",
+        "Noun phrases, hedging, information packaging and cohesion",
+        "Using the longest sentences possible",
+        "Using every tense in one essay"
+      ],
+      "answer": "Noun phrases, hedging, information packaging and cohesion",
+      "explanation": "Advanced লেভেলের নম্বর আসে Module 18 থেকে 21-এর দক্ষতা থেকে; Module 22 শুধু বাড়তি জ্ঞান।"
+    },
+    {
+      "id": "m23-t1",
+      "moduleId": 23,
+      "type": "multiple-choice",
+      "question": "Which phrase can usually be deleted entirely?",
+      "options": [
+        "because of",
+        "it is important to note that",
+        "in order to",
+        "as a result"
+      ],
+      "answer": "it is important to note that",
+      "explanation": "এটা কোনো তথ্য দেয় না, শুধু ভূমিকা করে; বাদ দিলেও বাক্যটা ঠিকই থাকে।"
+    },
+    {
+      "id": "m23-t2",
+      "moduleId": 23,
+      "type": "choose-correct-sentence",
+      "question": "Which version is concise?",
+      "options": [
+        "There are a large number of students who are struggling with the course.",
+        "Many students are struggling with the course.",
+        "A large number of students are being in a struggle with the course.",
+        "It is the case that many students struggle with the course."
+      ],
+      "answer": "Many students are struggling with the course.",
+      "explanation": "There is... গঠন আর Relative Clause, দুটোই কোনো অর্থ যোগ করছিল না।"
+    },
+    {
+      "id": "m23-t3",
+      "moduleId": 23,
+      "type": "fill-blank",
+      "question": "Replace \"has the ability to\" with one word.",
+      "answer": "can",
+      "explanation": "একটা Modal-ই পুরো phrase-টার জায়গা নিয়ে নেয়।"
+    },
+    {
+      "id": "m23-t4",
+      "moduleId": 23,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The minister | announced a plan | to reduce emissions | on Tuesday.",
+      "options": [
+        "The minister",
+        "announced a plan",
+        "to reduce emissions",
+        "on Tuesday"
+      ],
+      "answer": "on Tuesday",
+      "explanation": "বাক্যের শেষে বসায় সময় বোঝানো phrase-টা মনে হচ্ছে emissions-কে বর্ণনা করছে; এটাকে সামনে নিয়ে আসুন।"
+    },
+    {
+      "id": "m23-t5",
+      "moduleId": 23,
+      "type": "multiple-choice",
+      "question": "Why keep the subject close to its verb?",
+      "options": [
+        "It makes sentences longer",
+        "It reduces memory load and prevents agreement errors",
+        "It is required by IELTS",
+        "It allows more adjectives"
+      ],
+      "answer": "It reduces memory load and prevents agreement errors",
+      "explanation": "Subject আর Verb-এর মাঝে অনেক শব্দ থাকলে পাঠককে Subject মনে ধরে রাখতে হয়, আর agreement-এর ভুলও হয় সহজে।"
+    },
+    {
+      "id": "m23-t6",
+      "moduleId": 23,
+      "type": "multiple-choice",
+      "question": "Which sentence places only correctly to mean nothing else was approved?",
+      "options": [
+        "Only the committee approved the plan.",
+        "The committee only approved the plan.",
+        "The committee approved only the plan.",
+        "The committee approved the plan only approved."
+      ],
+      "answer": "The committee approved only the plan.",
+      "explanation": "Only বসে ঠিক সেই অংশের আগে, যেটাকে এটা সীমিত করছে।"
+    },
+    {
+      "id": "m23-t7",
+      "moduleId": 23,
+      "type": "choose-correct-sentence",
+      "question": "Which revision is clearest?",
+      "options": [
+        "The implementation of the utilisation of renewable resources is necessary.",
+        "Renewable resources must be used more widely.",
+        "The utilisation implementation of renewables is a necessity.",
+        "There is a necessity of the implementation of renewables."
+      ],
+      "answer": "Renewable resources must be used more widely.",
+      "explanation": "একের পর এক nominalization ভেঙে ফেললে সহজ একটা Verb ফিরে আসে।"
+    },
+    {
+      "id": "m23-t8",
+      "moduleId": 23,
+      "type": "fill-blank",
+      "question": "Replace \"in spite of the fact that\" with one word.",
+      "answer": "although",
+      "explanation": "Although-এর পরে সরাসরি Clause বসে।"
+    },
+    {
+      "id": "m23-t9",
+      "moduleId": 23,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "In todays modern world of today, | technology | is important | to everyone.",
+      "options": [
+        "In todays modern world of today,",
+        "technology",
+        "is important",
+        "to everyone"
+      ],
+      "answer": "In todays modern world of today,",
+      "explanation": "Phrase-টা একই কথা দুবার বলছে; শুধু Today লিখলেই যথেষ্ট হতো।"
+    },
+    {
+      "id": "m23-t10",
+      "moduleId": 23,
+      "type": "multiple-choice",
+      "question": "What should you do with a sentence you lose track of while writing?",
+      "options": [
+        "Add another clause to finish the thought",
+        "Split it into two sentences",
+        "Add a semicolon and continue",
+        "Delete the subject"
+      ],
+      "answer": "Split it into two sentences",
+      "explanation": "ভুলওয়ালা একটা লম্বা বাক্যের চেয়ে দুটো নির্ভুল বাক্য বেশি নম্বর পায়।"
+    },
+    {
+      "id": "m24-t1",
+      "moduleId": 24,
+      "type": "choose-correct-sentence",
+      "question": "Which sentence fits academic register?",
+      "options": [
+        "Kids nowadays are getting addicted to their phones big time.",
+        "Children today spend an increasing amount of time on their phones.",
+        "Kids these days cant stop using phones.",
+        "Children are into phones a lot nowadays."
+      ],
+      "answer": "Children today spend an increasing amount of time on their phones.",
+      "explanation": "Formal Noun, নির্দিষ্ট Verb, আর কোনো slang নেই।"
+    },
+    {
+      "id": "m24-t2",
+      "moduleId": 24,
+      "type": "multiple-choice",
+      "question": "Which punctuation mark introduces an explanation or list?",
+      "options": [
+        "semicolon",
+        "colon",
+        "comma",
+        "dash"
+      ],
+      "answer": "colon",
+      "explanation": "একটা পূর্ণ Clause-এর পরে colon বসিয়ে পরের কথাটা সামনে আনা হয়।"
+    },
+    {
+      "id": "m24-t3",
+      "moduleId": 24,
+      "type": "fill-blank",
+      "question": "Write the formal equivalent of \"find out\" in one word.",
+      "answer": "discover",
+      "acceptable": [
+        "discover",
+        "determine",
+        "establish",
+        "ascertain"
+      ],
+      "explanation": "Academic লেখায় কথ্য phrasal verb-এর জায়গায় সাধারণত এক শব্দের Verb বসে।"
+    },
+    {
+      "id": "m24-t4",
+      "moduleId": 24,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "The main issues | are: | cost, time | and access.",
+      "options": [
+        "The main issues",
+        "are:",
+        "cost, time",
+        "and access"
+      ],
+      "answer": "are:",
+      "explanation": "Verb আর তার Object-এর মাঝখানে colon বসানো যায় না।"
+    },
+    {
+      "id": "m24-t5",
+      "moduleId": 24,
+      "type": "multiple-choice",
+      "question": "Which is correct in formal academic writing?",
+      "options": [
+        "didnt work",
+        "did not work",
+        "didn t work",
+        "not worked"
+      ],
+      "answer": "did not work",
+      "explanation": "Academic register-এ contraction এড়িয়ে চলা হয়।"
+    },
+    {
+      "id": "m24-t6",
+      "moduleId": 24,
+      "type": "choose-correct-sentence",
+      "question": "Which uses a semicolon correctly?",
+      "options": [
+        "Costs rose, demand fell.",
+        "Costs rose; demand fell.",
+        "Costs rose; and demand fell.",
+        "Costs rose; however demand fell."
+      ],
+      "answer": "Costs rose; demand fell.",
+      "explanation": "দুই পাশেই একটা করে পূর্ণ বাক্য আছে, আর দুটোর অর্থ কাছাকাছি।"
+    },
+    {
+      "id": "m24-t7",
+      "moduleId": 24,
+      "type": "multiple-choice",
+      "question": "What does purposeful sentence variety mean?",
+      "options": [
+        "Making every sentence long",
+        "Choosing sentence length for effect",
+        "Alternating tenses",
+        "Using a connector in each sentence"
+      ],
+      "answer": "Choosing sentence length for effect",
+      "explanation": "দুটো লম্বা বাক্যের পরে একটা ছোট বাক্য পাঠকের মনে জোরে দাগ কাটে, আর এটাই উদ্দেশ্য।"
+    },
+    {
+      "id": "m24-t8",
+      "moduleId": 24,
+      "type": "fill-blank",
+      "question": "Costs rose; ___, demand fell. (however with correct punctuation after it)",
+      "answer": "however",
+      "explanation": "However দিয়ে দ্বিতীয় Clause শুরু হলে এর পরে একটা কমা বসে।"
+    },
+    {
+      "id": "m24-t9",
+      "moduleId": 24,
+      "type": "error-correction",
+      "question": "Which underlined part contains the error?",
+      "prompt": "Although many argue | that the policy is effective, | however | it remains controversial.",
+      "options": [
+        "Although many argue",
+        "that the policy is effective,",
+        "however",
+        "it remains controversial"
+      ],
+      "answer": "however",
+      "explanation": "Although আগেই বৈপরীত্যটা বুঝিয়ে দিয়েছে, তাই আরেকটা connector বসানো ভুল।"
+    },
+    {
+      "id": "m24-t10",
+      "moduleId": 24,
+      "type": "multiple-choice",
+      "question": "What does a wide range of structures mean at Band 8?",
+      "options": [
+        "Every sentence is complex",
+        "You can choose the right structure, including a simple one",
+        "You use inversion and clefts often",
+        "You use the longest possible sentences"
+      ],
+      "answer": "You can choose the right structure, including a simple one",
+      "explanation": "Range মানে সাবলীলতা আর নির্ভুলতা, সবকিছু জটিল করে ফেলা নয়।"
+    }
+  ]
+}

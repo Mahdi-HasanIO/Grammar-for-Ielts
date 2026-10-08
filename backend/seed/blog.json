@@ -1,0 +1,668 @@
+{
+  "categories": [
+    "Grammar Tips",
+    "IELTS Writing",
+    "Task 1",
+    "Task 2",
+    "Study Strategy"
+  ],
+  "posts": [
+    {
+      "slug": "common-grammar-mistakes-in-ielts",
+      "coverAlt": "An IELTS Task 2 essay page marked in red pen, correcting subject-verb agreement, an article error and a comma splice.",
+      "title": "10 Common Grammar Mistakes in IELTS Writing (and How to Fix Them)",
+      "excerpt": "The errors examiners see most often are not advanced at all. Here are the ten that cost the most marks, with a quick fix for each.",
+      "category": "Grammar Tips",
+      "date": "2026-09-22",
+      "featured": true,
+      "topics": [
+        "subject-verb-agreement",
+        "articles",
+        "sentence-boundaries",
+        "linking-clauses"
+      ],
+      "readingMinutes": 3
+    },
+    {
+      "slug": "how-to-improve-ielts-writing-grammar",
+      "coverAlt": "A rising staircase chart from Band 6 to Band 8, labelled accuracy, range and control.",
+      "title": "How to Improve Your IELTS Writing Grammar Score",
+      "excerpt": "What Grammatical Range and Accuracy actually measures, why accuracy comes before complexity, and a practical plan to move from Band 6 to Band 7 and beyond.",
+      "category": "IELTS Writing",
+      "date": "2026-09-10",
+      "topics": [
+        "sentence-structure",
+        "linking-clauses",
+        "relative-clauses"
+      ],
+      "readingMinutes": 2
+    },
+    {
+      "slug": "how-to-use-complex-sentences-in-ielts",
+      "coverAlt": "A sentence diagram joining the subordinate clause \"Although the scheme was costly\" to the main clause \"it reduced emissions\".",
+      "title": "How to Use Complex Sentences in IELTS (Without Making Errors)",
+      "excerpt": "Complex sentences only help your band score when they are accurate. Five safe structures, the mistakes to avoid, and how many you really need.",
+      "category": "Task 2",
+      "date": "2026-08-28",
+      "topics": [
+        "linking-clauses",
+        "relative-clauses",
+        "conditionals",
+        "participial-clauses"
+      ],
+      "readingMinutes": 2
+    },
+    {
+      "slug": "articles-a-an-the-for-ielts",
+      "coverAlt": "Cards showing the articles a, an, the and zero article next to three questions: countable, singular, specific.",
+      "title": "A, An or The? A Simple Article System for IELTS Writers",
+      "excerpt": "Articles are small, but a single essay needs around a hundred article decisions. A three-question system that makes them almost automatic.",
+      "category": "Grammar Tips",
+      "date": "2026-08-14",
+      "topics": [
+        "articles",
+        "subject-verb-agreement"
+      ],
+      "readingMinutes": 2
+    },
+    {
+      "slug": "describing-trends-in-ielts-task-1",
+      "coverAlt": "A line graph from 2000 to 2020 annotated with the phrases rose by 20%, peaked at 90m and fell to 60m.",
+      "title": "Describing Trends in IELTS Task 1: Grammar That Gets the Numbers Right",
+      "excerpt": "Rose by or rose to? A sharp rise or rose sharply? The small grammar choices that decide whether your Task 1 report is accurate.",
+      "category": "Task 1",
+      "date": "2026-07-30",
+      "topics": [
+        "prepositions",
+        "comparisons",
+        "tenses"
+      ],
+      "readingMinutes": 2
+    },
+    {
+      "slug": "hedging-in-ielts-task-2",
+      "coverAlt": "A certainty scale running from will and should to may, might and cannot, above a sentence softened from \"always improves\" to \"can improve\".",
+      "title": "Sound Academic Without Overclaiming: Hedging in IELTS Task 2",
+      "excerpt": "Absolute claims invite counter-examples. Learn the hedging toolkit that keeps your arguments strong, measured and defensible.",
+      "category": "Task 2",
+      "date": "2026-07-16",
+      "topics": [
+        "hedging",
+        "modal-verbs",
+        "conditionals"
+      ],
+      "readingMinutes": 2
+    },
+    {
+      "slug": "ielts-grammar-study-plan",
+      "coverAlt": "A six-week grammar study calendar with the first two weeks ticked off and topics for each week.",
+      "title": "A 6-Week IELTS Grammar Study Plan That Actually Works",
+      "excerpt": "Studying grammar in the right order saves weeks. A week-by-week plan that builds accuracy first, then complexity, then style.",
+      "category": "Study Strategy",
+      "date": "2026-07-02",
+      "topics": [
+        "sentence-structure",
+        "tenses",
+        "linking-clauses",
+        "nominalization"
+      ],
+      "readingMinutes": 2
+    }
+  ],
+  "articles": {
+    "common-grammar-mistakes-in-ielts": [
+      {
+        "type": "p",
+        "text": "Most candidates assume their grammar score is held back by a lack of advanced structures. In practice, the opposite is usually true. The band descriptors for Grammatical Range and Accuracy reward error-free sentences: at Band 7 you need frequent error-free sentences, and at Band 8 the majority of your sentences should contain no errors at all. That means the small, repeated mistakes matter far more than the absence of an inversion or a cleft sentence."
+      },
+      {
+        "type": "p",
+        "text": "Here are the ten errors that appear most often in IELTS scripts, with a quick fix for each and a link to the grammar topic that covers it in depth."
+      },
+      {
+        "type": "h2",
+        "text": "1. A missing or doubled subject"
+      },
+      {
+        "type": "p",
+        "text": "Every clause needs a subject, and a prepositional phrase can never be one. Task 1 openings are the classic trap. See [Sentence Structure & Word Order](/grammar/sentence-structure)."
+      },
+      {
+        "type": "example",
+        "wrong": "In the chart illustrates the number of visitors.",
+        "right": "The chart illustrates the number of visitors."
+      },
+      {
+        "type": "h2",
+        "text": "2. Subject-verb agreement with long subjects"
+      },
+      {
+        "type": "p",
+        "text": "When the subject grows long, writers match the verb to the nearest noun instead of the real one. Strip out the middle and check the head noun. Full rules: [Subject-Verb Agreement](/grammar/subject-verb-agreement)."
+      },
+      {
+        "type": "example",
+        "wrong": "The impact of social media on young people are significant.",
+        "right": "The impact of social media on young people is significant.",
+        "note": "The head noun is impact, which is singular."
+      },
+      {
+        "type": "h2",
+        "text": "3. Plural uncountable nouns"
+      },
+      {
+        "type": "p",
+        "text": "Information, research, advice, equipment and evidence never take -s. If you need to count them, use a unit: two pieces of evidence, several studies."
+      },
+      {
+        "type": "example",
+        "wrong": "Researches show that exercise improves memory.",
+        "right": "Research shows that exercise improves memory."
+      },
+      {
+        "type": "h2",
+        "text": "4. Articles with general nouns"
+      },
+      {
+        "type": "p",
+        "text": "When you talk about something in general, plural and uncountable nouns usually take no article. This one error can appear a dozen times in a single essay. Our [article guide](/blog/articles-a-an-the-for-ielts) gives you a three-question system."
+      },
+      {
+        "type": "example",
+        "wrong": "The technology has transformed the education.",
+        "right": "Technology has transformed education."
+      },
+      {
+        "type": "h2",
+        "text": "5. Comma splices with however and therefore"
+      },
+      {
+        "type": "p",
+        "text": "However and therefore are adverbs, not conjunctions, so a comma alone cannot join two sentences with them. Use a full stop or a semicolon instead. See [Sentence Boundaries & Punctuation](/grammar/sentence-boundaries)."
+      },
+      {
+        "type": "example",
+        "wrong": "Technology is advancing rapidly, therefore many jobs will disappear.",
+        "right": "Technology is advancing rapidly; therefore, many jobs will disappear."
+      },
+      {
+        "type": "h2",
+        "text": "6. Two connectors for one relationship"
+      },
+      {
+        "type": "p",
+        "text": "Although already signals contrast, so adding but breaks the sentence. The same goes for because... so. This is the single most common complex-sentence error. Learn more in [Linking Clauses](/grammar/linking-clauses)."
+      },
+      {
+        "type": "example",
+        "wrong": "Although the government increased spending, but the problem continued.",
+        "right": "Although the government increased spending, the problem continued."
+      },
+      {
+        "type": "h2",
+        "text": "7. Wrong verb patterns"
+      },
+      {
+        "type": "p",
+        "text": "Suggest, recommend and avoid take -ing; allow and enable need an object before to. These errors are marked as grammar, not vocabulary. See [Verb Patterns](/grammar/verb-patterns)."
+      },
+      {
+        "type": "example",
+        "wrong": "This policy allows to reduce traffic.",
+        "right": "This policy allows cities to reduce traffic."
+      },
+      {
+        "type": "h2",
+        "text": "8. Tense shifts without a reason"
+      },
+      {
+        "type": "p",
+        "text": "A specific past year needs the past simple; since needs the present perfect. Decide the time frame for each paragraph and stay in it. See [Tenses](/grammar/tenses)."
+      },
+      {
+        "type": "example",
+        "wrong": "In 2020 the figure has reached its highest point.",
+        "right": "In 2020 the figure reached its highest point."
+      },
+      {
+        "type": "h2",
+        "text": "9. Will in the if-clause"
+      },
+      {
+        "type": "p",
+        "text": "In a first conditional, the if-clause takes the present simple even though it refers to the future. Read more in [Conditionals](/grammar/conditionals)."
+      },
+      {
+        "type": "example",
+        "wrong": "If the government will invest more, the problem will be solved.",
+        "right": "If the government invests more, the problem will be solved."
+      },
+      {
+        "type": "h2",
+        "text": "10. Extra pronouns in relative clauses"
+      },
+      {
+        "type": "p",
+        "text": "The relative pronoun already fills the subject slot, so a second pronoun creates a double subject. See [Relative Clauses](/grammar/relative-clauses)."
+      },
+      {
+        "type": "example",
+        "wrong": "The policy which it was introduced in 2015 reduced pollution.",
+        "right": "The policy which was introduced in 2015 reduced pollution."
+      },
+      {
+        "type": "tip",
+        "title": "How to use this list",
+        "text": "Pick the two errors you make most often and check for only those in your next three essays. Targeted proofreading beats trying to catch everything at once. When you are ready to fix them properly, [start the course](/course) from Module 1."
+      }
+    ],
+    "how-to-improve-ielts-writing-grammar": [
+      {
+        "type": "p",
+        "text": "Grammatical Range and Accuracy is one of the four criteria in IELTS Writing, worth a quarter of your score in each task. Yet it is the criterion candidates understand least. Many try to raise it by memorising impressive structures, then lose marks because those structures come out with errors."
+      },
+      {
+        "type": "h2",
+        "text": "What the examiner is looking for"
+      },
+      {
+        "type": "p",
+        "text": "The criterion has two halves. Range is about using a variety of structures: simple, compound and complex sentences, with features like relative clauses, conditionals and passives. Accuracy is about how many of your sentences are error-free. The descriptors make the balance clear: as you move up the bands, the proportion of error-free sentences has to rise, until at Band 8 the majority of sentences contain no errors."
+      },
+      {
+        "type": "tip",
+        "title": "The key insight",
+        "text": "Range without accuracy does not raise your score. A complex sentence with an error counts against you; a correct simple sentence never does."
+      },
+      {
+        "type": "h2",
+        "text": "Step 1: Secure the foundations"
+      },
+      {
+        "type": "p",
+        "text": "Start with the errors that repeat. Subject-verb agreement, articles and sentence boundaries appear in almost every paragraph, so fixing them has the biggest effect on your error-free sentence count. These are the first five modules of the course, starting with [Sentence Structure](/grammar/sentence-structure)."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Find the subject and the finite verb in every sentence you write.",
+          "Check every plural noun against the verb that follows it.",
+          "Look at every full stop and ask whether the sentence before it is complete."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Step 2: Add complexity you can control"
+      },
+      {
+        "type": "p",
+        "text": "Once your simple sentences are reliable, add a small set of complex structures and practise them until they are automatic. Good choices are [relative clauses](/grammar/relative-clauses), [subordinating conjunctions](/grammar/linking-clauses) such as although and whereas, and [first and second conditionals](/grammar/conditionals). Our guide to [complex sentences](/blog/how-to-use-complex-sentences-in-ielts) shows five safe patterns."
+      },
+      {
+        "type": "h2",
+        "text": "Step 3: Build an academic style"
+      },
+      {
+        "type": "p",
+        "text": "At the higher bands, style comes less from rare structures and more from noun phrases, careful claims and flow. [Nominalization](/grammar/nominalization), [hedging](/grammar/hedging) and [information structure](/grammar/information-structure) are the skills that make writing sound genuinely academic."
+      },
+      {
+        "type": "h2",
+        "text": "Step 4: Proofread with a checklist"
+      },
+      {
+        "type": "p",
+        "text": "Leave three minutes at the end of each task. Do not reread for meaning; scan for your personal error list. Most candidates know the rule for the mistakes they make. They simply never check for them."
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "Agreement: does every verb match its head noun?",
+          "Articles: does every singular countable noun have a determiner?",
+          "Boundaries: is there a comma before however or therefore?",
+          "Connectors: is there an although... but or because... so?"
+        ]
+      },
+      {
+        "type": "tip",
+        "text": "Want a structured path? The [course](/course) follows exactly this order across five stages, and every lesson is available in English and বাংলা."
+      }
+    ],
+    "how-to-use-complex-sentences-in-ielts": [
+      {
+        "type": "p",
+        "text": "To reach Band 7, you need a mix of simple and complex sentence forms. But complexity on its own earns nothing. A complex sentence that contains an error lowers your accuracy, and accuracy is what separates the higher bands. The goal is not to write as many complex sentences as possible; it is to write the right ones correctly."
+      },
+      {
+        "type": "h2",
+        "text": "Five safe complex structures"
+      },
+      {
+        "type": "p",
+        "text": "These five patterns cover almost everything you need in Task 2, and each has a simple rule you can check under time pressure."
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "Concession with although: Although the scheme was costly, it reduced emissions.",
+          "Contrast with whereas: Cities grew, whereas rural areas shrank.",
+          "Non-defining relative clause: The policy, which was introduced in 2015, has halved waiting times.",
+          "First or second conditional: If governments invested in rail, congestion would fall.",
+          "Result participle clause: Demand fell sharply, causing prices to drop."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Mistake 1: two connectors for one idea"
+      },
+      {
+        "type": "p",
+        "text": "Although, because and even though already carry the relationship. Adding but, so or however repeats it and breaks the sentence. [Linking Clauses](/grammar/linking-clauses) explains the three types of connector and their punctuation."
+      },
+      {
+        "type": "example",
+        "wrong": "Even though renewable energy is clean, but it remains expensive.",
+        "right": "Even though renewable energy is clean, it remains expensive."
+      },
+      {
+        "type": "h2",
+        "text": "Mistake 2: despite + clause"
+      },
+      {
+        "type": "p",
+        "text": "Despite is a preposition, so it takes a noun or an -ing form. If you want a full clause, use although."
+      },
+      {
+        "type": "example",
+        "wrong": "Despite it was raining, the event continued.",
+        "right": "Although it was raining, the event continued."
+      },
+      {
+        "type": "h2",
+        "text": "Mistake 3: missing commas in non-defining clauses"
+      },
+      {
+        "type": "p",
+        "text": "If the clause adds extra information about a unique noun, it needs commas on both sides, and it cannot use that. [Relative Clauses](/grammar/relative-clauses) covers the difference in detail."
+      },
+      {
+        "type": "example",
+        "wrong": "My hometown which is in the north has grown rapidly.",
+        "right": "My hometown, which is in the north, has grown rapidly."
+      },
+      {
+        "type": "h2",
+        "text": "Mistake 4: dangling participles"
+      },
+      {
+        "type": "p",
+        "text": "A participle clause at the start of a sentence must describe the subject of the main clause. If it does not, the sentence says something absurd. See [Participle Clauses](/grammar/participial-clauses)."
+      },
+      {
+        "type": "example",
+        "wrong": "Having finished the report, the deadline was met.",
+        "right": "Having finished the report, the team met the deadline."
+      },
+      {
+        "type": "h2",
+        "text": "How many complex sentences do you need?"
+      },
+      {
+        "type": "p",
+        "text": "There is no quota. A strong essay naturally mixes short and long sentences. A useful habit is one or two complex sentences per paragraph, each built on a structure you have practised. If you are unsure whether a sentence is correct, write the simple version. It will never cost you marks."
+      },
+      {
+        "type": "tip",
+        "title": "Practise it",
+        "text": "Every grammar topic page has quick practice questions. Try [Linking Clauses](/grammar/linking-clauses#practice) or [Conditionals](/grammar/conditionals#practice) now."
+      }
+    ],
+    "articles-a-an-the-for-ielts": [
+      {
+        "type": "p",
+        "text": "Articles carry almost no meaning on their own, which is exactly why they are so easy to get wrong. The problem is volume: a 250-word essay contains around a hundred places where you have to choose a, an, the or nothing. Even a small error rate produces a script full of mistakes."
+      },
+      {
+        "type": "h2",
+        "text": "The three-question system"
+      },
+      {
+        "type": "p",
+        "text": "Before you write a common noun, ask three questions in order. Together they decide almost every case."
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "Is the noun countable or uncountable?",
+          "If countable, is it singular or plural?",
+          "Will the reader know exactly which one you mean?"
+        ]
+      },
+      {
+        "type": "p",
+        "text": "A singular countable noun always needs a determiner: a, an, the, this, my or similar. Plural and uncountable nouns used in a general sense take no article. And anything specific, already mentioned or unique takes the."
+      },
+      {
+        "type": "h2",
+        "text": "General statements: no article"
+      },
+      {
+        "type": "p",
+        "text": "Task 2 is full of general statements about whole categories: cars, education, children, technology. These take no article."
+      },
+      {
+        "type": "example",
+        "wrong": "The cars are a major source of pollution.",
+        "right": "Cars are a major source of pollution.",
+        "note": "The cars would mean a specific group of cars."
+      },
+      {
+        "type": "h2",
+        "text": "First mention and second mention"
+      },
+      {
+        "type": "p",
+        "text": "Introduce something new with a, then refer back to it with the: The city built a new railway. The railway has reduced congestion."
+      },
+      {
+        "type": "h2",
+        "text": "Uncountable nouns never take a"
+      },
+      {
+        "type": "example",
+        "wrong": "It is a useful information for students.",
+        "right": "It is useful information for students."
+      },
+      {
+        "type": "h2",
+        "text": "Shared, unique things take the"
+      },
+      {
+        "type": "p",
+        "text": "The internet, the environment, the government and the media take the because everyone knows which one you mean."
+      },
+      {
+        "type": "example",
+        "wrong": "Internet has changed how we communicate.",
+        "right": "The internet has changed how we communicate."
+      },
+      {
+        "type": "tip",
+        "text": "The full lesson, with tables of quantifiers and practice questions, is in [Articles (a, an, the)](/grammar/articles). Agreement with uncountable nouns is covered in [Subject-Verb Agreement](/grammar/subject-verb-agreement)."
+      }
+    ],
+    "describing-trends-in-ielts-task-1": [
+      {
+        "type": "p",
+        "text": "In Academic Task 1, grammar errors do more than cost Grammatical Range and Accuracy marks. A wrong preposition or multiple can report the wrong number, which also damages Task Achievement. The good news is that the grammar of trends is a small, learnable set of patterns."
+      },
+      {
+        "type": "h2",
+        "text": "By, to, from and at"
+      },
+      {
+        "type": "p",
+        "text": "These four prepositions give four different pieces of information. Confusing them changes your data."
+      },
+      {
+        "type": "list",
+        "items": [
+          "rose by 20 per cent: the size of the change",
+          "rose to 80 million: the final value",
+          "rose from 60 to 80 million: the start and end values",
+          "peaked at 90 million: a specific value"
+        ]
+      },
+      {
+        "type": "example",
+        "wrong": "Consumption peaked to 90 million units.",
+        "right": "Consumption peaked at 90 million units."
+      },
+      {
+        "type": "h2",
+        "text": "Noun phrase or verb phrase"
+      },
+      {
+        "type": "p",
+        "text": "You can describe the same change in two ways, and alternating between them adds range. Remember that adjectives go before nouns and adverbs go after verbs."
+      },
+      {
+        "type": "list",
+        "items": [
+          "There was a sharp rise in sales. (adjective + noun)",
+          "Sales rose sharply. (verb + adverb)"
+        ]
+      },
+      {
+        "type": "example",
+        "wrong": "There was a slightly increase in unemployment.",
+        "right": "There was a slight increase in unemployment."
+      },
+      {
+        "type": "h2",
+        "text": "Multiples and comparisons"
+      },
+      {
+        "type": "p",
+        "text": "Use twice as many as or three times the number of. Avoid three times more than, which is ambiguous. And compare like with like: a figure with a figure, not a figure with a year. See [Comparisons & Quantities](/grammar/comparisons)."
+      },
+      {
+        "type": "example",
+        "wrong": "There were twice more visitors in July than in January.",
+        "right": "There were twice as many visitors in July as in January."
+      },
+      {
+        "type": "h2",
+        "text": "Choosing the tense"
+      },
+      {
+        "type": "p",
+        "text": "The years on the chart decide the tense. Past years take the past simple; projections take will or is expected to; a process diagram with no dates takes the present simple passive. Describe what the chart shows in the present. More in [Tenses](/grammar/tenses)."
+      },
+      {
+        "type": "tip",
+        "text": "Prepositions in Task 1 have their own lesson: [Prepositions & Collocations](/grammar/prepositions), including increase in, impact on and the patterns above."
+      }
+    ],
+    "hedging-in-ielts-task-2": [
+      {
+        "type": "p",
+        "text": "Write that technology always improves education, and the reader immediately thinks of an exception. Write that technology can improve educational outcomes when it is properly implemented, and the claim survives. That is hedging: matching the strength of your claim to the strength of your evidence."
+      },
+      {
+        "type": "h2",
+        "text": "The hedging toolkit"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Modals: may, might, could, can",
+          "Verbs: tend to, appear to, suggest, indicate",
+          "Adverbs: often, generally, largely, arguably",
+          "Quantifiers: many, most, some, in some cases",
+          "Frames: It is likely that..., There is evidence that..."
+        ]
+      },
+      {
+        "type": "example",
+        "wrong": "This study proves that exercise prevents depression.",
+        "right": "This study indicates that exercise may help prevent depression."
+      },
+      {
+        "type": "h2",
+        "text": "Add a condition instead of softening the verb"
+      },
+      {
+        "type": "p",
+        "text": "Often the strongest move is to say when your claim is true. A condition makes the claim more precise rather than weaker, and it shows the examiner you have considered limitations. [Conditionals](/grammar/conditionals) give you the structures."
+      },
+      {
+        "type": "h2",
+        "text": "Do not hedge your own opinion away"
+      },
+      {
+        "type": "p",
+        "text": "Task 2 asks for a clear position. Hedge claims about evidence and consequences, not your answer to the question."
+      },
+      {
+        "type": "example",
+        "wrong": "In my opinion, I think that perhaps the government should maybe act.",
+        "right": "The government should act."
+      },
+      {
+        "type": "tip",
+        "text": "The full toolkit is in [Hedging & Academic Stance](/grammar/hedging). Modals are the foundation, covered in [Modal Verbs](/grammar/modal-verbs)."
+      }
+    ],
+    "ielts-grammar-study-plan": [
+      {
+        "type": "p",
+        "text": "Most grammar study fails because it happens in the wrong order. Learners jump to inversion and cleft sentences while still making agreement and article errors in every paragraph. This six-week plan follows the order that raises your score fastest: accuracy, then complexity, then style."
+      },
+      {
+        "type": "h2",
+        "text": "Weeks 1-2: Foundations"
+      },
+      {
+        "type": "p",
+        "text": "Focus on [sentence structure](/grammar/sentence-structure), [agreement](/grammar/subject-verb-agreement), [articles](/grammar/articles), [pronouns](/grammar/pronouns) and [sentence boundaries](/grammar/sentence-boundaries). These errors appear in every paragraph, so fixing them has the largest effect."
+      },
+      {
+        "type": "h2",
+        "text": "Weeks 3-4: Core grammar and complex sentences"
+      },
+      {
+        "type": "p",
+        "text": "Move on to [tenses](/grammar/tenses), [modals](/grammar/modal-verbs), [the passive](/grammar/passive-voice) and [verb patterns](/grammar/verb-patterns), then add [linking clauses](/grammar/linking-clauses), [relative clauses](/grammar/relative-clauses) and [conditionals](/grammar/conditionals)."
+      },
+      {
+        "type": "h2",
+        "text": "Weeks 5-6: Academic style and editing"
+      },
+      {
+        "type": "p",
+        "text": "Finish with [nominalization](/grammar/nominalization), [hedging](/grammar/hedging), [information structure](/grammar/information-structure) and [concise writing](/grammar/concision). Write one essay every two days and proofread it against your personal error list."
+      },
+      {
+        "type": "h2",
+        "text": "A daily routine"
+      },
+      {
+        "type": "list",
+        "items": [
+          "15 minutes: one lesson section (rules or examples)",
+          "10 minutes: practice questions on that topic",
+          "10 minutes: write one paragraph using the structure",
+          "5 minutes: check the paragraph for your top three errors"
+        ]
+      },
+      {
+        "type": "tip",
+        "text": "The [course](/course) is built in exactly this order, with a test at the end of each module, progress tracking and a daily streak on your [dashboard](/dashboard)."
+      }
+    ]
+  }
+}
