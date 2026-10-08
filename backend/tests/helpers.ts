@@ -15,6 +15,7 @@ import { mergeBookmarks, mergeProgress } from '../src/services/merge.js'
 import { createProfileService } from '../src/services/profile.js'
 import { createSyncService } from '../src/services/sync.js'
 import { createContentService } from '../src/services/content.js'
+import { createAdminContentService } from '../src/services/adminContent.js'
 import { bookmarkList, progressState } from '../src/validators/progress.js'
 
 export const ALLOWED_ORIGIN = 'https://app.example.com'
@@ -67,6 +68,7 @@ export interface TestServiceOptions {
   mailer?: Mailer
   now?: () => Date
   logger?: ReturnType<typeof silentLogger>
+  adminEmails?: string[]
 }
 
 /** Auth, account and profile services over one set of in-memory repositories. */
@@ -76,13 +78,14 @@ export function testServices({
   mailer = recordingMailer(),
   now,
   logger = silentLogger(),
+  adminEmails,
 }: TestServiceOptions = {}) {
   return {
     repositories,
     mailer,
     /** Emails sent, when the mailer is a recordingMailer(). */
     sent: 'sent' in mailer ? (mailer as ReturnType<typeof recordingMailer>).sent : [],
-    auth: createAuthService({ repositories, hasher, now }),
+    auth: createAuthService({ repositories, hasher, now, adminEmails }),
     account: createAccountService({ repositories, hasher, mailer, logger, appBaseUrl: APP_BASE_URL, now }),
     profile: createProfileService(repositories),
     sync: {
@@ -90,12 +93,13 @@ export function testServices({
       bookmarks: createSyncService({ repository: repositories.bookmarks, merge: mergeBookmarks, schema: bookmarkList }),
     },
     content: createContentService(repositories.content),
+    admin: createAdminContentService({ content: repositories.content, audit: repositories.audit, now }),
   }
 }
 
 /** Builds the real app with test dependencies. */
 export function testApp(overrides: Partial<AppDependencies> = {}) {
-  const { auth, account, profile, sync, content } = testServices()
+  const { auth, account, profile, sync, content, admin } = testServices()
   return createApp({
     env: TEST_ENV,
     db: fakeDb(),
@@ -104,6 +108,7 @@ export function testApp(overrides: Partial<AppDependencies> = {}) {
     profile,
     sync,
     content,
+    admin,
     logger: silentLogger(),
     ...overrides,
   })

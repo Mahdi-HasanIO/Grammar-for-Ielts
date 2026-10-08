@@ -43,6 +43,7 @@ function failingRepositories(makeError: () => Error): Repositories {
     progress: { get: fail, put: fail },
     bookmarks: { get: fail, put: fail },
     content: createMemoryRepositories().content,
+    audit: createMemoryRepositories().audit,
   }
 }
 

@@ -12,6 +12,8 @@ const userSchema = new Schema(
     // Never sent to clients or logged: the repository maps documents to UserRecord, and the API to PublicUser.
     passwordHash: { type: String, required: true },
     emailVerifiedAt: { type: Date },
+    // Granted only by the grant-admin script; never set through the API.
+    role: { type: String, enum: ['user', 'admin'], default: 'user' },
     // Profile (all optional; validated by validators/profile.ts before they get here).
     displayName: { type: String, maxlength: 50 },
     targetBand: { type: Number, min: 4, max: 9 },

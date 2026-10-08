@@ -1,5 +1,6 @@
 import { isValidObjectId, mongo, type Connection, type Model } from 'mongoose'
 import { accountTokenModel } from '../models/AccountToken.js'
+import { auditModel } from '../models/AuditLog.js'
 import { contentModels } from '../models/Content.js'
 import { sessionModel } from '../models/Session.js'
 import { bookmarksModel, progressModel } from '../models/SyncDocument.js'
@@ -12,6 +13,8 @@ import {
   type ContentCollectionConfig,
   type ContentRepositories,
   type ContentStore,
+  type AuditEntry,
+  type Role,
   PROFILE_FIELDS,
   type AccountTokenRecord,
   type AccountTokenType,
@@ -30,6 +33,7 @@ type UserLean = {
   email: string
   passwordHash: string
   emailVerifiedAt?: Date | null
+  role?: Role
   createdAt: Date
 } & { [K in keyof ProfileFields]?: ProfileFields[K] | null }
 
@@ -59,6 +63,7 @@ function toUser(doc: UserLean): UserRecord {
     email: doc.email,
     passwordHash: doc.passwordHash,
     emailVerifiedAt: doc.emailVerifiedAt ?? null,
+    role: doc.role ?? 'user',
     profile: profile as ProfileFields,
     createdAt: doc.createdAt,
   }
@@ -160,6 +165,22 @@ function mongoContentStore<T>(model: Model<never>, { key, sort }: ContentCollect
   }
 }
 
+function mongoAudit(connection: Connection) {
+  const Audit = auditModel(connection)
+  type AuditLean = Omit<AuditEntry, 'id'> & { _id: { toString(): string } }
+  const toEntry = ({ _id, ...entry }: AuditLean): AuditEntry => ({ id: _id.toString(), ...entry })
+  return {
+    async append(entry: Omit<AuditEntry, 'id'>) {
+      const doc = await Audit.create(entry)
+      return toEntry(doc.toObject() as unknown as AuditLean)
+    },
+    async list({ limit, before }: { limit: number; before?: Date }) {
+      const docs = await Audit.find(before ? { at: { $lt: before } } : {}).sort({ at: -1 }).limit(limit).lean<AuditLean[]>()
+      return docs.map(toEntry)
+    },
+  }
+}
+
 function mongoContent(connection: Connection): ContentRepositories {
   const models = contentModels(connection) as unknown as Record<keyof ContentRepositories, Model<never>>
   return {
@@ -209,6 +230,7 @@ export function createMongoRepositories(connection: Connection): Repositories {
         const unset: Record<string, ''> = {}
         if (changes.passwordHash !== undefined) set.passwordHash = changes.passwordHash
         if (changes.emailVerifiedAt !== undefined) set.emailVerifiedAt = changes.emailVerifiedAt
+        if (changes.role !== undefined) set.role = changes.role
         for (const [key, value] of Object.entries(changes.profile ?? {})) {
           if (value === null) unset[key] = ''
           else if (value !== undefined) set[key] = value
@@ -259,5 +281,6 @@ export function createMongoRepositories(connection: Connection): Repositories {
     progress,
     bookmarks,
     content: mongoContent(connection),
+    audit: mongoAudit(connection),
   }
 }

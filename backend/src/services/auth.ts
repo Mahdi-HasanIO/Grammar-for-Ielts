@@ -19,6 +19,7 @@ export interface PublicUser {
   id: string
   email: string
   emailVerifiedAt: string | null
+  role: UserRecord['role']
   createdAt: string
 }
 
@@ -26,8 +27,19 @@ export const toPublicUser = (user: UserRecord): PublicUser => ({
   id: user.id,
   email: user.email,
   emailVerifiedAt: user.emailVerifiedAt?.toISOString() ?? null,
+  role: user.role,
   createdAt: user.createdAt.toISOString(),
 })
+
+/**
+ * The role the user acts with: the stored role, or admin when the address is
+ * in ADMIN_EMAILS and verified. Verification matters: otherwise anyone could
+ * register an allowlisted address first and be admin.
+ */
+export function effectiveRole(user: UserRecord, adminEmails: ReadonlySet<string>): UserRecord {
+  if (user.role === 'admin' || !user.emailVerifiedAt || !adminEmails.has(user.email)) return user
+  return { ...user, role: 'admin' }
+}
 
 export interface NewSession {
   user: UserRecord
@@ -54,6 +66,8 @@ export interface AuthServiceOptions {
   hasher: PasswordHasher
   now?: () => Date
   sessionTtlMs?: number
+  /** ADMIN_EMAILS: verified users with these addresses act as admins. */
+  adminEmails?: readonly string[]
 }
 
 export const hashToken = (token: string) => createHash('sha256').update(token).digest('hex')
@@ -66,14 +80,16 @@ export function createAuthService({
   hasher,
   now = () => new Date(),
   sessionTtlMs = SESSION_TTL_MS,
+  adminEmails = [],
 }: AuthServiceOptions): AuthService {
   const getDummyHash = dummyHash(hasher)
+  const admins = new Set(adminEmails)
 
   async function startSession(user: UserRecord): Promise<NewSession> {
     const token = generateToken()
     const expiresAt = new Date(now().getTime() + sessionTtlMs)
     await sessions.create({ tokenHash: hashToken(token), userId: user.id, expiresAt })
-    return { user, token, expiresAt }
+    return { user: effectiveRole(user, admins), token, expiresAt }
   }
 
   return {
@@ -121,7 +137,7 @@ export function createAuthService({
         await sessions.deleteByTokenHash(tokenHash)
         return null
       }
-      return { user, tokenHash }
+      return { user: effectiveRole(user, admins), tokenHash }
     },
   }
 }

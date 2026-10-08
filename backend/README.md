@@ -33,6 +33,7 @@ cp .env.example .env   # then edit .env
 | `MONGODB_MAX_POOL_SIZE` / `MONGODB_MIN_POOL_SIZE` | no | `10` / `0` | Driver connection pool bounds |
 | `MONGODB_SERVER_SELECTION_TIMEOUT_MS` | no | `5000` | How long an operation waits for a usable server |
 | `MONGODB_CONNECT_TIMEOUT_MS` / `MONGODB_SOCKET_TIMEOUT_MS` | no | `10000` / `45000` | Connection and socket timeouts (`0` = no socket timeout) |
+| `ADMIN_EMAILS` | no | — | Comma-separated addresses that act as admins once their email is verified |
 | `APP_BASE_URL` | in production | `http://localhost:5173` | Frontend URL that links in emails point to (`/verify-email#token=…`, `/reset-password#token=…`) |
 | `MAIL_TRANSPORT` | no | `log` | `log` writes emails to the log (the body, with its link, only outside production); `resend` sends through the Resend API |
 | `MAIL_FROM` | with `resend` | — | Sender, e.g. `Grammar for IELTS <no-reply@your-domain>` (the domain must be verified in Resend) |
@@ -79,6 +80,7 @@ URL-encode special characters in the password.
 | `npm run typecheck` | Type-check source and tests |
 | `npm run lint` | oxlint (same linter as the frontend) |
 | `npm test` | Vitest + supertest. No MongoDB needed. |
+| `npm run admin:grant -- <email> [--revoke]` | Give (or take away) the stored admin role; audited. The only way to store it |
 | `npm run seed:content` | Validate `seed/*.json` and upsert it into MongoDB (idempotent). `-- --check` validates only, without a database |
 
 Opt-in integration tests run against a real MongoDB when `MONGODB_URI_TEST` is set. They use a
@@ -117,7 +119,11 @@ Logs are JSON lines. For readable local output: `npm run dev | npx pino-pretty`.
 | `GET /api/content/modules/:ref/questions?set=practice\|test` | Public. `{"questions"}` in order (both sets without `set`). |
 | `GET /api/content/blog` / `GET /api/content/blog/:slug` | Public. Posts newest first without bodies / one post with its body. |
 
-`user` is `{"id","email","emailVerifiedAt","createdAt"}`. `profile` is `{"email","emailVerifiedAt"}` plus
+| `GET /api/admin/content/:collection` | Admin. `:collection` is `stages`, `modules`, `lessons`, `questions` or `posts`. `{"documents"}`. |
+| `GET/PUT/DELETE /api/admin/content/:collection/:key` | Admin. `:key` is the stage id, module legacy id, `<moduleId>-<language>` for lessons, question id or post slug. PUT takes the whole document: `201` created or `200`; `400` invalid, `422` bad references or a slug change, `409` duplicate slug. DELETE: `204`, or `409 in_use` while other content points at it. |
+| `GET /api/admin/audit?limit=&before=` | Admin. Audit entries, newest first. |
+
+`user` is `{"id","email","emailVerifiedAt","role","createdAt"}`. `profile` is `{"email","emailVerifiedAt"}` plus
 the six profile fields (`null` when unset). Emails are trimmed and lowercased; passwords must be
 10–128 characters. Invalid input returns `400 validation_error`.
 
@@ -188,6 +194,14 @@ Any other path returns `404 {"error":{"code":"not_found","message":"Route not fo
     lesson parity, 4 practice and 10 test questions per module), refuses to change a stored module
     slug, and upserts. Documents not in the snapshot are left alone.
   - Responses carry `Cache-Control: public, max-age=300`.
+- **Admin** (`/api/admin/*`; `src/services/adminContent.ts`):
+  - `role` is `user` or `admin`. Admin comes only from `npm run admin:grant` or from
+    `ADMIN_EMAILS` for a verified address; no API can grant it. Every admin route answers 401
+    without a session and 403 for non-admins.
+  - Content writes use the seed's document schemas plus reference checks (module and stage exist,
+    related topics exist, rule ids belong to the module, slugs never change).
+  - Every change (and every role grant) is appended to `audit_log` with the actor and the document
+    before and after.
 - **Logging:** one line per request (id, method, URL, status, duration) with an `X-Request-Id`
   response header; every other line logged during the request carries the same id as `reqId`. Headers and bodies are never logged. Connection strings are redacted from
   database errors.

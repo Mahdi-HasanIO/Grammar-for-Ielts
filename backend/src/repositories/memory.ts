@@ -7,6 +7,7 @@ import {
   type ContentFilter,
   type ContentRepositories,
   type ContentStore,
+  type AuditEntry,
   type AccountTokenRecord,
   type ProfileFields,
   type Repositories,
@@ -88,6 +89,24 @@ const memoryContent = (): ContentRepositories => ({
   posts: memoryContentStore(CONTENT_COLLECTIONS.posts),
 })
 
+function memoryAudit() {
+  const entries: AuditEntry[] = []
+  return {
+    async append(entry: Omit<AuditEntry, 'id'>) {
+      const stored: AuditEntry = { ...clone(entry), at: entry.at, id: randomUUID() }
+      entries.push(stored)
+      return { ...stored }
+    },
+    async list({ limit, before }: { limit: number; before?: Date }) {
+      return entries
+        .filter((e) => !before || e.at.getTime() < before.getTime())
+        .sort((a, b) => b.at.getTime() - a.at.getTime())
+        .slice(0, limit)
+        .map((e) => ({ ...e }))
+    },
+  }
+}
+
 const copyUser = (user: UserRecord): UserRecord => ({ ...user, profile: { ...user.profile } })
 
 /**
@@ -106,7 +125,7 @@ export function createMemoryRepositories(): Repositories {
     users: {
       async create({ email, passwordHash }) {
         if ([...users.values()].some((user) => user.email === email)) throw new DuplicateEmailError()
-        const user: UserRecord = { id: randomUUID(), email, passwordHash, emailVerifiedAt: null, profile: {}, createdAt: new Date() }
+        const user: UserRecord = { id: randomUUID(), email, passwordHash, emailVerifiedAt: null, role: 'user', profile: {}, createdAt: new Date() }
         users.set(user.id, user)
         return copyUser(user)
       },
@@ -123,6 +142,7 @@ export function createMemoryRepositories(): Repositories {
         if (!user) return null
         if (changes.passwordHash !== undefined) user.passwordHash = changes.passwordHash
         if (changes.emailVerifiedAt !== undefined) user.emailVerifiedAt = changes.emailVerifiedAt
+        if (changes.role !== undefined) user.role = changes.role
         for (const [key, value] of Object.entries(changes.profile ?? {}) as [keyof ProfileFields, unknown][]) {
           if (value === null) delete user.profile[key]
           else if (value !== undefined) (user.profile as Record<string, unknown>)[key] = value
@@ -170,5 +190,6 @@ export function createMemoryRepositories(): Repositories {
     progress: memorySync(),
     bookmarks: memorySync(),
     content: memoryContent(),
+    audit: memoryAudit(),
   }
 }

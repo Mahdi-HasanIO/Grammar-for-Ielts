@@ -25,12 +25,17 @@ export interface ProfileFields {
 
 export const PROFILE_FIELDS = ['displayName', 'targetBand', 'examDate', 'timezone', 'dailyGoalMinutes', 'language'] as const satisfies readonly (keyof ProfileFields)[]
 
+export const ROLES = ['user', 'admin'] as const
+export type Role = (typeof ROLES)[number]
+
 export interface UserRecord {
   id: string
   /** Normalised: trimmed and lowercased. */
   email: string
   passwordHash: string
   emailVerifiedAt: Date | null
+  /** Stored role. The effective role can also be admin through ADMIN_EMAILS (see services/auth.ts). */
+  role: Role
   profile: ProfileFields
   createdAt: Date
 }
@@ -38,6 +43,7 @@ export interface UserRecord {
 /** A partial update. In `profile`, null removes the field. */
 export interface UserChanges {
   passwordHash?: string
+  role?: Role
   emailVerifiedAt?: Date
   profile?: { [K in keyof ProfileFields]?: ProfileFields[K] | null }
 }
@@ -168,6 +174,24 @@ export class DuplicateKeyError extends Error {
   }
 }
 
+export interface AuditEntry {
+  id: string
+  at: Date
+  /** Who did it: a signed-in admin, or a command-line script run on the server. */
+  actor: { type: 'user'; id: string; email: string } | { type: 'script'; name: string }
+  action: 'create' | 'update' | 'delete' | 'grant_role' | 'revoke_role' | 'grant_plan'
+  target: { collection: string; key: string }
+  /** The document before and after the change (null when it did not exist / was deleted). */
+  before: unknown
+  after: unknown
+}
+
+export interface AuditLogRepository {
+  append(entry: Omit<AuditEntry, 'id'>): Promise<AuditEntry>
+  /** Newest first; `before` pages backwards in time. */
+  list(options: { limit: number; before?: Date }): Promise<AuditEntry[]>
+}
+
 export interface Repositories {
   users: UserRepository
   sessions: SessionRepository
@@ -175,4 +199,5 @@ export interface Repositories {
   progress: SyncRepository<ProgressState>
   bookmarks: SyncRepository<Bookmark[]>
   content: ContentRepositories
+  audit: AuditLogRepository
 }

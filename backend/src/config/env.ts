@@ -93,6 +93,17 @@ const envSchema = z
     .refine(isBaseUrl, 'must be an http(s) URL without query or fragment, like https://example.com')
     .transform((value) => value.replace(/\/+$/, ''))
     .optional(),
+  // Comma-separated emails that are admins once verified (in addition to roles granted by the grant-admin script).
+  ADMIN_EMAILS: z
+    .string()
+    .optional()
+    .transform((value) =>
+      (value ?? '')
+        .split(',')
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean),
+    )
+    .pipe(z.array(z.email('must be a comma-separated list of email addresses'))),
   // log: write emails to the log (content only outside production). resend: send through the Resend API.
   MAIL_TRANSPORT: z.enum(MAIL_TRANSPORTS).default('log'),
   MAIL_FROM: z.string().trim().min(3).optional(),

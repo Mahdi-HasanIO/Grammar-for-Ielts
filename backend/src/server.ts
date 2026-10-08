@@ -12,6 +12,7 @@ import { mergeBookmarks, mergeProgress } from './services/merge.js'
 import { createProfileService } from './services/profile.js'
 import { createSyncService } from './services/sync.js'
 import { createContentService } from './services/content.js'
+import { createAdminContentService } from './services/adminContent.js'
 import { bookmarkList, progressState } from './validators/progress.js'
 
 const SHUTDOWN_TIMEOUT_MS = 10_000
@@ -53,7 +54,7 @@ async function main(): Promise<void> {
   })
   const repositories = createMongoRepositories(db.connection)
   const hasher = createArgon2Hasher()
-  const auth = createAuthService({ repositories, hasher })
+  const auth = createAuthService({ repositories, hasher, adminEmails: env.ADMIN_EMAILS })
   const account = createAccountService({ repositories, hasher, mailer: createMailer(env, logger), logger, appBaseUrl: env.APP_BASE_URL })
   const profile = createProfileService(repositories)
   const sync = {
@@ -61,7 +62,8 @@ async function main(): Promise<void> {
     bookmarks: createSyncService({ repository: repositories.bookmarks, merge: mergeBookmarks, schema: bookmarkList }),
   }
   const content = createContentService(repositories.content)
-  const app = createApp({ env, db, auth, account, profile, sync, content, logger })
+  const admin = createAdminContentService({ content: repositories.content, audit: repositories.audit })
+  const app = createApp({ env, db, auth, account, profile, sync, content, admin, logger })
   logger.info({ mailTransport: env.MAIL_TRANSPORT }, 'Mail transport selected')
 
   const server: Server = app.listen(env.PORT, (error?: Error) => {

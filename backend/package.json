@@ -14,7 +14,8 @@
     "typecheck": "tsc -p tsconfig.json",
     "lint": "oxlint",
     "test": "vitest run",
-    "seed:content": "tsx src/scripts/seed-content.ts"
+    "seed:content": "tsx src/scripts/seed-content.ts",
+    "admin:grant": "tsx src/scripts/grant-admin.ts"
   },
   "dependencies": {
     "argon2": "^0.45.1",

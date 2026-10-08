@@ -14,6 +14,8 @@ import { createProfileRouter } from './profile.js'
 import { createSyncRouter } from './sync.js'
 import { createContentRouter } from './content.js'
 import type { ContentService } from '../services/content.js'
+import type { AdminContentService } from '../services/adminContent.js'
+import { createAdminRouter } from './admin.js'
 import type { SyncService } from '../services/sync.js'
 import { putBookmarksBody, putProgressBody, type Bookmark, type ProgressState } from '../validators/progress.js'
 
@@ -24,6 +26,7 @@ export interface ApiRouterOptions {
   profile: ProfileService
   sync: SyncServices
   content: ContentService
+  admin: AdminContentService
   cookie: SessionCookieConfig
   allowedOrigins: readonly string[]
   authRateLimit?: RateLimitOptions
@@ -35,7 +38,7 @@ export interface SyncServices {
 }
 
 /** Everything under /api. Feature routers are added here as later phases introduce them. */
-export function createApiRouter({ db, auth, account, profile, sync, content, cookie, allowedOrigins, authRateLimit }: ApiRouterOptions): Router {
+export function createApiRouter({ db, auth, account, profile, sync, content, admin, cookie, allowedOrigins, authRateLimit }: ApiRouterOptions): Router {
   const guards: AccountRouteGuards = {
     limiter: authRateLimiter(authRateLimit),
     database: requireDatabase(db),
@@ -53,5 +56,6 @@ export function createApiRouter({ db, auth, account, profile, sync, content, coo
   router.use('/progress', createSyncRouter({ field: 'progress', service: sync.progress, body: putProgressBody, guards: syncGuards }))
   router.use('/bookmarks', createSyncRouter({ field: 'bookmarks', service: sync.bookmarks, body: putBookmarksBody, guards: syncGuards }))
   router.use('/content', createContentRouter({ content, database: guards.database }))
+  router.use('/admin', createAdminRouter({ admin, guards: syncGuards }))
   return router
 }

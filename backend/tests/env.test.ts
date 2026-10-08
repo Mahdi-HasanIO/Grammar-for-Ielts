@@ -33,6 +33,7 @@ describe('loadEnv', () => {
       SESSION_COOKIE_NAME: 'gfi_session',
       APP_BASE_URL: 'http://localhost:5173',
       MAIL_TRANSPORT: 'log',
+      ADMIN_EMAILS: [],
       ...MONGO_AND_PROXY_DEFAULTS,
     })
   })
@@ -55,6 +56,7 @@ describe('loadEnv', () => {
         MAIL_FROM: 'Grammar for IELTS <no-reply@example.com>',
         RESEND_API_KEY: 're_test_key',
         TRUST_PROXY: '1',
+        ADMIN_EMAILS: ' Owner@Example.com, ops@example.com ',
         MONGODB_MAX_POOL_SIZE: '20',
         MONGODB_MIN_POOL_SIZE: '2',
         MONGODB_SERVER_SELECTION_TIMEOUT_MS: '3000',
@@ -73,6 +75,7 @@ describe('loadEnv', () => {
       MAIL_FROM: 'Grammar for IELTS <no-reply@example.com>',
       RESEND_API_KEY: 're_test_key',
       TRUST_PROXY: 1,
+      ADMIN_EMAILS: ['owner@example.com', 'ops@example.com'],
       MONGODB_MAX_POOL_SIZE: 20,
       MONGODB_MIN_POOL_SIZE: 2,
       MONGODB_SERVER_SELECTION_TIMEOUT_MS: 3000,
@@ -99,6 +102,7 @@ describe('loadEnv', () => {
     [{ ...VALID, NODE_ENV: 'production' }, 'APP_BASE_URL is required when NODE_ENV=production'],
     [{ ...VALID, MAIL_TRANSPORT: 'smtp' }, 'MAIL_TRANSPORT'],
     [{ ...VALID, TRUST_PROXY: 'true' }, 'TRUST_PROXY'],
+    [{ ...VALID, ADMIN_EMAILS: 'owner@example.com,not-an-email' }, 'ADMIN_EMAILS'],
     [{ ...VALID, TRUST_PROXY: '11' }, 'TRUST_PROXY'],
     [{ ...VALID, MONGODB_MAX_POOL_SIZE: '0' }, 'MONGODB_MAX_POOL_SIZE'],
     [{ ...VALID, MONGODB_MIN_POOL_SIZE: '5', MONGODB_MAX_POOL_SIZE: '4' }, 'MONGODB_MIN_POOL_SIZE must not exceed MONGODB_MAX_POOL_SIZE'],

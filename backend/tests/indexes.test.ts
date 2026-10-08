@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import { describe, expect, it } from 'vitest'
 import { accountTokenModel } from '../src/models/AccountToken.js'
+import { auditModel } from '../src/models/AuditLog.js'
 import { contentModels } from '../src/models/Content.js'
 import { sessionModel } from '../src/models/Session.js'
 import { bookmarksModel, progressModel } from '../src/models/SyncDocument.js'
@@ -57,5 +58,9 @@ describe('schema indexes match the documented review', () => {
       [{ slug: 1 }, { unique: true }],
       [{ date: -1 }, {}],
     ])
+  })
+
+  it('audit_log', () => {
+    expect(auditModel(connection).schema.indexes()).toEqual([[{ at: -1 }, {}]])
   })
 })
